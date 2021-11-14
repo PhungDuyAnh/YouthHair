@@ -1,0 +1,262 @@
+<div class="card shadow border-left-success mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-success">Danh Sách Hoàn
+			Thành</h6>
+	</div>
+	<div class="card-body">
+		<div class="form-group">
+			<div class="d-none d-sm-inline-block form-inline">
+				Tìm Kiếm: <input type="text"
+					class="form-control bg-light border-0 small" placeholder="..."
+					aria-label="Search">
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Position</th>
+						<th>Office</th>
+						<th>Age</th>
+						<th>Start date</th>
+						<th>Salary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Doris Wilder</td>
+						<td>Sales Assistant</td>
+						<td>Sidney</td>
+						<td>23</td>
+						<td>2010/09/20</td>
+						<td align="center"><a href="#!booking"
+							class="btn btn-success" data-toggle="modal"
+							data-target="#confirmModal"> Thanh Toán
+						</a></td>
+					</tr>
+					<tr>
+						<td>Angelica Ramos</td>
+						<td>Chief Executive Officer (CEO)</td>
+						<td>London</td>
+						<td>47</td>
+						<td>2009/10/09</td>
+						<td>$1,200,000</td>
+					</tr>
+					<tr>
+						<td>Gavin Joyce</td>
+						<td>Developer</td>
+						<td>Edinburgh</td>
+						<td>42</td>
+						<td>2010/12/22</td>
+						<td>$92,575</td>
+					</tr>
+
+					<tr>
+						<td>Sakura Yamamoto</td>
+						<td>Support Engineer</td>
+						<td>Tokyo</td>
+						<td>37</td>
+						<td>2009/08/19</td>
+						<td>$139,575</td>
+					</tr>
+					<tr>
+						<td>Thor Walton</td>
+						<td>Developer</td>
+						<td>New York</td>
+						<td>61</td>
+						<td>2013/08/11</td>
+						<td>$98,540</td>
+					</tr>
+					<tr>
+						<td>Finn Camacho</td>
+						<td>Support Engineer</td>
+						<td>San Francisco</td>
+						<td>47</td>
+						<td>2009/07/07</td>
+						<td>$87,500</td>
+					</tr>
+					<tr>
+						<td>Serge Baldwin</td>
+						<td>Data Coordinator</td>
+						<td>Singapore</td>
+						<td>64</td>
+						<td>2012/04/09</td>
+						<td>$138,575</td>
+					</tr>
+					<tr>
+						<td>Zenaida Frank</td>
+						<td>Software Engineer</td>
+						<td>New York</td>
+						<td>63</td>
+						<td>2010/01/04</td>
+						<td>$125,250</td>
+					</tr>
+					<tr>
+						<td>Zorita Serrano</td>
+						<td>Software Engineer</td>
+						<td>San Francisco</td>
+						<td>56</td>
+						<td>2012/06/01</td>
+						<td>$115,000</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="text-center">
+				<a href="#!booking" class="btn btn-success btn-circle"> <i
+					class="fas fa-angle-double-left"></i>
+				</a> <a href="#!booking" class="btn btn-success btn-circle"> <i
+					class="fas fa-angle-left"></i>
+				</a>
+				<button class="btn btn-success" disabled="disabled">1 of 2</button>
+				<a href="#!booking" class="btn btn-success btn-circle"> <i
+					class="fas fa-angle-right"></i>
+				</a> <a href="#!booking" class="btn btn-success btn-circle"> <i
+					class="	fas fa-angle-double-right"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- confirmModal-->
+<div class="modal" id="confirmModal">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="m-0 font-weight-bold text-primary">Thanh Toán Hoá Đơn</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<form action="#!booking" class="p-5 bg-white">
+
+					<div class="row form-group">
+						<div class="col-md-6 mb-3 mb-md-0">
+							<label class="text-black" for="fname">Họ Tên Khách Hàng</label><input
+								type="text" id="fname" class="form-control"
+								placeholder="Họ Tên..." readonly>
+						</div>
+						<div class="col-md-6">
+							<label class="text-black" for="lname">Số Điện Thoại </label> <input
+								type="text" id="lname" class="form-control"
+								placeholder="Số Điện Thoại..." readonly>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-6 mb-3 mb-md-0">
+							<label class="text-black" for="email">Email</label> <input
+								type="email" id="email" class="form-control" placeholder="Email"
+								readonly>
+						</div>
+						<div class="col-md-6">
+							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
+								type="text" id="date" class="form-control datepicker px-2"
+								placeholder="Ngày Làm Tóc..." readonly>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-12">
+							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
+								class="text-danger">(*)</span></label>
+							<ul class="services-form">
+								<li><input type="checkbox" id="confrimCheckbox1" disabled checked/> <label
+									for="onfrimCheckbox1"> <img src="/images/haircut/2.jpg" />
+										<br> Service 1
+								</label></li>
+								<li><input type="checkbox" id="confrimCheckbox2" disabled/> <label
+									for="confrimCheckbox2"> <img src="/images/haircut/4.jpg" />
+										<br> Service 2
+								</label></li>
+								<li><input type="checkbox" id="confrimCheckbox3" disabled/> <label
+									for="confrimCheckbox3"> <img src="/images/haircut/6.jpg" />
+										<br> Service 3
+								</label></li>
+								<li><input type="checkbox" id="confrimCheckbox4" disabled/> <label
+									for="confrimCheckbox4"> <img src="/images/haircut/8.jpg" />
+										<br> Service 4
+								</label></li>
+								<li><input type="checkbox" id="confrimCheckbox5" disabled/> <label
+									for="confrimCheckbox5"> <img src="/images/haircut/10.jpg" />
+										<br> Service 5
+								</label></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-12">
+							<label class="text-black" for="stylist">Stylist</label> <input
+								type="text" id="stylist" class="form-control datepicker px-2"
+								placeholder="Stylist..." readonly>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-12">
+							<label class="text-black" for="note">Ghi Chú</label>
+							<textarea name="note" id="note" cols="30" rows="5"
+								class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
+						</div>
+					</div>
+					
+
+					<div class="row form-group">
+						<div class="col-md-12">
+							<label class="text-black" for="treatment">Chọn Đánh Giá <span
+									class="text-danger">(*)</span></label>
+								<ul class="status-form text-center" >
+									<li><input type="radio" name="name" id="one"  /> <label
+										for="one" class="btn btn-danger btn-circle btn-lg"> <span
+											class="icon"> <i class="fas fa-angry"></i>
+										</span>
+									</label> <br> Không Hài Lòng</li>
+	
+									<li><input type="radio" name="name" id="two" checked/> <label
+										for="two" class="btn btn-primary btn-circle btn-lg"> <span
+											class="icon"> <i class="fas fa-smile"></i>
+										</span>
+									</label> <br> Bình Thường</li>
+									<li><input type="radio" name="name" id="three" /> <label
+										for="three" class="btn btn-success btn-circle btn-lg">
+											<span class="icon"> <i class="fas fa-grin-stars"></i>
+										</span>
+									</label> <br> Hài Lòng</li>
+								</ul>
+							
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-6">
+							<label class="text-black" for="voucher">Voucher</label> 
+							<select class="form-control" id="voucher">
+								<option disabled selected>Hãy Chọn 1 Voucher</option>
+							    <option>1</option>
+							    <option>2</option>
+							    <option>3</option>
+							    <option>4</option>
+							</select>
+						</div>
+						<div class="col-md-6 text-center">
+							<label class="text-black">Tổng Thời Gian: </label> <h5>40 phút</h5> <br>
+							<label class="text-black">Tổng Tiền: </label> <h5>100,000 VNĐ</h5>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-12" align="right">
+							<input type="submit" value="Thanh Toán"
+								class="btn btn-success py-2 px-4 text-white">
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
