@@ -43,19 +43,16 @@ public class Booking implements Serializable {
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="CustormerId")
-	@JsonIgnore
 	private Customer customer;
 
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="EmloyeeId")
-	@JsonIgnore
 	private Employee employee1;
 
 	//bi-directional many-to-one association to Statusbooking
 	@ManyToOne
 	@JoinColumn(name="StatusId")
-	@JsonIgnore
 	private Statusbooking statusbooking;
 
 	//bi-directional one-to-one association to Employee
@@ -67,13 +64,11 @@ public class Booking implements Serializable {
 	//bi-directional many-to-one association to Voting
 	@ManyToOne
 	@JoinColumn(name="VotingId")
-	@JsonIgnore
 	private Voting voting;
 	
 	//bi-directional many-to-one association to VoucherDetails
 	@ManyToOne
 	@JoinColumn(name="VoucherDetailsId")
-	@JsonIgnore
 	private Voucherdetail voucherdetails;
 
 	//bi-directional many-to-one association to Bookingdetail

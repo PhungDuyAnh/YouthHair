@@ -1,10 +1,13 @@
-angular.module("admin_app", ["ngRoute"]).config(function($routeProvider){
+app=angular.module("admin_app", ["ngRoute"]);
+
+app.config(function($routeProvider){
 	$routeProvider
 	.when("/", {
 		templateUrl:"/admin/templates/dashboard.html"
 	})
 	.when("/booking", {
-		templateUrl:"/admin/templates/booking/index.html"
+		templateUrl:"/admin/templates/booking/index.html",
+		controller:"booking-ctrl"
 	})
 	.when("/checkbooking", {
 		templateUrl:"/admin/templates/booking/bookingcheck.html"
@@ -19,7 +22,8 @@ angular.module("admin_app", ["ngRoute"]).config(function($routeProvider){
 		templateUrl:"/admin/templates/customer/index.html"
 	})
 	.when("/employees", {
-		templateUrl:"/admin/templates/employee/index.html"
+		templateUrl:"/admin/templates/employee/index.html",
+		controller:"employee-ctrl"
 	})
 	.when("/vouchers", {
 		templateUrl:"/admin/templates/voucher/index.html"
