@@ -13,7 +13,8 @@ app.config(function($routeProvider){
 		templateUrl:"/admin/templates/booking/bookingcheck.html"
 	})
 	.when("/services", {
-		templateUrl:"/admin/templates/service/index.html"
+		templateUrl:"/admin/templates/service/index.html",
+		controller:"service-ctrl"
 	})
 	.when("/contacts", {
 		templateUrl:"/admin/templates/contact/index.html"

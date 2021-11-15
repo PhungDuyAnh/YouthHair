@@ -8,36 +8,13 @@ import poly.datn.service.IServiceService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/poly")
+@RequestMapping("/rest")
 public class ServiceController {
 
-//    private final ServicesService servicesService;
-//
-//    private final ServiceDAO serviceDAO;
-//
-//    public ServiceController(ServicesService servicesService, ServiceDAO serviceDAO){
-//
-//        this.servicesService = servicesService;
-//        this.serviceDAO = serviceDAO;
-//    }
-    //
-    //    @PostMapping("/services")
-    //    public ResponseEntity<Services> create(@Valid @RequestBody ServiceDTO serviceDTO) throws URISyntaxException {
-    //        Services services = servicesService.create(serviceDTO);
-    //
-    //        return ResponseEntity.ok().body(services);
-    //    }
-    //
-    //    @GetMapping("/services")
-    //    public ResponseEntity<Page<ServiceDTO>> getAllCortusers(Pageable pageable) {
-    //        Page<ServiceDTO> page =servicesService.findAll(pageable);
-    //        return ResponseEntity.ok().body(page);
-    //    }
     @Autowired
     IServiceService iServiceService;
     @PostMapping("/services")
     public ResponseEntity <Services> create(@ModelAttribute Services services) {
-//        iServiceService.save(services);
         return ResponseEntity.ok(iServiceService.save(services));
     }
     @GetMapping("/services")
