@@ -59,7 +59,6 @@ public class Employee implements Serializable {
 	//bi-directional many-to-one association to Role
 	@ManyToOne
 	@JoinColumn(name="RolesId")
-	@JsonIgnore
 	private Role role;
 
 }
