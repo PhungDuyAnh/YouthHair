@@ -45,21 +45,23 @@
 					<table class="table table-bordered" id="dataTable">
 						<thead>
 							<tr >
-								<th>Service Name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Age</th>
-								<th>Start date</th>
+								<th>Name</th>
+								<th>Price</th>
+								<th>note</th>
+								<th>Time</th>
+								<th>Images</th>
+								<th>Status</th>
 								<th class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="item in pager.items">
 								<td>{{item.serviceName}}</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
+								<td>{{item.price}}</td>
+								<td>{{item.note}}</td>
+								<td>{{item.time}}</td>
+								<td>{{item.image}}</td>
+								<td>{{item.status}}</td>
 								<td class="text-center"><a href="#!stylist"
 									class="btn btn-info btn-circle"> <i
 										class="fas fa-info-circle"></i>
@@ -71,7 +73,7 @@
 						</tbody>
 					</table>
 					<div class="text-center">
-						<a href="/services" class="btn btn-info btn-circle"> <i
+						<a href="" class="btn btn-info btn-circle"> <i
 							class="fas fa-angle-double-left"></i>
 						</a> <a href="#" class="btn btn-info btn-circle"> <i
 							class="fas fa-angle-left"></i>
