@@ -32,6 +32,8 @@ public class Booking implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
 
+	private Time time;
+	
 	private String note;
 
 	private int stylistId;
