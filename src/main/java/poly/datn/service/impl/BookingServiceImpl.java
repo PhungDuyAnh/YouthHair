@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import poly.datn.dao.BookingDAO;
@@ -164,7 +165,9 @@ public class BookingServiceImpl implements BookingService {
 	public <S extends Booking> List<S> findAll(Example<S> example, Sort sort) {
 		return bookingDAO.findAll(example, sort);
 	}
-	
-	
-	
+
+	@Override
+	public List<Booking> findBookingByStatusbooking(String status){
+		return bookingDAO.bookingByStatus(status);
+	}
 }
