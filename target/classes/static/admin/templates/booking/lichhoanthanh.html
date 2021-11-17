@@ -132,14 +132,19 @@
 			</div>
 
 			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="#!booking" class="p-5 bg-white">
-
+			<div class="modal-body p-5">
 					<div class="row form-group">
-						<div class="col-md-6 mb-3 mb-md-0">
+						<div class="col-md-12">
 							<label class="text-black" for="fname">Họ Tên Khách Hàng</label><input
 								type="text" id="fname" class="form-control"
 								placeholder="Họ Tên..." readonly>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-6 mb-3 mb-md-0">
+							<label class="text-black" for="email">Email</label> <input
+								type="email" id="email" class="form-control" placeholder="Email"
+								readonly>
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="lname">Số Điện Thoại </label> <input
@@ -150,21 +155,20 @@
 
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
-							<label class="text-black" for="email">Email</label> <input
-								type="email" id="email" class="form-control" placeholder="Email"
-								readonly>
+							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
+								type="date" id="date" class="form-control datepicker px-2"
+								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 						<div class="col-md-6">
-							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
-								type="text" id="date" class="form-control datepicker px-2"
+							<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
+								type="time" id="time" class="form-control datepicker px-2"
 								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
-								class="text-danger">(*)</span></label>
+							<label class="text-black" for="treatment">Các Dịch Vụ Sử Dụng</label>
 							<ul class="services-form">
 								<li><input type="checkbox" id="confrimCheckbox1" disabled checked/> <label
 									for="onfrimCheckbox1"> <img src="/images/haircut/2.jpg" />
@@ -174,7 +178,7 @@
 									for="confrimCheckbox2"> <img src="/images/haircut/4.jpg" />
 										<br> Service 2
 								</label></li>
-								<li><input type="checkbox" id="confrimCheckbox3" disabled/> <label
+								<li><input type="checkbox" id="confrimCheckbox3" disabled checked/> <label
 									for="confrimCheckbox3"> <img src="/images/haircut/6.jpg" />
 										<br> Service 3
 								</label></li>
@@ -203,7 +207,7 @@
 								class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 						</div>
 					</div>
-					
+					<hr>
 
 					<div class="row form-group">
 						<div class="col-md-12">
@@ -243,19 +247,20 @@
 							</select>
 						</div>
 						<div class="col-md-6 text-center">
-							<label class="text-black">Tổng Thời Gian: </label> <h5>40 phút</h5> <br>
-							<label class="text-black">Tổng Tiền: </label> <h5>100,000 VNĐ</h5>
+							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">40 phút</span></h5>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">100,000 VNĐ</span></h4>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12" align="right">
+						<!-- 
 							<input type="submit" value="Thanh Toán"
-								class="btn btn-success py-2 px-4 text-white">
+								class="btn btn-success py-2 px-4 text-white"> -->
+								<button type="button" class="btn btn-success" data-dismiss="modal">Thanh Toán</button>
 						</div>
 					</div>
 
-				</form>
 			</div>
 		</div>
 	</div>

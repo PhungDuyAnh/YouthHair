@@ -5,8 +5,8 @@
 	<div class="card-body">
 		<div class="form-group">
 			<div class="d-none d-sm-inline-block form-inline">
-				Tìm Kiếm: <input type="text"
-					class="form-control bg-light border-0 small" placeholder="..."
+				Tìm Kiếm: <input type="text" ng-model="searchText"
+					class="form-control bg-light border-0 small" placeholder=""
 					aria-label="Search">
 			</div>
 		</div>
@@ -16,7 +16,7 @@
 					<tr>
 						<th>Customer</th>
 						<th>Employee</th>
-						<th>Style list</th>
+						<th>Stylist</th>
 						<th>Total Time</th>
 						<th>Total Price</th>
 						<th>Create Date</th>
@@ -25,10 +25,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in pager.items">
+					<tr ng-repeat="item in pager.items | filter:searchText" >
 						<td>{{item.customer.fullName}}</td>
 						<td>{{item.employee1.fullName}}</td>
-						<td>{{item.stylistId}}</td>
+						<td>{{item.employee1.role.name}}</td>
 						<td>{{item.totalTime}}</td>
 						<td>{{item.totalPrice}}</td>
 						<td>{{item.createDate}}</td>
@@ -61,7 +61,7 @@
 	</div>
 </div>
 
-<!-- infoModal-->
+	<!-- infoModal-->
 	<div class="modal" id="infoModal">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -73,14 +73,21 @@
 				</div>
 
 				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="#" class="p-5 bg-white">
+				<div class="modal-body p-5">
 						
 						<div class="row form-group">
-							<div class="col-md-6 mb-3 mb-md-0">
+							<div class="col-md-12">
 								<label class="text-black" for="fname">Họ Tên</label><input
 									type="text" id="fname" class="form-control"
 									placeholder="Họ Tên..." readonly>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="col-md-6 mb-3 mb-md-0">
+								<label class="text-black" for="email">Email</label> <input
+									type="email" id="email" class="form-control"
+									placeholder="Email" readonly>
 							</div>
 							<div class="col-md-6">
 								<label class="text-black" for="lname">Số Điện Thoại </label> <input
@@ -91,14 +98,14 @@
 
 						<div class="row form-group">
 							<div class="col-md-6 mb-3 mb-md-0">
-								<label class="text-black" for="email">Email</label> <input
-									type="email" id="email" class="form-control"
-									placeholder="Email" readonly>
+								<label class="text-black" for="date">Ngày Làm Tóc</label> <input
+									type="date" id="date" class="form-control datepicker px-2"
+									placeholder="Ngày Làm Tóc..." readonly>
 							</div>
 							<div class="col-md-6">
-								<label class="text-black" for="date">Ngày Làm Tóc</label> <input
-									type="text" id="date" class="form-control datepicker px-2"
-									placeholder="Ngày Làm Tóc..." readonly>
+								<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
+									type="time" id="time" class="form-control datepicker px-2"
+									placeholder="Khung Giờ Làm Tóc...">
 							</div>
 						</div>
 
@@ -132,17 +139,21 @@
 						
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="text-black" for="note">Tổng Thời Gian: </label> <span>40 phút</span> <br>
-								<label class="text-black" for="note">Tổng Tiền: </label> <span>100,000 VNĐ</span>
+								<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">40 phút</span></h5>
+								<h4 class="text-black" >Tổng Tiền: <span class="text-warning">100,000 VNĐ</span></h4> 
 							</div>
 						</div>
 						
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="text-black" for="stylist">Stylist</label> 
-								<input
-									type="text" id="stylist" class="form-control datepicker px-2"
-									placeholder="Stylist..." readonly>
+								<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label> 
+								<select class="form-control" id="stylist">
+									<option disabled selected>Hãy Chọn 1 Stylist</option>
+								    <option>1</option>
+								    <option>2</option>
+								    <option>3</option>
+								    <option>4</option>
+								 </select>
 							</div>
 						</div>
 						
@@ -161,7 +172,6 @@
 							</div>
 						</div>
 
-					</form>
 				</div>
 			</div>
 		</div>

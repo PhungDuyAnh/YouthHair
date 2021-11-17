@@ -1,9 +1,9 @@
-app.controller("booking-ctrl",function($scope,$http){
+app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.items=[];
 	$scope.form=[];
 	$scope.initialize=function (){
 		//load booking
-		$http.get("/rest/booking").then(resp=>{
+		$http.get("/rest/booking/WFC").then(resp=>{
 			$scope.items=resp.data;
 		})
 	}
@@ -46,5 +46,17 @@ app.controller("booking-ctrl",function($scope,$http){
 		last(){
 			this.page = this.count - 1;
 		}
+	}
+
+
+	$scope.counter = 0;
+	$scope.onTimeout = function(){
+		$scope.counter++;
+		mytimeout = $timeout($scope.onTimeout,1000);
+	}
+	var mytimeout = $timeout($scope.onTimeout,1000);
+
+	$scope.stop = function(){
+		$timeout.cancel(mytimeout);
 	}
 })
