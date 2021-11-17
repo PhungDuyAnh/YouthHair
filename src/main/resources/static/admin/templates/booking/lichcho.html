@@ -28,7 +28,7 @@
 					<tr ng-repeat="item in pager.items | filter:searchText" >
 						<td>{{item.customer.fullName}}</td>
 						<td>{{item.employee1.fullName}}</td>
-						<td>{{item.stylistId}}</td>
+						<td>{{item.employee1.role.name}}</td>
 						<td>{{item.totalTime}}</td>
 						<td>{{item.totalPrice}}</td>
 						<td>{{item.createDate}}</td>

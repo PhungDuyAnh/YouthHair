@@ -3,7 +3,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.form=[];
 	$scope.initialize=function (){
 		//load booking
-		$http.get("/rest/booking").then(resp=>{
+		$http.get("/rest/booking/WFC").then(resp=>{
 			$scope.items=resp.data;
 		})
 	}
