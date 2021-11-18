@@ -256,7 +256,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (1,'Cắt tóc',100000,'30:00:00',1,'1.png','A'),(2,'Gội đầu',30000,'10:00:00',1,'1.png','B'),(3,'Uốn tóc',400000,'90:00:00',1,'1.png','C'),(4,'Nhuộm tóc',300000,'90:00:00',1,'1.png','D');
+INSERT INTO `services` VALUES (1,'Cắt tóc',100000,'00:30:00',1,'1.png','A'),(2,'Gội đầu',30000,'00:10:00',1,'1.png','B'),(3,'Uốn tóc',400000,'01:30:00',1,'1.png','C'),(4,'Nhuộm tóc',300000,'01:30:00',1,'1.png','D');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,4 +373,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16 22:45:55
+-- Dump completed on 2021-11-18 16:14:51
