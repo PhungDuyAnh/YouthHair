@@ -10,7 +10,8 @@ app.config(function($routeProvider){
 		controller:"booking-ctrl"
 	})
 	.when("/checkbooking", {
-		templateUrl:"/admin/templates/booking/bookingcheck.html"
+		templateUrl:"/admin/templates/booking/bookingcheck.html",
+		controller:"booking-ctrl"
 	})
 	.when("/services", {
 		templateUrl:"/admin/templates/service/index.html"

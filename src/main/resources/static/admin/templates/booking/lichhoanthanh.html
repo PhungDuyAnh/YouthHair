@@ -6,118 +6,57 @@
 	<div class="card-body">
 		<div class="form-group">
 			<div class="d-none d-sm-inline-block form-inline">
-				Tìm Kiếm: <input type="text"
-					class="form-control bg-light border-0 small" placeholder="..."
-					aria-label="Search">
+				Tìm Kiếm: <input type="text" ng-model="searchText"
+								 class="form-control bg-light border-0 small" placeholder=""
+								 aria-label="Search">
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Position</th>
-						<th>Office</th>
-						<th>Age</th>
-						<th>Start date</th>
-						<th>Salary</th>
-					</tr>
+			<table class="table table-bordered text-center" id="dataTable">
+				<thead >
+				<tr>
+					<th>Customer</th>
+					<th>Employee</th>
+					<th>Stylist</th>
+					<th>Total Time</th>
+					<th>Total Price</th>
+					<th>Create Date</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Doris Wilder</td>
-						<td>Sales Assistant</td>
-						<td>Sidney</td>
-						<td>23</td>
-						<td>2010/09/20</td>
-						<td align="center"><a href="#!booking"
-							class="btn btn-success" data-toggle="modal"
-							data-target="#confirmModal"> Thanh Toán
-						</a></td>
-					</tr>
-					<tr>
-						<td>Angelica Ramos</td>
-						<td>Chief Executive Officer (CEO)</td>
-						<td>London</td>
-						<td>47</td>
-						<td>2009/10/09</td>
-						<td>$1,200,000</td>
-					</tr>
-					<tr>
-						<td>Gavin Joyce</td>
-						<td>Developer</td>
-						<td>Edinburgh</td>
-						<td>42</td>
-						<td>2010/12/22</td>
-						<td>$92,575</td>
-					</tr>
-
-					<tr>
-						<td>Sakura Yamamoto</td>
-						<td>Support Engineer</td>
-						<td>Tokyo</td>
-						<td>37</td>
-						<td>2009/08/19</td>
-						<td>$139,575</td>
-					</tr>
-					<tr>
-						<td>Thor Walton</td>
-						<td>Developer</td>
-						<td>New York</td>
-						<td>61</td>
-						<td>2013/08/11</td>
-						<td>$98,540</td>
-					</tr>
-					<tr>
-						<td>Finn Camacho</td>
-						<td>Support Engineer</td>
-						<td>San Francisco</td>
-						<td>47</td>
-						<td>2009/07/07</td>
-						<td>$87,500</td>
-					</tr>
-					<tr>
-						<td>Serge Baldwin</td>
-						<td>Data Coordinator</td>
-						<td>Singapore</td>
-						<td>64</td>
-						<td>2012/04/09</td>
-						<td>$138,575</td>
-					</tr>
-					<tr>
-						<td>Zenaida Frank</td>
-						<td>Software Engineer</td>
-						<td>New York</td>
-						<td>63</td>
-						<td>2010/01/04</td>
-						<td>$125,250</td>
-					</tr>
-					<tr>
-						<td>Zorita Serrano</td>
-						<td>Software Engineer</td>
-						<td>San Francisco</td>
-						<td>56</td>
-						<td>2012/06/01</td>
-						<td>$115,000</td>
-					</tr>
-
+				<tr ng-repeat="item in pager1.items1 | filter:searchText" >
+					<td>{{item.customer.fullName}}</td>
+					<td>{{item.employee1.fullName}}</td>
+					<td>{{item.employee1.role.name}}</td>
+					<td>{{item.totalTime}}</td>
+					<td>{{item.totalPrice}}</td>
+					<td>{{item.createDate}}</td>
+					<td>{{item.statusbooking.statusName}}</td>
+					<td align="center"><a href="#!booking"
+										  class="btn btn-success" data-toggle="modal"
+										  data-target="#confirmModal"> Thanh Toán
+					</a></td>
+				</tr>
 				</tbody>
 			</table>
 			<div class="text-center">
-				<a href="#!booking" class="btn btn-success btn-circle"> <i
-					class="fas fa-angle-double-left"></i>
-				</a> <a href="#!booking" class="btn btn-success btn-circle"> <i
+				<a ng-click="pager1.first()" href="#!booking" class="btn btn-primary btn-circle"> <i
+						class="fas fa-angle-double-left"></i>
+				</a> <a ng-click="pager1.prev()" href="#!booking" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-left"></i>
-				</a>
-				<button class="btn btn-success" disabled="disabled">1 of 2</button>
-				<a href="#!booking" class="btn btn-success btn-circle"> <i
-					class="fas fa-angle-right"></i>
-				</a> <a href="#!booking" class="btn btn-success btn-circle"> <i
+			</a>
+				<button class="btn btn-primary" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
+				<a ng-click="pager1.next()"  href="#!booking" class="btn btn-primary btn-circle"> <i
+						class="fas fa-angle-right"></i>
+				</a> <a ng-click="pager1.last()" href="#!booking" class="btn btn-primary btn-circle"> <i
 					class="	fas fa-angle-double-right"></i>
-				</a>
+			</a>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <!-- confirmModal-->
@@ -132,14 +71,19 @@
 			</div>
 
 			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="#!booking" class="p-5 bg-white">
-
+			<div class="modal-body p-5">
 					<div class="row form-group">
-						<div class="col-md-6 mb-3 mb-md-0">
+						<div class="col-md-12">
 							<label class="text-black" for="fname">Họ Tên Khách Hàng</label><input
 								type="text" id="fname" class="form-control"
 								placeholder="Họ Tên..." readonly>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-6 mb-3 mb-md-0">
+							<label class="text-black" for="email">Email</label> <input
+								type="email" id="email" class="form-control" placeholder="Email"
+								readonly>
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="lname">Số Điện Thoại </label> <input
@@ -150,21 +94,20 @@
 
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
-							<label class="text-black" for="email">Email</label> <input
-								type="email" id="email" class="form-control" placeholder="Email"
-								readonly>
+							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
+								type="date" id="date" class="form-control datepicker px-2"
+								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 						<div class="col-md-6">
-							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
-								type="text" id="date" class="form-control datepicker px-2"
+							<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
+								type="time" id="time" class="form-control datepicker px-2"
 								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
-								class="text-danger">(*)</span></label>
+							<label class="text-black" for="treatment">Các Dịch Vụ Sử Dụng</label>
 							<ul class="services-form">
 								<li><input type="checkbox" id="confrimCheckbox1" disabled checked/> <label
 									for="onfrimCheckbox1"> <img src="/images/haircut/2.jpg" />
@@ -174,7 +117,7 @@
 									for="confrimCheckbox2"> <img src="/images/haircut/4.jpg" />
 										<br> Service 2
 								</label></li>
-								<li><input type="checkbox" id="confrimCheckbox3" disabled/> <label
+								<li><input type="checkbox" id="confrimCheckbox3" disabled checked/> <label
 									for="confrimCheckbox3"> <img src="/images/haircut/6.jpg" />
 										<br> Service 3
 								</label></li>
@@ -203,7 +146,7 @@
 								class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 						</div>
 					</div>
-					
+					<hr>
 
 					<div class="row form-group">
 						<div class="col-md-12">
@@ -243,19 +186,20 @@
 							</select>
 						</div>
 						<div class="col-md-6 text-center">
-							<label class="text-black">Tổng Thời Gian: </label> <h5>40 phút</h5> <br>
-							<label class="text-black">Tổng Tiền: </label> <h5>100,000 VNĐ</h5>
+							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">40 phút</span></h5>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">100,000 VNĐ</span></h4>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12" align="right">
+						<!-- 
 							<input type="submit" value="Thanh Toán"
-								class="btn btn-success py-2 px-4 text-white">
+								class="btn btn-success py-2 px-4 text-white"> -->
+								<button type="button" class="btn btn-success" data-dismiss="modal">Thanh Toán</button>
 						</div>
 					</div>
 
-				</form>
 			</div>
 		</div>
 	</div>
