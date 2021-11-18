@@ -9,13 +9,13 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login1() {
 		
-		return "login/login1";
+		return "login/login_email";
 	}
 	
 	@RequestMapping("/login2")
 	public String login2() {
 		
-		return "login/login2";
+		return "login/login_pass";
 	}
 	
 	@RequestMapping("/fogotpassword")
@@ -27,6 +27,6 @@ public class LoginController {
 	@RequestMapping("/newpassword")
 	public String newpassword() {
 		
-		return "login/login3";
+		return "login/newpassword";
 	}
 }

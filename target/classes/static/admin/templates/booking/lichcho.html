@@ -5,31 +5,35 @@
 	<div class="card-body">
 		<div class="form-group">
 			<div class="d-none d-sm-inline-block form-inline">
-				Tìm Kiếm: <input type="text"
-					class="form-control bg-light border-0 small" placeholder="..."
+				Tìm Kiếm: <input type="text" ng-model="searchText"
+					class="form-control bg-light border-0 small" placeholder=""
 					aria-label="Search">
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable">
-				<thead>
+			<table class="table table-bordered text-center" id="dataTable">
+				<thead >
 					<tr>
-						<th>Name</th>
-						<th>Position</th>
-						<th>Office</th>
-						<th>Age</th>
-						<th>Start date</th>
-						<th>Salary</th>
+						<th>Customer</th>
+						<th>Employee</th>
+						<th>Stylist</th>
+						<th>Total Time</th>
+						<th>Total Price</th>
+						<th>Create Date</th>
+						<th>Status</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Doris Wilder</td>
-						<td>Sales Assistant</td>
-						<td>Sidney</td>
-						<td>23</td>
-						<td>2010/09/20</td>
-						<td align="center">
+					<tr ng-repeat="item in pager.items | filter:searchText" >
+						<td>{{item.customer.fullName}}</td>
+						<td>{{item.employee1.fullName}}</td>
+						<td>{{item.employee1.role.name}}</td>
+						<td>{{item.totalTime}}</td>
+						<td>{{item.totalPrice}}</td>
+						<td>{{item.createDate}}</td>
+						<td>{{item.statusbooking.statusName}}</td>
+						<td>
 							<a href="#!booking"
 								class="btn btn-primary" data-toggle="modal" data-target="#infoModal"> Chi Tiết</i>
 							</a>
@@ -38,84 +42,18 @@
 							</a>
 						</td>
 					</tr>
-					<tr>
-						<td>Angelica Ramos</td>
-						<td>Chief Executive Officer (CEO)</td>
-						<td>London</td>
-						<td>47</td>
-						<td>2009/10/09</td>
-						<td>$1,200,000</td>
-					</tr>
-					<tr>
-						<td>Gavin Joyce</td>
-						<td>Developer</td>
-						<td>Edinburgh</td>
-						<td>42</td>
-						<td>2010/12/22</td>
-						<td>$92,575</td>
-					</tr>
-					
-					<tr>
-						<td>Sakura Yamamoto</td>
-						<td>Support Engineer</td>
-						<td>Tokyo</td>
-						<td>37</td>
-						<td>2009/08/19</td>
-						<td>$139,575</td>
-					</tr>
-					<tr>
-						<td>Thor Walton</td>
-						<td>Developer</td>
-						<td>New York</td>
-						<td>61</td>
-						<td>2013/08/11</td>
-						<td>$98,540</td>
-					</tr>
-					<tr>
-						<td>Finn Camacho</td>
-						<td>Support Engineer</td>
-						<td>San Francisco</td>
-						<td>47</td>
-						<td>2009/07/07</td>
-						<td>$87,500</td>
-					</tr>
-					<tr>
-						<td>Serge Baldwin</td>
-						<td>Data Coordinator</td>
-						<td>Singapore</td>
-						<td>64</td>
-						<td>2012/04/09</td>
-						<td>$138,575</td>
-					</tr>
-					<tr>
-						<td>Zenaida Frank</td>
-						<td>Software Engineer</td>
-						<td>New York</td>
-						<td>63</td>
-						<td>2010/01/04</td>
-						<td>$125,250</td>
-					</tr>
-					<tr>
-						<td>Zorita Serrano</td>
-						<td>Software Engineer</td>
-						<td>San Francisco</td>
-						<td>56</td>
-						<td>2012/06/01</td>
-						<td>$115,000</td>
-					</tr>
-					
 				</tbody>
 			</table>
 			<div class="text-center">
-				<a href="#!booking" class="btn btn-primary btn-circle"> <i
+				<a ng-click="pager.first()" href="#!booking" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-double-left"></i>
-				</a> <a href="#!booking" class="btn btn-primary btn-circle"> <i
+				</a> <a ng-click="pager.prev()" href="#!booking" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-left"></i>
 				</a> 
-				<button class="btn btn-primary" disabled="disabled">1 of 2</button>
-				<a href="#!booking" class="btn btn-primary btn-circle"> <i
+				<button class="btn btn-primary" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
+				<a ng-click="pager.next()"  href="#!booking" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-right"></i>
-				</a> <a href="#!booking" class="btn btn-primary btn-circle"> <i
+				</a> <a ng-click="pager.last()" href="#!booking" class="btn btn-primary btn-circle"> <i
 					class="	fas fa-angle-double-right"></i>
 				</a>
 			</div>
@@ -123,7 +61,7 @@
 	</div>
 </div>
 
-<!-- infoModal-->
+	<!-- infoModal-->
 	<div class="modal" id="infoModal">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -135,14 +73,21 @@
 				</div>
 
 				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="#" class="p-5 bg-white">
+				<div class="modal-body p-5">
 						
 						<div class="row form-group">
-							<div class="col-md-6 mb-3 mb-md-0">
+							<div class="col-md-12">
 								<label class="text-black" for="fname">Họ Tên</label><input
 									type="text" id="fname" class="form-control"
 									placeholder="Họ Tên..." readonly>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="col-md-6 mb-3 mb-md-0">
+								<label class="text-black" for="email">Email</label> <input
+									type="email" id="email" class="form-control"
+									placeholder="Email" readonly>
 							</div>
 							<div class="col-md-6">
 								<label class="text-black" for="lname">Số Điện Thoại </label> <input
@@ -153,14 +98,14 @@
 
 						<div class="row form-group">
 							<div class="col-md-6 mb-3 mb-md-0">
-								<label class="text-black" for="email">Email</label> <input
-									type="email" id="email" class="form-control"
-									placeholder="Email" readonly>
+								<label class="text-black" for="date">Ngày Làm Tóc</label> <input
+									type="date" id="date" class="form-control datepicker px-2"
+									placeholder="Ngày Làm Tóc..." readonly>
 							</div>
 							<div class="col-md-6">
-								<label class="text-black" for="date">Ngày Làm Tóc</label> <input
-									type="text" id="date" class="form-control datepicker px-2"
-									placeholder="Ngày Làm Tóc..." readonly>
+								<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
+									type="time" id="time" class="form-control datepicker px-2"
+									placeholder="Khung Giờ Làm Tóc...">
 							</div>
 						</div>
 
@@ -194,17 +139,21 @@
 						
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="text-black" for="note">Tổng Thời Gian: </label> <span>40 phút</span> <br>
-								<label class="text-black" for="note">Tổng Tiền: </label> <span>100,000 VNĐ</span>
+								<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">40 phút</span></h5>
+								<h4 class="text-black" >Tổng Tiền: <span class="text-warning">100,000 VNĐ</span></h4> 
 							</div>
 						</div>
 						
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="text-black" for="stylist">Stylist</label> 
-								<input
-									type="text" id="stylist" class="form-control datepicker px-2"
-									placeholder="Stylist..." readonly>
+								<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label> 
+								<select class="form-control" id="stylist">
+									<option disabled selected>Hãy Chọn 1 Stylist</option>
+								    <option>1</option>
+								    <option>2</option>
+								    <option>3</option>
+								    <option>4</option>
+								 </select>
 							</div>
 						</div>
 						
@@ -223,7 +172,6 @@
 							</div>
 						</div>
 
-					</form>
 				</div>
 			</div>
 		</div>
