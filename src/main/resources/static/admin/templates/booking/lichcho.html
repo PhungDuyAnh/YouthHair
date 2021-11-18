@@ -5,8 +5,8 @@
 	<div class="card-body">
 		<div class="form-group">
 			<div class="d-none d-sm-inline-block form-inline">
-				Tìm Kiếm: <input type="text"
-					class="form-control bg-light border-0 small" placeholder="..."
+				Tìm Kiếm: <input type="text" ng-model="searchText"
+					class="form-control bg-light border-0 small" placeholder=""
 					aria-label="Search">
 			</div>
 		</div>
@@ -16,7 +16,7 @@
 					<tr>
 						<th>Customer</th>
 						<th>Employee</th>
-						<th>Style list</th>
+						<th>Stylist</th>
 						<th>Total Time</th>
 						<th>Total Price</th>
 						<th>Create Date</th>
@@ -25,10 +25,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in pager.items">
+					<tr ng-repeat="item in pager.items | filter:searchText" >
 						<td>{{item.customer.fullName}}</td>
 						<td>{{item.employee1.fullName}}</td>
-						<td>{{item.stylistId}}</td>
+						<td>{{item.employee1.role.name}}</td>
 						<td>{{item.totalTime}}</td>
 						<td>{{item.totalPrice}}</td>
 						<td>{{item.createDate}}</td>
