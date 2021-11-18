@@ -28,6 +28,7 @@ public class Voucher implements Serializable {
 	@Id
 	private String id;
 
+	@Column(name = "`condition`")
 	private float condition;
 
 	private String note;
