@@ -18,31 +18,11 @@ public interface VoucherService {
 
 	Voucher getById(String id);
 
-	void deleteAll();
-
-	void deleteAll(Iterable<? extends Voucher> entities);
-
-	Voucher getOne(String id);
-
-	void deleteAllInBatch();
-
-	void deleteAllById(Iterable<? extends String> ids);
-
-	void delete(Voucher entity);
-
-	void deleteAllByIdInBatch(Iterable<String> ids);
-
-	void deleteById(String id);
-
 	long count();
-
-	void deleteAllInBatch(Iterable<Voucher> entities);
 
 	<S extends Voucher> boolean exists(Example<S> example);
 
 	<S extends Voucher> long count(Example<S> example);
-
-	void deleteInBatch(Iterable<Voucher> entities);
 
 	<S extends Voucher> Page<S> findAll(Example<S> example, Pageable pageable);
 
@@ -56,8 +36,6 @@ public interface VoucherService {
 
 	<S extends Voucher> List<S> saveAll(Iterable<S> entities);
 
-	Optional<Voucher> findById(String id);
-
 	List<Voucher> findAllById(Iterable<String> ids);
 
 	List<Voucher> findAll(Sort sort);
@@ -70,4 +48,11 @@ public interface VoucherService {
 
 	<S extends Voucher> S save(S entity);
 
+	Voucher create(Voucher voucher);
+
+	Voucher update(Voucher voucher);
+
+	void delete(String id);
+
+	Voucher findById(String id);
 }
