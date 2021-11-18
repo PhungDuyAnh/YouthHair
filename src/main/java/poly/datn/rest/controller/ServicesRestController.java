@@ -4,44 +4,53 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import poly.datn.entity.Services;
 import poly.datn.service.IServiceService;
+import poly.datn.service.dto.ServiceDTO;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Timer;
 
 @RestController
-@RequestMapping("/poly")
+@RequestMapping("/rest")
 public class ServicesRestController {
 
-	//    private final ServicesService servicesService;
-//
-//    private final ServiceDAO serviceDAO;
-//
-//    public ServiceController(ServicesService servicesService, ServiceDAO serviceDAO){
-//
-//        this.servicesService = servicesService;
-//        this.serviceDAO = serviceDAO;
-//    }
-	//
-	//    @PostMapping("/services")
-	//    public ResponseEntity<Services> create(@Valid @RequestBody ServiceDTO serviceDTO) throws URISyntaxException {
-	//        Services services = servicesService.create(serviceDTO);
-	//
-	//        return ResponseEntity.ok().body(services);
-	//    }
-	//
-	//    @GetMapping("/services")
-	//    public ResponseEntity<Page<ServiceDTO>> getAllCortusers(Pageable pageable) {
-	//        Page<ServiceDTO> page =servicesService.findAll(pageable);
-	//        return ResponseEntity.ok().body(page);
-	//    }
+
 	@Autowired
 	IServiceService iServiceService;
 	@PostMapping("/services")
-	public ResponseEntity <Services> create(@ModelAttribute Services services) {
-//        iServiceService.save(services);
-		return ResponseEntity.ok(iServiceService.save(services));
+	public Services create(@RequestBody ServiceDTO services) {
+//		long now = System.currentTimeMillis();
+//		Time sqlTime = new Time(now);
+//		System.out.println(sqlTime);
+//		String time = services.getTime().toString();
+//		System.out.println("aaaaaaa "+time);
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//		long ms = sdf.parse(time).getTime();
+//		Time t = new Time(ms);
+
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+//		try {
+//			java.sql.Date fajr_begins = (java.sql.Date) formatter.parse(services.getTime());
+//			System.out.println(fajr_begins);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+
+		System.out.println(services.getTime());
+
+//		Time a = new Time(sfd.parse(services.getTime()));
+		return null;
 	}
 	@GetMapping("/services")
 	public ResponseEntity<List<Services>>  getAll() {
+		long now = System.currentTimeMillis();
+		Time sqlTime = new Time(now);
+		System.out.println(sqlTime);
 		return ResponseEntity.ok().body(iServiceService.findAll());
 	}
 	@GetMapping("/services/{id}")

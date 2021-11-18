@@ -14,44 +14,66 @@
 						</div>
 							<div class="row">
 								<div class="col-sm-3">
-		                        	<input type="image" class="img-profile rounded-circle dropdown-toggle" src="../img/undraw_profile.svg" 
-		                        	id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                        	 <input type="image" class="img-profile rounded-circle dropdown-toggle"
+											ng-src="{{'/images/' + form.image}}"
+		                        			id="dropdownMenuButton"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false"
+											style="max-width: 100%; height:50%;"
+
+									 >
+									<!-- <img ng-src="{{'/images/' + form.image}}" class="img-profile rounded-circle" style="max-width: 100%; height:50%;" alt="">-->
 		                        	<div class="dropdown-menu animated--fade-in"
                                             aria-labelledby="dropdownMenuButton">
-                                            <input type="file" accept="image/*" class="form-control" >
+<!--                                            <input type="file" accept="image/*" class="form-control" >-->
+										<input type="file" class="form-control "  placeholder="Tên Dịch Vụ" accept="image/*" class="form-control"
+											   onchange="angular.element(this).scope().imageChanged(this.files)">
                                             </div>
 								</div>
 								<div class="col-sm-9">
 									<div class="form-group">
 										<label class="form-label" for="name">Tên Dịch Vụ <span
-											class="text-danger">(*)</span></label> <input type="text"
-											class="form-control " id="name"
-											placeholder="Tên Dịch Vụ">
+											class="text-danger">(*)</span></label>
+										<input type="text"
+											   ng-model="form.serviceName"
+											   class="form-control " id="name"
+											   placeholder="Tên Dịch Vụ">
 									</div>
 									<div class="form-group">
 										<label class="form-label" for="price">Giá <span
-											class="text-danger">(*)</span></label> <input type="text"
+											class="text-danger">(*)</span></label>
+										<input type="text" ng-model="form.price"
 											class="form-control " id="price"
 											placeholder="Giá Dịch Vụ">
 									</div>
 									<div class="form-group">
 										<label class="form-label" for="time">Thời Gian <span
-											class="text-danger">(*)</span></label> <input type="time"
+											class="text-danger">(*)</span></label> <input type="time" ng-model="form.time "
 											class="form-control " id="time"
 											placeholder="Tên Dịch Vụ">
 									</div>
+									<tt>value = {{form.time | date: "HH:mm"}}</tt><br/>
+<!--									<div class="form-group">-->
+<!--										<label class="form-label" for="time">Thời Gian <span-->
+<!--												class="text-danger">(*)</span></label>-->
+<!--										<input type="file" class="form-control " id="image" placeholder="Tên Dịch Vụ" accept="image/*"-->
+<!--											   onchange="angular.element(this).scope().imageChanged(this.files)">-->
+<!--									</div>-->
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
 												<label class="form-label" for="name">Trạng Thái</label>
 												<div class="form-check">
 													<input type="radio" class="form-check-input" id="radio1"
-														name="optradio" value="option1" checked> <label
+														   ng-model="form.status" ng-value="true"
+														name="optradio"  checked> <label
 														class="form-check-label" for="radio1">Đang Hoạt Động</label>
 												</div>
 												<div class="form-check">
 													<input type="radio" class="form-check-input" id="radio2"
-														name="optradio" value="option2">Dừng Hoạt Động <label
+														   ng-model="form.status" ng-value="false"
+														name="optradio" >Dừng Hoạt Động <label
 														class="form-check-label" for="radio2"></label>
 												</div>
 											</div>
@@ -60,17 +82,17 @@
 											<div class="form-group">
 												<div class="form-group">
 													<label class="form-label" for="name">Mô Tả</label>
-													<textarea class="form-control" rows=""
+													<textarea class="form-control" rows="" ng-model="form.note"
 														cols=""></textarea>
 												</div>
-											</div>										
-										</div>											
+											</div>
+										</div>
 									</div>
 								</div>
 
 								<hr>
 								<div class="text-right">
-									<a href="#!services" class="btn btn-primary  "> Reset </a> <a
+									<a ng-click="create()" class="btn btn-primary  "> Reset </a> <a
 										href="#!services" class="btn btn-success  "> Create </a> <a
 										href="#!services" class="btn btn-warning  "> Update </a> <a
 										href="#!services" class="btn btn-danger  "> Delete </a>
