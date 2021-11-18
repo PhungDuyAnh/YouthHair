@@ -22,4 +22,15 @@ public class BookingRestController {
 		return bookingService.findAll();
 	}
 
+	@GetMapping("/WFC")
+	public List<Booking> getByStatusBooking(){
+		return  bookingService.findBookingByStatusbooking("WFC");
+	}
+
+	@GetMapping("/WFP")
+	public List<Booking> getByStatusBookingWFP(){return bookingService.findBookingByStatusbooking("WFP");}
+
+	@GetMapping("/UCF")
+	public List<Booking> getByStatusBookingUCF(){return bookingService.findBookingByStatusbooking("UCF");}
+
 }
