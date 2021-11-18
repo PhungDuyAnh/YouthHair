@@ -447,11 +447,30 @@
 
 	<!-- Controller Angular -->
 	<script type="text/javascript" src="admin-app.js"></script>
-	<script type="text/javascript" src="booking/booking-ctrl.js"></script>
-	<script type="text/javascript" src="employee/employee_ctrl.js"></script>
-	<script type="text/javascript" src="service/_service_ctrl.js"></script>
+    <script type="text/javascript" src="booking/booking-ctrl.js"></script>
+    <script type="text/javascript" src="employee/employee_ctrl.js"></script>
+<<<<<<< HEAD
+    <script type="text/javascript" src="customer/customer-ctrl.js"></script>
+	<script>
 
+	// Add active class to the current button (highlight it)
+	var navbar = document.getElementById("accordionSidebar");
+	var navItem = navbar.getElementsByClassName("nav-item");
+	for (var i = 0; i < navItem.length; i++) {
+		navItem[i].addEventListener("click", function() {
+	  var current = document.getElementsByClassName("active");
+	  current[0].className = current[0].className.replace(" active", "");
+	  this.className += " active";
+	  });
+	}
+	</script>
+=======
+    <script type="text/javascript" src="service/_service_ctrl.js"></script>
+    <script type="text/javascript" src="voucher/voucher_ctrl.js"></script>
+	
 
+>>>>>>> b3172cd689ce1c984b3c75e20295104d8a6ad34f
+	
 </body>
 
 </html>
