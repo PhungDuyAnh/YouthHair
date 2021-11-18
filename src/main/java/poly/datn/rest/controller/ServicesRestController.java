@@ -40,7 +40,7 @@ public class ServicesRestController {
 //		} catch (ParseException e) {
 //			e.printStackTrace();
 //		}
-
+//		Hi bạn nam
 		System.out.println(services.getTime());
 
 //		Time a = new Time(sfd.parse(services.getTime()));
