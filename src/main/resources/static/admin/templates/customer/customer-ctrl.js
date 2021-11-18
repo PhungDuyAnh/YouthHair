@@ -16,6 +16,12 @@ app.controller("customer-ctrl",function($scope,$http){
 		}
 	}
 	
+	//hien thi len form
+	$scope.edit = function(item){
+		$scope.form = angular.copy(item);
+		$(".nav-tabs a:eq(0)").tab('show');
+	}
+	
 	//xoa reset form
 	//$scope.reset = function(){
 			//$scope.form = {
@@ -24,7 +30,7 @@ app.controller("customer-ctrl",function($scope,$http){
 			//};
 	//}
 	
-	//cap nhat voucher
+	//cap nhat 
 	$scope.update = function(){
 		var item = angular.copy($scope.form);
 		$http.put(`/rest/customer/${item.id}`,item).then(resp => {
