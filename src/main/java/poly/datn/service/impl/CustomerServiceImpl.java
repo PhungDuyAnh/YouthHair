@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 
 import poly.datn.dao.CustomerDAO;
 import poly.datn.entity.Customer;
-import poly.datn.service.CustomerSerivce;
+import poly.datn.service.CustomerService;
 
 @Service
-public class CustomerSerivceImpl implements CustomerSerivce{
+public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired
 	CustomerDAO customerDAO;
@@ -164,6 +164,12 @@ public class CustomerSerivceImpl implements CustomerSerivce{
 	public <S extends Customer> List<S> findAll(Example<S> example, Sort sort) {
 		return customerDAO.findAll(example, sort);
 	}
+	
+	
+	public Customer create(Customer customer) {
+		return customerDAO.save(customer);
+	}
+	
 	
 	
 }

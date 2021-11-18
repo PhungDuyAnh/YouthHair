@@ -15,12 +15,36 @@ app.controller("customer-ctrl",function($scope,$http){
 
 		}
 	}
+	
+	//xoa reset form
+	//$scope.reset = function(){
+			//$scope.form = {
+				
+				
+			//};
+	//}
+	
+	//cap nhat voucher
+	$scope.update = function(){
+		var item = angular.copy($scope.form);
+		$http.put(`/rest/customer/${item.id}`,item).then(resp => {
+			var index = $scope.items.findIndex(p => p.id === item.id);
+			$scope.items[index] = item;
+			$scope.reset();
+			alert("Chỉnh sửa thông tin thành công!");
+		}).catch(error => {
+			alert(" Chỉnh sửa thông tin không thành công!");
+			console.log("Error",error);
+		});
+	}
+	
+
 
 
 	//phan trang
 	$scope.pager = {
 		page: 0,
-		size: 10,
+		size: 2,
 		get items(){
 			var start = this.page * this.size;
 			return $scope.items.slice(start,start + this.size);
