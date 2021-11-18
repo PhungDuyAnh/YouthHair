@@ -27,7 +27,8 @@ app.config(function($routeProvider){
 		controller:"employee-ctrl"
 	})
 	.when("/vouchers", {
-		templateUrl:"/admin/templates/voucher/index.html"
+		templateUrl:"/admin/templates/voucher/index.html",
+		controller:"voucher-ctrl"
 	})
 	.when("/billpaid", {
 		templateUrl:"/admin/templates/bill/index.html"
