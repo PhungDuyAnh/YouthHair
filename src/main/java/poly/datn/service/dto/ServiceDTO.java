@@ -2,38 +2,21 @@ package poly.datn.service.dto;
 
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.sql.Time;
 
 public class ServiceDTO implements Serializable {
 
-    private Integer id;
-
-    private String description;
-
     private String image;
 
-    private String nameService;
+    private String note;
 
     private float price;
 
-    private int serviceTime;
+    private String serviceName;
 
-    private int status;
+    private Boolean status;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    private String time;
 
     public String getImage() {
         return image;
@@ -43,12 +26,12 @@ public class ServiceDTO implements Serializable {
         this.image = image;
     }
 
-    public String getNameService() {
-        return nameService;
+    public String getNote() {
+        return note;
     }
 
-    public void setNameService(String nameService) {
-        this.nameService = nameService;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public float getPrice() {
@@ -59,32 +42,27 @@ public class ServiceDTO implements Serializable {
         this.price = price;
     }
 
-    public int getServiceTime() {
-        return serviceTime;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setServiceTime(int serviceTime) {
-        this.serviceTime = serviceTime;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public int getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "ServiceDTO{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
-                ", nameService='" + nameService + '\'' +
-                ", price=" + price +
-                ", serviceTime=" + serviceTime +
-                ", status=" + status +
-                '}';
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

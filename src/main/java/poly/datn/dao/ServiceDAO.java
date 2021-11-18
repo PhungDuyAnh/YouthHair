@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import poly.datn.entity.Services;
 
 public interface ServiceDAO extends JpaRepository<Services, Integer> {
-    @Query("update Services set status = 0 where id = :id")
-    Services updateStatus(@Param("id") Integer id);
+    @Query("select u from Services u ")
+    Services updateStatus();
 }

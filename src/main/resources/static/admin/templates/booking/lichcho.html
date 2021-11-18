@@ -5,8 +5,13 @@
 	<div class="card-body">
 		<div class="form-group">
 			<div class="d-none d-sm-inline-block form-inline">
+<<<<<<< HEAD
 				TÃ¬m Kiáº¿m: <input type="text"
 					class="form-control bg-light border-0 small" placeholder="..."
+=======
+				Tìm Kiếm: <input type="text" ng-model="searchText"
+					class="form-control bg-light border-0 small" placeholder=""
+>>>>>>> b3172cd689ce1c984b3c75e20295104d8a6ad34f
 					aria-label="Search">
 			</div>
 		</div>
@@ -25,10 +30,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in pager.items">
+					<tr ng-repeat="item in pager.items | filter:searchText" >
 						<td>{{item.customer.fullName}}</td>
 						<td>{{item.employee1.fullName}}</td>
-						<td>{{item.stylistId}}</td>
+						<td>{{item.employee1.role.name}}</td>
 						<td>{{item.totalTime}}</td>
 						<td>{{item.totalPrice}}</td>
 						<td>{{item.createDate}}</td>
@@ -61,7 +66,7 @@
 	</div>
 </div>
 
-<!-- infoModal-->
+	<!-- infoModal-->
 	<div class="modal" id="infoModal">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -73,14 +78,26 @@
 				</div>
 
 				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="#" class="p-5 bg-white">
+				<div class="modal-body p-5">
+						
+						<div class="row form-group">
+<<<<<<< HEAD
+							<div class="col-md-6 mb-3 mb-md-0">
+								<label class="text-black" for="fname">Há»� TÃªn</label><input
+=======
+							<div class="col-md-12">
+								<label class="text-black" for="fname">Họ Tên</label><input
+>>>>>>> b3172cd689ce1c984b3c75e20295104d8a6ad34f
+									type="text" id="fname" class="form-control"
+									placeholder="Há»� TÃªn..." readonly>
+							</div>
+						</div>
 						
 						<div class="row form-group">
 							<div class="col-md-6 mb-3 mb-md-0">
-								<label class="text-black" for="fname">Há»� TÃªn</label><input
-									type="text" id="fname" class="form-control"
-									placeholder="Há»� TÃªn..." readonly>
+								<label class="text-black" for="email">Email</label> <input
+									type="email" id="email" class="form-control"
+									placeholder="Email" readonly>
 							</div>
 							<div class="col-md-6">
 								<label class="text-black" for="lname">Sá»‘ Ä�iá»‡n Thoáº¡i </label> <input
@@ -91,6 +108,7 @@
 
 						<div class="row form-group">
 							<div class="col-md-6 mb-3 mb-md-0">
+<<<<<<< HEAD
 								<label class="text-black" for="email">Email</label> <input
 									type="email" id="email" class="form-control"
 									placeholder="Email" readonly>
@@ -99,6 +117,16 @@
 								<label class="text-black" for="date">NgÃ y LÃ m TÃ³c</label> <input
 									type="text" id="date" class="form-control datepicker px-2"
 									placeholder="NgÃ y LÃ m TÃ³c..." readonly>
+=======
+								<label class="text-black" for="date">Ngày Làm Tóc</label> <input
+									type="date" id="date" class="form-control datepicker px-2"
+									placeholder="Ngày Làm Tóc..." readonly>
+>>>>>>> b3172cd689ce1c984b3c75e20295104d8a6ad34f
+							</div>
+							<div class="col-md-6">
+								<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
+									type="time" id="time" class="form-control datepicker px-2"
+									placeholder="Khung Giờ Làm Tóc...">
 							</div>
 						</div>
 
@@ -132,17 +160,26 @@
 						
 						<div class="row form-group">
 							<div class="col-md-12">
+<<<<<<< HEAD
 								<label class="text-black" for="note">Tá»•ng Thá»�i Gian: </label> <span>40 phÃºt</span> <br>
 								<label class="text-black" for="note">Tá»•ng Tiá»�n: </label> <span>100,000 VNÄ�</span>
+=======
+								<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">40 phút</span></h5>
+								<h4 class="text-black" >Tổng Tiền: <span class="text-warning">100,000 VNĐ</span></h4> 
+>>>>>>> b3172cd689ce1c984b3c75e20295104d8a6ad34f
 							</div>
 						</div>
 						
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="text-black" for="stylist">Stylist</label> 
-								<input
-									type="text" id="stylist" class="form-control datepicker px-2"
-									placeholder="Stylist..." readonly>
+								<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label> 
+								<select class="form-control" id="stylist">
+									<option disabled selected>Hãy Chọn 1 Stylist</option>
+								    <option>1</option>
+								    <option>2</option>
+								    <option>3</option>
+								    <option>4</option>
+								 </select>
 							</div>
 						</div>
 						
@@ -161,7 +198,6 @@
 							</div>
 						</div>
 
-					</form>
 				</div>
 			</div>
 		</div>

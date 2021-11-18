@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import org.springframework.data.jpa.repository.Query;
 import poly.datn.entity.Booking;
 
 public interface BookingService {
@@ -70,4 +71,5 @@ public interface BookingService {
 
 	<S extends Booking> S save(S entity);
 
+	List<Booking> findBookingByStatusbooking(String status);
 }

@@ -52,6 +52,7 @@ CREATE TABLE `booking` (
   `CreateDate` date NOT NULL,
   `TotalPrice` float NOT NULL,
   `TotalTime` varchar(45) NOT NULL,
+  `Time` time DEFAULT NULL,
   `Note` varchar(455) DEFAULT NULL,
   `EmloyeeId` int NOT NULL,
   `StylistId` int NOT NULL,
@@ -80,7 +81,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00','A',5,1,'CAN',1,3,NULL),(2,'2021-11-11',50000,'00:40:00','BV',5,2,'CPM',2,3,NULL),(3,'2021-11-11',500000,'00:40:00','C',5,3,'IAT',3,3,NULL),(4,'2021-11-11',500000,'00:40:00','D',5,1,'UCF',1,3,NULL),(5,'2021-11-11',500000,'00:40:00','F',5,2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00','G',5,3,'WFP',3,3,NULL);
+INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00',NULL,'A',5,1,'CAN',1,3,NULL),(2,'2021-11-11',50000,'00:40:00',NULL,'BV',5,2,'CPM',2,3,NULL),(3,'2021-11-11',500000,'00:40:00',NULL,'C',5,3,'IAT',3,3,NULL),(4,'2021-11-11',500000,'00:40:00',NULL,'D',5,1,'UCF',1,3,NULL),(5,'2021-11-11',500000,'00:40:00',NULL,'F',5,2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00',NULL,'G',5,3,'WFP',3,3,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +256,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (1,'Cắt tóc',100000,'30:00:00',1,'1.png','A'),(2,'Gội đầu',30000,'10:00:00',1,'1.png','B'),(3,'Uốn tóc',400000,'90:00:00',1,'1.png','C'),(4,'Nhuộm tóc',300000,'90:00:00',1,'1.png','D');
+INSERT INTO `services` VALUES (1,'Cắt tóc',100000,'00:30:00',1,'1.png','A'),(2,'Gội đầu',30000,'00:10:00',1,'1.png','B'),(3,'Uốn tóc',400000,'01:30:00',1,'1.png','C'),(4,'Nhuộm tóc',300000,'01:30:00',1,'1.png','D');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,4 +373,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-14 22:52:52
+-- Dump completed on 2021-11-18 16:14:51

@@ -10,10 +10,12 @@ app.config(function($routeProvider){
 		controller:"booking-ctrl"
 	})
 	.when("/checkbooking", {
-		templateUrl:"/admin/templates/booking/bookingcheck.html"
+		templateUrl:"/admin/templates/booking/bookingcheck.html",
+		controller:"booking-ctrl"
 	})
 	.when("/services", {
-		templateUrl:"/admin/templates/service/index.html"
+		templateUrl:"/admin/templates/service/index.html",
+		controller:"service-ctrl"
 	})
 	.when("/contacts", {
 		templateUrl:"/admin/templates/contact/index.html"
@@ -27,7 +29,8 @@ app.config(function($routeProvider){
 		controller:"employee-ctrl"
 	})
 	.when("/vouchers", {
-		templateUrl:"/admin/templates/voucher/index.html"
+		templateUrl:"/admin/templates/voucher/index.html",
+		controller:"voucher-ctrl"
 	})
 	.when("/billpaid", {
 		templateUrl:"/admin/templates/bill/index.html"

@@ -51,11 +51,6 @@ public class VoucherServiceImpl implements VoucherService{
 	}
 
 	@Override
-	public Optional<Voucher> findById(String id) {
-		return voucherDAO.findById(id);
-	}
-
-	@Override
 	public <S extends Voucher> List<S> saveAll(Iterable<S> entities) {
 		return voucherDAO.saveAll(entities);
 	}
@@ -86,11 +81,6 @@ public class VoucherServiceImpl implements VoucherService{
 	}
 
 	@Override
-	public void deleteInBatch(Iterable<Voucher> entities) {
-		voucherDAO.deleteInBatch(entities);
-	}
-
-	@Override
 	public <S extends Voucher> long count(Example<S> example) {
 		return voucherDAO.count(example);
 	}
@@ -100,54 +90,10 @@ public class VoucherServiceImpl implements VoucherService{
 		return voucherDAO.exists(example);
 	}
 
-	@Override
-	public void deleteAllInBatch(Iterable<Voucher> entities) {
-		voucherDAO.deleteAllInBatch(entities);
-	}
 
 	@Override
 	public long count() {
 		return voucherDAO.count();
-	}
-
-	@Override
-	public void deleteById(String id) {
-		voucherDAO.deleteById(id);
-	}
-
-	@Override
-	public void deleteAllByIdInBatch(Iterable<String> ids) {
-		voucherDAO.deleteAllByIdInBatch(ids);
-	}
-
-	@Override
-	public void delete(Voucher entity) {
-		voucherDAO.delete(entity);
-	}
-
-	@Override
-	public void deleteAllById(Iterable<? extends String> ids) {
-		voucherDAO.deleteAllById(ids);
-	}
-
-	@Override
-	public void deleteAllInBatch() {
-		voucherDAO.deleteAllInBatch();
-	}
-
-	@Override
-	public Voucher getOne(String id) {
-		return voucherDAO.getOne(id);
-	}
-
-	@Override
-	public void deleteAll(Iterable<? extends Voucher> entities) {
-		voucherDAO.deleteAll(entities);
-	}
-
-	@Override
-	public void deleteAll() {
-		voucherDAO.deleteAll();
 	}
 
 	@Override
@@ -164,6 +110,23 @@ public class VoucherServiceImpl implements VoucherService{
 	public <S extends Voucher> List<S> findAll(Example<S> example, Sort sort) {
 		return voucherDAO.findAll(example, sort);
 	}
-	
-	
+
+	public Voucher create(Voucher voucher) {
+		return voucherDAO.save(voucher);
+	}
+
+	@Override
+	public Voucher update(Voucher voucher) {
+		return voucherDAO.save(voucher);
+	}
+
+	@Override
+	public void delete(String id) {
+		voucherDAO.deleteById(id);
+	}
+
+	@Override
+	public Voucher findById(String id) {
+		return voucherDAO.findById(id).get();
+	}
 }
