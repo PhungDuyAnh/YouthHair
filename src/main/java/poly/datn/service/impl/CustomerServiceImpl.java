@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import poly.datn.dao.CustomerDAO;
 import poly.datn.entity.Customer;
+import poly.datn.entity.Voucher;
 import poly.datn.service.CustomerService;
 
 @Service
@@ -120,6 +121,7 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDAO.deleteAllByIdInBatch(ids);
 	}
 
+	
 	@Override
 	public void delete(Customer entity) {
 		customerDAO.delete(entity);
@@ -166,9 +168,12 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	
-	public Customer create(Customer customer) {
+	@Override
+	public Customer update(Customer customer) {
 		return customerDAO.save(customer);
 	}
+	
+	
 	
 	
 	

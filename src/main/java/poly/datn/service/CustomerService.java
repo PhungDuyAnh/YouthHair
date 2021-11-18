@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import poly.datn.dao.CustomerDAO;
 import poly.datn.entity.Customer;
+import poly.datn.entity.Voucher;
 
 public interface CustomerService {
 
@@ -29,7 +30,7 @@ public interface CustomerService {
 
 	void deleteAllById(Iterable<? extends Integer> ids);
 
-	void delete(Customer entity);
+	void delete(String id);
 
 	void deleteAllByIdInBatch(Iterable<Integer> ids);
 
@@ -57,7 +58,6 @@ public interface CustomerService {
 
 	<S extends Customer> List<S> saveAll(Iterable<S> entities);
 
-	Optional<Customer> findById(Integer id);
 
 	List<Customer> findAllById(Iterable<Integer> ids);
 
@@ -68,10 +68,18 @@ public interface CustomerService {
 	Page<Customer> findAll(Pageable pageable);
 
 	<S extends Customer> Optional<S> findOne(Example<S> example);
+	
+	Customer save(Customer customer);
 
-	<S extends Customer> S save(S entity);
 
-	Customer create(Customer customer);
+
+	Customer update(Customer customer);
+
+	
+
+	
+
+	
 	
 
 }
