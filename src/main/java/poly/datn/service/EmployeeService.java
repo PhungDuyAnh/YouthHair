@@ -70,4 +70,12 @@ public interface EmployeeService {
 
 	<S extends Employee> S save(S entity);
 
+	Employee create(Employee employee);
+
+	Employee update(Employee employee);
+
+	void delete(Integer id);
+
+	
+
 }

@@ -8,9 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import poly.datn.dao.CustomerDAO;
 import poly.datn.entity.Customer;
+import poly.datn.entity.Voucher;
 
-public interface CustomerSerivce {
+public interface CustomerService {
 
 	<S extends Customer> List<S> findAll(Example<S> example, Sort sort);
 
@@ -69,5 +71,7 @@ public interface CustomerSerivce {
 	<S extends Customer> Optional<S> findOne(Example<S> example);
 
 	<S extends Customer> S save(S entity);
+	
 
 }
+

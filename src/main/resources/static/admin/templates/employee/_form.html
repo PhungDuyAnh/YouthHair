@@ -1,5 +1,14 @@
 <div class="container">
 
+<style>
+         .error-msg {
+         font-size: 90%;
+         font-style: italic;
+         color: red;
+         }
+      </style>
+
+
 	<!-- Outer Row -->
 	<div class="row justify-content-center">
 
@@ -11,44 +20,71 @@
 					<div class="p-5">
 						<div class="text-center">
 							<h1 class="h4 text-gray-900 mb-4">Chi Tiết Nhân Viên!</h1>
+
+
+							
 						</div>
-							<div class="row">
+							<div class="row" >
 								<div class="col-sm-3">
-		                        	<input type="image" class="img-profile rounded-circle dropdown-toggle" src="../img/undraw_profile.svg" 
-		                        	id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								
+		                        	<input type="image" class="img-profile rounded-circle dropdown-toggle" src="../img/undraw_profile.svg" ng-src="{{'/images/'+form.image}}"  
+		                        	id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; height: 80%;">
 		                        	<div class="dropdown-menu animated--fade-in"
                                             aria-labelledby="dropdownMenuButton">
-                                            <input type="file" accept="image/*" class="form-control" >
+                                            <input type="file" class="form-control" id="image"
+						onchange="angular.element(this).scope().imageChanged(this.files)">
                                         </div>
 								</div>
-								<div class="col-sm-9">
+								
+								
+								
+		
+								
+								
+								
+								
+								<div class="col-sm-9" >
+								
+								
+								
+								
 									<div class="form-group">
 										<label class="form-label" for="name">Tên Nhân Viên</label><span
 													class="text-danger">(*)</span> <input type="text"
-											class="form-control" id="name" 
-											placeholder="Tên Nhân Viên...">
+											class="form-control" name="myFullName" ng-model="form.fullName" id="name" 
+											placeholder="Tên Nhân Viên(Bắt Buộc Nhập)" >
+											
+											
 									</div>
+									
+
+									
+									
 									<div class="row">
+									
+									
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="form-label">Giới Tính </label> <br>
 												<div class="form-check-inline">
 												  <label class="form-check-label">
-												    <input type="radio" class="form-check-input" name="optradio" checked="checked">Nam
+												    <input ng-model="form.gender" type="radio" name="available" ng-value="true">Nam
 												  </label>
 												</div>
 												<div class="form-check-inline">
 												  <label class="form-check-label">
-												    <input type="radio" class="form-check-input" name="optradio"> Nữ
+												    <input ng-model="form.gender" type="radio" name="available" ng-value="false">Nữ
 												  </label>
 												</div>
 											</div>
 										</div>
+										
+										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label class="form-label" for="salary">Lương</label> <input type="number"
+												<label class="form-label" for="salary">Lương</label> <input ng-model="form.salary" type="number"
 													class="form-control" id="salary" 
-													placeholder="Lương...">
+													placeholder="Lương(Bắt Buộc Nhập)">
 											</div>
 										</div>
 									</div>
@@ -56,47 +92,82 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="form-label" for="phone">Số Điện Thoại</label><span
-													class="text-danger">(*)</span> <input type="number"
+													class="text-danger">(*)</span> <input ng-model="form.phone"
 													class="form-control" id="phone" 
-													placeholder="Số Điện Thoại...">
+													placeholder="Số Điện Thoại(Bắt Buộc Nhập)">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label class="form-label" for="address">Địa Chỉ</label> <input type="text"
+												<label class="form-label" for="address">Địa Chỉ</label> <input ng-model="form.address" type="text"
 													class="form-control" id="address" 
-													placeholder="Địa Chỉ...">
+													placeholder="Địa Chỉ(Bắt Buộc Nhập)">
 											</div>
 										</div>
+										
+						
+										
+										
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="form-label">Status Work </label> <br>
+												<div class="form-check-inline">
+												  <label class="form-check-label">
+												    <input ng-model="form.statusWork" ng-value="true" type="radio" class="form-check-input" name="optradio" checked="checked">True
+												  </label>
+												</div>
+												<div class="form-check-inline">
+												  <label class="form-check-label">
+												    <input ng-model="form.statusWork" ng-value="false" type="radio" class="form-check-input" name="optradio"> False
+												  </label>
+												</div>
+											</div>
+										</div>
+										
+										
+										
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="form-label" for="roles">Vai Trò<span
 													class="text-danger">(*)</span></label> 	
-												 <select class="form-control " id="roles" >
-												    <option>1</option>
-												    <option>2</option>
-												    <option>3</option>
-												    <option>4</option>
+												 <select ng-model="form.role.id" class="form-control " id="roles" >
+												    <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
 												  </select>
 											</div>
 										</div>
+										
+										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label class="form-label" for="date">Ngày Bắt Đầu Làm</label> <input type="date"
+												<label class="form-label" for="date">Ngày Bắt Đầu Làm</label> 
+												<input ng-model="form.startDate" type="date"
 													class="form-control" id="date" 
-													placeholder="Ngày Làm...">
+													placeholder="Ngày Làm(Bắt Buộc Nhập)">
+				
+		
 											</div>
 										</div>
+										
+										<!-- <div class="form-group col-sm-6">
+                        <div>Create Date</div>
+                        <input ng-model="form.startDate" type="date" class="form-control">
+                    </div> -->
+										
+										
 									</div>									
 								</div>
 								<hr>
 								<div class="text-right">
-									<a href="#!stylist" class="btn btn-primary"> Reset </a> <a
-										href="#!stylist" class="btn btn-success"> Create </a> <a
-										href="#!stylist" class="btn btn-warning"> Update </a> <a
-										href="#!stylist" class="btn btn-danger"> Delete </a>
+										<a  ng-click="reset()" class="btn btn-primary"> Reset </a> 
+										<a
+										 ng-click="create()" class="btn btn-success"> Create </a> 
+										<a ng-click="update()"
+										 class="btn btn-warning"> Update 
+										</a> 
+										<a ng-click="delete(form)"  class="btn btn-danger"> Delete </a>
+										
 								</div>
 							</div>
 					</div>

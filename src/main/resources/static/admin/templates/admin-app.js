@@ -1,4 +1,4 @@
-app=angular.module("admin_app", ["ngRoute"]);
+app = angular.module("admin_app", ["ngRoute"]);
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -21,7 +21,8 @@ app.config(function($routeProvider){
 		templateUrl:"/admin/templates/contact/index.html"
 	})
 	.when("/customers", {
-		templateUrl:"/admin/templates/customer/index.html"
+		templateUrl:"/admin/templates/customer/index.html",
+		controller:"customer-ctrl"
 	})
 	.when("/employees", {
 		templateUrl:"/admin/templates/employee/index.html",
