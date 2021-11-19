@@ -3,82 +3,172 @@ package poly.datn.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import poly.datn.dao.CustomerDAO;
 import poly.datn.entity.Customer;
 import poly.datn.entity.Voucher;
+import poly.datn.service.CustomerService;
 
-public interface CustomerServiceImpl {
+@Service
+public class CustomerServiceImpl implements CustomerService{
 
-	<S extends Customer> List<S> findAll(Example<S> example, Sort sort);
+	@Autowired
+	CustomerDAO customerDAO;
 
-	<S extends Customer> List<S> findAll(Example<S> example);
+	@Override
+	public <S extends Customer> S save(S entity) {
+		return customerDAO.save(entity);
+	}
 
-	Customer getById(Integer id);
+	@Override
+	public <S extends Customer> Optional<S> findOne(Example<S> example) {
+		return customerDAO.findOne(example);
+	}
 
+	@Override
+	public Page<Customer> findAll(Pageable pageable) {
+		return customerDAO.findAll(pageable);
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		return customerDAO.findAll();
+	}
+
+	@Override
+	public List<Customer> findAll(Sort sort) {
+		return customerDAO.findAll(sort);
+	}
+
+	@Override
+	public List<Customer> findAllById(Iterable<Integer> ids) {
+		return customerDAO.findAllById(ids);
+	}
+
+	@Override
+	public Optional<Customer> findById(Integer id) {
+		return customerDAO.findById(id);
+	}
+
+	@Override
+	public <S extends Customer> List<S> saveAll(Iterable<S> entities) {
+		return customerDAO.saveAll(entities);
+	}
+
+	@Override
+	public void flush() {
+		customerDAO.flush();
+	}
+
+	@Override
+	public <S extends Customer> S saveAndFlush(S entity) {
+		return customerDAO.saveAndFlush(entity);
+	}
+
+	@Override
+	public boolean existsById(Integer id) {
+		return customerDAO.existsById(id);
+	}
+
+	@Override
+	public <S extends Customer> List<S> saveAllAndFlush(Iterable<S> entities) {
+		return customerDAO.saveAllAndFlush(entities);
+	}
+
+	@Override
+	public <S extends Customer> Page<S> findAll(Example<S> example, Pageable pageable) {
+		return customerDAO.findAll(example, pageable);
+	}
+
+	@Override
+	public void deleteInBatch(Iterable<Customer> entities) {
+		customerDAO.deleteInBatch(entities);
+	}
+
+	@Override
+	public <S extends Customer> long count(Example<S> example) {
+		return customerDAO.count(example);
+	}
+
+	@Override
+	public <S extends Customer> boolean exists(Example<S> example) {
+		return customerDAO.exists(example);
+	}
+
+	@Override
+	public void deleteAllInBatch(Iterable<Customer> entities) {
+		customerDAO.deleteAllInBatch(entities);
+	}
+
+	@Override
+	public long count() {
+		return customerDAO.count();
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		customerDAO.deleteById(id);
+	}
+
+	@Override
+	public void deleteAllByIdInBatch(Iterable<Integer> ids) {
+		customerDAO.deleteAllByIdInBatch(ids);
+	}
+
+	@Override
+	public void delete(Customer entity) {
+		customerDAO.delete(entity);
+	}
+
+	@Override
+	public void deleteAllById(Iterable<? extends Integer> ids) {
+		customerDAO.deleteAllById(ids);
+	}
+
+	@Override
+	public void deleteAllInBatch() {
+		customerDAO.deleteAllInBatch();
+	}
+
+	@Override
+	public Customer getOne(Integer id) {
+		return customerDAO.getOne(id);
+	}
+
+	@Override
+	public void deleteAll(Iterable<? extends Customer> entities) {
+		customerDAO.deleteAll(entities);
+	}
+
+	@Override
+	public void deleteAll() {
+		customerDAO.deleteAll();
+	}
+
+	@Override
+	public Customer getById(Integer id) {
+		return customerDAO.getById(id);
+	}
+
+	@Override
+	public <S extends Customer> List<S> findAll(Example<S> example) {
+		return customerDAO.findAll(example);
+	}
+
+	@Override
+	public <S extends Customer> List<S> findAll(Example<S> example, Sort sort) {
+		return customerDAO.findAll(example, sort);
+	}
 	
-
-
-	Customer getOne(Integer id);
-
-	void deleteAllInBatch();
-
-	void deleteAllById(Iterable<? extends Integer> ids);
-
-	void delete(String id);
-
-	void deleteAllByIdInBatch(Iterable<Integer> ids);
-
-	void deleteById(Integer id);
-
-	long count();
-
-	void deleteAllInBatch(Iterable<Customer> entities);
-
-	<S extends Customer> boolean exists(Example<S> example);
-
-	<S extends Customer> long count(Example<S> example);
-
-	void deleteInBatch(Iterable<Customer> entities);
-
-	<S extends Customer> Page<S> findAll(Example<S> example, Pageable pageable);
-
-	<S extends Customer> List<S> saveAllAndFlush(Iterable<S> entities);
-
-	boolean existsById(Integer id);
-
-	<S extends Customer> S saveAndFlush(S entity);
-
-	void flush();
-
-	<S extends Customer> List<S> saveAll(Iterable<S> entities);
-
-
-	List<Customer> findAllById(Iterable<Integer> ids);
-
-	List<Customer> findAll(Sort sort);
-
-	List<Customer> findAll();
-
-	Page<Customer> findAll(Pageable pageable);
-
-	<S extends Customer> Optional<S> findOne(Example<S> example);
 	
-	Customer save(Customer customer);
-
-
-
-	Customer update(Customer customer);
-
-	
-
-	
-
-	
-	
+	public Customer create(Customer customer) {
+		return customerDAO.save(customer);
+	}
 
 }

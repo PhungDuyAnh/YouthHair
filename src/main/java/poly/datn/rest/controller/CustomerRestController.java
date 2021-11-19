@@ -33,10 +33,7 @@ public class CustomerRestController {
 		return customerSerivce.save(customer);
 	}
 	
-	@DeleteMapping("/rest/customer/{id}")
-	public void delete(@PathVariable("id")String id) {
-		customerSerivce.delete(id);
-	}
+	
 	
 	
 }
