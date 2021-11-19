@@ -28,4 +28,11 @@ public class CustomerRestController {
 		return customerSerivce.findAll();
 	}
 
+	
+	@PutMapping("/rest/customer/{id}")
+	public Customer update(@PathVariable("id")String id,@RequestBody Customer customer) {
+		return customerSerivce.save(customer);
+	}
+
+	
 }

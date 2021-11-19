@@ -10,6 +10,7 @@ app.controller("customer-ctrl",function($scope,$http){
 
 	$scope.initialize();
 
+	//xoa reset form
 	$scope.reset=function (){
 		$scope.form={
 
@@ -22,13 +23,8 @@ app.controller("customer-ctrl",function($scope,$http){
 		$(".nav-tabs a:eq(0)").tab('show');
 	}
 	
-	//xoa reset form
-	//$scope.reset = function(){
-			//$scope.form = {
-				
-				
-			//};
-	//}
+	
+
 	
 	//cap nhat 
 	$scope.update = function(){
@@ -37,6 +33,7 @@ app.controller("customer-ctrl",function($scope,$http){
 			var index = $scope.items.findIndex(p => p.id === item.id);
 			$scope.items[index] = item;
 			$scope.reset();
+			$(".nav-tabs a:eq(1)").tab('show');
 			alert("Chỉnh sửa thông tin thành công!");
 		}).catch(error => {
 			alert(" Chỉnh sửa thông tin không thành công!");
@@ -50,7 +47,7 @@ app.controller("customer-ctrl",function($scope,$http){
 	//phan trang
 	$scope.pager = {
 		page: 0,
-		size: 1,
+		size: 2,
 		get items(){
 			var start = this.page * this.size;
 			return $scope.items.slice(start,start + this.size);
@@ -64,13 +61,13 @@ app.controller("customer-ctrl",function($scope,$http){
 		prev(){
 			this.page--;
 			if(this.page<0){
-				this.last();
+				this.first();
 			}
 		},
 		next(){
 			this.page++;
 			if(this.page>=this.count){
-				this.first();
+				this.last();
 			}
 		},
 		last(){
