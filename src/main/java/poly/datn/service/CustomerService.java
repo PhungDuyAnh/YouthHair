@@ -20,9 +20,8 @@ public interface CustomerService {
 
 	Customer getById(Integer id);
 
-	void deleteAll();
 
-	void deleteAll(Iterable<? extends Customer> entities);
+
 
 	Customer getOne(Integer id);
 

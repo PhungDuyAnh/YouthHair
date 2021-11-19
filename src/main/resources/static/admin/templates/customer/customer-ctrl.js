@@ -50,7 +50,7 @@ app.controller("customer-ctrl",function($scope,$http){
 	//phan trang
 	$scope.pager = {
 		page: 0,
-		size: 1,
+		size: 7,
 		get items(){
 			var start = this.page * this.size;
 			return $scope.items.slice(start,start + this.size);
