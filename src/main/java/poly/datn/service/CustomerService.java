@@ -30,7 +30,7 @@ public interface CustomerService {
 
 	void deleteAllById(Iterable<? extends Integer> ids);
 
-	void delete(String id);
+	void delete(Customer entity);
 
 	void deleteAllByIdInBatch(Iterable<Integer> ids);
 
@@ -58,6 +58,7 @@ public interface CustomerService {
 
 	<S extends Customer> List<S> saveAll(Iterable<S> entities);
 
+	Optional<Customer> findById(Integer id);
 
 	List<Customer> findAllById(Iterable<Integer> ids);
 
@@ -68,18 +69,11 @@ public interface CustomerService {
 	Page<Customer> findAll(Pageable pageable);
 
 	<S extends Customer> Optional<S> findOne(Example<S> example);
-	
-	Customer save(Customer customer);
 
+	<S extends Customer> S save(S entity);
 
+	Customer create(Customer customer);
 
-	Customer update(Customer customer);
-
-	
-
-	
-
-	
 	
 
 }

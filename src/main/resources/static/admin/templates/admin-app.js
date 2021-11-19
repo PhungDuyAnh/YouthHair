@@ -1,4 +1,4 @@
-app=angular.module("admin_app", ["ngRoute"]);
+var app = angular.module("admin_app", ["ngRoute"]);
 
 app.config(function($routeProvider){
 	$routeProvider
