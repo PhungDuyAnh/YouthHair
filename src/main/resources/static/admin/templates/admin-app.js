@@ -18,7 +18,8 @@ app.config(function($routeProvider){
 		controller:"service-ctrl"
 	})
 	.when("/contacts", {
-		templateUrl:"/admin/templates/contact/index.html"
+		templateUrl:"/admin/templates/contact/index.html",
+		controller:"contact-ctrl"
 	})
 	.when("/customers", {
 		templateUrl:"/admin/templates/customer/index.html",
