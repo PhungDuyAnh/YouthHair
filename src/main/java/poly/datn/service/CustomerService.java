@@ -71,9 +71,7 @@ public interface CustomerService {
 	<S extends Customer> Optional<S> findOne(Example<S> example);
 
 	<S extends Customer> S save(S entity);
-
-	Customer create(Customer customer);
-
 	
 
 }
+

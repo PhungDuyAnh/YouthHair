@@ -118,9 +118,34 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 		}
 	}
 
+	$scope.countDowClock=function (){
+
+	}
 
 	$scope.counter = 0;
+	$scope.targetDate1=function (time){
+		var time="01:50:55";
+		var objProps = time.split(':');
+		var myObj = {};
+		myObj.hour = objProps[0];
+		myObj.minutes = objProps[1];
+		myObj.second = objProps[2];
+		return new Date().getTime()+(1000*myObj.second*60*myObj.hour);
+	}
+	var targetDate=$scope.targetDate1();
+	$scope.day=0;
+	$scope.hour=0;
+	$scope.minutes=0;
+	$scope.second=0;
+	$scope.demo=0;
 	$scope.onTimeout = function(){
+		$scope.cunrent_date=new Date().getTime();
+		$scope.distance=targetDate-$scope.cunrent_date;
+		$scope.day=Math.floor($scope.distance/(1000*60*60*24));
+		$scope.hour=Math.floor(($scope.distance%(1000*60*60*24))/(1000*60*60));
+		$scope.minutes=Math.floor(($scope.distance%(1000*60*60))/(1000*60));
+		$scope.second=Math.floor(($scope.distance%(1000*60))/1000);
+		$scope.demo=$scope.day+":"+$scope.hour+":"+$scope.minutes+":"+$scope.second;
 		$scope.counter++;
 		mytimeout = $timeout($scope.onTimeout,1000);
 	}
@@ -129,4 +154,24 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.stop = function(){
 		$timeout.cancel(mytimeout);
 	}
+
+	$scope.mySplit = function(string, nb) {
+		var array = string.split(':');
+		return array[nb];
+	}
+
+
+// 	var string = "Name1;Email1;ID1~Name2;Email2;ID2";
+// // Initial split in entries
+// 	var splitStrings = string.split('~');
+// 	var objects = [];
+// 	for(var i = 0; i < splitStrings.length; i++) {
+// 		// split into properties
+// 		var objProps = splitStrings[i].split(';');
+// 		var myObj = {};
+// 		myObj.name = objProps[0];
+// 		myObj.mail = objProps[1];
+// 		myObj.id = objProps[2];
+// 		objects.push(myObj);
+// 	}
 })
