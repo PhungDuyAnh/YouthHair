@@ -7,7 +7,7 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Tìm Kiếm</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-	                    <input type="text"
+	                    <input type="text" ng-model="searchText"
 						class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
 						aria-label="Search">
                     </div>
@@ -20,10 +20,7 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Số bản ghi hiển thị</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-							<select name="cars" class="custom-select">
-								<option selected>10</option>
-								<option value="volvo">20</option>
-								<option value="audi">30</option>
+							<select name="sizePage" class="custom-select" ng-model="pager.size" ng-options="x for x in sizePage">
 							</select>
                     </div>
                </div> 
@@ -51,7 +48,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat ="item in pager.items"> 
+							<tr ng-repeat ="item in pager.items | filter:searchText"> 
 								<td>{{item.fullName}}</td>
 								<td>{{item.phone}}</td>
 								<td>{{item.email}}</td>
@@ -61,7 +58,7 @@
 									<a href="#!contacts" ng-click="edit(item)"
 									class="btn btn-info btn-circle"> <i class="fas fa-info-circle"></i>
 									</a> 
-									<a href="#!contacts" class="btn btn-danger btn-circle"> <i
+									<a href="#!contacts" ng-click="delete(item)" class="btn btn-danger btn-circle"> <i
 										class="fas fa-trash"></i>
 									</a>
 								</td>
@@ -69,17 +66,19 @@
 						</tbody>
 					</table>
 					<div class="text-center">
-						<a href="#!contacts" ng-click="pager.first()" class="btn btn-info btn-circle"> <i
-							class="fas fa-angle-double-left"></i>
-						</a> <a href="#!contacts" ng-click="pager.prev()" class="btn btn-info btn-circle"> <i
-							class="fas fa-angle-left"></i>
-						</a>
-						<button class="btn btn-info" disabled="disabled">1 of 2</button>
-						<a href="#!contacts" ng-click="pager.next()" class="btn btn-info btn-circle"> <i
-							class="fas fa-angle-right"></i>
-						</a> <a href="#!contacts" ng-click="pager.last()" class="btn btn-info btn-circle"> <i
-							class="	fas fa-angle-double-right"></i>
-						</a>
+						<button ng-click="pager.first()" class="btn btn-info btn-circle" ng-disabled="disabledBtnFisrt"> 
+							<i class="fas fa-angle-double-left"></i>
+						</button> 
+						<button ng-click="pager.prev()" class="btn btn-info btn-circle"> 
+							<i class="fas fa-angle-left"></i>
+						</button>
+						<button class="btn btn-info" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
+						<button ng-click="pager.next()" class="btn btn-info btn-circle"> 
+							<i class="fas fa-angle-right"></i>
+						</button> 
+						<button ng-click="pager.last()" class="btn btn-info btn-circle" ng-disabled="disabledBtnLast"> 
+							<i class="	fas fa-angle-double-right"></i>
+						</button>
 					</div>
 				</div>
 			</div>
