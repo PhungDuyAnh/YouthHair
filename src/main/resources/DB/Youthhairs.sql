@@ -54,20 +54,17 @@ CREATE TABLE `booking` (
   `TotalTime` varchar(45) NOT NULL,
   `Time` time DEFAULT NULL,
   `Note` varchar(455) DEFAULT NULL,
-  `EmloyeeId` int NOT NULL,
   `StylistId` int NOT NULL,
   `StatusId` varchar(5) NOT NULL,
   `CustormerId` int NOT NULL,
   `VotingId` int DEFAULT NULL,
   `VoucherDetailsID` int DEFAULT NULL,
   PRIMARY KEY (`Id`),
-  KEY `FK_booking_emloyee_idx` (`EmloyeeId`),
   KEY `FK_booking_statusbooking_idx` (`StatusId`),
   KEY `FK_booking_customer_idx` (`CustormerId`),
   KEY `FK_booking_voting_idx` (`VotingId`),
   KEY `FK_booking_voucher_idx` (`VoucherDetailsID`),
   CONSTRAINT `FK_booking_customer` FOREIGN KEY (`CustormerId`) REFERENCES `customers` (`Id`),
-  CONSTRAINT `FK_booking_emloyee` FOREIGN KEY (`EmloyeeId`) REFERENCES `employees` (`Id`),
   CONSTRAINT `FK_booking_statusbooking` FOREIGN KEY (`StatusId`) REFERENCES `statusbooking` (`Id`),
   CONSTRAINT `FK_booking_stylist` FOREIGN KEY (`Id`) REFERENCES `employees` (`Id`),
   CONSTRAINT `FK_booking_voting` FOREIGN KEY (`VotingId`) REFERENCES `voting` (`Id`),
@@ -81,7 +78,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00',NULL,'A',5,1,'CAN',1,3,NULL),(2,'2021-11-11',50000,'00:40:00',NULL,'BV',5,2,'CPM',2,3,NULL),(3,'2021-11-11',500000,'00:40:00',NULL,'C',5,3,'IAT',3,3,NULL),(4,'2021-11-11',500000,'00:40:00',NULL,'D',5,1,'UCF',1,3,NULL),(5,'2021-11-11',500000,'00:40:00',NULL,'F',5,2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00',NULL,'G',5,3,'WFP',3,3,NULL);
+INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00',NULL,'A',1,'CAN',1,3,NULL),(2,'2021-11-11',50000,'00:40:00',NULL,'BV',2,'CPM',2,3,NULL),(3,'2021-11-11',500000,'00:40:00',NULL,'C',3,'IAT',3,3,NULL),(4,'2021-11-11',500000,'00:40:00',NULL,'D',1,'UCF',1,3,NULL),(5,'2021-11-11',500000,'00:40:00',NULL,'F',2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00',NULL,'G',3,'WFP',3,3,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,11 +126,11 @@ CREATE TABLE `contacts` (
   `Status` tinyint NOT NULL,
   `CreateDate` date NOT NULL,
   `Note` varchar(455) DEFAULT NULL,
-  `CustomerId` int NOT NULL,
+  `CustomerId` int DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `FK_contact_customer_idx` (`CustomerId`),
   CONSTRAINT `FK_contact_customer` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +139,7 @@ CREATE TABLE `contacts` (
 
 LOCK TABLES `contacts` WRITE;
 /*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
-INSERT INTO `contacts` VALUES (1,'Hai','0987654321','Hai@gmail.com',1,'2021-11-11','A',1),(2,'Hiaauu','0987654321','Hai@gmail.com',0,'2021-11-11','B',1);
+INSERT INTO `contacts` VALUES (3,'Nam','0123456789','nam@gmail.com',1,'2021-11-21','Ồ',5),(4,'Thành','0987678912','thanh@gmail.com',0,'2021-11-21','thanh nek',NULL),(5,'Thanh Phong','0123321123','phongdt@gmail.com',0,'2021-11-21','p',4),(6,'danh','0999999998','da@gmail.com',1,'2021-11-20','da',3),(7,'huyenpt','0987678987','hpt@gmail.com',1,'2021-11-12','h',2),(8,'dương lê','0123456543','dlx@gmail.com',0,'2021-11-19','dl',6);
 /*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,4 +370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-18 16:14:51
+-- Dump completed on 2021-11-21 17:03:53
