@@ -33,8 +33,6 @@ public class Customer implements Serializable {
 
 	private String fullName;
 
-	private String password;
-
 	private String phone;
 
 	//bi-directional many-to-one association to Booking
@@ -43,9 +41,9 @@ public class Customer implements Serializable {
 	private List<Booking> bookings;
 
 	//bi-directional many-to-one association to Contact
-	@OneToMany(mappedBy="customer")
-	@JsonIgnore
-	private List<Contact> contacts;
+//	@OneToMany(mappedBy="customer")
+//	@JsonIgnore
+//	private List<Contact> contacts;
 
 	//bi-directional many-to-one association to Voucherdetail
 	@OneToMany(mappedBy="customer")

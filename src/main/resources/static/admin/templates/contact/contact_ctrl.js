@@ -71,11 +71,11 @@ app.controller("contact-ctrl",function($scope,$http){
 	$scope.disabledBtnNext = false;
 	$scope.disabledBtnPrev = false;
 	
-	$scope.sizePage = [2,4,6];
+	$scope.sizePage = [3,6,9,11];
 	//phan trang
 	$scope.pager = {
 		page: 0,
-		size: 2,
+		size: 3,
 		get items(){
 			var start = this.page * this.size;
 			return $scope.items.slice(start,start + this.size);

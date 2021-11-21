@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import poly.datn.entity.Contact;
@@ -46,59 +47,26 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/contact")
-	public String contact(Model model,
-			@RequestParam("fullName") String fullName,
-			@RequestParam("phone") String phone,
-			@RequestParam("email") String email,
-			@RequestParam("note") String note
-			) {
-		
-		Optional<Customer> customer = customerService.checkCustomerContact(phone, email);
-		//Kiem tra khach hang ton tai
-		if(customer.isPresent()) {
-			try {
-				//them moi contact
-				Contact nContact = new Contact(); 	
-				nContact.setFullName(fullName);
-				nContact.setEmail(email);
-				nContact.setPhone(phone);
-				nContact.setNote(note);
-				nContact.setCreateDate(new Date());
-				nContact.setStatus(false);
-				nContact.setCustomer(customer.get());
-				contactService.save(nContact);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				//them moi khach hang
-				Customer nCustomer = new Customer();
-				try {
-					nCustomer.setFullName(fullName);
-					nCustomer.setEmail(email);
-					nCustomer.setPhone(phone);
-					customerService.save(nCustomer);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				//them moi contact
-				Contact nContact = new Contact(); 	
-				nContact.setFullName(fullName);
-				nContact.setEmail(email);
-				nContact.setPhone(phone);
-				nContact.setNote(note);
-				nContact.setCreateDate(new Date());
-				nContact.setStatus(false);
-				nContact.setCustomer(nCustomer);
-				contactService.save(nContact);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	public String contact(Model model) {
 		
 		return "layout/contact";
+	}
+	
+	@RequestMapping(value = "/contact/save", method = RequestMethod.POST)
+	public String saveContact(Contact contact, 
+			@RequestParam("fullName") String fullName,
+			@RequestParam("email") String email,
+			@RequestParam("phone") String phone,
+			@RequestParam("note") String note
+			) {
+		contact.setFullName(fullName);
+		contact.setEmail(email);
+		contact.setPhone(phone);
+		contact.setNote(note);
+		contact.setCreateDate(new Date());
+		contact.setStatus(false);
+		contactService.save(contact);
+		return "redirect:/contact"; 
 	}
 	
 	@RequestMapping("/about")
