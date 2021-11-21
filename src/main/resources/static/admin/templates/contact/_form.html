@@ -14,18 +14,18 @@
 						</div>
 							<div class="form-group">
 								<label class="form-label" for="name">Tên Khách Hàng </label> <input type="text"
-									class="form-control" id="name" ng-model="form.fullname"
-									placeholder="Tên Khách Hàng...">
+									class="form-control" id="name" ng-model="form.fullName"
+									placeholder="Tên Khách Hàng..." readonly>
 							</div>
 							<div class="form-group">
 								<label class="form-label" for="email">Email </label> <input type="email"
 									class="form-control " id="email" ng-model="form.email"
-									placeholder="Nhập Email...">
+									placeholder="Nhập Email..." readonly>
 							</div>
 							<div class="form-group">
-								<label class="form-label" for="phone">Số Điện Thoại </label> <input type="number"
+								<label class="form-label" for="phone">Số Điện Thoại </label> <input type="text"
 									class="form-control " id="phone" ng-model="form.phone"
-									placeholder="Nhập Số Điện Thoại...">
+									placeholder="Nhập Số Điện Thoại..." readonly>
 							</div>
 							<div class="row">
 								<div class="col-sm-4">
@@ -33,12 +33,12 @@
 										<label class="form-label" for="name">Trạng Thái</label>
 										<div class="form-check">
 											<input ng-model="form.status" type="radio" class="form-check-input" id="radio1"
-												name="optradio" value="true" > <label
+												name="optradio" ng-value="false"> <label
 												class="form-check-label" for="radio1">Đang Xử Lý</label>
 										</div>
 										<div class="form-check">
 											<input ng-model="form.status" type="radio" class="form-check-input" id="radio2"
-												name="optradio" value="false">
+												name="optradio" ng-value="true">
 											<label class="form-check-label" for="radio2">Đã Xử Lý</label>
 										</div>
 									</div>
@@ -56,10 +56,9 @@
 
 							<hr>
 							<div class="text-right">
-								<a href="#!contacts" class="btn btn-primary" ng-click="reset()"> Reset </a> <a
-									href="#!customers" class="btn btn-success  "> Create </a> <a
-									href="#!customers" class="btn btn-warning  "> Update </a> <a
-									href="#!customers" class="btn btn-danger  "> Delete </a>
+								<button class="btn btn-primary" ng-click="reset()" ng-disabled="disabledBtnReset"> Reset </button> 
+								<button class="btn btn-warning" ng-click="update()" ng-disabled="disabledBtnUpdate"> Update </button> 
+								<button class="btn btn-danger" ng-click="delete(form)" ng-disabled="disabledBtnDelete"> Delete </button>
 							</div>
 					</div>
 				</div>
