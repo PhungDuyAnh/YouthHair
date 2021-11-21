@@ -171,4 +171,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDAO.save(customer);
 	}
 
+	@Override
+	public Optional<Customer> checkCustomerContact(String phone, String email) {
+		return customerDAO.checkCustomerContact(phone, email);
+	}
+
 }

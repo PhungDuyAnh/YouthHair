@@ -29,8 +29,8 @@ app.controller("contact-ctrl",function($scope,$http){
 	//show data into form
 	$scope.edit = function(item){
 		$scope.form = angular.copy(item);
-        $(".nav-tabs a:eq(0)").tab('show');
-
+        $(".nav-tabs a:eq(0)").tab('show');		
+			
 		$scope.disabledBtnReset = true;
 		$scope.disabledBtnUpdate = false;
 		$scope.disabledBtnDelete = false;
@@ -39,6 +39,7 @@ app.controller("contact-ctrl",function($scope,$http){
 	//update contact
     $scope.update = function(){
 	    var item = angular.copy($scope.form);
+			
         $http.put(`/rest/contact/${item.id}`,item).then(resp => {
             var index = $scope.items.findIndex(p => p.id == item.id);
             $scope.items[index] = item;
@@ -70,7 +71,7 @@ app.controller("contact-ctrl",function($scope,$http){
 	$scope.disabledBtnNext = false;
 	$scope.disabledBtnPrev = false;
 	
-	$scope.sizePage = [1,2,3];
+	$scope.sizePage = [2,4,6];
 	//phan trang
 	$scope.pager = {
 		page: 0,

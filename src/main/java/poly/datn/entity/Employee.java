@@ -57,9 +57,9 @@ public class Employee implements Serializable {
 	private List<Booking> bookings;
 
 	//bi-directional one-to-one association to Booking
-	@OneToOne(mappedBy="employee2")
-	@JsonIgnore
-	private Booking booking;
+//	@OneToOne(mappedBy="employee2")
+//	@JsonIgnore
+//	private Booking booking;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
