@@ -9,7 +9,4 @@ import poly.datn.entity.Customer;
 
 public interface CustomerDAO extends JpaRepository<Customer, Integer> {
 
-	@Query("SELECT c FROM Customer c WHERE c.phone = ?1 AND c.email = ?2")
-	Optional<Customer> checkCustomerContact(String phone, String email);
-
 }

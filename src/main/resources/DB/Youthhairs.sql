@@ -127,11 +127,8 @@ CREATE TABLE `contacts` (
   `Status` tinyint NOT NULL,
   `CreateDate` date NOT NULL,
   `Note` varchar(455) DEFAULT NULL,
-  `CustomerId` int DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `FK_contact_customer_idx` (`CustomerId`),
-  CONSTRAINT `FK_contact_customer` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +137,7 @@ CREATE TABLE `contacts` (
 
 LOCK TABLES `contacts` WRITE;
 /*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
-INSERT INTO `contacts` VALUES (3,'Nam','0123456789','nam@gmail.com',1,'2021-11-21','Ồ',5),(4,'Thành','0987678912','thanh@gmail.com',0,'2021-11-21','thanh nek',NULL),(5,'Thanh Phong','0123321123','phongdt@gmail.com',0,'2021-11-21','p',4),(6,'danh','0999999998','da@gmail.com',1,'2021-11-20','da',3),(7,'huyenpt','0987678987','hpt@gmail.com',1,'2021-11-12','h',2),(8,'dương lê','0123456543','dlx@gmail.com',1,'2021-11-19','dl',NULL),(9,'Test','0987654321','test@gmail.com',0,'2021-11-21','',8),(10,'Test','0987654321','test@gmail.com',0,'2021-11-21','test note',8),(11,'Test','0987654321','test@gmail.com',0,'2021-11-21','Test note 2',8),(12,'test2','0987654322','test2@gmail.com',0,'2021-11-21','notest2',9),(13,'test3','0987654323','test3@gmail.com',0,'2021-11-21','notest3',10),(14,'test2','0987654322','test2@gmail.com',0,'2021-11-21','notest22',9),(15,'test2','0987654322','test2@gmail.com',0,'2021-11-21','notest23',9),(16,'test3','0987654323','test3@gmail.com',0,'2021-11-21','notest32',10),(17,'test4','0987654324','test4@gmail.com',0,'2021-11-21','notest4',11);
+INSERT INTO `contacts` VALUES (3,'Nam','0123456789','nam@gmail.com',1,'2021-11-21','Ồ'),(4,'Thành','0987678912','thanh@gmail.com',0,'2021-11-21','thanh nek'),(5,'Thanh Phong','0123321123','phongdt@gmail.com',0,'2021-11-21','p'),(6,'danh','0999999998','da@gmail.com',1,'2021-11-20','da'),(7,'huyenpt','0987678987','hpt@gmail.com',1,'2021-11-12','h'),(8,'dương lê','0123456543','dlx@gmail.com',1,'2021-11-19','dl'),(10,'Test','0987654321','test@gmail.com',0,'2021-11-21','test note'),(13,'test3','0987654323','test3@gmail.com',0,'2021-11-21','notest3'),(15,'test2','0987654322','test2@gmail.com',0,'2021-11-21','notest23'),(17,'test4','0987654324','test4@gmail.com',0,'2021-11-21','notest4');
 /*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +151,6 @@ DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `FullName` varchar(45) NOT NULL,
-  `Password` varchar(45) DEFAULT NULL,
   `Email` varchar(145) NOT NULL,
   `Phone` varchar(11) NOT NULL,
   PRIMARY KEY (`Id`)
@@ -167,7 +163,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Ngô Văn Hải','123','Hai@gmail.com','0966028059'),(2,'Huyen Phan','123','Huyen@gmail.com','0987654321'),(3,'Ph DAnh','123','danh@gmail.com','0987654322'),(4,'Phong Thanh Đặng','123','phongdt@gmail.com','0987654323'),(5,'Thành Nam','123','namnt@gmail.com','0987654324'),(6,'Dương Lê','123','duongle@gmail.com','0987654325'),(7,'Thành Nguyễn','123','thanh@gmail.com','0987654326'),(8,'test',NULL,'test@gmail.com','0987654321'),(9,'test2',NULL,'test2@gmail.com','0987654322'),(10,'test3',NULL,'test3@gmail.com','0987654323'),(11,'test4',NULL,'test4@gmail.com','0987654324');
+INSERT INTO `customers` VALUES (1,'Ngô Văn Hải','Hai@gmail.com','0966028059'),(2,'Huyen Phan','Huyen@gmail.com','0987654321'),(3,'Ph DAnh','danh@gmail.com','0987654322'),(4,'Phong Thanh Đặng','phongdt@gmail.com','0987654323'),(5,'Thành Nam','namnt@gmail.com','0987654324'),(6,'Dương Lê','duongle@gmail.com','0987654325'),(7,'Thành Nguyễn','thanh@gmail.com','0987654326'),(8,'test','test@gmail.com','0987654321'),(9,'test2','test2@gmail.com','0987654322'),(10,'test3','test3@gmail.com','0987654323'),(11,'test4','test4@gmail.com','0987654324');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-21 20:11:47
+-- Dump completed on 2021-11-21 22:20:53
