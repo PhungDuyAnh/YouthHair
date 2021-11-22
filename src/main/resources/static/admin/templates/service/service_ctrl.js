@@ -22,15 +22,17 @@ app.controller("service-ctrl",function($scope,$http){
     //them sp
     $scope.create = function() {
         var item = angular.copy($scope.form);
-        var value = '';
-        // var timeFM = date(1970, 0, 1, time.getHours(), time.getMinutes(), time.getSeconds());
+        const value = moment($scope.form.time).format('DD/MM/yyyy HH:mm:ss');
+        item.time= value;
         $http.post(`/rest/services`,item).then(resp =>{
+
+            // resp.data.time = new Date(value);
             $scope.items.push(resp.data);
             $scope.reset();
-            alert("Them thanh cong");
+            alert("Thêm dịch vụ thành công ");
         }).catch(error =>{
 
-            alert("Loi them moi sp " + value );
+            alert("Thêm mới dịch vụ thất bại ");
             console.log("Error" , error);
         });
     }
@@ -55,7 +57,7 @@ app.controller("service-ctrl",function($scope,$http){
     //phan trang
     $scope.pager = {
         page: 0,
-        size: 10,
+        size: 5,
         get items(){
             var start = this.page * this.size;
             return $scope.items.slice(start,start + this.size);
