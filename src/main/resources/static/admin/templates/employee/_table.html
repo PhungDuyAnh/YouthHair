@@ -22,23 +22,12 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Số bản ghi hiển thị</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-							<select id="soBanGhi" name="cars" class="custom-select" >
-								<option selected>10</option>
-								<option value="volvo">20</option>
-								<option value="audi">30</option>	
+							<select name="sizePage" class="custom-select" ng-model="pager.size" ng-options="x for x in sizePage">
 							</select>
-							<!-- <select ng-modal="selectedPage">
-								<option ng-repeat="x in pages" value="{{x}}">{{x}}</option>
-								</select> -->
-								
-								
-								
-                    
-							
                     </div>
                </div> 
            </div>
-		</div> <br>
+		</div><br>
 	</div>
 	
 	<div class="col-xl-10 col-lg-9">
@@ -59,10 +48,8 @@
 						<th>Id</th>
 						<th>FullName</th>
 						<th>Gender</th>
-						<th>Image</th>
 						<th>Phone</th>
 						<th>Adress</th>
-						<th>Salary</th>
 						<th>StartDates</th>
 						<th>Status</th>
 						<th>Roles</th>
@@ -76,10 +63,8 @@
 						<td>{{item.id}}</td>
                 		<td>{{item.fullName}}</td>
                 		<td>{{item.gender}}</td>
-                		<td>{{item.image}}</td>
                 		<td>{{item.phone}}</td>
                 		<td>{{item.address}}</td>
-                		<td>{{item.salary | number:2}}</td>
                 		<td>{{item.startDate | date:'dd-mm-yyyy'}}</td>
                 		<td>{{item.statusWork}}</td>
                 		<td>{{item.role.name}}</td>
