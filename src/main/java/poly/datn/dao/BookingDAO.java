@@ -15,6 +15,4 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
     List<Booking> bookingByStatus(String status);
 
 
-
-
 }

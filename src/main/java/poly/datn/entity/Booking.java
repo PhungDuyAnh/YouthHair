@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class Booking implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
 
-	private Time time;
+	private LocalDateTime time;
 	
 	private String note;
 
@@ -40,28 +42,17 @@ public class Booking implements Serializable {
 
 	private float totalPrice;
 
-	private Time totalTime;
+	private LocalTime totalTime;
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="CustormerId")
 	private Customer customer;
 
-	//bi-directional many-to-one association to Employee
-	@ManyToOne
-	@JoinColumn(name="EmloyeeId")
-	private Employee employee1;
-
 	//bi-directional many-to-one association to Statusbooking
 	@ManyToOne
 	@JoinColumn(name="StatusId")
 	private Statusbooking statusbooking;
-
-	//bi-directional one-to-one association to Employee
-//	@OneToOne
-//	@JoinColumn(name="Id")
-//	@JsonIgnore
-//	private Employee employee2;
 
 	//bi-directional many-to-one association to Voting
 	@ManyToOne

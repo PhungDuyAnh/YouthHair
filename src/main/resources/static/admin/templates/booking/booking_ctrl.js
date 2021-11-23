@@ -5,15 +5,15 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.form=[];
 	$scope.initialize=function (){
 		//load booking
-		$http.get("/rest/booking/WFC").then(resp=>{
+		$http.get("/rest/bookingviews/WFC").then(resp=>{
 			$scope.items=resp.data;
 		})
 
-		$http.get("/rest/booking/WFP").then(resp=>{
+		$http.get("/rest/bookingviews/WFP").then(resp=>{
 			$scope.items1=resp.data;
 		})
 
-		$http.get("/rest/booking/UCF").then(resp=>{
+		$http.get("/rest/bookingviews/UCF").then(resp=>{
 			$scope.items2=resp.data;
 		})
 	}
