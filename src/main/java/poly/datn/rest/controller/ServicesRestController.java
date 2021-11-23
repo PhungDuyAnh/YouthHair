@@ -23,39 +23,16 @@ public class ServicesRestController {
 	@Autowired
 	IServiceService iServiceService;
 	@PostMapping("/services")
-	public Services create(@RequestBody ServiceDTO services) {
-//		long now = System.currentTimeMillis();
-//		Time sqlTime = new Time(now);
-//		System.out.println(sqlTime);
-//		String time = services.getTime().toString();
-//		System.out.println("aaaaaaa "+time);
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//		long ms = sdf.parse(time).getTime();
-//		Time t = new Time(ms);
-
-//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-//		try {
-//			java.sql.Date fajr_begins = (java.sql.Date) formatter.parse(services.getTime());
-//			System.out.println(fajr_begins);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		Hi bạn nam
-		System.out.println(services.getTime());
-
-//		Time a = new Time(sfd.parse(services.getTime()));
-		return null;
+	public Services create(@RequestBody ServiceDTO serviceDTO) {
+		return iServiceService.save(serviceDTO);
 	}
 	@GetMapping("/services")
 	public ResponseEntity<List<Services>>  getAll() {
-		long now = System.currentTimeMillis();
-		Time sqlTime = new Time(now);
-		System.out.println(sqlTime);
 		return ResponseEntity.ok().body(iServiceService.findAll());
 	}
 	@GetMapping("/services/{id}")
 	public Services getById(@PathVariable("id") Integer id) {
-		return iServiceService.findById(id);
+		return iServiceService.getById(id);
 	}
 
 	@PutMapping("/services/{id}")
