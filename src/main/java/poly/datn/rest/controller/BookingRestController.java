@@ -33,4 +33,9 @@ public class BookingRestController {
 	@GetMapping("/UCF")
 	public List<Booking> getByStatusBookingUCF(){return bookingService.findBookingByStatusbooking("UCF");}
 
+	@GetMapping("/CPM")
+	public List<Booking> getByStatusBookingCPM(){return bookingService.findBookingByStatusbooking("CPM");}
+	
+	@GetMapping("/CAN")
+	public List<Booking> getByStatusBookingCAN(){return bookingService.findBookingByStatusbooking("CAN");}
 }

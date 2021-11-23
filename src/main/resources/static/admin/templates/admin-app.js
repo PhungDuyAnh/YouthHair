@@ -34,7 +34,8 @@ app.config(function($routeProvider){
 		controller:"voucher-ctrl"
 	})
 	.when("/billpaid", {
-		templateUrl:"/admin/templates/bill/index.html"
+		templateUrl:"/admin/templates/bill/index.html",
+		controller:"bill-ctrl"
 	})
 	.otherwise({
 		templateUrl:"/admin/templates/404.html"
