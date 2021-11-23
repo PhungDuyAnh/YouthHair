@@ -36,7 +36,7 @@ public class Booking implements Serializable {
 	
 	private String note;
 
-	private int stylistId;
+//	private int stylistId;
 
 	private float totalPrice;
 
@@ -49,7 +49,7 @@ public class Booking implements Serializable {
 
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="EmloyeeId")
+	@JoinColumn(name="StylistId")
 	private Employee employee1;
 
 	//bi-directional many-to-one association to Statusbooking
