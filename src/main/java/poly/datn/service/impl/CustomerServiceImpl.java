@@ -121,7 +121,6 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDAO.deleteAllByIdInBatch(ids);
 	}
 
-	
 	@Override
 	public void delete(Customer entity) {
 		customerDAO.delete(entity);
@@ -168,13 +167,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	
-	@Override
-	public Customer update(Customer customer) {
+	public Customer create(Customer customer) {
 		return customerDAO.save(customer);
 	}
-	
-	
-	
-	
-	
+
 }

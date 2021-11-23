@@ -58,10 +58,10 @@ public class Booking implements Serializable {
 	private Statusbooking statusbooking;
 
 	//bi-directional one-to-one association to Employee
-	@OneToOne
-	@JoinColumn(name="Id")
-	@JsonIgnore
-	private Employee employee2;
+//	@OneToOne
+//	@JoinColumn(name="Id")
+//	@JsonIgnore
+//	private Employee employee2;
 
 	//bi-directional many-to-one association to Voting
 	@ManyToOne

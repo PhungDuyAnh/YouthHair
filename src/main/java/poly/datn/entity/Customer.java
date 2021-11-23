@@ -26,13 +26,12 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String email;
 
 	private String fullName;
-
-	private String password;
 
 	private String phone;
 
@@ -42,9 +41,9 @@ public class Customer implements Serializable {
 	private List<Booking> bookings;
 
 	//bi-directional many-to-one association to Contact
-	@OneToMany(mappedBy="customer")
-	@JsonIgnore
-	private List<Contact> contacts;
+//	@OneToMany(mappedBy="customer")
+//	@JsonIgnore
+//	private List<Contact> contacts;
 
 	//bi-directional many-to-one association to Voucherdetail
 	@OneToMany(mappedBy="customer")

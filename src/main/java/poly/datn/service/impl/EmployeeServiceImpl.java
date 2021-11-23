@@ -164,5 +164,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public <S extends Employee> List<S> findAll(Example<S> example, Sort sort) {
 		return employeeDAO.findAll(example, sort);
 	}
+
+	@Override
+	public Employee create(Employee employee) {
+		return employeeDAO.save(employee);
+	}
+
+	@Override
+	public Employee update(Employee employee) {
+		return employeeDAO.save(employee);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		employeeDAO.deleteById(id);
+		
+	}
 	
 }

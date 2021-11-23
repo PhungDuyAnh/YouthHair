@@ -8,7 +8,8 @@
 						class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 						Tìm kiếm</div>
 					<div class="h5 mb-0 font-weight-bold text-gray-800">
-						<input type="text" class="form-control bg-light border-0 small"
+						<input type="text" ng-model="searchText"
+							class="form-control bg-light border-0 small"
 							placeholder="Tìm kiếm..." aria-label="Search">
 					</div>
 				</div>
@@ -40,7 +41,7 @@
 				<h6 class="m-0 font-weight-bold text-info">Danh sách khách hàng</h6>
 			</div>
 			<div class="card-body">
-				
+
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
 						<thead>
@@ -48,59 +49,51 @@
 								<th>Tên khách hàng</th>
 								<th>Email</th>
 								<th>SĐT</th>
-								
-								<th class="text-center">Trạng thái</th>
+
+								<th class="text-center">Chi tiết</th>
 								<th class="text-center">Tặng Voucher</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="item in pager.items">
+							<tr ng-repeat="item in pager.items | filter:searchText">
 								<td>{{item.fullName}}</td>
 								<td>{{item.email}}</td>
 								<td>{{item.phone}}</td>
-								<td class="text-center">
-								<a ng-click="edit(item)"
-								class="btn btn-info btn-circle"> <i
+								
+								<td class="text-center"><a ng-click="edit(item)"
+									class="btn btn-info btn-circle"> <i
 										class="fas fa-info-circle"></i>
-								</a> <a href="#!customers" class="btn btn-danger btn-circle"> <i
-										class="fas fa-trash"></i>
 								</a></td>
-								<td class="text-center"><a href="#!customers" data-toggle="modal" data-target="#GiftVoucherModal"
+								
+								<td class="text-center"><a 
+									ng-click="edit(item)"	href="#!customers"
+									data-toggle="modal" data-target="#GiftVoucherModal"
 									class="btn btn-secondary btn-circle"> <i
 										class="fas fa-gift"></i>
-								</a>
-								</td>
+								</a></td>
 							</tr>
-							
+
 						</tbody>
 					</table>
 					<div class="text-center">
-						<!--<a ng-click="first()"  class="btn btn-info btn-circle"> <i
+
+
+						<a ng-click="pager.first()" class="btn btn-info btn-circle"> <i
 							class="fas fa-angle-double-left"></i>
-						</a> <a ng-click="prev()" href="#" class="btn btn-info btn-circle"> <i
+						</a> <a ng-click="pager.prev()" class="btn btn-info btn-circle"> <i
 							class="fas fa-angle-left"></i>
-							
-						</a> -->
-						<button ng-click="pager.first()" class="btn btn-danger" >
-						<b class="fas fa-angle-double-left"></b>
-						</button>
-						<button ng-click="pager.prev()" class="btn btn-danger" >
-						<b class="fas fa-angle-left"></b>
-						</button>
-						
-						<button class="btn btn-info" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-						<button ng-click="pager.next()" class="btn btn-danger" >
-						<b class="fas fa-angle-right"></b>
-						</button>
-						<button ng-click="pager.last()" class="btn btn-danger" >
-						<b class="fas fa-angle-double-right"></b>
-						</button>
-						
-						<!--<a ng-click="next()" href="#" class="btn btn-info btn-circle"> <i
-							class="fas fa-angle-right"></i>
-						 </a> <a ng-click="last()" href="#" class="btn btn-info btn-circle"> <i
-							class="	fas fa-angle-double-right"></i> -->
 						</a>
+
+						<button class="btn btn-info" disabled="disabled">{{pager.page
+							+ 1}} of {{pager.count}}</button>
+
+						<a ng-click="pager.next()" class="btn btn-info btn-circle"> <i
+							class="fas fa-angle-right"></i>
+						</a> <a ng-click="pager.last()" class="btn btn-info btn-circle"> <i
+							class="	fas fa-angle-double-right"></i>
+						</a>
+
+
 					</div>
 				</div>
 			</div>

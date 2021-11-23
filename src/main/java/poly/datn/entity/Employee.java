@@ -26,7 +26,11 @@ import java.util.List;
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+//	@Id
+//	private Integer id;
 	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	private String address;
@@ -43,6 +47,7 @@ public class Employee implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
+	
 
 	private Boolean statusWork;
 
@@ -52,13 +57,15 @@ public class Employee implements Serializable {
 	private List<Booking> bookings;
 
 	//bi-directional one-to-one association to Booking
-	@OneToOne(mappedBy="employee2")
-	@JsonIgnore
-	private Booking booking;
+//	@OneToOne(mappedBy="employee2")
+//	@JsonIgnore
+//	private Booking booking;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
 	@JoinColumn(name="RolesId")
 	private Role role;
+
+
 
 }

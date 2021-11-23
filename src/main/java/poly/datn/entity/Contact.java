@@ -26,6 +26,7 @@ public class Contact implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Temporal(TemporalType.DATE)
@@ -42,10 +43,10 @@ public class Contact implements Serializable {
 	private Boolean status;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CustomerId")
-	@JsonIgnore
-	private Customer customer;
+//	@ManyToOne
+//	@JoinColumn(name="CustomerId")
+//	@JsonIgnore
+//	private Customer customer;
 
 
 }
