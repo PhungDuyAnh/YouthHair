@@ -70,7 +70,7 @@ CREATE TABLE `booking` (
   CONSTRAINT `FK_booking_stylist` FOREIGN KEY (`StylistId`) REFERENCES `employees` (`Id`),
   CONSTRAINT `FK_booking_voting` FOREIGN KEY (`VotingId`) REFERENCES `voting` (`Id`),
   CONSTRAINT `FK_booking_voucher` FOREIGN KEY (`VoucherDetailsID`) REFERENCES `voucherdetail` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00',NULL,'A',1,'CAN',1,3,NULL),(2,'2021-11-11',50000,'00:40:00',NULL,'BV',2,'CPM',2,3,NULL),(3,'2021-11-11',500000,'00:40:00',NULL,'C',3,'IAT',3,3,NULL),(4,'2021-11-11',500000,'00:40:00',NULL,'D',1,'UCF',1,3,NULL),(5,'2021-11-11',500000,'00:40:00',NULL,'F',2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00',NULL,'G',3,'WFP',3,3,NULL);
+INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00',NULL,'A',1,'CAN',1,NULL,NULL),(2,'2021-11-11',50000,'00:40:00',NULL,'BV',2,'CPM',2,3,NULL),(3,'2021-11-11',500000,'00:40:00',NULL,'C',3,'IAT',3,3,NULL),(4,'2021-11-11',500000,'00:40:00',NULL,'D',1,'UCF',1,3,NULL),(5,'2021-11-11',500000,'00:40:00',NULL,'F',2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00',NULL,'G',3,'WFP',3,3,NULL),(8,'2021-11-21',500000,'00:40:00',NULL,'TestData',3,'CPM',3,3,NULL),(9,'2021-11-21',1000000,'01:30:00',NULL,'TestData2',2,'CPM',1,2,NULL),(10,'2021-11-19',100000,'00:30:00',NULL,'A2',1,'CAN',6,NULL,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,15 +91,17 @@ DROP TABLE IF EXISTS `bookingdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bookingdetails` (
-  `BookingId` int NOT NULL AUTO_INCREMENT,
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `BookingId` int NOT NULL,
   `ServiceId` int NOT NULL,
   `Price` float NOT NULL,
   `Time` time NOT NULL,
-  PRIMARY KEY (`BookingId`,`ServiceId`),
+  PRIMARY KEY (`Id`),
   KEY `FK_BookingDetai_Service_idx` (`ServiceId`),
+  KEY `FK_BookingDetai_Booking` (`BookingId`),
   CONSTRAINT `FK_BookingDetai_Booking` FOREIGN KEY (`BookingId`) REFERENCES `booking` (`Id`),
   CONSTRAINT `FK_BookingDetai_Service` FOREIGN KEY (`ServiceId`) REFERENCES `services` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +110,7 @@ CREATE TABLE `bookingdetails` (
 
 LOCK TABLES `bookingdetails` WRITE;
 /*!40000 ALTER TABLE `bookingdetails` DISABLE KEYS */;
-INSERT INTO `bookingdetails` VALUES (1,1,100000,'00:30:00'),(1,2,30000,'00:10:00'),(2,1,100000,'00:30:00'),(3,2,30000,'00:10:00');
+INSERT INTO `bookingdetails` VALUES (4,1,1,100000,'00:30:00'),(5,1,2,30000,'00:10:00'),(6,2,1,100000,'00:30:00'),(7,3,2,30000,'00:10:00');
 /*!40000 ALTER TABLE `bookingdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-21 22:20:53
+-- Dump completed on 2021-11-24 22:23:25
