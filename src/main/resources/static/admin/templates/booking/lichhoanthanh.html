@@ -26,12 +26,12 @@
 				</thead>
 				<tbody>
 				<tr ng-repeat="item in pager1.items1 | filter:searchText" >
-					<td>{{item.customerName}}</td>
-					<td>{{item.stylistName}}</td>
+					<td>{{item.customer.fullName}}</td>
+					<td>{{item.employee1.fullName}}</td>
 					<td>{{item.totalTime}}</td>
 					<td>{{item.totalPrice}}</td>
 					<td>{{item.createDate}}</td>
-					<td>{{item.statusName}}</td>
+					<td>{{item.statusbooking.statusName}}</td>
 					<td align="center"><a href="#!booking"
 										  class="btn btn-success" data-toggle="modal"
 										  data-target="#confirmModal"> Thanh Toán

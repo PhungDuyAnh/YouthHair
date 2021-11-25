@@ -52,9 +52,9 @@ public class Employee implements Serializable {
 	private Boolean statusWork;
 
 	//bi-directional many-to-one association to Booking
-//	@OneToMany(mappedBy="employee1")
-//	@JsonIgnore
-//	private List<Booking> bookings;
+	@OneToMany(mappedBy="employee1")
+	@JsonIgnore
+	private List<Booking> bookings;
 
 	//bi-directional one-to-one association to Booking
 //	@OneToOne(mappedBy="employee2")

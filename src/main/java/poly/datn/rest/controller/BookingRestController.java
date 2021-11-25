@@ -24,8 +24,7 @@ public class BookingRestController {
 
 	@GetMapping("/WFC")
 	public List<Booking> getByStatusBooking(){
-		List<Booking> list= bookingService.findBookingByStatusbooking("WFC");
-		return  list;
+		return  bookingService.findBookingByStatusbooking("WFC");
 	}
 
 	@GetMapping("/WFP")
