@@ -2,7 +2,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.items=[];
 	$scope.items1=[];
 	$scope.items2=[];
-	$scope.form=[];
+	$scope.form={};
+	$scope.sizePage = [5,10,15,20];
+	$scope.employee=[];
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -16,6 +18,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 		$http.get("/rest/booking/UCF").then(resp=>{
 			$scope.items2=resp.data;
 		})
+
+		$http.get("/rest/booking/employee").then(resp=>{
+			$scope.employee=resp.data;
+		})
+
 	}
 
 	$scope.initialize();
@@ -26,17 +33,24 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 		}
 	}
 
+	$scope.showDetail=function (item){
+		$scope.form=angular.copy(item);
+	}
+
 
 	//phan trang
 	$scope.pager = {
 		page: 0,
-		size: 10,
+		size: 5,
 		get items(){
 			var start = this.page * this.size;
 			return $scope.items.slice(start,start + this.size);
 		},
 		get count(){
 			return Math.ceil(1.0 *$scope.items.length / this.size)
+		},
+		get setPage(){
+			return this.first();
 		},
 		first(){
 			this.page = 0;
@@ -60,7 +74,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 	$scope.pager1 = {
 		page: 0,
-		size: 10,
+		size: 5,
 		get items1(){
 			var start = this.page * this.size;
 			return $scope.items1.slice(start,start + this.size);
@@ -68,8 +82,12 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 		get count(){
 			return Math.ceil(1.0 *$scope.items1.length / this.size)
 		},
+
 		first(){
 			this.page = 0;
+		},
+		get setPage(){
+			return this.first();
 		},
 		prev(){
 			this.page--;
@@ -90,7 +108,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 	$scope.pager2 = {
 		page: 0,
-		size: 10,
+		size: 5,
 		get items2(){
 			var start = this.page * this.size;
 			return $scope.items2.slice(start,start + this.size);
@@ -98,8 +116,12 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 		get count(){
 			return Math.ceil(1.0 *$scope.items2.length / this.size)
 		},
+
 		first(){
 			this.page = 0;
+		},
+		get setPage(){
+			return this.first();
 		},
 		prev(){
 			this.page--;

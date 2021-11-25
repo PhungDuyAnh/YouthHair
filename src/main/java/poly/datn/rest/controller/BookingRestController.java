@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import poly.datn.entity.Booking;
+import poly.datn.entity.Employee;
 import poly.datn.service.BookingService;
 
 @RestController
@@ -33,4 +34,14 @@ public class BookingRestController {
 	@GetMapping("/UCF")
 	public List<Booking> getByStatusBookingUCF(){return bookingService.findBookingByStatusbooking("UCF");}
 
+	@GetMapping("/CPM")
+	public List<Booking> getByStatusBookingCPM(){return bookingService.findBookingByStatusbooking("CPM");}
+	
+	@GetMapping("/CAN")
+	public List<Booking> getByStatusBookingCAN(){return bookingService.findBookingByStatusbooking("CAN");}
+
+	@GetMapping("/employee")
+	public String[] getAllEmployee(){
+		return bookingService.finbyEmployee();
+	}
 }
