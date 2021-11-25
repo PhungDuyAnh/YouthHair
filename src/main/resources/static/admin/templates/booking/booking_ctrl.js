@@ -19,7 +19,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 			$scope.items2=resp.data;
 		})
 
-		$http.get("/rest/booking/employee").then(resp=>{
+		$http.get("/rest/booking/stylist").then(resp=>{
 			$scope.employee=resp.data;
 		})
 
@@ -144,9 +144,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 	}
 
+	$scope.index_of=function(time){
+		return time;
+	}
+
 	$scope.counter = 0;
 	$scope.targetDate1=function (time){
-		var time="01:50:55";
+			var time="01:50:55";
 		var objProps = time.split(':');
 		var myObj = {};
 		myObj.hour = objProps[0];
