@@ -45,6 +45,7 @@ app.controller("employee-ctrl",function($scope,$http){
             $scope.items.push(resp.data);
             $scope.reset();
             alert("Thêm mới thành công!");
+            $(".nav-tabs a:eq(1)").tab('show');
         }).catch(error => {
             alert("Lỗi thêm mới nhân viên!");
             console.log("Error",error);
@@ -58,6 +59,7 @@ app.controller("employee-ctrl",function($scope,$http){
             $scope.items[index] = item;
             $scope.reset();
             alert("Cập nhật nhân viên thành công!");
+            $(".nav-tabs a:eq(1)").tab('show');
         }).catch(error => {
             alert("Lỗi cập nhật nhân viên!");
             console.log("Error",error);
@@ -72,6 +74,7 @@ app.controller("employee-ctrl",function($scope,$http){
             $scope.items.splice(index,1);
             $scope.reset();
             alert("Xóa nhân viên thành công!");
+            $(".nav-tabs a:eq(1)").tab('show');
         }).catch(error => {
             alert("Lỗi xóa nhân viên!");
             console.log("Error",error);
