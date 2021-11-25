@@ -3,6 +3,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.items1=[];
 	$scope.items2=[];
 	$scope.form={};
+	$scope.sizePage = [3,6,9,11];
+	$scope.employee=[];
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -16,6 +18,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 		$http.get("/rest/booking/UCF").then(resp=>{
 			$scope.items2=resp.data;
 		})
+
+		$http.get("/rest/booking/employee").then(resp=>{
+			$scope.employee=resp.data;
+		})
+
 	}
 
 	$scope.initialize();

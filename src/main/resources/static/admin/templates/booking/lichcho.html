@@ -145,13 +145,9 @@
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label> 
-								<select class="form-control" id="stylist">
-									<option disabled selected>Hãy Chọn 1 Stylist</option>
-									<option selected>{{form.employee1.fullName}}</option>
-								    <option>1</option>
-								    <option>2</option>
-								    <option>3</option>
-								    <option>4</option>
+								<select class="form-control" id="stylist"
+										ng-model="form.employee1.fullName"
+										ng-options="x for x in employee">
 								 </select>
 							</div>
 						</div>
