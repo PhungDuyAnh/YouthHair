@@ -64,7 +64,9 @@ app.controller("employee-ctrl",function($scope,$http){
         });
     }
     //xoa sp
+    
     $scope.delete = function(item){
+    if(confirm("Bạn có muốn xoá liên hệ này không?")){
         $http.delete(`/rest/employee/${item.id}`).then(resp => {
             var index = $scope.items.findIndex(p => p.id == item.id);
             $scope.items.splice(index,1);
@@ -74,6 +76,7 @@ app.controller("employee-ctrl",function($scope,$http){
             alert("Lỗi xóa nhân viên!");
             console.log("Error",error);
         });
+    }
     }
     //upload hinh
     $scope.imageChanged = function(files){
@@ -89,6 +92,8 @@ app.controller("employee-ctrl",function($scope,$http){
             console.log("Error",error);
         })
     }
+    
+    $scope.sizePage = [5,10,15,20];
     //phan trang
     $scope.pager = {
         page: 0,
@@ -108,13 +113,13 @@ app.controller("employee-ctrl",function($scope,$http){
         prev(){
         	this.page--;
         	if(this.page<0){
-        		this.last();
+        		this.first();
         	}
         },
         next(){
         	this.page++;
         	if(this.page>=this.count){
-        		this.first();
+        		this.last();
         	}
         },
         last(){
