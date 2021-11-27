@@ -51,15 +51,8 @@
 										<label class="form-label" for="time">Thời Gian <span
 											class="text-danger">(*)</span></label> <input type="time" ng-model="form.time "
 											class="form-control " id="time"
-											placeholder="Tên Dịch Vụ">
+											placeholder="Thời gian">
 									</div>
-									<tt>value = {{form.time | date: "HH:mm"}}</tt><br/>
-<!--									<div class="form-group">-->
-<!--										<label class="form-label" for="time">Thời Gian <span-->
-<!--												class="text-danger">(*)</span></label>-->
-<!--										<input type="file" class="form-control " id="image" placeholder="Tên Dịch Vụ" accept="image/*"-->
-<!--											   onchange="angular.element(this).scope().imageChanged(this.files)">-->
-<!--									</div>-->
 									<div class="row">
 										<div class="col-sm-4">
 											<div class="form-group">
@@ -92,10 +85,8 @@
 
 								<hr>
 								<div class="text-right">
-									<a ng-click="create()" class="btn btn-primary  "> Reset </a> <a
-										href="#!services" class="btn btn-success  "> Create </a> <a
-										href="#!services" class="btn btn-warning  "> Update </a> <a
-										href="#!services" class="btn btn-danger  "> Delete </a>
+									<a ng-click="reset()" class="btn btn-primary  "> Reset </a> <a
+										ng-click="update()" class="btn btn-warning  "> Update </a>
 								</div>
 							</div>
 					</div>
