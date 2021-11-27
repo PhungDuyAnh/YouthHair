@@ -44,4 +44,9 @@ public class BookingRestController {
 	public String[] getAllEmployee(){
 		return bookingService.finbyEmployee();
 	}
+
+	@GetMapping("/stylist")
+	public List<Employee> findByRoleAndStatusWork(){
+		return bookingService.findByRoleAndSatus();
+	};
 }
