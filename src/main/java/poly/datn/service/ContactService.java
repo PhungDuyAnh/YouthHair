@@ -70,4 +70,6 @@ public interface ContactService {
 
 	<S extends Contact> S save(S entity);
 
+	List<Contact> findContactStatus(Boolean status);
+
 }
