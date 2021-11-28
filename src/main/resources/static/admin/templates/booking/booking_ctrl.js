@@ -1,4 +1,4 @@
-app.controller("booking-ctrl",function($scope,$http,$timeout){
+app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.items=[];
 	$scope.items1=[];
 	$scope.items2=[];
@@ -45,6 +45,22 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 			$scope.itemWaiting=resp.data;
 			return $scope.itemWaiting.findIndex(a=>a.id==item.id)
 		})
+	}
+
+	$scope.getType2 = function (id) {
+		var deferred = $q.defer();
+		$http.get("/rest/booking/stylist/waiting/" + id)
+			.success(function (data) {
+				deferred.resolve(data);
+				console.log(data);
+				$scope.type2 = data;
+				$state.go('tab.catalog2', {
+					id: id
+				});
+			})
+			.error(function () {
+				deferred.reject();
+			});
 	}
 
 
