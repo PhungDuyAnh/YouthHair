@@ -75,4 +75,6 @@ public interface BookingService {
 	List<Booking> findBookingByStatusbooking(String status);
 
     String[] finbyEmployee();
+
+	List<Employee> findByRoleAndSatus();
 }

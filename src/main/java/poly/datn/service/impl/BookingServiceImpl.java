@@ -176,4 +176,9 @@ public class BookingServiceImpl implements BookingService {
 	public String[] finbyEmployee() {
 		return bookingDAO.finbyEmployee();
 	}
+
+	@Override
+	public List<Employee> findByRoleAndSatus() {
+		return bookingDAO.findByRoleAndSatus();
+	}
 }

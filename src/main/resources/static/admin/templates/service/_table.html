@@ -8,8 +8,10 @@
 						class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 						Tìm Kiếm</div>
 					<div class="h5 mb-0 font-weight-bold text-gray-800">
-						<input type="text" class="form-control bg-light border-0 small"
-							placeholder="Tìm kiếm..." aria-label="Search">
+						<input type="text" ng-model="seach.searchText"
+							   ng-change="seachServiceByName()"
+							   class="form-control bg-light border-0 small"
+							   placeholder="Tìm kiếm..." aria-label="Search">
 					</div>
 				</div>
 			</div>
@@ -22,10 +24,11 @@
 						class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 						Số bản ghi hiển thị</div>
 					<div class="h5 mb-0 font-weight-bold text-gray-800">
-						<select name="cars" class="custom-select">
-							<option selected>10</option>
-							<option value="volvo">20</option>
-							<option value="audi">30</option>
+						<select name="sizePage" class="custom-select"
+								ng-model="pager.size"
+								ng-options="x for x in sizePage"
+								ng-change="pager.setPage()"
+						>
 						</select>
 					</div>
 				</div>
@@ -62,10 +65,15 @@
 								<td>{{item.time}}</td>
 								<td>{{item.image}}</td>
 								<td>{{item.status}}</td>
-								<td class="text-center"><a href="#!stylist"
-									class="btn btn-info btn-circle"> <i
-										class="fas fa-info-circle"></i>
-								</a> <a href="#!stylist" class="btn btn-danger btn-circle"> <i
+								<td class="text-center">
+
+
+								<a ng-click="edit(item)"class="btn btn-info btn-circle">
+									<i class="fas fa-info-circle"></i>
+								</a>
+
+
+									<a href="#!stylist" class="btn btn-danger btn-circle"> <i
 										class="fas fa-trash"></i>
 								</a></td>
 							</tr>

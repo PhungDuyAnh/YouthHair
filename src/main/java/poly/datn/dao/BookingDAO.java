@@ -18,6 +18,7 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
     @Query(value = "SELECT e.fullName FROM Employee e")
     String[] finbyEmployee();
 
-
+    @Query(value = "SELECT e FROM Employee e where e.role.id=2 and e.statusWork=true ")
+    List<Employee>  findByRoleAndSatus();
 
 }

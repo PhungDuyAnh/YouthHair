@@ -3,26 +3,48 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.items1=[];
 	$scope.items2=[];
 	$scope.form={};
+	$scope.form1={};
+	$scope.form2={};
+	$scope.form3={};
 	$scope.sizePage = [5,10,15,20];
 	$scope.employee=[];
+	$scope.itemWaiting=[];
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
 			$scope.items=resp.data;
+			$scope.items.forEach(item => {
+				item.createDate = new Date(item.createDate);
+				item.time=new Date(item.time)
+			})
 		})
 
 		$http.get("/rest/booking/WFP").then(resp=>{
 			$scope.items1=resp.data;
+			$scope.items1.forEach(item => {
+				item.createDate = new Date(item.createDate)
+			})
 		})
 
 		$http.get("/rest/booking/UCF").then(resp=>{
 			$scope.items2=resp.data;
+			$scope.items2.forEach(item => {
+				item.createDate = new Date(item.createDate)
+			})
 		})
 
-		$http.get("/rest/booking/employee").then(resp=>{
+		$http.get("/rest/booking/stylist").then(resp=>{
 			$scope.employee=resp.data;
+
 		})
 
+	}
+
+	$scope.showBookingWating=function (item){
+		$http.get(`/rest/booking/stylist/waiting/${item.id}`).then(resp=>{
+			$scope.itemWaiting=resp.data;
+			alert($scope.itemWaiting.fullName)
+		})
 	}
 
 	$scope.initialize();
@@ -35,6 +57,15 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 	$scope.showDetail=function (item){
 		$scope.form=angular.copy(item);
+	}
+	$scope.showDetail1=function (item){
+		$scope.form1=angular.copy(item);
+	}
+	$scope.showDetail2=function (item){
+		$scope.form2=angular.copy(item);
+	}
+	$scope.showDetail3=function (item){
+		$scope.form3=angular.copy(item);
 	}
 
 
@@ -144,9 +175,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 	}
 
+	$scope.index_of=function(time){
+		return time;
+	}
+
 	$scope.counter = 0;
 	$scope.targetDate1=function (time){
-		var time="01:50:55";
+			var time="01:50:55";
 		var objProps = time.split(':');
 		var myObj = {};
 		myObj.hour = objProps[0];
