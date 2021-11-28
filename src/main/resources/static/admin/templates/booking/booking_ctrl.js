@@ -6,6 +6,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.form1={};
 	$scope.form2={};
 	$scope.form3={};
+	$scope.form5={};
 	$scope.sizePage = [5,10,15,20];
 	$scope.employee=[];
 	$scope.itemWaiting=[];
@@ -35,17 +36,17 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 		$http.get("/rest/booking/stylist").then(resp=>{
 			$scope.employee=resp.data;
-
 		})
 
 	}
 
 	$scope.showBookingWating=function (item){
-		$http.get(`/rest/booking/stylist/waiting/${item.id}`).then(resp=>{
+		$http.get("/rest/booking/stylist/waiting").then(resp=>{
 			$scope.itemWaiting=resp.data;
-			alert($scope.itemWaiting.fullName)
+			return $scope.itemWaiting.findIndex(a=>a.id==item.id)
 		})
 	}
+
 
 	$scope.initialize();
 
@@ -66,6 +67,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	}
 	$scope.showDetail3=function (item){
 		$scope.form3=angular.copy(item);
+	}
+	$scope.showDetail5=function (item){
+		$scope.form5=angular.copy(item)
 	}
 
 
