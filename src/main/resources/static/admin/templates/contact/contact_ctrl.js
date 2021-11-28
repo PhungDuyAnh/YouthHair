@@ -2,38 +2,28 @@ app.controller("contact-ctrl",function($scope,$http){
 	
 	$scope.items=[];
 	$scope.form={};
-	
-	$scope.disabledBtnReset = false;
-	$scope.disabledBtnUpdate = false;
-	$scope.disabledBtnDelete = false;
+	$scope.statusContact = '';
 	
 	$scope.initialize=function (){
 		//load contacts
-		$http.get("/rest/contact").then(resp=>{
+		$http.get(`/rest/contact/${$scope.statusContact}`).then(resp=>{
 			$scope.items = resp.data;
 		});
-		$scope.reset();
 	}	
-	
-	//reset form
-	$scope.reset = function(){
-		$scope.form = {
-			status: true
-		};
-		$(".nav-tabs a:eq(1)").tab('show');
-		$scope.disabledBtnUpdate = true;
-		$scope.disabledBtnDelete = true;
-		$scope.disabledBtnReset = false;
-	}
 
 	//show data into form
-	$scope.edit = function(item){
+	$scope.showDetail = function(item){
 		$scope.form = angular.copy(item);
-        $(".nav-tabs a:eq(0)").tab('show');		
-			
-		$scope.disabledBtnReset = true;
-		$scope.disabledBtnUpdate = false;
-		$scope.disabledBtnDelete = false;
+	}
+	
+	$scope.loadTableDXL = function(){
+		$scope.statusContact = 'DXL';
+		$scope.initialize();
+	}
+	
+	$scope.loadTableCXL = function(){
+		$scope.statusContact = 'CXL';
+		$scope.initialize();
 	}
 	
 	//update contact
@@ -43,7 +33,7 @@ app.controller("contact-ctrl",function($scope,$http){
         $http.put(`/rest/contact/${item.id}`,item).then(resp => {
             var index = $scope.items.findIndex(p => p.id == item.id);
             $scope.items[index] = item;
-            $scope.reset();
+            
             alert("Cập nhật liên hệ thành công!");
         }).catch(error => {
             alert("Lỗi cập nhật liên hệ!");
@@ -57,7 +47,7 @@ app.controller("contact-ctrl",function($scope,$http){
 	        $http.delete(`/rest/contact/${item.id}`).then(resp => {
 	            var index = $scope.items.findIndex(p => p.id == item.id);
 	            $scope.items.splice(index,1);
-	            $scope.reset();
+	            
 	            alert("Xóa liên hệ thành công!");
 	        }).catch(error => {
 	            alert("Lỗi xóa liên hệ!");
@@ -65,11 +55,6 @@ app.controller("contact-ctrl",function($scope,$http){
 	        });
 		}
     }
-
-	$scope.disabledBtnFisrt = false;
-	$scope.disabledBtnLast = false;
-	$scope.disabledBtnNext = false;
-	$scope.disabledBtnPrev = false;
 	
 	$scope.sizePage = [3,6,9,11];
 	//phan trang
@@ -88,8 +73,6 @@ app.controller("contact-ctrl",function($scope,$http){
 		},
 		first(){
 			this.page = 0;
-			$scope.disabledBtnFisrt = true;
-			$scope.disabledBtnLast = false;
 		},
 		prev(){
 			this.page--;
@@ -105,8 +88,6 @@ app.controller("contact-ctrl",function($scope,$http){
 		},
 		last(){
 			this.page = this.count - 1;
-			$scope.disabledBtnFisrt = false;
-			$scope.disabledBtnLast = true;
 		}
 	}
 	

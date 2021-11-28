@@ -29,4 +29,10 @@ public class LoginController {
 		
 		return "login/newpassword";
 	}
+	
+	@RequestMapping("/admin/login")
+	public String login() {
+		
+		return "redirect:/admin/templates/login.html";
+	}
 }
