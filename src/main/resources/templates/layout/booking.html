@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
 <title>YouthsHairs &mdash; Booking</title>
 <meta charset="utf-8">
@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body>
+<body ng-app="booking_Customer_app" ng-controller="booking_Customer_ctrl">
 
 	<div class="site-wrap">
 
@@ -179,20 +179,6 @@
 
 					</div>
 
-					<div class="col-lg-4 mb-5 mb-lg-0">
-
-
-						<div class="mb-5">
-							<h3 class="footer-heading mb-2">Đăng Nhập</h3>
-							<p>Hay đăng nhập vào hệ thống để biết thêm các thông tin chi
-								tiết.</p>
-
-							<a class="btn btn-info text-white" id="button-addon2"
-								href="/login"> Đăng Nhập </a>
-
-						</div>
-
-					</div>
 
 				</div>
 				<div class="row pt-5 mt-5 text-center">
@@ -241,12 +227,12 @@
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
 							<label class="text-black" for="fname">Họ Tên <span
-								class="text-danger">(*)</span></label> <input type="text" id="fname"
+								class="text-danger">(*)</span></label> <input type="text" id="fname"  ng-model="form.fullName"
 								class="form-control" placeholder="Họ Tên...">
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="lname">Số Điện Thoại <span
-								class="text-danger">(*)</span></label> <input type="text" id="lname"
+								class="text-danger">(*)</span></label> <input type="text" id="lname"  ng-model="form.phone"
 								class="form-control" placeholder="Số Điện Thoại...">
 						</div>
 					</div>
@@ -254,63 +240,55 @@
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
 							<label class="text-black" for="email">Email <span
-								class="text-danger">(*)</span></label> <input type="email" id="email"
+								class="text-danger">(*)</span></label> <input type="email" id="email"   ng-model="form.email"
 								class="form-control" placeholder="Email">
 						</div>
 						<div class="col-md-6">
-							<label class="text-black" for="date">Chọn Ngày <span
-								class="text-danger">(*)</span></label> <input type="text" id="date"
-								class="form-control datepicker px-2"
-								placeholder="Chọn Ngày Làm Tóc...">
+							<label class="text-black" for="txtDate">Chọn Ngày <span
+									class="text-danger">(*)</span></label> <input name="somedate" type="date" id="txtDate"
+																				  ng-model="form.createDate"
+																				  class="form-control px-2"
+																				  placeholder="Chọn Ngày Làm Tóc...">
+
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
-								class="text-danger">(*)</span></label>
+							<label class="text-black">Chọn Dịch Vụ <span
+									class="text-danger">(*)</span></label>
 							<ul class="services-form">
-								<li><input type="checkbox" id="myCheckbox1" /> <label
-									for="myCheckbox1"> <img src="images/haircut/2.jpg" />
-										<br> Service 1
-								</label></li>
-								<li><input type="checkbox" id="myCheckbox2" /> <label
-									for="myCheckbox2"> <img src="images/haircut/4.jpg" />
-										<br> Service 2
-								</label></li>
-								<li><input type="checkbox" id="myCheckbox3" /> <label
-									for="myCheckbox3"> <img src="images/haircut/6.jpg" />
-										<br> Service 3
-								</label></li>
-								<li><input type="checkbox" id="myCheckbox4" /> <label
-									for="myCheckbox4"> <img src="images/haircut/8.jpg" />
-										<br> Service 4
-								</label></li>
-								<li><input type="checkbox" id="myCheckbox5" /> <label
-									for="myCheckbox5"> <img src="images/haircut/10.jpg" />
-										<br> Service 5
-								</label></li>
+
+								<li th:each="s,state:${sers} ">
+									<input type="checkbox" th:id="${state.index}"
+										   th:attr="ng-click=@{|cart.add(${s.id})|}"/>
+									<label th:for="${state.index}"
+									> <img th:src="@{|/images/haircut/${s.image}|}"/>
+										<br><a> [[${s.serviceName}]]</a>
+									</label>
+								</li>
+
 							</ul>
 						</div>
 					</div>
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="note">Tổng Thời Gian: </label> <span>40
+							<label class="text-black" for="note">Tổng Thời Gian: </label> <span>{{cart.totalTime}}
 								phút</span> <br> <label class="text-black" for="note">Tổng
-								Tiền: </label> <span>100,000 VNĐ</span>
+								Tiền: </label> <span>{{cart.amount}} VNĐ</span>
 						</div>
 					</div>
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="note">Ghi Chú</label>
-							<textarea name="note" id="note" cols="30" rows="5"
+							<textarea name="note" id="note" cols="30" rows="5" ng-model="form.note"
 								class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<input type="submit" value="Đặt Lịch"
+							<input type="submit" value="Đặt Lịch" ng-click="booking.purchase()"
 								class="btn btn-primary py-2 px-4 text-white">
 						</div>
 					</div>
@@ -330,8 +308,32 @@
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/bootstrap-datepicker.min.js"></script>
 	<script src="js/aos.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<!--	<script-->
+	<!--			src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>-->
 
 	<script src="js/main.js"></script>
+	<script src="js/bookingCustomer_ctrl.js"></script>
+
+	<!--<script>-->
+	<!--    $(function(){-->
+	<!--        var dtToday = new Date();-->
+	<!--        var month = dtToday.getMonth() + 1;-->
+	<!--        var day = dtToday.getDate();-->
+	<!--        var year = dtToday.getFullYear();-->
+	<!--        if(month < 10)-->
+	<!--            month = '0' + month.toString();-->
+	<!--        if(day < 10)-->
+	<!--            day = '0' + day.toString();-->
+
+	<!--        var minDate= year + '-' + month + '-' + day;-->
+
+	<!--        $('#txtDate').attr('min', minDate);-->
+	<!--    });-->
+	<!--</script>-->
 
 </body>
 </html>

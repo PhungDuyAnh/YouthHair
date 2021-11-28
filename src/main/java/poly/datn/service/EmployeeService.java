@@ -76,6 +76,7 @@ public interface EmployeeService {
 
 	void delete(Integer id);
 
-	
+
+	List<Employee> loadStylist();
 
 }
