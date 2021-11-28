@@ -31,6 +31,25 @@
                </div>
            </div>
 		</div> <br>
+		<div class="card border-left-primary shadow  py-2">
+			<div class="card-body">
+               <div class=" no-gutters align-items-center">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Các Liên Hệ</div>
+                    <div class="form-check">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" ng-model="statusContact" ng-change="loadTableCXL()" ng-value="true">Chưa Xử Lý
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="radio" class="form-check-input" name="optradio" ng-model="statusContact" ng-change="loadTableDXL()" ng-value="false">Đã Xử Lý
+					  </label>
+					</div>
+               </div>
+           </div>
+		</div>
+		
 	</div>
 	
 	<div class="col-xl-10 col-lg-9">
@@ -41,8 +60,8 @@
 			<div class="card-body">
 				
 				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable">
-						<thead>
+					<table class="table table-striped text-center" id="dataTable">
+						<thead class="thead-dark">
 							<tr>
 								<th>Họ Tên Khách Hàng</th>
 								<th>Số Điện Thoại</th>
@@ -53,16 +72,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat ="item in pager.items | filter:searchText "> 
+							<tr ng-repeat ="item in pager.items"> 
 								<td>{{item.fullName}}</td>
 								<td>{{item.phone}}</td>
 								<td>{{item.email}}</td>
 								<td>{{item.status == true ? 'Đã Xử lý' : 'Chưa Xử Lý'}}</td>
 								<td>{{item.createDate}}</td>
-								<td class="text-center">
-									<a href="#!contacts" ng-click="edit(item)"
-									class="btn btn-info btn-circle"> <i class="fas fa-info-circle"></i>
-									</a> 
+								<td>
+									<a href="#!contacts" ng-click="showDetail(item)"
+										class="btn btn-info btn-circle" data-toggle="modal"
+										data-target="#infoModal"> <i class="fas fa-info-circle"></i>
+									</a>
 									<a href="#!contacts" ng-click="delete(item)" class="btn btn-danger btn-circle"> <i
 										class="fas fa-trash"></i>
 									</a>
@@ -89,5 +109,77 @@
 			</div>
 		</div>
 
+	</div>
+</div>
+
+
+<!-- Info Modal-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Thông Tin Hoá
+					Đơn</h5>
+				<button class="close" type="button" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="p-5">
+						<div class="text-center">
+							<h1 class="h4 text-gray-900 mb-4">Chi Tiết Liên Hệ!</h1>
+						</div>
+							<div class="form-group">
+								<label class="form-label" for="name">Tên Khách Hàng </label> <input type="text"
+									class="form-control" id="name" ng-model="form.fullName"
+									placeholder="Tên Khách Hàng..." readonly>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="email">Email </label> <input type="email"
+									class="form-control " id="email" ng-model="form.email"
+									placeholder="Nhập Email..." readonly>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="phone">Số Điện Thoại </label> <input type="text"
+									class="form-control " id="phone" ng-model="form.phone"
+									placeholder="Nhập Số Điện Thoại..." readonly>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label class="form-label" for="name">Trạng Thái</label>
+										<div class="form-check">
+											<input ng-model="form.status" type="radio" class="form-check-input" id="radio1"
+												name="optradio" ng-value="false"> <label
+												class="form-check-label" for="radio1">Đang Xử Lý</label>
+										</div>
+										<div class="form-check">
+											<input ng-model="form.status" type="radio" class="form-check-input" id="radio2"
+												name="optradio" ng-value="true">
+											<label class="form-check-label" for="radio2">Đã Xử Lý</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-8">
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label" for="note">Ghi Chú</label>
+											<textarea class="form-control" id="note" rows="" ng-model="form.note"
+												cols=""></textarea>
+										</div>
+									</div>										
+								</div>											
+							</div>
+
+							<hr>
+							<div class="text-right">
+								<button class="btn btn-warning" ng-click="update()"> Update </button> 
+								<button class="btn btn-danger" ng-click="delete(form)"> Delete </button>
+							</div>
+					</div>
+			</div>
+		</div>
 	</div>
 </div>
