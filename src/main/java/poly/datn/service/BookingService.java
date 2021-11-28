@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import org.springframework.data.jpa.repository.Query;
 import poly.datn.entity.Booking;
+import poly.datn.entity.Employee;
 
 public interface BookingService {
 
@@ -72,4 +73,8 @@ public interface BookingService {
 	<S extends Booking> S save(S entity);
 
 	List<Booking> findBookingByStatusbooking(String status);
+
+    String[] finbyEmployee();
+
+	List<Employee> findByRoleAndSatus();
 }

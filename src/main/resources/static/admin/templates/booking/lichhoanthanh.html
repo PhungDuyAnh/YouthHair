@@ -5,9 +5,9 @@
 	</div>
 	<div class="card-body">
 		<div class="form-group">
-			<div class="d-none d-sm-inline-block form-inline">
-				Tìm Kiếm: <input type="text" ng-model="searchText"
-								 class="form-control bg-light border-0 small" placeholder=""
+			<div class="d-none d-sm-inline-block">
+				<input type="text" ng-model="searchText"
+								 class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
 								 aria-label="Search">
 			</div>
 		</div>
@@ -16,7 +16,6 @@
 				<thead >
 				<tr>
 					<th>Customer</th>
-					<th>Employee</th>
 					<th>Stylist</th>
 					<th>Total Time</th>
 					<th>Total Price</th>
@@ -29,10 +28,9 @@
 				<tr ng-repeat="item in pager1.items1 | filter:searchText" >
 					<td>{{item.customer.fullName}}</td>
 					<td>{{item.employee1.fullName}}</td>
-					<td>{{item.employee1.role.name}}</td>
 					<td>{{item.totalTime}}</td>
 					<td>{{item.totalPrice}}</td>
-					<td>{{item.createDate}}</td>
+					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
 					<td align="center"><a href="#!booking"
 										  class="btn btn-success" data-toggle="modal"
@@ -41,6 +39,17 @@
 				</tr>
 				</tbody>
 			</table>
+			<div class="d-none d-sm-inline-block form-inline">
+				<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+					Page Size</div>
+				<select
+						name="sizePage"
+						class="custom-select"
+						ng-model="pager1.size"
+						ng-change="pager1.setPage()"
+						ng-options="x for x in sizePage">
+				</select>
+			</div>
 			<div class="text-center">
 				<a ng-click="pager1.first()" href="#!booking" class="btn btn-primary btn-circle"> <i
 						class="fas fa-angle-double-left"></i>

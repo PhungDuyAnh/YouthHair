@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import poly.datn.dao.BookingDAO;
 import poly.datn.entity.Booking;
+import poly.datn.entity.Employee;
 import poly.datn.service.BookingService;
 
 @Service
@@ -169,5 +170,15 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Booking> findBookingByStatusbooking(String status){
 		return bookingDAO.bookingByStatus(status);
+	}
+
+	@Override
+	public String[] finbyEmployee() {
+		return bookingDAO.finbyEmployee();
+	}
+
+	@Override
+	public List<Employee> findByRoleAndSatus() {
+		return bookingDAO.findByRoleAndSatus();
 	}
 }
