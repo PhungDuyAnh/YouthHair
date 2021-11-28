@@ -1,9 +1,7 @@
 package poly.datn.service;
 
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import poly.datn.entity.Services;
 import poly.datn.service.dto.ServiceDTO;
 
@@ -14,13 +12,16 @@ public interface IServiceService {
 
     List<Services> findAll();
 
-    Services getById(Integer id);
+    Optional<Services> findById(Integer id);
+    Services getById (Integer id);
 
     Page<Services> findAll(Pageable pageable);
-
-    Services save(ServiceDTO serviceDTO);
+    boolean checkService (Services services);
+    ServiceDTO save(ServiceDTO serviceDTO);
 
     Services update(Services services);
+
+    List<Services> seachServiceByName(String serviceName);
 
 
 }

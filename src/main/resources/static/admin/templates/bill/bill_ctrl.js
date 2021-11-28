@@ -2,7 +2,7 @@ app.controller("bill-ctrl",function($scope,$http){
 	
 	$scope.items=[];
 	$scope.form={};
-	$scope.statusBooking = 'CPM';
+	$scope.statusBooking = '';
 	
 	
 	$scope.initialize = function (){

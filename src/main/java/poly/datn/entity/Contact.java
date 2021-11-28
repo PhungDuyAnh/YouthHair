@@ -42,6 +42,18 @@ public class Contact implements Serializable {
 
 	private Boolean status;
 
+	public Contact(Date createDate, String email, String fullName, String note, String phone, Boolean status) {
+		super();
+		this.createDate = createDate;
+		this.email = email;
+		this.fullName = fullName;
+		this.note = note;
+		this.phone = phone;
+		this.status = status;
+	}
+
+	
+	
 	//bi-directional many-to-one association to Customer
 //	@ManyToOne
 //	@JoinColumn(name="CustomerId")

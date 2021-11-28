@@ -4,7 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
@@ -24,7 +29,7 @@ public class BookingRestController {
 
 	@GetMapping("")
 	public List<Booking> getAll(){
-		return bookingService.findAll();
+		return bookingService.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
 	}
 
 	@GetMapping("/WFC")
@@ -59,10 +64,5 @@ public class BookingRestController {
 		return bookingService.findByStatusWFCAndStylist(id);
 	}
 
-	@PutMapping("/update/{id}")
-	public Booking Update(@RequestBody Booking booking){
-		Optional<Statusbooking> statusbooking=statusBookingService.findById("WFC");
-		booking.setStatusbooking(statusbooking.get());
-		return bookingService.save(booking);
-	}
+
 }
