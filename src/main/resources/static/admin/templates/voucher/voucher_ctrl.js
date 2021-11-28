@@ -1,21 +1,40 @@
 app.controller("voucher-ctrl", function ($scope, $http) {
     $scope.items = [];
     $scope.form = {};
+    $scope.disabledId = false;
+    $scope.disabledBtnUpdate = true;
+    $scope.disabledBtnCreate = false;
     $scope.initialize = function () {
         $http.get("/rest/voucher").then(resp => {
             $scope.items = resp.data;
         })
+    }
+    $scope.form.condition = "";
+    $scope.form.id = "";
+    $scope.form.price = "";
+    $scope.form.note = "";
+
+
+    $scope.doSubmitForm = function(event) {
+        alert("OK: " + $scope.userForm.$submitted);
+        // Code to Submit form!
     }
 
     $scope.initialize();
 
     $scope.reset = function () {
         $scope.form = {};
+        $scope.disabledId = false;
+        $scope.disabledBtnCreate = false;
+        $scope.disabledBtnUpdate = true;
     }
     //hien thi len form
     $scope.edit = function (item) {
         $scope.form = angular.copy(item);
         $(".nav-tabs a:eq(0)").tab('show');
+        $scope.disabledId = true;
+        $scope.disabledBtnUpdate = false;
+        $scope.disabledBtnCreate = true;
     }
 
     //them voucher moi
@@ -25,6 +44,7 @@ app.controller("voucher-ctrl", function ($scope, $http) {
             $scope.items.push(resp.data);
             $scope.reset();
             alert("Thêm mới thành công!");
+            $(".nav-tabs a:eq(1)").tab('show');
         }).catch(error => {
             alert("Thêm mới không thành công!");
             console.log("Error", error);
@@ -39,6 +59,7 @@ app.controller("voucher-ctrl", function ($scope, $http) {
                 $scope.items[index] = item;
                 $scope.reset();
                 alert("Chỉnh sửa thông tin voucher thành công!");
+                $(".nav-tabs a:eq(1)").tab('show');
             }).catch(error => {
                 alert(" Chỉnh sửa thông tin voucher không thành công!");
                 console.log("Error", error);

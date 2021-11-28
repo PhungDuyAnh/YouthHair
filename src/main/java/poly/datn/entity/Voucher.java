@@ -2,6 +2,10 @@ package poly.datn.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,10 +33,15 @@ public class Voucher implements Serializable {
 	private String id;
 
 	@Column(name = "`condition`")
+	@NotNull
+	@Min(10000)
 	private float condition;
 
+	@NotNull
 	private String note;
 
+	@NotNull
+	@Min(10000)
 	private float price;
 
 	//bi-directional many-to-one association to Voucherdetail
