@@ -44,10 +44,11 @@ app.controller("customer-ctrl",function($scope,$http){
 
 
 
+	$scope.sizePage = [5,10,15,20];
 	//phan trang
 	$scope.pager = {
 		page: 0,
-		size: 2,
+		size: 5,
 		get items(){
 			var start = this.page * this.size;
 			return $scope.items.slice(start,start + this.size);
@@ -55,23 +56,30 @@ app.controller("customer-ctrl",function($scope,$http){
 		get count(){
 			return Math.ceil(1.0 *$scope.items.length / this.size)
 		},
+		get setPage(){
+			return this.first();
+		},
 		first(){
 			this.page = 0;
+			$scope.disabledBtnFisrt = true;
+			$scope.disabledBtnLast = false;
 		},
 		prev(){
 			this.page--;
-			if(this.page<0){
+			if(this.page <= 0){
 				this.first();
 			}
 		},
 		next(){
 			this.page++;
-			if(this.page>=this.count){
+			if(this.page+1 >= this.count){
 				this.last();
 			}
 		},
 		last(){
 			this.page = this.count - 1;
+			$scope.disabledBtnFisrt = false;
+			$scope.disabledBtnLast = true;
 		}
 	}
 })

@@ -23,11 +23,13 @@
 						class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 						Số bản ghi</div>
 					<div class="h5 mb-0 font-weight-bold text-gray-800">
-						<select name="cars" class="custom-select">
-							<option selected>10</option>
-							<option value="volvo">20</option>
-							<option value="audi">30</option>
-						</select>
+						<select
+							name="sizePage"
+							class="custom-select"
+							ng-model="pager.size"
+							ng-change="pager.setPage()"
+							ng-options="x for x in sizePage">
+							</select>
 					</div>
 				</div>
 			</div>
