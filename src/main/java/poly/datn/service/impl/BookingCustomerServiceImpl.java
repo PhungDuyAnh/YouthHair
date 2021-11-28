@@ -87,7 +87,6 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bookingDetail.setService(bookingCustomerDTO.getListSer().get(i));
 					bookingDetail.setPrice(bookingCustomerDTO.getListSer().get(i).getPrice());
 					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
-
 					bDetailDAO.save(bookingDetail);
 				}}
 

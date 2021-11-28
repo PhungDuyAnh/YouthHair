@@ -50,7 +50,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         },
 //tong time
         get totalTime() {
-            var date1 = null;
+            var convertDate1 = null;
             var totalHour = 0;
             var totalMinutes = 0;
             var totalSeconds = 0;
