@@ -181,4 +181,13 @@ public class BookingServiceImpl implements BookingService {
 	public List<Employee> findByRoleAndSatus() {
 		return bookingDAO.findByRoleAndSatus();
 	}
+
+	@Query("SELECT b FROM Booking b WHERE b.statusbooking.id = ?1")
+	public List<Booking> bookingByStatus(String status) {
+		return bookingDAO.bookingByStatus(status);
+	}
+	@Override
+	public List<Booking> findByStatusWFCAndStylist() {
+		return bookingDAO.findByStatusWFCAndStylist();
+	}
 }
