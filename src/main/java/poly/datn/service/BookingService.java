@@ -77,4 +77,6 @@ public interface BookingService {
     String[] finbyEmployee();
 
 	List<Employee> findByRoleAndSatus();
+
+    List<Booking> findByStatusWFCAndStylist();
 }
