@@ -44,7 +44,6 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 	public BookingCustomerDTO AddInfoBookingCustomer(BookingCustomerDTO bookingCustomerDTO) {
 
 		try {
-
 			Customer cus = cusDAO.customerByPhone(bookingCustomerDTO.getPhone());
 			Booking booking = null;
 			if(!checkNullCustomer(cus)) {
@@ -79,8 +78,6 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 				booking1.setVoucherdetails(null);
 				bookingDao.save(booking1);
 
-
-
 				for(int i=0; i<bookingCustomerDTO.getListSer().size();i++ ){
 					BookingDetail bookingDetail = new BookingDetail();
 					bookingDetail.setBooking(booking1);
@@ -88,7 +85,9 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bookingDetail.setPrice(bookingCustomerDTO.getListSer().get(i).getPrice());
 					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
 					bDetailDAO.save(bookingDetail);
-				}}
+				}}else{
+				throw new Exception("c error");
+			}
 
 
 		} catch (Exception e) {

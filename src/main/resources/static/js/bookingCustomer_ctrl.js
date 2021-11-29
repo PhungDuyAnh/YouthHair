@@ -1,13 +1,46 @@
 app = angular.module("booking_Customer_app", [])
 app.controller("booking_Customer_ctrl", function ($scope, $http) {
-
+    $scope.openFromLeft;
     var totime;
     var toprice;
 
-    $scope.timeBookingByStylist = {
 
-    }
 
+    // $scope.Stylist = {
+    //     listSty : [],
+    //     addSty(id) {
+    //         var item = this.listSty.find(item => item.id == id);
+    //         var index = this.listSty.findIndex(item => item.id == id);
+    //         if (item) {
+    //             this.listSty.splice(index, 1);
+    //         }else{
+    //             this.listSty.push(id);
+    //          alert(this.listSty);
+    //     }
+    //     }
+    // }
+    // $scope.timeSty=[];
+    // $scope.timeBookingByStylist = {
+    //     bookingStatusIAT: [],
+    //     bookingBySty() {
+    //         for (var i = 0; i < this.listSty.length; i++) {
+    //             $http.get(`/rest/bookingCusByStylist/${this.listSty[i]}`).then(resp => {
+    //                 this.bookingStatusIAT.push(resp.data);
+    //             })
+    //         }
+    //     },
+    //      timeBooking(){
+    //         for(var i = 0; i < this.listSty.length; i++){
+    //             for(var j = 0; j < this.bookingStatusIAT.length; j++){
+    //                     if(this.listSty[i] = this.bookingStatusIAT[j].stylistId){
+    //                         this.timeSty.push(this.bookingStatusIAT[j].totalTime);
+    //                     }else if (this.timeSty = null){
+    //                         this.timeSty.push("00:00:00");
+    //                     }
+    //             }
+    //         }
+    //     }
+    // }
     $scope.form = {
         email: null,
         fullName: null,
@@ -91,13 +124,34 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             bookings.createDate = value;
             bookings.listSer = $scope.cart.items;
             $http.post("/rest/bookingCus", bookings).then(resp => {
-                alert("Bạn đã đặt lich thành công!");
+
+                // if(resp.data.id = 0){
+                //
+                // }
+                // else{
+                // alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+                $scope.openFromLeft;
                 $scope.cart.clear();
                 location.href = "/booking";
+            // }
             }).catch(error => {
                 alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
                 console.log(error);
             })
         }
     }
+    $scope.openFromLeft = function() {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title('Opening from the left')
+                .textContent('Closing to the right!')
+                .ariaLabel('Left to right demo')
+                .ok('Nice!')
+                // You can specify either sting with query selector
+                .openFrom('#left')
+                // or an element
+                .closeTo(angular.element(document.querySelector('#right')))
+        );
+    };
 });
