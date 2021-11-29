@@ -9,6 +9,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.form5={};
 	$scope.sizePage = [5,10,15,20];
 	$scope.employee=[];
+	$scope.employee1=[];
 	$scope.itemWaiting=[];
 	$scope.initialize=function (){
 		//load booking
@@ -38,6 +39,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.employee=resp.data;
 		})
 
+		$http.get("/rest/booking/employee").then(resp=>{
+			$scope.employee1=resp.data;
+		})
+
 	}
 
 	$scope.showBookingWating=function (item){
@@ -45,22 +50,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.itemWaiting=resp.data;
 			return $scope.itemWaiting.findIndex(a=>a.id==item.id)
 		})
-	}
-
-	$scope.getType2 = function (id) {
-		var deferred = $q.defer();
-		$http.get("/rest/booking/stylist/waiting/" + id)
-			.success(function (data) {
-				deferred.resolve(data);
-				console.log(data);
-				$scope.type2 = data;
-				$state.go('tab.catalog2', {
-					id: id
-				});
-			})
-			.error(function () {
-				deferred.reject();
-			});
 	}
 
 

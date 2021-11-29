@@ -34,13 +34,11 @@ public class BookingDetail implements Serializable {
 
 	//bi-directional many-to-one association to Booking
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name="BookingId")
 	private Booking booking;
 
 	//bi-directional many-to-one association to Service
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name="ServiceId")
 	private Services service;
 
