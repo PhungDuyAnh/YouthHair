@@ -259,7 +259,6 @@
                         <label class="text-black">Chọn Dịch Vụ <span
                                 class="text-danger">(*)</span></label>
                         <ul class="services-form">
-
                             <li th:each="s,state:${sers} ">
                                 <input type="checkbox" th:id="${state.index}"
                                        th:attr="ng-click=@{|cart.add(${s.id})|}"/>
