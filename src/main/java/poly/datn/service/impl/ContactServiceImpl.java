@@ -166,8 +166,8 @@ public class ContactServiceImpl implements ContactService{
 	}
 
 	@Override
-	public List<Contact> findContactStatus(Boolean status) {
-		return contactDAO.findContactStatus(status);
+	public List<Contact> findContactStatus(Boolean status, String keyword) {
+		return contactDAO.findContactStatus(status, keyword);
 	}
 	
 	

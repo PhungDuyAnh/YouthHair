@@ -38,9 +38,6 @@ app.controller("bill-ctrl",function($scope,$http){
 		get count(){
 			return Math.ceil(1.0 *$scope.items.length / this.size)
 		},
-		get setPage(){
-			return this.first();
-		},
 		first(){
 			this.page = 0;
 		},
