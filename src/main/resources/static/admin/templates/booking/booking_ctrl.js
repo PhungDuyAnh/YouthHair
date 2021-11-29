@@ -1,4 +1,4 @@
-app.controller("booking-ctrl",function($scope,$http,$timeout){
+app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.items=[];
 	$scope.items1=[];
 	$scope.items2=[];
@@ -9,6 +9,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 	$scope.form5={};
 	$scope.sizePage = [5,10,15,20];
 	$scope.employee=[];
+	$scope.employee1=[];
 	$scope.itemWaiting=[];
 	$scope.initialize=function (){
 		//load booking
@@ -36,6 +37,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout){
 
 		$http.get("/rest/booking/stylist").then(resp=>{
 			$scope.employee=resp.data;
+		})
+
+		$http.get("/rest/booking/employee").then(resp=>{
+			$scope.employee1=resp.data;
 		})
 
 	}
