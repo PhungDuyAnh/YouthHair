@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>YouthsHairs &mdash; Booking</title>
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+          
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
@@ -27,6 +30,7 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+    
 
 </head>
 <body ng-app="booking_Customer_app" ng-controller="booking_Customer_ctrl">
@@ -118,9 +122,10 @@
         </div>
     </div>
 
-
-    <div th:replace="/layout/booking-form.html"></div>
-
+	
+	<div th:replace="/layout/booking-form.html"></div>
+	
+    
 
     <div class="site-section  bg-light">
         <div class="container">
@@ -184,7 +189,7 @@
                     <p>
                         Copyright &copy;
                         <script data-cfasync="false"
-                                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                                src=""></script>
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
@@ -199,103 +204,7 @@
     </footer>
 </div>
 
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body p-5 bg-white">
-                <div class="site-section-heading">
-                    <h3 class="mb-4">Hãy nhập thông tin của bạn ở dưới đây...</h3>
-                    <h5>
-                        <span class="text-danger">(*)</span> Vui lòng Vui lòng nhập thông
-                        tin bắt buộc
-                    </h5>
-                    <br>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <label class="text-black" for="fname">Họ Tên <span
-                                class="text-danger">(*)</span></label> <input type="text" id="fname"
-                                                                              ng-model="form.fullName"
-                                                                              class="form-control"
-                                                                              placeholder="Họ Tên...">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="text-black" for="lname">Số Điện Thoại <span
-                                class="text-danger">(*)</span></label> <input type="text" id="lname"
-                                                                              ng-model="form.phone"
-                                                                              class="form-control"
-                                                                              placeholder="Số Điện Thoại...">
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <label class="text-black" for="email">Email <span
-                                class="text-danger">(*)</span></label> <input type="email" id="email"
-                                                                              ng-model="form.email"
-                                                                              class="form-control" placeholder="Email">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="text-black" for="txtDate">Chọn Ngày <span
-                                class="text-danger">(*)</span></label> <input name="somedate" type="date" id="txtDate"
-                                                                              ng-model="form.createDate"
-                                                                              class="form-control px-2"
-                                                                              placeholder="Chọn Ngày Làm Tóc...">
-
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <label class="text-black">Chọn Dịch Vụ <span
-                                class="text-danger">(*)</span></label>
-                        <ul class="services-form">
-                            <li th:each="s,state:${sers} ">
-                                <input type="checkbox" th:id="${state.index}"
-                                       th:attr="ng-click=@{|cart.add(${s.id})|}"/>
-                                <label th:for="${state.index}"
-                                > <img th:src="@{|/images/haircut/${s.image}|}"/>
-                                    <br><a> [[${s.serviceName}]]</a>
-                                </label>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <label class="text-black" for="note">Tổng Thời Gian: </label> <span>{{cart.totalTime}}
-								phút</span> <br> <label class="text-black" for="note">Tổng
-                        Tiền: </label> <span>{{cart.amount}} VNĐ</span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <label class="text-black" for="note">Ghi Chú</label>
-                        <textarea name="note" id="note" cols="30" rows="5" ng-model="form.note"
-                                  class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <input type="submit" value="Đặt Lịch" ng-click="booking.purchase()"
-                               class="btn btn-primary py-2 px-4 text-white">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -308,15 +217,10 @@
 <script src="js/jquery.magnific-popup.min.js"></script>
 <script src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/aos.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<!--	<script-->
-<!--			src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>-->
 
 <script src="js/main.js"></script>
-<script src="js/bookingCustomer_ctrl.js"></script>
+
+<script type="text/javascript" src="js/controller/bookingCustomer_ctrl.js"></script>
 
 <script>
     $(function(){
@@ -331,8 +235,8 @@
         var minDate= year + '-' + month + '-' + day;
         $('#txtDate').attr('min', minDate);
         var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+2 ; //January is 0!
+        var dd = today.getDate() - 23 ;
+        var mm = today.getMonth() + 2; //January is 0!
         var yyyy = today.getFullYear();
         if (dd < 10) {
             dd = '0' + dd;

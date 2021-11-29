@@ -29,7 +29,10 @@ public class IndexController {
 	EmployeeService employeeService;
 	
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("sers",iService.findAll());
+		List<Employee> listStylist = employeeService.loadStylist();
+		model.addAttribute("stylist",listStylist);
 		
 		return "layout/home";
 	}
@@ -70,7 +73,7 @@ public class IndexController {
 	}
 
 	@RequestMapping("/booking")
-	public String booking( Model model) {
+	public String booking(Model model) {
 		model.addAttribute("sers",iService.findAll());
 		List<Employee> listStylist = employeeService.loadStylist();
 		model.addAttribute("stylist",listStylist);
