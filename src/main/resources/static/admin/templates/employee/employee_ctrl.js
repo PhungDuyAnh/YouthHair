@@ -68,6 +68,7 @@ app.controller("employee-ctrl",function($scope,$http){
 		startDate:new Date(),
 		image:'undraw_profile.svg',
 		statusWork:true,
+		
 		};
 		
 		
