@@ -10,10 +10,6 @@ app.controller("contact-ctrl",function($scope,$http){
 			$scope.items = resp.data;
 		});
 	}
-	
-	$scope.search = function (item){
-		console.log(item);
-	}	
 
 	//show data into form
 	$scope.showDetail = function(item){
