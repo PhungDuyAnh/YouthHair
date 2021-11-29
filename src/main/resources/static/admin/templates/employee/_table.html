@@ -22,7 +22,10 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Số bản ghi hiển thị</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-							<select name="sizePage" class="custom-select" ng-model="pager.size" ng-options="x for x in sizePage">
+							<select name="sizePage" class="custom-select" 
+							ng-model="pager.size"
+							ng-change="pager.setPage()"
+							ng-options="x for x in sizePage">
 							</select>
                     </div>
                </div> 
@@ -58,14 +61,14 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in pager.items | filter:searchText " >
-					
+					 
 					
 						<td>{{item.id}}</td>
                 		<td>{{item.fullName}}</td>
                 		<td>{{item.gender}}</td>
                 		<td>{{item.phone}}</td>
                 		<td>{{item.address}}</td>
-                		<td>{{item.startDate | date:'dd-mm-yyyy'}}</td>
+                		<td>{{item.startDate | date:'dd-MM-yyyy'}}</td>
                 		<td>{{item.statusWork}}</td>
                 		<td>{{item.role.name}}</td>
                 
@@ -83,18 +86,20 @@
 				</tbody>
 			</table>
 			<div class="text-center">
-				<a ng-click="pager.first()" class="btn btn-info btn-circle"> <i
-					class="fas fa-angle-double-left"></i>
-				</a> <a ng-click="pager.prev()" class="btn btn-info btn-circle"> <i
-					class="fas fa-angle-left"></i>
-				</a>
-				<button class="btn btn-info" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-				<a ng-click="pager.next()" class="btn btn-info btn-circle"> <i
-					class="fas fa-angle-right"></i>
-				</a> <a ng-click="pager.last()" class="btn btn-info btn-circle"> <i
-					class="	fas fa-angle-double-right"></i>
-				</a>
-			</div>
+						<button ng-click="pager.first()" class="btn btn-info btn-circle" ng-disabled="disabledBtnFisrt"> 
+							<i class="fas fa-angle-double-left"></i>
+						</button> 
+						<button ng-click="pager.prev()" class="btn btn-info btn-circle"> 
+							<i class="fas fa-angle-left"></i>
+						</button>
+						<button class="btn btn-info" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
+						<button ng-click="pager.next()" class="btn btn-info btn-circle"> 
+							<i class="fas fa-angle-right"></i>
+						</button> 
+						<button ng-click="pager.last()" class="btn btn-info btn-circle" ng-disabled="disabledBtnLast"> 
+							<i class="	fas fa-angle-double-right"></i>
+						</button>
+					</div>
 		</div>
 	</div>
 </div>
