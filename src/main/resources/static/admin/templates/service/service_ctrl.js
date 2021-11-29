@@ -1,26 +1,34 @@
 app.controller("service-ctrl",function($scope,$http){
     $scope.items=[];
-    $scope.form={};
-    $scope.time={
-        value: new Date(1970, 0, 1, 14, 57, 0)
+    $scope.seach={
+        searchText: " "
     };
+    $scope.form={};
     $scope.initialize=function (){
-        //load booking
+        //load service
         $http.get("/rest/services").then(resp=>{
             $scope.items=resp.data;
         })
     }
 
-    $scope.initialize();
-
-    $scope.reset=function (){
-        $scope.form={
-
-        }
+    $scope.seachServiceByName=function (){
+        var item = angular.copy($scope.seach);
+        $http.get(`/rest/services/seach/?serviceName=${item.searchText}`).then(resp=>{
+            $scope.items=resp.data;
+        })
     }
 
-    //them sp
-    $scope.create = function() {
+    $scope.initialize();
+    $scope.reset=function (){
+        $scope.form={
+            image: "Add.png",
+            status: true
+        }
+    }
+    $scope.reset();
+
+    //update
+    $scope.update = function() {
         var item = angular.copy($scope.form);
         const value = moment($scope.form.time).format('DD/MM/yyyy HH:mm:ss');
         item.time= value;
@@ -29,13 +37,23 @@ app.controller("service-ctrl",function($scope,$http){
             // resp.data.time = new Date(value);
             $scope.items.push(resp.data);
             $scope.reset();
-            alert("Thêm dịch vụ thành công ");
+            $scope.initialize();
+            alert("Cập nhập vụ thành công ");
         }).catch(error =>{
 
-            alert("Thêm mới dịch vụ thất bại ");
+            alert("Cập nhập dịch vụ thất bại ");
             console.log("Error" , error);
         });
     }
+
+    //hien thi len form
+    $scope.edit = function(item){
+        item.time= new Date("1970-01-01 "+item.time);
+        $scope.form = angular.copy(item);
+        $scope.initialize();
+        $(".nav-tabs a:eq(0)").tab('show');
+    }
+
 
     //upload
     $scope.imageChanged = function(files) {
@@ -48,13 +66,14 @@ app.controller("service-ctrl",function($scope,$http){
             $scope.form.image = resp.data.name
             alert($scope.form.image);
         }).catch(error => {
-            alert("Loi upload hinh anh");
+            alert("Lỗi update hình ảnh");
             console.log("Error" ,error);
         })
     }
 
 
     //phan trang
+    $scope.sizePage = [5,10,15,20];
     $scope.pager = {
         page: 0,
         size: 5,
@@ -64,6 +83,9 @@ app.controller("service-ctrl",function($scope,$http){
         },
         get count(){
             return Math.ceil(1.0 *$scope.items.length / this.size)
+        },
+        get setPage(){
+            return this.first();
         },
         first(){
             this.page = 0;

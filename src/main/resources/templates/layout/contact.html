@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>YouthsHairs &mdash; Contact</title>
 <meta charset="utf-8">
@@ -140,14 +140,15 @@
 				</div>
 				<div class="row">
 					<div class="col-md-7 mb-5">
-						<form action="/contact/save"  class="p-5 bg-white" method="post">
-
+						<form th:action="@{/contact/save}" th:object="${contact}" class="p-5 bg-white" method="post">
 							<div class="row form-group">
 
 								<div class="col-md-12">
 									<label class="text-black" for="name">Họ Tên <span
 											class="text-danger">(*)</span></label> <input
-										type="text" id="name" class="form-control" name="fullName">
+										type="text" id="name" class="form-control" name="fullName" th:value="*{fullName}">
+										
+									<span ></span>
 								</div>
 							</div>
 
@@ -156,7 +157,7 @@
 								<div class="col-md-12">
 									<label class="text-black" for="email">Email <span
 											class="text-danger">(*)</span></label> <input
-										type="email" id="email" class="form-control" name="email">
+										type="email" id="email" class="form-control" name="email" th:value="*{email}">
 								</div>
 							</div>
 
@@ -165,7 +166,7 @@
 								<div class="col-md-12">
 									<label class="text-black" for="number">Số Điện Thoại <span
 											class="text-danger">(*)</span></label> <input
-										type="number" id="number" class="form-control" name="phone">
+										type="number" id="number" class="form-control" name="phone" th:value="*{phone}">
 								</div>
 							</div>
 
@@ -174,7 +175,7 @@
 									<label class="text-black" for="message">Ghi Chú</label>
 									<textarea name="note" id="message" cols="30" rows="7"
 										class="form-control"
-										placeholder="Để lại lời nhắn của bạn ở đây..."></textarea>
+										placeholder="Để lại lời nhắn của bạn ở đây..." th:value="*{note}"></textarea>
 								</div>
 							</div>
 

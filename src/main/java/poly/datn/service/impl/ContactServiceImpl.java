@@ -164,6 +164,11 @@ public class ContactServiceImpl implements ContactService{
 	public <S extends Contact> List<S> findAll(Example<S> example, Sort sort) {
 		return contactDAO.findAll(example, sort);
 	}
+
+	@Override
+	public List<Contact> findContactStatus(Boolean status) {
+		return contactDAO.findContactStatus(status);
+	}
 	
 	
 	

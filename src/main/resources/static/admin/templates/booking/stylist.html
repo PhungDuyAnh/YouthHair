@@ -6,7 +6,7 @@
 
 	<div class="card-body">
 		<div class="row" >
-			<div class="col-xl-3 col-md-6 mb-4" ng-repeat="item in items">
+			<div class="col-xl-3 col-md-6 mb-4" ng-repeat="item in employee">
 				<div class="card border-left-success shadow h-100" >
 					<div class="card-header">
 						<div class="dropdown no-arrow" align="right">
@@ -20,14 +20,15 @@
 							<div class="col mr-2">
 								<div
 									class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									{{item.customer.fullName}}</div>
-								<div ng-click="targetDate1(item.totalTime)" class="h5 mb-0 font-weight-bold text-gray-800" ng-model="demo">{{demo}}</div>
+									{{item.fullName}}</div>
+								<input type="checkbox" ng-checked="index_of(item.totalTime)">
+								<div class="h5 mb-0 font-weight-bold text-gray-800" ng-model="demo">{{demo}}</div>
 							</div>
 							<div class="col-auto">
-								<a href="#!booking" data-toggle="modal" data-target="#StylistModal"> 
+								<a href="#!booking" data-toggle="modal" data-target="#StylistModal" ng-click="showBookingWating(item)">
 									<i class="fas fa-calendar-plus fa-2x text-gray-300"></i>
 								</a> 
-								<a href="#!booking"> 
+								<a href="#!booking">
 									<i class="fas fa-check-circle fa-2x text-gray-300"></i>
 								</a>
 							</div>
@@ -52,14 +53,9 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" ng-repeat="item in itemWaiting">
 					<a href="#!booking" class="btn btn-info btn-block"><i
-						class="fas fa-user-tie"></i> Tên Khách Hàng</a> <a href="#!booking"
-						class="btn btn-info btn-block"><i class="fas fa-user-tie"></i>
-						Tên Khách Hàng</a> <a href="#!booking" class="btn btn-info btn-block"><i
-						class="fas fa-user-tie"></i> Tên Khách Hàng</a> <a href="#!booking"
-						class="btn btn-info btn-block"><i class="fas fa-user-tie"></i>
-						Tên Khách Hàng</a>
+						class="fas fa-user-tie"></i> {{item.customer.fullName}}</a>
 				</div>
 			</div>
 		</div>
@@ -80,7 +76,7 @@
 
 				<!-- Modal body -->
 				<div class="modal-body p-5">
-						
+
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="text-black" for="fname">Họ Tên</label><input
@@ -88,7 +84,7 @@
 									placeholder="Họ Tên..." readonly>
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-6 mb-3 mb-md-0">
 								<label class="text-black" for="email">Email</label> <input
@@ -142,23 +138,23 @@
 								</ul>
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-12">
 								<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">40 phút</span></h5>
 								<h4 class="text-black" >Tổng Tiền: <span class="text-warning">100,000 VNĐ</span></h4>
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-12">
-								<label class="text-black" for="stylist">Stylist</label> 
+								<label class="text-black" for="stylist">Stylist</label>
 								<input
 									type="text" id="stylist" class="form-control datepicker px-2"
 									placeholder="Stylist..." readonly>
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="text-black" for="note">Ghi Chú</label>

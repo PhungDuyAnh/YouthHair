@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Time;
 
 public class ServiceDTO implements Serializable {
+    private Integer id;
 
     private String image;
 
@@ -17,6 +18,14 @@ public class ServiceDTO implements Serializable {
     private Boolean status;
 
     private String time;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getImage() {
         return image;
