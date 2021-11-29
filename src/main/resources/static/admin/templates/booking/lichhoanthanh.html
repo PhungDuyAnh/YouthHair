@@ -32,7 +32,7 @@
 					<td>{{item.totalPrice}}</td>
 					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
-					<td align="center"><a href="#!booking"
+					<td align="center"><a href="#!booking" ng-click="showDetail1(item)"
 										  class="btn btn-success" data-toggle="modal"
 										  data-target="#confirmModal"> Thanh Toán
 					</a></td>
@@ -84,19 +84,19 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="fname">Họ Tên Khách Hàng</label><input
-								type="text" id="fname" class="form-control"
+								type="text" id="fname" class="form-control" ng-model="form1.customer.fullName"
 								placeholder="Họ Tên..." readonly>
 						</div>
 					</div>
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
-							<label class="text-black" for="email">Email</label> <input
+							<label class="text-black" for="email">Email</label> <input ng-model="form1.customer.email"
 								type="email" id="email" class="form-control" placeholder="Email"
 								readonly>
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="lname">Số Điện Thoại </label> <input
-								type="text" id="lname" class="form-control"
+								type="text" id="lname" class="form-control" ng-model="form1.customer.phone"
 								placeholder="Số Điện Thoại..." readonly>
 						</div>
 					</div>
@@ -104,12 +104,12 @@
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
 							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
-								type="date" id="date" class="form-control datepicker px-2"
+								type="date" id="date" class="form-control datepicker px-2" ng-model="form1.createDate"
 								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
-								type="time" id="time" class="form-control datepicker px-2"
+								type="time" id="time" class="form-control datepicker px-2" ng-model="form1.time"
 								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 					</div>
@@ -144,14 +144,16 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="stylist">Stylist</label> <input
-								type="text" id="stylist" class="form-control datepicker px-2"
+								type="text" id="stylist"
+								ng-model="form1.employee1.fullName"
+								class="form-control datepicker px-2"
 								placeholder="Stylist..." readonly>
 						</div>
 					</div>
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="note">Ghi Chú</label>
-							<textarea name="note" id="note" cols="30" rows="5"
+							<textarea name="note" id="note" cols="30" rows="5" ng-model="form1.note"
 								class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 						</div>
 					</div>
@@ -195,8 +197,8 @@
 							</select>
 						</div>
 						<div class="col-md-6 text-center">
-							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">40 phút</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">100,000 VNĐ</span></h4>
+							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{item.totalTime}}</span></h5>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{item.toalPrice}} VNĐ</span></h4>
 						</div>
 					</div>
 

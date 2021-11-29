@@ -17,7 +17,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.items=resp.data;
 			$scope.items.forEach(item => {
 				item.createDate = new Date(item.createDate);
-				item.time=new Date(item.time)
 			})
 		})
 
@@ -62,18 +61,23 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.showDetail=function (item){
+		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form=angular.copy(item);
 	}
 	$scope.showDetail1=function (item){
+		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form1=angular.copy(item);
 	}
 	$scope.showDetail2=function (item){
+		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form2=angular.copy(item);
 	}
 	$scope.showDetail3=function (item){
+		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form3=angular.copy(item);
 	}
 	$scope.showDetail5=function (item){
+		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form5=angular.copy(item)
 	}
 
