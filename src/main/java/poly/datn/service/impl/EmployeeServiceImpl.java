@@ -180,5 +180,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDAO.deleteById(id);
 		
 	}
-	
+	public List<Employee> loadStylist(){
+
+		return employeeDAO.bookingByStylist();
+	}
 }

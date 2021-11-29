@@ -1,7 +1,10 @@
 package poly.datn.service;
 
-public interface BookingCustomerService {
+import poly.datn.entity.Booking;
+import poly.datn.service.dto.BookingCustomerDTO;
 
-	void AddInfoBookingCustomer();
+public interface BookingCustomerService {
+	BookingCustomerDTO AddInfoBookingCustomer(BookingCustomerDTO bookingCustomerDTO);
+	Booking bookingStatusIAT(Integer id);
 
 }
