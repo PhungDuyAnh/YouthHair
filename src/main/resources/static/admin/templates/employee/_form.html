@@ -1,17 +1,19 @@
 <div class="container">
 
 <style>
-         .error-msg {
-         font-size: 90%;
-         font-style: italic;
-         color: red;
-         }
-      </style>
+   .error-msg {
+   font-size: 90%;
+   font-style: italic;
+   color: red;
+   }
+</style>
 
 
 	<!-- Outer Row -->
-	<div class="row justify-content-center">
-
+	<div class="row justify-content-center" ng-app="admin-app" >
+	
+	<form class="css-form" name="myForm"  ng-submit="myForm.$valid && doSubmitForm($event)" novalidate>
+ 
 		<div class="col-xl-10 col-lg-12 col-md-9">
 
 			<div class="card o-hidden border-0 shadow-lg my-5">
@@ -27,12 +29,12 @@
 							<div class="row" >
 								<div class="col-sm-3">
 								
-		                        	<input type="image" class="img-profile rounded-circle dropdown-toggle" src="../img/undraw_profile.svg" ng-src="{{'/images/'+form.image}}"  
+		                        	<input type="image" class="img-profile rounded dropdown-toggle" ng-src="{{'/images/'+form.image}}"  
 		                        	id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; height: 80%;">
 		                        	<div class="dropdown-menu animated--fade-in"
                                             aria-labelledby="dropdownMenuButton">
                                             <input type="file" class="form-control" id="image"
-						onchange="angular.element(this).scope().imageChanged(this.files)">
+											onchange="angular.element(this).scope().imageChanged(this.files)">
                                         </div>
 								</div>
 								
@@ -50,12 +52,26 @@
 								
 									<div class="form-group">
 										<label class="form-label" for="name">Tên Nhân Viên</label><span
-													class="text-danger">(*)</span> <input type="text"
+													class="text-danger">(*)</span> 
+													<input type="text"
 											class="form-control" name="myFullName" ng-model="form.fullName" id="name" 
-											placeholder="Tên Nhân Viên(Bắt Buộc Nhập)" >
+											placeholder="Tên Nhân Viên" ng-required="true"/>
 											
-											
+										
+    								<span ng-show="myForm.$submitted ">
+      							<span ng-show="myForm.myFullName.$error.required" class="error-msg">Bạn chưa nhập tên.</span>
+    								</span>
 									</div>
+									
+									
+									
+								
+									
+									
+									 
+             
+            
+         
 									
 
 									
@@ -68,44 +84,132 @@
 												<label class="form-label">Giới Tính </label> <br>
 												<div class="form-check-inline">
 												  <label class="form-check-label">
-												    <input ng-model="form.gender" type="radio" name="available" ng-value="true">Nam
+												    <input ng-model="form.gender" type="radio" name="available" ng-value="true" ng-required="true"/>Nam<br>
+												    
+												    
+												    
+												    
+												    <span ng-show="myForm.$submitted ">
+      						<span ng-show="myForm.available.$error.required" class="error-msg">Chưa chọn giới tính.</span>
+    												</span>
+    
+    
+    
 												  </label>
 												</div>
 												<div class="form-check-inline">
 												  <label class="form-check-label">
-												    <input ng-model="form.gender" type="radio" name="available" ng-value="false">Nữ
+												    <input ng-model="form.gender" type="radio" name="available" ng-value="false" ng-required="true"/>Nữ<br>
+												    
+												    
+												    
+												    
+												    
+												    <span ng-show="myForm.$submitted ">
+      								<span ng-show="myForm.available.$error.required" class="error-msg">Chưa chọn giới tính.</span>
+    												</span>
+												    
+												    
 												  </label>
 												</div>
 											</div>
 										</div>
 										
 										
+										
+										
+										
+										
+										
+										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label class="form-label" for="salary">Lương</label> <input ng-model="form.salary" type="number"
+												<label class="form-label" for="salary">Lương</label> 
+												
+												<input name="salary" ng-model="form.salary" type="number"
 													class="form-control" id="salary" 
-													placeholder="Lương(Bắt Buộc Nhập)">
+													placeholder="Lương" ng-required="true"/>
+										
+													
+													
+													
+													
+													<!--
+													<span ng-show="myForm.$submitted ">
+      									<span ng-show="myForm.salary.$error.required" class="error-msg">Bạn chưa nhập lương..</span>
+    												</span>
+    												-->
 											</div>
 										</div>
 									</div>
+									
+									
+									
+									
+									
+									
+									
+									
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="form-label" for="phone">Số Điện Thoại</label><span
-													class="text-danger">(*)</span> <input ng-model="form.phone"
-													class="form-control" id="phone" 
-													placeholder="Số Điện Thoại(Bắt Buộc Nhập)">
+													class="text-danger">(*)</span> 
+													
+													<input name="phone" ng-model="form.phone" type="text"
+													class="form-control" id="phone"
+													placeholder="Số Điện Thoại(10 số)." ng-minlength= "10" ng-maxlength= "10" ng-pattern="/^[0-9]+$/" ng-required="true"/>
+													
+													
+													
+													
+													
+													
+													<span ng-show="myForm.$submitted ">
+      					<span ng-show="myForm.phone.$error.required" class="error-msg">Bạn chưa nhập số điện thoại.</span>
+   													 </span>
+   													 <span class="error-msg" ng-show="myForm.phone.$dirty && myForm.phone.$error.pattern">
+            Chỉ chấp nhận số 0-9!
+            </span>
+            <span class="error-msg" ng-show="myForm.phone.$error.minlength">Nhập ít nhất 10 số.
+  </span>
+  <span class="error-msg" ng-show="myForm.phone.$error.maxlength"> Độ dài tối đa là 10 số.
+  </span>
+           
+            
+    												
 											</div>
 										</div>
+										
+										
+										
+										
+										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label class="form-label" for="address">Địa Chỉ</label> <input ng-model="form.address" type="text"
+												<label class="form-label" for="address">Địa Chỉ</label> 
+												<input name="adress" ng-model="form.address" type="text"
 													class="form-control" id="address" 
-													placeholder="Địa Chỉ(Bắt Buộc Nhập)">
+													placeholder="Địa Chỉ" ng-required="true"/>
+													
+													
+													
+													
+													
+													
+													
+													
+													<span ng-show="myForm.$submitted ">
+      							<span ng-show="myForm.adress.$error.required" class="error-msg">Bạn chưa nhập địa chỉ.</span>
+    												</span>
+    
 											</div>
 										</div>
 										
 						
+										
+										
+										
 										
 										
 										<div class="col-sm-6">
@@ -113,12 +217,30 @@
 												<label class="form-label">Status Work </label> <br>
 												<div class="form-check-inline">
 												  <label class="form-check-label">
-												    <input ng-model="form.statusWork" ng-value="true" type="radio" class="form-check-input" name="optradio" checked="checked">True
+												    <input ng-model="form.statusWork" ng-value="true" type="radio" class="form-check-input" name="optradio" checked="checked" ng-required="true"/>True
+												    
+												    
+												    <span ng-show="myForm.$submitted ">
+     			 <span ng-show="myForm.optradio.$error.required" class="error-msg">Bạn chưa chọn trạng thái.</span>
+      
+    												</span>
 												  </label>
 												</div>
 												<div class="form-check-inline">
 												  <label class="form-check-label">
-												    <input ng-model="form.statusWork" ng-value="false" type="radio" class="form-check-input" name="optradio"> False
+												    <input ng-model="form.statusWork" ng-value="false" type="radio" class="form-check-input" name="optradio" ng-required="true"/> False
+												    
+												    
+												    
+												    
+												    
+												    
+												    <span ng-show="myForm.$submitted ">
+      <span ng-show="myForm.optradio.$error.required" class="error-msg">Bạn chưa chọn trạng thái.</span> 
+    												</span>
+    												
+    												
+												    
 												  </label>
 												</div>
 											</div>
@@ -132,9 +254,21 @@
 											<div class="form-group">
 												<label class="form-label" for="roles">Vai Trò<span
 													class="text-danger">(*)</span></label> 	
-												 <select ng-model="form.role.id" class="form-control " id="roles" >
-												    <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+												 <select name="role" ng-model="form.role.id" class="form-control " id="roles" ng-required="true"/>
+												 	<option value="" selected disabled hidden>Chọn vai trò</option>
+												    <option ng-repeat="c in cates" ng-value="c.id" selected="1">{{c.name}}</option>
 												  </select>
+												  
+												  
+												  
+												  
+												  
+												  
+												  <span ng-show="myForm.$submitted ">
+      <span ng-show="myForm.role.$error.required" class="error-msg">Bạn chưa chọn vai trò.</span>
+      
+    												</span>
+												  
 											</div>
 										</div>
 										
@@ -142,10 +276,19 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label class="form-label" for="date">Ngày Bắt Đầu Làm</label> 
-												<input ng-model="form.startDate" type="date"
+												<input name="startDate" ng-model="form.startDate" type="date"
 													class="form-control" id="date" 
-													placeholder="Ngày Làm(Bắt Buộc Nhập)">
-				
+													placeholder="Ngày Làm(Bắt Buộc Nhập)" ng-required="true"/>
+										
+										
+										
+										
+										
+										
+										
+										
+										<span ng-show="myForm.$submitted ">
+      				<span ng-show="myForm.startDate.$error.required" class="error-msg">Bạn chưa chọn ngày bắt đầu làm.</span>
 		
 											</div>
 										</div>
@@ -160,22 +303,50 @@
 								</div>
 								<hr>
 								<div class="text-right">
-										<a  ng-click="reset()" class="btn btn-primary"> Reset </a> 
-										<a
-										 ng-click="create()" class="btn btn-success"> Create </a> 
-										<a ng-click="update()"
-										 class="btn btn-warning"> Update 
-										</a> 
-										<a ng-click="delete(form)"  class="btn btn-danger"> Delete </a>
-										
-								</div>
+								
+								
+							
+            
+								
+								
+								<button type="reset" class="btn btn-primary" ng-click="reset()" ng-disabled="disabledBtnReset"> Reset </button> 
+
+								
+								
+								
+								
+								
+								<button type="submit" class="btn btn-warning" ng-click="update()" ng-disabled="disabledBtnUpdate"> Update </button>
+								
+								
+								
+								
+								
+								 
+								<button class="btn btn-danger" ng-click="delete(form)" ng-disabled="disabledBtnDelete"> Delete </button>
+								
+								
+								
+								
+								
+								<button type="submit" class="btn btn-success" ng-click="create()" ng-disabled="disabledBtnCreate"> Create </button>
+								
+								<!--
+								<h4 ng-show="myForm.$submitted && myForm.$invalid" class="error-msg">
+               					Vui lòng kiểm tra lỗi hiển thị trên form trước khi thao tác ..!!
+            					</h4>
+            					-->
+								
+								
+								
+							</div>
 							</div>
 					</div>
 				</div>
 			</div>
 
 		</div>
-
+</form>
 	</div>
 
 </div>

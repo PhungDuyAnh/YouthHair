@@ -187,7 +187,7 @@ public class BookingServiceImpl implements BookingService {
 		return bookingDAO.bookingByStatus(status);
 	}
 	@Override
-	public List<Booking> findByStatusWFCAndStylist() {
-		return bookingDAO.findByStatusWFCAndStylist();
+	public List<Booking> findByStatusWFCAndStylist(int id) {
+		return bookingDAO.findByStatusWFCAndStylist(id);
 	}
 }

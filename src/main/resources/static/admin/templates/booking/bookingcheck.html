@@ -211,22 +211,6 @@
 										for="myCheckboxCho1"> <img src="/images/haircut/2.jpg" />
 									<br> Service 1
 								</label></li>
-								<li><input type="checkbox" id="myCheckboxCho2" /> <label
-										for="myCheckboxCho2"> <img src="/images/haircut/4.jpg" />
-									<br> Service 2
-								</label></li>
-								<li><input type="checkbox" id="myCheckboxCho3" /> <label
-										for="myCheckboxCho3"> <img src="/images/haircut/6.jpg" />
-									<br> Service 3
-								</label></li>
-								<li><input type="checkbox" id="myCheckboxCho4" /> <label
-										for="myCheckboxCho4"> <img src="/images/haircut/8.jpg" />
-									<br> Service 4
-								</label></li>
-								<li><input type="checkbox" id="myCheckboxCho5" /> <label
-										for="myCheckboxCho5"> <img src="/images/haircut/10.jpg" />
-									<br> Service 5
-								</label></li>
 							</ul>
 						</div>
 					</div>
@@ -234,32 +218,28 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<h5 class="text-black">
-								Tổng Thời Gian: <span class="text-info">40 phút</span>
+								Tổng Thời Gian: <span class="text-info">{{form2.totalTime}}</span>
 							</h5>
 							<h4 class="text-black">
-								Tổng Tiền: <span class="text-warning">100,000 VNĐ</span>
+								Tổng Tiền: <span class="text-warning">{{form2.totalPrice}} VNĐ</span>
 							</h4>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="stylist">Chọn Stylist <span
-									class="text-danger">(*)</span></label> <select class="form-control"
-																				   id="stylist">
-							<option disabled selected>Hãy Chọn 1 Stylist</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-						</select>
+							<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label>
+							<select class="form-control" id="stylist"
+									ng-model="form2.employee1.fullName"
+									ng-options="x for x in employee1">
+							</select>
 						</div>
 					</div>
 
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="note">Ghi Chú</label>
-							<textarea name="note" id="note" cols="30" rows="5"
+							<textarea name="note" id="note" cols="30" rows="5" ng-model="form2.note"
 									  class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 						</div>
 					</div>
