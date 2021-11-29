@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import poly.datn.entity.Contact;
@@ -42,13 +44,13 @@ public class ContactRestController {
 		}
 		
 		@GetMapping("/rest/contact/DXL")
-		public List<Contact> getContactsDXL(){
-			return contactService.findContactStatus(true);
+		public List<Contact> getContactsDXL(String keyword){
+			return contactService.findContactStatus(true, keyword);
 		}
 		
 		@GetMapping("/rest/contact/CXL")
-		public List<Contact> getContactsCXL(){
-			return contactService.findContactStatus(false);
+		public List<Contact> getContactsCXL(@Param("keyword") String keyword){
+			return contactService.findContactStatus(false, keyword);
 		}
 
 }
