@@ -2,7 +2,7 @@ app.controller("bill-ctrl",function($scope,$http){
 	
 	$scope.items=[];
 	$scope.form={};
-	$scope.statusBooking = '';
+	$scope.statusBooking = 'CPM';
 	
 	
 	$scope.initialize = function (){
@@ -18,11 +18,13 @@ app.controller("bill-ctrl",function($scope,$http){
 	
 	$scope.loadTableCPM = function(){
 		$scope.statusBooking = 'CPM';
+		$scope.pager.first();
 		$scope.initialize();
 	}
 	
 	$scope.loadTableCAN = function(){
 		$scope.statusBooking = 'CAN';
+		$scope.pager.first();
 		$scope.initialize();
 	}
 	
