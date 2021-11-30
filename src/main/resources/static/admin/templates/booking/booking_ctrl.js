@@ -3,7 +3,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.items1=[];
 	$scope.items2=[];
 	$scope.form={};
-	$scope.form1={};
+	$scope.form1={
+	};
 	$scope.form2={};
 	$scope.form3={};
 	$scope.form5={};
@@ -244,4 +245,18 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 // 		myObj.id = objProps[2];
 // 		objects.push(myObj);
 // 	}
+
+
+
+
+
+	var voucherByCus= [];
+	$scope.voucherByCustomer={
+		addVoucher= (id){
+		$http.get("/rest/voucherdetailByCustomer/{id}").then(resp=>{
+			this.voucherByCus=resp.data;
+		})
+	}
+
+	}
 })

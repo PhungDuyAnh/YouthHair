@@ -1,4 +1,4 @@
-<div class="card shadow border-left-success mb-4">
+<div class="card shadow border-left-success mb-4" xmlns:th="https://www.thymeleaf.org">
 	<div class="card-header py-3">
 		<h6 class="m-0 font-weight-bold text-success">Danh Sách Hoàn
 			Thành</h6>
@@ -118,26 +118,11 @@
 						<div class="col-md-12">
 							<label class="text-black" for="treatment">Các Dịch Vụ Sử Dụng</label>
 							<ul class="services-form">
-								<li><input type="checkbox" id="confrimCheckbox1" disabled checked/> <label
-									for="onfrimCheckbox1"> <img src="/images/haircut/2.jpg" />
-										<br> Service 1
+								<li ng-repeat="item in items1"><input type="checkbox" id="${item.index}" disabled checked/> <label
+										for="${item.index}"> <img ng:src="@{|/images/haircut/{{item.images}}|}" />
+										<br> {{item.serviceName}}
 								</label></li>
-								<li><input type="checkbox" id="confrimCheckbox2" disabled/> <label
-									for="confrimCheckbox2"> <img src="/images/haircut/4.jpg" />
-										<br> Service 2
-								</label></li>
-								<li><input type="checkbox" id="confrimCheckbox3" disabled checked/> <label
-									for="confrimCheckbox3"> <img src="/images/haircut/6.jpg" />
-										<br> Service 3
-								</label></li>
-								<li><input type="checkbox" id="confrimCheckbox4" disabled/> <label
-									for="confrimCheckbox4"> <img src="/images/haircut/8.jpg" />
-										<br> Service 4
-								</label></li>
-								<li><input type="checkbox" id="confrimCheckbox5" disabled/> <label
-									for="confrimCheckbox5"> <img src="/images/haircut/10.jpg" />
-										<br> Service 5
-								</label></li>
+
 							</ul>
 						</div>
 					</div>
@@ -191,14 +176,12 @@
 							<select class="form-control" id="voucher">
 								<option disabled selected>Hãy Chọn 1 Voucher</option>
 							    <option>1</option>
-							    <option>2</option>
-							    <option>3</option>
-							    <option>4</option>
+
 							</select>
 						</div>
 						<div class="col-md-6 text-center">
-							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{item.totalTime}}</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{item.toalPrice}} VNĐ</span></h4>
+							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{form1.totalPrice}} VNĐ</span></h4>
 						</div>
 					</div>
 

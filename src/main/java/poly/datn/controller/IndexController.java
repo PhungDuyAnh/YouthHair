@@ -79,7 +79,11 @@ public class IndexController {
 //		}
 		return "layout/booking";
 	}
+	@RequestMapping("admin/templates/index.html#!/booking")
+	public String voucherBooking( Model model) {
 
+		return "admin/templates/booking/lịchhoanthanh";
+	}
 
 //	@RequestMapping("/profile")
 //	public String profile() {
