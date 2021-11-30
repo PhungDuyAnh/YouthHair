@@ -83,7 +83,6 @@ public class IndexController {
 		return "layout/booking";
 	}
 
-
 //	@RequestMapping("/profile")
 //	public String profile() {
 //		

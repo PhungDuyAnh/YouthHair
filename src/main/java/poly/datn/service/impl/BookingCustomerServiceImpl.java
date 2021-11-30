@@ -56,6 +56,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 				System.out.println(cus1.getId());
 			}else {
 				if(cus.getEmail()!= bookingCustomerDTO.getEmail()) {
+					cus.setFullName(bookingCustomerDTO.getFullName());
 					cus.setEmail(bookingCustomerDTO.getEmail());
 					cusDAO.save(cus);
 					booking = bookingDao.bookingByCustomer(cus.getId());
@@ -86,9 +87,10 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
 					bDetailDAO.save(bookingDetail);
 				}}else{
-				throw new Exception("c error");
-			}
 
+				throw new Exception("c error");
+
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
