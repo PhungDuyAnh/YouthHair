@@ -9,7 +9,7 @@ app.controller("contact-ctrl",function($scope,$http){
 		$http.get(`/rest/contact/${$scope.statusContact}`).then(resp=>{
 			$scope.items = resp.data;
 		});
-	}	
+	}
 
 	//show data into form
 	$scope.showDetail = function(item){
@@ -19,11 +19,13 @@ app.controller("contact-ctrl",function($scope,$http){
 	$scope.loadTableDXL = function(){
 		$scope.statusContact = 'DXL';
 		$scope.initialize();
+		$scope.pager.first();
 	}
 	
 	$scope.loadTableCXL = function(){
 		$scope.statusContact = 'CXL';
 		$scope.initialize();
+		$scope.pager.first();
 	}
 	
 	//update contact
@@ -33,8 +35,9 @@ app.controller("contact-ctrl",function($scope,$http){
         $http.put(`/rest/contact/${item.id}`,item).then(resp => {
             var index = $scope.items.findIndex(p => p.id == item.id);
             $scope.items[index] = item;
-            
             alert("Cập nhật liên hệ thành công!");
+			$scope.pager.first();
+			$scope.initialize();
         }).catch(error => {
             alert("Lỗi cập nhật liên hệ!");
             console.log("Error",error);
@@ -47,8 +50,9 @@ app.controller("contact-ctrl",function($scope,$http){
 	        $http.delete(`/rest/contact/${item.id}`).then(resp => {
 	            var index = $scope.items.findIndex(p => p.id == item.id);
 	            $scope.items.splice(index,1);
-	            
 	            alert("Xóa liên hệ thành công!");
+				$scope.pager.first();
+				$scope.initialize();
 	        }).catch(error => {
 	            alert("Lỗi xóa liên hệ!");
 	            console.log("Error",error);
@@ -67,10 +71,7 @@ app.controller("contact-ctrl",function($scope,$http){
 		},
 		get count(){
 			return Math.ceil(1.0 *$scope.items.length / this.size)
-		},
-		get setPage(){
-			return this.first();
-		},
+		},		
 		first(){
 			this.page = 0;
 		},

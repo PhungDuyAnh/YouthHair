@@ -7,7 +7,7 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Tìm Kiếm</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-	                    <input type="text" ng-model="searchText"
+	                    <input type="text" ng-keyup="search"
 						class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
 						aria-label="Search">
                     </div>
@@ -24,7 +24,7 @@
 							name="sizePage"
 							class="custom-select"
 							ng-model="pager.size"
-							ng-change="pager.setPage()"
+							ng-change="pager.last()"
 							ng-options="x for x in sizePage">
 							</select>
                     </div>
@@ -38,12 +38,12 @@
                         Các Liên Hệ</div>
                     <div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-model="statusContact" ng-change="loadTableCXL()" ng-value="true">Chưa Xử Lý
+					    <input type="radio" class="form-check-input" name="optradio" ng-click="loadTableCXL()">Chưa Xử Lý
 					  </label>
 					</div>
 					<div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-model="statusContact" ng-change="loadTableDXL()" ng-value="false">Đã Xử Lý
+					    <input type="radio" class="form-check-input" name="optradio" ng-click="loadTableDXL()">Đã Xử Lý
 					  </label>
 					</div>
                </div>
@@ -54,8 +54,14 @@
 	
 	<div class="col-xl-10 col-lg-9">
 		<div class="card shadow border-left-info mb-4">
-			<div class="card-header py-3">
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 				<h6 class="m-0 font-weight-bold text-info">Danh Sách Liên Hệ</h6>
+				<div align="right">
+					<span class="font-weight-bold text-primary">Thêm lịch hẹn:</span> 
+					<button class="btn btn-primary btn-circle" data-toggle="modal" data-target="#NewBookingModal">
+		                <i class="fas fa-calendar-plus"></i>
+		            </button>
+                </div>
 			</div>
 			<div class="card-body">
 				
@@ -79,13 +85,13 @@
 								<td>{{item.status == true ? 'Đã Xử lý' : 'Chưa Xử Lý'}}</td>
 								<td>{{item.createDate}}</td>
 								<td>
-									<a href="#!contacts" ng-click="showDetail(item)"
+									<button ng-click="showDetail(item)"
 										class="btn btn-info btn-circle" data-toggle="modal"
-										data-target="#infoModal"> <i class="fas fa-info-circle"></i>
-									</a>
-									<a href="#!contacts" ng-click="delete(item)" class="btn btn-danger btn-circle"> <i
+										data-target="#infoContactModal"> <i class="fas fa-info-circle"></i>
+									</button>
+									<button ng-click="delete(item)" class="btn btn-danger btn-circle"> <i
 										class="fas fa-trash"></i>
-									</a>
+									</button>
 								</td>
 							</tr>
 						</tbody>
@@ -114,7 +120,7 @@
 
 
 <!-- Info Modal-->
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+<div class="modal fade" id="infoContactModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -152,12 +158,12 @@
 										<label class="form-label" for="name">Trạng Thái</label>
 										<div class="form-check">
 											<input ng-model="form.status" type="radio" class="form-check-input" id="radio1"
-												name="optradio" ng-value="false"> <label
-												class="form-check-label" for="radio1">Đang Xử Lý</label>
+												name="status" ng-value="false"> <label
+												class="form-check-label" for="radio1">Chưa Xử Lý</label>
 										</div>
 										<div class="form-check">
 											<input ng-model="form.status" type="radio" class="form-check-input" id="radio2"
-												name="optradio" ng-value="true">
+												name="status" ng-value="true">
 											<label class="form-check-label" for="radio2">Đã Xử Lý</label>
 										</div>
 									</div>
@@ -175,8 +181,8 @@
 
 							<hr>
 							<div class="text-right">
-								<button class="btn btn-warning" ng-click="update()"> Update </button> 
-								<button class="btn btn-danger" ng-click="delete(form)"> Delete </button>
+								<button class="btn btn-warning" data-dismiss="modal" ng-click="update()"> Update </button> 
+								<button class="btn btn-danger" data-dismiss="modal" ng-click="delete(form)"> Delete </button>
 							</div>
 					</div>
 			</div>
