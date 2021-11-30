@@ -5,8 +5,6 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     var toprice;
 
 
-
-
     // $scope.Stylist = {
     //     listSty : [],
     //     addSty(id) {
@@ -61,7 +59,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     // $scope.form.listSer = "";
     // $scope.form.createDate = "";
 
-    $scope.doSubmitForm = function(event) {
+    $scope.doSubmitForm = function (event) {
         alert("OK: " + $scope.myForm.$submitted);
     }
 
@@ -138,9 +136,9 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             bookings.createDate = value;
             bookings.listSer = $scope.cart.items;
 
-            if($scope.form == null || $scope.form =="" || $scope.form == undefined || $scope.form.listSer.length == 0 ){
-alert("Vui lòng nhập thông tin đầy đủ")
-            }else{
+            if ($scope.form == null || $scope.form == "" || $scope.form == undefined || $scope.form.listSer.length == 0) {
+                alert("Vui lòng nhập thông tin đầy đủ")
+            } else {
                 $http.post("/rest/bookingCus", bookings).then(resp => {
 
                     // if(resp.data.id = 0){

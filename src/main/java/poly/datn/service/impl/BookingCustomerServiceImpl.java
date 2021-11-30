@@ -92,7 +92,6 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 
 			}
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

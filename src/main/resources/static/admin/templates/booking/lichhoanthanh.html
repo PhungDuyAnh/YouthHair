@@ -32,10 +32,14 @@
 					<td>{{item.totalPrice}}</td>
 					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
-					<td align="center"><a href="#!booking" ng-click="showDetail1(item)"
+					<td align="center"><a href="#!booking" ng-click="showDetail1(item) ;
+																	voucherByCustomer.addVoucher(item.customer.id) ;
+																	 serviceByBooking.getSerDetail(item.id) "
 										  class="btn btn-success" data-toggle="modal"
 										  data-target="#confirmModal"> Thanh Toán
-					</a></td>
+					</a>
+					</td>
+
 				</tr>
 				</tbody>
 			</table>
@@ -119,9 +123,12 @@
 						<div class="col-md-12">
 							<label class="text-black" for="treatment">Các Dịch Vụ Sử Dụng</label>
 							<ul class="services-form">
-								<li ng-repeat="item in items1"><input type="checkbox" id="${item.index}" disabled checked/> <label
-										for="${item.index}"> <img ng:src="@{|/images/haircut/{{item.images}}|}" />
-										<br> {{item.serviceName}}
+								<li >
+									<input type="checkbox" id="{{item.id}}" disabled checked/>
+									<label for="{{item.id}}">
+									<img src="/images/haircut/1.jpg" />
+										<br>Ser1
+<!--										{{item.serviceName}}-->
 								</label></li>
 
 							</ul>
@@ -173,16 +180,16 @@
 
 					<div class="row form-group">
 						<div class="col-md-6">
-							<label class="text-black" for="voucher">Voucher</label> 
-							<select class="form-control" id="voucher">
-								<option disabled selected>Hãy Chọn 1 Voucher</option>
-							    <option>1</option>
-
+							<label class="text-black" for="voucher" >Voucher</label>
+							<select class="form-control" id="voucher" ng-model="formCPM.voucherId">
+<!--									ng-options="x.id for x in voucherByCus"-->
+								 <option disabled selected value="">DM NAM</option>
+									<option  ng-repeat="x in voucherByCus"  ng-value="{{x.id}}"> {{x.id}}</option>
 							</select>
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{form1.totalPrice}} VNĐ</span></h4>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{pay.totalPrice}} VNĐ</span></h4>
 						</div>
 					</div>
 
@@ -191,7 +198,7 @@
 						<!-- 
 							<input type="submit" value="Thanh Toán"
 								class="btn btn-success py-2 px-4 text-white"> -->
-								<button type="button" class="btn btn-success" data-dismiss="modal">Thanh Toán</button>
+								<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="pay.purchase">Thanh Toán</button>
 						</div>
 					</div>
 

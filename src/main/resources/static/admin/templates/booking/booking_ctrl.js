@@ -247,16 +247,69 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 // 	}
 
 
-
-
-
-	var voucherByCus= [];
-	$scope.voucherByCustomer={
-		addVoucher= (id){
-		$http.get("/rest/voucherdetailByCustomer/{id}").then(resp=>{
-			this.voucherByCus=resp.data;
-		})
+	$scope.formCPM={
+		voting: null,
+		CusId: null,
+		voucherId:"",
+		totalPrice:null
 	}
 
+	$scope.voucherByCus = []
+	$scope.voucherByCustomer={
+		addVoucher(id){
+		$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
+			$scope.voucherByCus = [];
+			$scope.formCPM={}
+			$scope.voucherByCus = resp.data;
+			$scope.formCPM.CusId = id;
+			alert($scope.formCPM.voucherId)
+		}) ;
+	}
+	}
+	var total = 0;
+	$scope.pay={
+		get totalPrice(){
+
+			if($scope.formCPM.voucherId == null ){
+				total = $scope.form1.totalPrice;
+			}else{
+				for(var i =0; i< $scope.voucherByCus.length; i++){
+					if($scope.formCPM.voucherId = $scope.voucherByCus[i].id){
+						if(total > $scope.voucherByCus[i].condition){
+							total = $scope.form1.totalPrice- $scope.voucherByCus[i].price
+						}else{
+							total = $scope.form1.totalPrice;
+							alert("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
+							// break;
+						}
+					}
+				}
+			}
+			return total;
+		},
+
+		purchase() {
+
+			var item = angular.copy($scope.formCPM);
+			item.totalPrice = total
+			$http.post(`/rest/bookingCus`, bookings).then(resp => {
+				alert("Thanh toan thành công!");
+				$scope.formCPM.clear();
+				location.href = "/booking";
+			}).catch(error => {
+				alert("Thanh toan thất bại!")
+				console.log(error);
+			})
+		}
+	}
+	$scope.serviceByBooking= {
+		listSer: [],
+		getSerDetail(id) {
+			$http.get(`/rest/bookingdetailByIdBooking/${id}`).then(resp => {
+				this.listSer=[];
+				this.listSer.push(resp.data);
+				console.log(this.listSer[0])
+			})
+		}
 	}
 })

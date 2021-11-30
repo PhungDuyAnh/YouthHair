@@ -8,4 +8,7 @@ import poly.datn.entity.Statusbooking;
 public interface StatusBookingDAO extends JpaRepository<Statusbooking, String> {
     @Query(value = "SELECT b FROM Statusbooking b  WHERE b.id = 'UCF' ")
     Statusbooking StatusbookingbyId();
+
+    @Query(value = "SELECT b FROM Statusbooking b  WHERE b.id = 'CPM' ")
+    Statusbooking StatusbookingbyIdCPM();
 }
