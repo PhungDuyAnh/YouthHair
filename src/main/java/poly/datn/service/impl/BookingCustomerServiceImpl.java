@@ -67,7 +67,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 			Customer cus1 = cusDAO.customerByPhone(bookingCustomerDTO.getPhone());
 			if(!checkNullBooking(booking )) {
 				Booking booking1= new Booking();
-				booking1.setCreateDate(new Date());
+				booking1.setCreateDate(bookingCustomerDTO.getCreateDate());
 				booking1.setTime(null);
 				booking1.setNote(bookingCustomerDTO.getNote());
 				booking1.setEmployee1(stylist);

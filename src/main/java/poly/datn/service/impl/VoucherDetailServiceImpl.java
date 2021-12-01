@@ -39,23 +39,32 @@ public class VoucherDetailServiceImpl implements VoucherDetailService{
 	public VoucherDetailInfoDTO completeBooking(VoucherDetailInfoDTO voucherDetailInfoDTO ){
 
 		try {
-			Voucherdetail voucherdetail = voucherDetailDAO.selectVoucherDetailByCus(voucherDetailInfoDTO.getVoucherId());
-			voucherdetail.setStatus(false);
-			voucherDetailDAO.save(voucherdetail);
+			System.out.println(voucherDetailInfoDTO.getTotalPrice());
+			Voucherdetail voucherdetail =new Voucherdetail();
+			if(voucherDetailInfoDTO.getVoucherId() != null){
+				 voucherdetail = voucherDetailDAO.selectVoucherDetailByCus(voucherDetailInfoDTO.getVoucherId());
+				voucherdetail.setStatus(false);
+				voucherDetailDAO.save(voucherdetail);
+			}else{
+				System.out.println("voucherDetailInfoDTO.getVoucherId() = null");
+			}
 
 			Statusbooking statusbooking= statusBookingDAO.StatusbookingbyIdCPM();
 			Voting voting = votingDAO.selectVotingById(voucherDetailInfoDTO.getVoting());
+
 			Booking booking = bookingDAO.bookingCusByCusWFP(voucherDetailInfoDTO.getCusId());
-			booking.setStatusbooking(statusbooking);
-			booking.setVoting(voting);
-			booking.setVoucherdetails(voucherdetail);
-			booking.setTotalPrice(voucherDetailInfoDTO.getTotalPrice());
-			bookingDAO.save(booking);
+			if (booking != null) {
+				booking.setStatusbooking(statusbooking);
+				booking.setVoting(voting);
+				booking.setVoucherdetails(voucherdetail);
+				booking.setTotalPrice(voucherDetailInfoDTO.getTotalPrice());
+				bookingDAO.save(booking);
+			}else{
+				System.out.println("booking = null");
+			}
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-
-
 		return voucherDetailInfoDTO;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import poly.datn.entity.Employee;
+import poly.datn.service.dto.StylistDTO;
 
 public interface EmployeeService {
 
@@ -79,4 +80,5 @@ public interface EmployeeService {
 
 	List<Employee> loadStylist();
 
+	List<StylistDTO> findStocktotal();
 }

@@ -13,6 +13,6 @@ public interface VoucherDetailDAO extends JpaRepository<Voucherdetail, Integer> 
     @Query(value = "SELECT v FROM Voucherdetail vd join Voucher v on vd.voucher.id = v.id  where vd.customer.id = ?1 and vd.status = true ")
     List<Voucher> selectVoucherByCus(Integer id);
 
-    @Query(value = "SELECT vd FROM Voucherdetail vd where vd.voucher.id=?1 and vd.status = true ")
+    @Query(value = "SELECT vd FROM Voucherdetail vd where vd.voucher.id like ?1 and vd.status = true ")
     Voucherdetail selectVoucherDetailByCus(String id);
 }

@@ -157,22 +157,22 @@
 							<label class="text-black" for="treatment">Chọn Đánh Giá <span
 									class="text-danger">(*)</span></label>
 								<ul class="status-form text-center" >
-									<li><input type="radio" name="name" id="one"  /> <label
+									<li><input type="radio" name="name" id="one" ng-click="votingId(1)" /> <label
 										for="one" class="btn btn-danger btn-circle btn-lg"> <span
 											class="icon"> <i class="fas fa-angry"></i>
 										</span>
 									</label> <br> Không Hài Lòng</li>
 	
-									<li><input type="radio" name="name" id="two" checked/> <label
+									<li><input ng-click="votingId(2)" type="radio" name="name" id="two" checked/> <label
 										for="two" class="btn btn-primary btn-circle btn-lg"> <span
 											class="icon"> <i class="fas fa-smile"></i>
 										</span>
-									</label> <br> Bình Thường</li>
-									<li><input type="radio" name="name" id="three" /> <label
+									</label> <br> Hài Lòng</li>
+									<li><input ng-click="votingId(3)" type="radio" name="name" id="three" /> <label
 										for="three" class="btn btn-success btn-circle btn-lg">
 											<span class="icon"> <i class="fas fa-grin-stars"></i>
 										</span>
-									</label> <br> Hài Lòng</li>
+									</label> <br>Rất Hài Lòng</li>
 								</ul>
 							
 						</div>
@@ -181,9 +181,9 @@
 					<div class="row form-group">
 						<div class="col-md-6">
 							<label class="text-black" for="voucher" >Voucher</label>
-							<select class="form-control" id="voucher" >
-								 	<option disabled value="">Chon Voucher</option>
-									<option  ng-repeat="x in voucherByCus" ng-value="{{x.id}}"> {{x.id}}</option>
+							<select class="form-control" id="voucher" ng-model = "formCPM.voucherId" ng-value="{{x.id}}" ng-options="x.id for x in voucherByCus">
+<!--								 	<option disabled value="">Chon Voucher</option>-->
+<!--									<option  ng-repeat="x in voucherByCus" ng-value="{{x.id}}"> {{x.id}}</option>-->
 							</select>
 
 						</div>
