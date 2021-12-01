@@ -4,6 +4,16 @@ app.controller("service-ctrl",function($scope,$http){
         searchText: " "
     };
     $scope.form={};
+
+    $scope.disabledBtnReset = false;
+    $scope.disabledBtnUpdate = false;
+    $scope.disabledBtnDelete = false;
+    $scope.disabledBtnCreate = false;
+    $scope.doSubmitForm = function(event) {
+        alert("OK: " + $scope.myForm.$submitted);
+
+    }
+
     $scope.initialize=function (){
         //load service
         $http.get("/rest/services").then(resp=>{
@@ -24,6 +34,10 @@ app.controller("service-ctrl",function($scope,$http){
             image: "Add.png",
             status: true
         }
+        $scope.disabledBtnUpdate = true;
+        $scope.disabledBtnDelete = true;
+        $scope.disabledBtnReset = false;
+        $scope.disabledBtnCreate = false;
     }
     $scope.reset();
 
@@ -89,21 +103,25 @@ app.controller("service-ctrl",function($scope,$http){
         },
         first(){
             this.page = 0;
+            $scope.disabledBtnFisrt = true;
+            $scope.disabledBtnLast = false;
         },
         prev(){
             this.page--;
-            if(this.page<0){
-                this.last();
+            if(this.page<=0){
+                this.first();
             }
         },
         next(){
             this.page++;
             if(this.page>=this.count){
-                this.first();
+                this.last();
             }
         },
         last(){
             this.page = this.count - 1;
+            $scope.disabledBtnFisrt = false;
+            $scope.disabledBtnLast = true;
         }
     }
 })
