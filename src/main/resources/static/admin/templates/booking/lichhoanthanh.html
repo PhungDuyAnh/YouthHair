@@ -32,8 +32,8 @@
 					<td>{{item.totalPrice}}</td>
 					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
-					<td align="center"><a href="#!booking" ng-click="showDetail1(item) ;
-																	voucherByCustomer.addVoucher(item.customer.id) ;
+					<td align="center"><a href="#!booking" ng-click="showDetail1(item);
+																	voucherByCustomer(item.customer.id);
 																	 serviceByBooking.getSerDetail(item.id) "
 										  class="btn btn-success" data-toggle="modal"
 										  data-target="#confirmModal"> Thanh Toán
@@ -181,11 +181,11 @@
 					<div class="row form-group">
 						<div class="col-md-6">
 							<label class="text-black" for="voucher" >Voucher</label>
-							<select class="form-control" id="voucher" ng-model="formCPM.voucherId">
-<!--									ng-options="x.id for x in voucherByCus"-->
-								 <option disabled selected value="">DM NAM</option>
-									<option  ng-repeat="x in voucherByCus"  ng-value="{{x.id}}"> {{x.id}}</option>
+							<select class="form-control" id="voucher" >
+								 	<option disabled value="">Chon Voucher</option>
+									<option  ng-repeat="x in voucherByCus" ng-value="{{x.id}}"> {{x.id}}</option>
 							</select>
+
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
@@ -198,7 +198,7 @@
 						<!-- 
 							<input type="submit" value="Thanh Toán"
 								class="btn btn-success py-2 px-4 text-white"> -->
-								<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="pay.purchase">Thanh Toán</button>
+								<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="pay.purchase()">Thanh Toán</button>
 						</div>
 					</div>
 

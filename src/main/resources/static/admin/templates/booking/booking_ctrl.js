@@ -250,31 +250,29 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.formCPM={
 		voting: null,
 		CusId: null,
-		voucherId:"",
+		voucherId:null,
 		totalPrice:null
 	}
 
-	$scope.voucherByCus = []
-	$scope.voucherByCustomer={
-		addVoucher(id){
+	$scope.voucherByCus = [];
+	$scope.voucherByCustomer= function (id){
 		$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
 			$scope.voucherByCus = [];
-			$scope.formCPM={}
+			$scope.formCPM={};
 			$scope.voucherByCus = resp.data;
 			$scope.formCPM.CusId = id;
-			alert($scope.formCPM.voucherId)
-		}) ;
+		})
 	}
-	}
+
 	var total = 0;
 	$scope.pay={
 		get totalPrice(){
-
 			if($scope.formCPM.voucherId == null ){
 				total = $scope.form1.totalPrice;
+				// console.log('voucher: null');
 			}else{
-				for(var i =0; i< $scope.voucherByCus.length; i++){
-					if($scope.formCPM.voucherId = $scope.voucherByCus[i].id){
+				for(var i =0; i < $scope.voucherByCus.length; i++){
+					if($scope.formCPM.voucherId == $scope.voucherByCus[i].id){
 						if(total > $scope.voucherByCus[i].condition){
 							total = $scope.form1.totalPrice- $scope.voucherByCus[i].price
 						}else{
@@ -289,17 +287,17 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		},
 
 		purchase() {
-
-			var item = angular.copy($scope.formCPM);
-			item.totalPrice = total
-			$http.post(`/rest/bookingCus`, bookings).then(resp => {
-				alert("Thanh toan thành công!");
-				$scope.formCPM.clear();
-				location.href = "/booking";
-			}).catch(error => {
-				alert("Thanh toan thất bại!")
-				console.log(error);
-			})
+			alert($scope.vou)
+			// var item = angular.copy($scope.formCPM);
+			// item.totalPrice = total
+			// $http.post(`/rest/bookingCus`, bookings).then(resp => {
+			// 	alert("Thanh toan thành công!");
+			// 	$scope.formCPM.clear();
+			// 	location.href = "/booking";
+			// }).catch(error => {
+			// 	alert("Thanh toan thất bại!")
+			// 	console.log(error);
+			// })
 		}
 	}
 	$scope.serviceByBooking= {
