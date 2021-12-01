@@ -1,7 +1,11 @@
 package poly.datn.service.impl;
 
+import java.math.BigInteger;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -13,6 +17,9 @@ import org.springframework.stereotype.Service;
 import poly.datn.dao.EmployeeDAO;
 import poly.datn.entity.Employee;
 import poly.datn.service.EmployeeService;
+import poly.datn.service.dto.StylistDTO;
+
+import javax.persistence.Tuple;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -184,4 +191,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return employeeDAO.bookingByStylist();
 	}
+
+	public List<StylistDTO> findStocktotal() {
+		List<Tuple> stockTotalTuples = employeeDAO.getAllStylistST();
+		List<StylistDTO> stockTotalDto = stockTotalTuples.stream()
+				.map(t -> new StylistDTO(
+						t.get(0, Integer.class),
+						t.get(1, String.class),
+						t.get(2, String.class),
+						t.get(3, Time.class),
+						t.get(4, String.class)
+				))
+				.collect(Collectors.toList());
+
+		return stockTotalDto;
+	}
+
 }

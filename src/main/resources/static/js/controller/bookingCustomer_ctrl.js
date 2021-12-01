@@ -5,41 +5,38 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     var toprice;
 
 
-    // $scope.Stylist = {
-    //     listSty : [],
-    //     addSty(id) {
-    //         var item = this.listSty.find(item => item.id == id);
-    //         var index = this.listSty.findIndex(item => item.id == id);
-    //         if (item) {
-    //             this.listSty.splice(index, 1);
-    //         }else{
-    //             this.listSty.push(id);
-    //          alert(this.listSty);
-    //     }
-    //     }
-    // }
-    // $scope.timeSty=[];
-    // $scope.timeBookingByStylist = {
-    //     bookingStatusIAT: [],
-    //     bookingBySty() {
-    //         for (var i = 0; i < this.listSty.length; i++) {
-    //             $http.get(`/rest/bookingCusByStylist/${this.listSty[i]}`).then(resp => {
-    //                 this.bookingStatusIAT.push(resp.data);
-    //             })
-    //         }
-    //     },
-    //      timeBooking(){
-    //         for(var i = 0; i < this.listSty.length; i++){
-    //             for(var j = 0; j < this.bookingStatusIAT.length; j++){
-    //                     if(this.listSty[i] = this.bookingStatusIAT[j].stylistId){
-    //                         this.timeSty.push(this.bookingStatusIAT[j].totalTime);
-    //                     }else if (this.timeSty = null){
-    //                         this.timeSty.push("00:00:00");
-    //                     }
-    //             }
-    //         }
-    //     }
-    // }
+    $scope.Stylist = {
+        listSty: [],
+        addSty(id) {
+            var item = this.listSty.find(item => item.id == id);
+            var index = this.listSty.findIndex(item => item.id == id);
+            if (item) {
+                this.listSty.splice(index, 1);
+            } else {
+                this.listSty.push(id);
+            }
+        }
+    }
+    $scope.getAllSty = {
+        AllStyList: [],
+        getAll() {
+            $http.get("/rest/employee/stylist").then(resp => {
+                $scope.AllStyList.push(resp.data);
+            })
+            console.log(this.AllStyList)
+        },
+        index: [],
+        totalTimeStylist() {
+            for(var i =0; i<this.AllStyList.length;i++){
+                if(this.AllStyList[i].statusBooking == 'IAT'){
+                    this.index=[]
+                    this.index.push(this.AllStyList[i].totalTime)
+                }
+            }
+            console.log(this.index)
+        }
+    }
+
     $scope.form = {
         email: null,
         fullName: null,
@@ -131,14 +128,19 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         purchase() {
             var bookings = angular.copy($scope.form);
             const value = moment($scope.form.createDate).format('YYYY-MM-DD');
-            bookings.totalTime = totime;
-            bookings.totalPrice = toprice;
-            bookings.createDate = value;
-            bookings.listSer = $scope.cart.items;
-            var a=0;
+            if ($scope.form.totalPrice > 0) {
+                bookings.totalTime = totime;
+                bookings.totalPrice = toprice;
+                bookings.createDate = value;
+                bookings.listSer = $scope.cart.items;
+            } else {
+                bookings.totalTime = null;
+                bookings.totalPrice = null;
+            }
+            var a = 0;
             if ($scope.form.fullName == null || $scope.form.email == null
-                || $scope.form.phone == null 
-                ||$scope.form.fullName == null || $scope.form.createDate == undefined ) {
+                || $scope.form.phone == null
+                || $scope.form.fullName == null || $scope.form.createDate == undefined) {
                 alert("Vui lòng nhập thông tin đầy đủ")
             } else {
                 $http.post("/rest/bookingCus", bookings).then(resp => {
@@ -155,4 +157,6 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
         }
     }
+
+
 });

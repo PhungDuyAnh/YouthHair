@@ -18,13 +18,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VoucherDetailInfoDTO {
-
-    private int voting;
-
     private int CusId;
-
     private String voucherId;
-
+    private int voting;
     private float totalPrice;
+
+
+
 
 }

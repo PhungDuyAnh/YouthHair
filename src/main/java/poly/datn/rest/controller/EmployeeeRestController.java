@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import poly.datn.entity.Employee;
 import poly.datn.service.EmployeeService;
+import poly.datn.service.dto.StylistDTO;
 
 
 @RestController
@@ -47,4 +48,10 @@ public class EmployeeeRestController {
 	public void delete(@PathVariable("id")Integer id) {
 		employeeService.delete(id);
 	}
+
+	@GetMapping("/stylist")
+	public List<StylistDTO> getAllSty(){
+		return employeeService.findStocktotal();
+	}
+
 }
