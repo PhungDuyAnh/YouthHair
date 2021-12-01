@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,12 @@ public class ContactRestController {
 		@GetMapping("/rest/contact")
 		public List<Contact> getAll(){
 			return contactService.findAll(Sort.by(Sort.Direction.ASC, "createDate"));
-		}		
+		}
+		
+		@PostMapping("/rest/contact")
+		public Contact save(@RequestBody Contact contact) {
+			return contactService.save(contact);
+		}
 		
 		@PutMapping("/rest/contact/{id}")
 		public Contact update(@PathVariable("id")Integer id,@RequestBody Contact contact) {

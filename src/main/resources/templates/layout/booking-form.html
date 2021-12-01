@@ -189,7 +189,6 @@
             mm = '0' + mm;
         }
         var minDate = yyyy + '-' + mm + '-' + dd;
-        console.log("minDate: " + minDate);
         input.setAttribute("min", minDate);
         
         var mmMax = today.getMonth() + 2;
@@ -207,7 +206,6 @@
         }
 
         var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
-        console.log("maxDate: " + maxDate);
         input.setAttribute("max", maxDate);
         
 	}
