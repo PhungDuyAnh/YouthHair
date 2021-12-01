@@ -60,7 +60,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     // $scope.form.createDate = "";
 
     $scope.doSubmitForm = function (event) {
-        alert("OK: " + $scope.myForm.$submitted);
+        // alert("OK: " + $scope.myForm.$submitted);
     }
 
     $scope.styId = function (id) {
@@ -135,20 +135,16 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             bookings.totalPrice = toprice;
             bookings.createDate = value;
             bookings.listSer = $scope.cart.items;
-
-            if ($scope.form == null || $scope.form == "" || $scope.form == undefined || $scope.form.listSer.length == 0) {
+            var a=0;
+            if ($scope.form.fullName == null || $scope.form.email == null
+                || $scope.form.phone == null 
+                ||$scope.form.fullName == null || $scope.form.createDate == undefined ) {
                 alert("Vui lòng nhập thông tin đầy đủ")
             } else {
                 $http.post("/rest/bookingCus", bookings).then(resp => {
-
-                    // if(resp.data.id = 0){
-                    //
-                    // }
-                    // else{
                     alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
                     $scope.cart.clear();
                     location.href = "/booking";
-                    // }
                 }).catch(error => {
                     alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
                     // $scope.form.data = null;
