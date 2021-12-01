@@ -1,9 +1,16 @@
 <div class="container">
+	<style>
+		.error-msg {
+			font-size: 90%;
+			font-style: italic;
+			color: red;
+		}
+	</style>
 
 	<!-- Outer Row -->
-	<div class="row justify-content-center">
+	<div class="row justify-content-center" ng-app="admin-app">
 
-		<div class="col-xl-10 col-lg-12 col-md-9">
+		<form class="col-xl-10 col-lg-12 col-md-9" name="myForm"  ng-submit="myForm.$valid && doSubmitForm($event)" novalidate>
 
 			<div class="card o-hidden border-0 shadow-lg my-5">
 				<div class="card-body p-0">
@@ -33,25 +40,37 @@
 								</div>
 								<div class="col-sm-9">
 									<div class="form-group">
-										<label class="form-label" for="name">Tên Dịch Vụ <span
-											class="text-danger">(*)</span></label>
+										<label class="form-label" for="name">Tên Dịch Vụ
+											<span class="text-danger">(*)</span></label>
 										<input type="text"
 											   ng-model="form.serviceName"
-											   class="form-control " id="name"
-											   placeholder="Tên Dịch Vụ">
+											   class="form-control " id="nameService"
+											   name="serviceName"
+											   placeholder="Tên Dịch Vụ" ng-required="true"/>
+										<span ng-show="myForm.$submitted ">
+      									<span ng-show="myForm.serviceName.$error.required" class="error-msg">Bạn chưa nhập tên dịch vụ.</span>
+    									</span>
 									</div>
+
 									<div class="form-group">
-										<label class="form-label" for="price">Giá <span
-											class="text-danger">(*)</span></label>
+										<label class="form-label" for="price">Giá
+											<span class="text-danger">(*)</span></label>
 										<input type="text" ng-model="form.price"
-											class="form-control " id="price"
-											placeholder="Giá Dịch Vụ">
+											class="form-control " id="price" name="price"
+											placeholder="Giá Dịch Vụ" ng-required="true">
+										<span ng-show="myForm.$submitted ">
+      									<span ng-show="myForm.price.$error.required" class="error-msg">Bạn chưa nhập giá dịch vụ.</span>
+    									</span>
 									</div>
+
 									<div class="form-group">
 										<label class="form-label" for="time">Thời Gian <span
 											class="text-danger">(*)</span></label> <input type="time" ng-model="form.time "
-											class="form-control " id="time"
-											placeholder="Thời gian">
+											class="form-control " id="time" name="time"
+											placeholder="Thời gian" ng-required="true">
+										<span ng-show="myForm.$submitted ">
+      									<span ng-show="myForm.time.$error.required" class="error-msg">Bạn chưa chọn thời gian dịch vụ.</span>
+    									</span>
 									</div>
 									<div class="row">
 										<div class="col-sm-4">
@@ -85,15 +104,15 @@
 
 								<hr>
 								<div class="text-right">
-									<a ng-click="reset()" class="btn btn-primary  "> Reset </a> <a
-										ng-click="update()" class="btn btn-warning  "> Update </a>
+									<a  ng-click="reset()" class="btn btn-primary  "> Reset </a>
+									<button type="submit" ng-click="update()" class="btn btn-warning  "> Update </button>
 								</div>
 							</div>
 					</div>
 				</div>
 			</div>
 
-		</div>
+		</form>
 
 	</div>
 
