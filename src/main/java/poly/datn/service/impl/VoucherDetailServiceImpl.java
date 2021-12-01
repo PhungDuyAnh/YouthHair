@@ -67,4 +67,14 @@ public class VoucherDetailServiceImpl implements VoucherDetailService{
 		}
 		return voucherDetailInfoDTO;
 	}
+
+	@Override
+	public List<Voucherdetail> findAll() {		
+		return voucherDetailDAO.findAll();
+	}
+
+	@Override
+	public Voucherdetail save(Voucherdetail voucherDetail) {
+		return voucherDetailDAO.save(voucherDetail);
+	}
 }
