@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <form class="css-form" name="myForm" ng-submit="myForm.$valid && doSubmitForm($event)" novalidate>
-<div class="site-section" th:fragment="booking"
+<div class="site-section" 
      style="background-image: url('/images/background-booking.jpg'); background-size: cover;">
 
 
@@ -174,5 +174,45 @@
 
 </div>
 </form>
+
+<script type="text/javascript">
+    var input = document.getElementById("txtDate");
+	function myFunction() {
+	    var today = new Date("2021-12-30");
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var minDate = yyyy + '-' + mm + '-' + dd;
+        console.log("minDate: " + minDate);
+        input.setAttribute("min", minDate);
+        
+        var mmMax = today.getMonth() + 2;
+        var ddMax = today.getDate() - 1;
+        
+        if (mmMax > 12) { 
+            mmMax = today.getMonth() - 10;
+            yyyy = today.getFullYear() + 1;
+        }               
+        if (mmMax < 10) {
+    		if (mmMax == 2) {
+                dd = today.getDate() - 3;
+            }
+            mmMax = '0' + mmMax;
+        }
+
+        var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
+        console.log("maxDate: " + maxDate);
+        input.setAttribute("max", maxDate);
+        
+	}
+	
+	myFunction();
+</script>
 </body>
 </html>
