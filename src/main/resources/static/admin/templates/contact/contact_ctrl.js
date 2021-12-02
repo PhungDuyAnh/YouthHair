@@ -14,6 +14,12 @@ app.controller("contact-ctrl",function($scope,$http){
 	//show data into form
 	$scope.showDetail = function(item){
 		$scope.form = angular.copy(item);
+		var input = document.getElementsByName("status");
+		if($scope.form.status == true){		
+			input[0].setAttribute("disabled", "disabled");
+		}else{
+			input[0].removeAttribute("disabled")
+		}
 	}
 	
 	$scope.loadTableDXL = function(){
