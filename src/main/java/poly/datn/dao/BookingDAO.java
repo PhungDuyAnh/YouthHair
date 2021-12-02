@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
 
+import javax.persistence.Tuple;
 import java.util.List;
 
 public interface BookingDAO extends JpaRepository<Booking, Integer> {
@@ -32,4 +33,7 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
 
     @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'IAT' and b.customer.id = ?1")
     Booking bookingCusByCusWFP(Integer id);
+
+    @Query(value = "SELECT b.employee1.id , b.totalTime FROM Booking b WHERE b.statusbooking.id = 'IAT' ")
+    List<Tuple> bookingIAT();
 }

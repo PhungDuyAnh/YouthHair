@@ -4,16 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VoucherDetailInfoDTO {
-    private int CusId;
-    private String voucherId;
-    private int voting;
-    private float totalPrice;
-
-
-
+public class BookingIatDTO {
+    private Integer idSty;
+    private Time totalTime;
 
 }

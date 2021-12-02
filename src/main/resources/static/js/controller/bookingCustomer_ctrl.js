@@ -4,7 +4,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     var totime;
     var toprice;
 
-
+//Lấy tất cả id của stylist => return: listSty: []
     $scope.Stylist = {
         listSty: [],
         addSty(id) {
@@ -17,26 +17,34 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             }
         }
     }
+    //lấy tất cả booking có status = IAT
+    $scope. AllbookingIAT= [],
+        $scope.initialize=function (){
+            $http.get("/rest/bookingIAT").then(resp => {
+                this.AllbookingIAT = resp.data;
+            } )
+        }
+    $scope.initialize();
+
+    //lấy totalTime theo từng stylist
     $scope.getAllSty = {
-        AllStyList: [],
-        getAll() {
-            $http.get("/rest/employee/stylist").then(resp => {
-                $scope.AllStyList.push(resp.data);
-            })
-            console.log(this.AllStyList)
-        },
-        index: [],
-        totalTimeStylist() {
-            for(var i =0; i<this.AllStyList.length;i++){
-                if(this.AllStyList[i].statusBooking == 'IAT'){
-                    this.index=[]
-                    this.index.push(this.AllStyList[i].totalTime)
-                }
-            }
-            console.log(this.index)
+         a : [],
+       get totalTimeStylist() {
+           this.a=[]
+            for(var i =0; i<$scope.Stylist.listSty.length;i++){
+                    for(var j =0; j<$scope.AllbookingIAT.length;j++){
+                        if($scope.Stylist.listSty[i] == $scope.AllbookingIAT[j].idSty){
+                            this.a=$scope.AllbookingIAT[j].totalTime
+                        }else{
+                            this.a="00:00:00"
+                        }
+                    }
+            }console.log(this.a)
+           return this.a;
+
         }
     }
-
+//form lưu thôg tin từ ng dùng nhập vào UI
     $scope.form = {
         email: null,
         fullName: null,
@@ -59,11 +67,11 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     $scope.doSubmitForm = function (event) {
         // alert("OK: " + $scope.myForm.$submitted);
     }
-
+// lấy id stylist khi click vào ảnh
     $scope.styId = function (id) {
         this.form.stylistId = id;
     }
-    //list service
+    //Lấy list service người dùng chọn
     $scope.cart = {
         items: [],
         //Them service vao list
@@ -79,18 +87,18 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                 })
             }
         },
-        // Xóa sạch form
+        // Xóa sạch list
         clear() {
             this.items = [];
         },
-        // Tông thành tiền các service trong giỏ
+        // Tông thành tiền các service trong list
         get amount() {
             return this.items
                 .map(item => item.price)
                 .reduce((total, price) => toprice = (total += price), 0,);
 
         },
-//tong time
+//tổng time trong list
         get totalTime() {
             var convertDate1 = null;
             var totalHour = 0;
@@ -124,6 +132,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             $scope.bookingSty.push(resp.data);
         })
     }
+    //thực hiện đặt lịch
     $scope.booking = {
         purchase() {
             var bookings = angular.copy($scope.form);
@@ -157,6 +166,5 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
         }
     }
-
-
+    
 });

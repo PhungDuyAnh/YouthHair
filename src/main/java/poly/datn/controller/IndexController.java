@@ -85,7 +85,7 @@ public class IndexController {
 
 //	@RequestMapping("/profile")
 //	public String profile() {
-//		
+//
 //		return "layout/profile";
 //	}
 
@@ -93,4 +93,5 @@ public class IndexController {
 	public String admin() {
 		return "redirect:/admin/templates/index.html";
 	}
+
 }

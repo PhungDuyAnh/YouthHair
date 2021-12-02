@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import poly.datn.entity.Booking;
 import poly.datn.service.BookingCustomerService;
 import poly.datn.service.dto.BookingCustomerDTO;
+import poly.datn.service.dto.BookingIatDTO;
 import poly.datn.service.impl.ServiceService;
+
+import java.util.List;
 
 @RestController
 public class BookingCustomerRestController {
@@ -31,4 +34,8 @@ public class BookingCustomerRestController {
     }
 
 
+    @GetMapping("rest/bookingIAT")
+    public List<BookingIatDTO> bookingIAT(){
+        return bcService.bookingIAT();
+    }
 }

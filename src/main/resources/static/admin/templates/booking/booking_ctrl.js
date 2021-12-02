@@ -302,6 +302,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			var item = angular.copy($scope.formCPM);
 
 			var item2=angular.copy(item);
+
 			if($scope.formCPM.voting==null){
 				item2.voting = 2;
 			}else {
@@ -319,7 +320,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			console.log(item2);
 			$http.post(`/rest/voucherdetailByCustomer`, item2).then(resp => {
 				alert("Thanh toan thành công!");
-				$scope.formCPM={};
+				// $scope.formCPM={};
 				// location.reload();
 			}).catch(error => {
 				alert("Thanh toan thất bại!")
@@ -333,7 +334,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$http.get(`/rest/bookingdetailByIdBooking/${id}`).then(resp => {
 				this.listSer=[];
 				this.listSer.push(resp.data);
-				console.log(this.listSer[0])
 			})
 		}
 	}
