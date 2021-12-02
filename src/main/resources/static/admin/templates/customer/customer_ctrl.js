@@ -45,7 +45,7 @@ app.controller("customer-ctrl",function($scope,$http){
 				$scope.vouchers[index] = item.voucher;			
 	            $scope.voucherDetails.push(resp.data);        
 	            alert("Thêm mới thành công!");
-				location.reload(); 
+				$(".close").click(); 
 	        }).catch(error => {
 	            alert("Thêm mới không thành công!");
 	            console.log("Error", error);
@@ -63,7 +63,7 @@ app.controller("customer-ctrl",function($scope,$http){
 				var index = $scope.items.findIndex(p => p.id === item.id);
 				$scope.items[index] = item;
 				alert("Chỉnh sửa thông tin thành công!");
-				location.reload(); 
+				$(".close").click(); 
 			}).catch(error => {
 				alert(" Chỉnh sửa thông tin không thành công!");
 				console.log("Error",error);

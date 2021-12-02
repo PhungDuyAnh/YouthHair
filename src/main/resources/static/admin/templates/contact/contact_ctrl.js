@@ -38,7 +38,7 @@ app.controller("contact-ctrl",function($scope,$http){
             alert("Cập nhật liên hệ thành công!");
 			$scope.pager.first();
 			$scope.initialize();
-			location.reload(); 
+			$(".close").click();
         }).catch(error => {
             alert("Lỗi cập nhật liên hệ!");
             console.log("Error",error);
@@ -54,7 +54,6 @@ app.controller("contact-ctrl",function($scope,$http){
 	            alert("Xóa liên hệ thành công!");
 				$scope.pager.first();
 				$scope.initialize();
-				location.reload(); 
 	        }).catch(error => {
 	            alert("Lỗi xóa liên hệ!");
 	            console.log("Error",error);

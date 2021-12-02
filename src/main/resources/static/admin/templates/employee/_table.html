@@ -45,34 +45,26 @@
 	
 		
 		<div class="table-responsive" >
-			<table class="table table-bordered text-center" id="dataTable">
+			<table class="table table-hover table-info text-center">
 				<thead>
 					<tr>
-						<th>Id</th>
-						<th>FullName</th>
-						<th>Gender</th>
-						<th>Phone</th>
-						<th>Adress</th>
-						<th>StartDates</th>
-						<th>Status</th>
-						<th>Roles</th>
-						<th class="text-center">Action</th>
+						<th>Họ Tên</th>
+						<th>Giới Tính</th>
+						<th>Điện Thoại</th>
+						<th>Địa Chỉ</th>
+						<th>Ngày Bắt Đầu Làm</th>						
+						<th>Vai Trò</th>
+						<th>Chức Năng</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in pager.items | filter:searchText " >
-					 
-					
-						<td>{{item.id}}</td>
+					<tr class="table-success" ng-repeat="item in pager.items | filter:searchText " >						
                 		<td>{{item.fullName}}</td>
                 		<td>{{item.gender}}</td>
                 		<td>{{item.phone}}</td>
                 		<td>{{item.address}}</td>
                 		<td>{{item.startDate | date:'dd-MM-yyyy'}}</td>
-                		<td>{{item.statusWork}}</td>
                 		<td>{{item.role.name}}</td>
-                
-                
 						<td class="text-center">
 							<a ng-click="edit(item)" class="btn btn-info btn-circle">
 	                            <i class="fas fa-info-circle"></i>
