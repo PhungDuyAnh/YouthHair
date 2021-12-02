@@ -7,7 +7,11 @@ import poly.datn.entity.Voucherdetail;
 import poly.datn.service.dto.VoucherDetailInfoDTO;
 
 public interface VoucherDetailService {
+	
+	List<Voucherdetail> findAll();
 
     List<Voucher> VoucherByCus(Integer id);
     VoucherDetailInfoDTO completeBooking(VoucherDetailInfoDTO voucherDetailInfoDTO );
+
+	Voucherdetail save(Voucherdetail voucherDetail);
 }

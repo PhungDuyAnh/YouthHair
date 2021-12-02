@@ -51,20 +51,20 @@ public class IndexController {
 	
 	@RequestMapping("/contact")
 	public String contact(@ModelAttribute Contact contact, Model model) {
-		model.addAttribute("contact", contact);
+//		model.addAttribute("contact", contact);
 		return "layout/contact";
 	}
 	
-	@PostMapping("/contact/save")
-	public String saveContact(
-			Contact contact
-			) {
-		
-			contactService.save(new Contact(new Date(), contact.getEmail(), contact.getFullName(), contact.getNote(), contact.getPhone(), false));
-			
-			return "redirect:/"; 
-		
-	}
+//	@PostMapping("/contact/save")
+//	public String saveContact(
+//			Contact contact
+//			) {
+//		
+//			contactService.save(new Contact(new Date(), contact.getEmail(), contact.getFullName(), contact.getNote(), contact.getPhone(), false));
+//			
+//			return "redirect:/"; 
+//		
+//	}
 	
 	@RequestMapping("/about")
 	public String about() {

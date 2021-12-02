@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>YouthsHairs &mdash; Contact</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
-<link rel="stylesheet" href="fonts/icomoon/style.css">
-
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-<link rel="stylesheet" href="css/jquery-ui.css">
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
-<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
-
-
-<link rel="stylesheet" href="css/aos.css">
-
-<link rel="stylesheet" href="css/style.css">
+	<title>YouthsHairs &mdash; Contact</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
+	<link rel="stylesheet" href="fonts/icomoon/style.css">
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+	
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+	
+	
+	<link rel="stylesheet" href="css/aos.css">
+	
+	<link rel="stylesheet" href="css/style.css">
 
 </head>
-<body>
+<body ng-app="contact_app" ng-controller="contact_ctrl">
 
 	<div class="site-wrap">
-
 		<div class="site-mobile-menu">
 			<div class="site-mobile-menu-header">
 				<div class="site-mobile-menu-close mt-3">
@@ -126,7 +127,7 @@
 
 
 
-
+		
 		<div class="site-section bg-light">
 			<div class="container">
 				<div class="row justify-content-center mb-5">
@@ -140,15 +141,27 @@
 				</div>
 				<div class="row">
 					<div class="col-md-7 mb-5">
-						<form th:action="@{/contact/save}" th:object="${contact}" class="p-5 bg-white" method="post">
+						<!-- <form th:action="@{/contact/save}" th:object="${contact}" class="p-5 bg-white" method="post"> -->
+						<form class="css-form" name="myForm" ng-submit="myForm.$valid" novalidate>
 							<div class="row form-group">
 
 								<div class="col-md-12">
 									<label class="text-black" for="name">Họ Tên <span
-											class="text-danger">(*)</span></label> <input
-										type="text" id="name" class="form-control" name="fullName" th:value="*{fullName}">
-										
-									<span ></span>
+											class="text-danger">(*)</span></label> 
+									<input
+										type="text" 
+										id="name" 
+										class="form-control" 
+										name="fullName" 
+										ng-model="form.fullName"
+										ng-required="true"
+										>
+									<span ng-show="myForm.$submitted ">
+										<span 
+										ng-show="myForm.fullName.$error.required" 
+										class="text-danger" >Bạn chưa nhập tên.</span>
+   									</span>
+									
 								</div>
 							</div>
 
@@ -156,8 +169,20 @@
 
 								<div class="col-md-12">
 									<label class="text-black" for="email">Email <span
-											class="text-danger">(*)</span></label> <input
-										type="email" id="email" class="form-control" name="email" th:value="*{email}">
+											class="text-danger">(*)</span></label> 
+									<input
+										type="email" 
+										id="email" 
+										class="form-control" 
+										name="email" 
+										ng-model="form.email"
+										ng-required="true"
+									>
+									<span ng-show="myForm.$submitted ">
+										<span 
+										ng-show="myForm.email.$error.required" 
+										class="text-danger" >Bạn chưa nhập email.</span>
+   									</span>
 								</div>
 							</div>
 
@@ -165,8 +190,28 @@
 
 								<div class="col-md-12">
 									<label class="text-black" for="number">Số Điện Thoại <span
-											class="text-danger">(*)</span></label> <input
-										type="number" id="number" class="form-control" name="phone" th:value="*{phone}">
+											class="text-danger">(*)</span></label> 
+									<input
+										type="number" 
+										id="number" 
+										class="form-control" 
+										name="phone" 
+										ng-model="form.phone"
+										ng-required="true"
+										ng-maxlength="10"
+										ng-pattern="/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/"
+									>
+									<span ng-show="myForm.$submitted ">
+										<span 
+										ng-show="myForm.phone.$error.required" 
+										class="text-danger" >Bạn chưa nhập số điện thoại.</span>
+   									</span>
+   									<span class="error-msg text-danger" ng-show="myForm.phone.$dirty && myForm.phone.$error.pattern">
+							            Vui lòng nhập đúng định dạng số điện thoại!
+							         </span>
+							        <span class="error-msg text-danger" ng-show="myForm.phone.$error.maxlength">
+							        	Độ dài tối đa là 10 số.
+							 		</span>
 								</div>
 							</div>
 
@@ -175,13 +220,13 @@
 									<label class="text-black" for="message">Ghi Chú</label>
 									<textarea name="note" id="message" cols="30" rows="7"
 										class="form-control"
-										placeholder="Để lại lời nhắn của bạn ở đây..." th:value="*{note}"></textarea>
+										placeholder="Để lại lời nhắn của bạn ở đây..." ng-model="form.note"></textarea>
 								</div>
 							</div>
 
 							<div class="row form-group">
 								<div class="col-md-12">
-									<button type="submit" class="btn btn-primary py-2 px-4 text-white">Gửi</button>
+									<button type="submit" class="btn btn-primary py-2 px-4 text-white" ng-click="saveContact()">Gửi</button>
 								</div>
 							</div>
 
@@ -356,8 +401,7 @@
 						<p>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;
-							<script data-cfasync="false"
-								src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+							
 							<script>
 								document.write(new Date().getFullYear());
 							</script>
@@ -386,6 +430,6 @@
 	<script src="js/aos.js"></script>
 
 	<script src="js/main.js"></script>
-
+	<script type="text/javascript" src="js/controller/contact_ctrl.js"></script>
 </body>
 </html>

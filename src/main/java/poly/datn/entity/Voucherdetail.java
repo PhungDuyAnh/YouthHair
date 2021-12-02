@@ -33,13 +33,11 @@ public class Voucherdetail implements Serializable {
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="CustomerId")
-	@JsonIgnore
 	private Customer customer;
 
 	//bi-directional many-to-one association to Voucher
 	@ManyToOne
 	@JoinColumn(name="VoucherId")
-	@JsonIgnore
 	private Voucher voucher;
 
 	//bi-directional many-to-one association to Booking
