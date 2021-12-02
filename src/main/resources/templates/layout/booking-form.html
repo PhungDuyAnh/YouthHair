@@ -18,9 +18,9 @@
                         tiến hành đặt lịch!</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" >
                 <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" th:each="sty,state:${stylist}"
-                     th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}">
+                     th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}"><!-- >-->
                     <div class=" p-4 p-lg-5 site-block-feature-7" align="center"
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 100%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
@@ -30,7 +30,7 @@
                              data-toggle="modal" data-target="#myModal">
                         <h3 class="text-black h3">[[${sty.fullName}]]</h3>
                         <p>
-                            <strong class="font-weight-bold text-light" ng-repeat="item in getAllSty.index">{{getAllSty.index}}</strong>
+                            <strong class="font-weight-bold text-light" >{{getAllSty.totalTimeStylist}}</strong>
                         </p>
                     </div>
                 </div>
