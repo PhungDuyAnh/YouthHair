@@ -266,8 +266,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.voucherByCus = [];
-	$scope.voucherByCustomer= function (id){
-
+	$scope.voucherCus={
+		voucherByCustomer(id){
 		$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
 			$scope.voucherByCus.length=0;
 			$scope.formCPM={};
@@ -275,7 +275,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.formCPM.CusId = id;
 		})
 	}
-
+}
 	var total = 0;
 	$scope.pay={
 		get totalPrice(){
@@ -328,13 +328,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		}
 	}
+	$scope.listSer= []
 	$scope.serviceByBooking= {
-		listSer: [],
 		getSerDetail(id) {
 			$http.get(`/rest/bookingdetailByIdBooking/${id}`).then(resp => {
-				this.listSer=[];
-				this.listSer.push(resp.data);
+				$scope.listSer=[];
+				$scope.listSer=resp.data;console.log($scope.listSer)
 			})
+
 		}
 	}
 })

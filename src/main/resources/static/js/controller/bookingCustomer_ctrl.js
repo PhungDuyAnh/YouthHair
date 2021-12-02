@@ -146,10 +146,8 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                 bookings.totalTime = null;
                 bookings.totalPrice = null;
             }
-            var a = 0;
-            if ($scope.form.fullName == null || $scope.form.email == null
-                || $scope.form.phone == null
-                || $scope.form.fullName == null || $scope.form.createDate == undefined) {
+            if (bookings.fullName == null || bookings.email == null
+                || bookings.phone == null || bookings.createDate == undefined) {
                 alert("Vui lòng nhập thông tin đầy đủ")
             } else {
                 $http.post("/rest/bookingCus", bookings).then(resp => {
@@ -166,5 +164,5 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
         }
     }
-    
+
 });
