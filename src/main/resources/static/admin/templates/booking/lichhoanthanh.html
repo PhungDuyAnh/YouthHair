@@ -33,7 +33,7 @@
 					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
 					<td align="center"><a href="#!booking" ng-click="showDetail1(item);
-																	voucherByCustomer(item.customer.id);
+																	voucherCus.voucherByCustomer(item.customer.id);
 																	 serviceByBooking.getSerDetail(item.id) "
 										  class="btn btn-success" data-toggle="modal"
 										  data-target="#confirmModal"> Thanh Toán
@@ -122,13 +122,13 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="treatment">Các Dịch Vụ Sử Dụng</label>
-							<ul class="services-form">
-								<li >
-									<input type="checkbox" id="{{item.id}}" disabled checked/>
-									<label for="{{item.id}}">
-									<img src="/images/haircut/1.jpg" />
-										<br>Ser1
-<!--										{{item.serviceName}}-->
+							<ul class="services-form" >
+								<li ng-repeat="item in listSer">
+									<input type="checkbox" id="{{item.serviceName}}" disabled checked/>
+									<label for="{{item.serviceName}}">
+									<img src="/images/haircut/{{item.image}}" />
+										<br>
+										{{item.serviceName}}
 								</label></li>
 
 							</ul>
