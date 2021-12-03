@@ -4,7 +4,7 @@ app.controller("customer-ctrl",function($scope,$http){
 	$scope.voucherDetails=[];
 	$scope.form={};
 	$scope.formVoucherGift={
-		status: false,
+		status: true,
 		customer: null,
 		voucher: {
             id: ""
@@ -44,10 +44,10 @@ app.controller("customer-ctrl",function($scope,$http){
 				var index = $scope.vouchers.findIndex(v => v.id === item.voucher.id);
 				$scope.vouchers[index] = item.voucher;			
 	            $scope.voucherDetails.push(resp.data);        
-	            alert("Thêm mới thành công!");
+	            alert("Tặng voucher " + item.voucher.id + " thành công cho khách hàng "+ item.customer.fullName +"!");
 				$(".close").click(); 
 	        }).catch(error => {
-	            alert("Thêm mới không thành công!");
+	            alert("Tặng voucher không thành công!");
 	            console.log("Error", error);
 	        });
 		}
