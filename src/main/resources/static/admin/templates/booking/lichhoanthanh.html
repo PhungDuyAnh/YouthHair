@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-bordered text-center" id="dataTable">
+			<table class="table table-bordered text-center">
 				<thead >
 				<tr>
 					<th>Customer</th>
@@ -32,7 +32,7 @@
 					<td>{{item.totalPrice}}</td>
 					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
-					<td align="center"><a href="#!booking" ng-click="showDetail1(item);
+					<td align="center"><a style="cursor: pointer;" ng-click="showDetail1(item);
 																	voucherCus.voucherByCustomer(item.customer.id);
 																	 serviceByBooking.getSerDetail(item.id) "
 										  class="btn btn-success" data-toggle="modal"
@@ -55,17 +55,17 @@
 				</select>
 			</div>
 			<div class="text-center">
-				<a ng-click="pager1.first()" href="#!booking" class="btn btn-primary btn-circle"> <i
+				<button ng-click="pager1.first()" class="btn btn-primary btn-circle"> <i
 						class="fas fa-angle-double-left"></i>
-				</a> <a ng-click="pager1.prev()" href="#!booking" class="btn btn-primary btn-circle"> <i
+				</button> <button ng-click="pager1.prev()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-left"></i>
-			</a>
+				</button>
 				<button class="btn btn-primary" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-				<a ng-click="pager1.next()"  href="#!booking" class="btn btn-primary btn-circle"> <i
+				<button ng-click="pager1.next()" class="btn btn-primary btn-circle"> <i
 						class="fas fa-angle-right"></i>
-				</a> <a ng-click="pager1.last()" href="#!booking" class="btn btn-primary btn-circle"> <i
+				</button> <button ng-click="pager1.last()" class="btn btn-primary btn-circle"> <i
 					class="	fas fa-angle-double-right"></i>
-			</a>
+				</button>
 			</div>
 		</div>
 	</div>

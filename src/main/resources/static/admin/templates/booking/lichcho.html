@@ -32,12 +32,10 @@
 						<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 						<td>{{item.statusbooking.statusName}}</td>
 						<td>
-							<a href="#!booking" ng-click="showDetail(item)"
+							<a style="cursor: pointer;" ng-click="showDetail(item)"
 								class="btn btn-primary" data-toggle="modal" data-target="#infoModal"> Chi Tiết</i>
 							</a>
-							<a href="#!booking"
-								class="btn btn-danger"> Huỷ</i>
-							</a>
+							<a style="cursor: pointer;" class="btn btn-danger"> Huỷ</i></a>
 						</td>
 					</tr>
 				</tbody>
@@ -55,17 +53,17 @@
 			</div>
 			<div class="text-center">
 
-				<a ng-click="pager.first()" href="#!booking" class="btn btn-primary btn-circle"> <i
+				<button ng-click="pager.first()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-double-left"></i>
-				</a> <a ng-click="pager.prev()" href="#!booking" class="btn btn-primary btn-circle"> <i
+				</button> <button ng-click="pager.prev()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-left"></i>
-				</a> 
+				</button> 
 				<button class="btn btn-primary" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-				<a ng-click="pager.next()"  href="#!booking" class="btn btn-primary btn-circle"> <i
+				<button ng-click="pager.next()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-right"></i>
-				</a> <a ng-click="pager.last()" href="#!booking" class="btn btn-primary btn-circle"> <i
+				</button> <button ng-click="pager.last()" class="btn btn-primary btn-circle"> <i
 					class="	fas fa-angle-double-right"></i>
-				</a>
+				</button>
 			</div>
 
 		</div>
