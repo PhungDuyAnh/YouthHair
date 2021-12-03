@@ -126,26 +126,13 @@
 							<div class="col-md-12">
 								<label class="text-black" for="treatment">Chọn Dịch Vụ <span class="text-danger">(*)</span></label>
 								<ul class="services-form">
-									<li><input type="checkbox" id="myCheckboxCho1" /> <label
-										for="myCheckboxCho1"> <img src="/images/haircut/2.jpg" />
-											<br> Service 1
-									</label></li>
-									<li><input type="checkbox" id="myCheckboxCho2" /> <label
-										for="myCheckboxCho2"> <img src="/images/haircut/4.jpg" />
-											<br> Service 2
-									</label></li>
-									<li><input type="checkbox" id="myCheckboxCho3" /> <label
-										for="myCheckboxCho3"> <img src="/images/haircut/6.jpg" />
-											<br> Service 3
-									</label></li>
-									<li><input type="checkbox" id="myCheckboxCho4" /> <label
-										for="myCheckboxCho4"> <img src="/images/haircut/8.jpg" />
-											<br> Service 4
-									</label></li>
-									<li><input type="checkbox" id="myCheckboxCho5" /> <label
-										for="myCheckboxCho5"> <img src="/images/haircut/10.jpg" />
-											<br> Service 5
-									</label></li>
+									<li ng-repeat="services in db.services"><input type="checkbox"
+																				   id="{{services.id}}"
+																				   ng-checked="showBookingWating(form.id,services.id)>=0"/>
+										<label for="{{services.id}}"> <img src="/images/haircut/2.jpg" />
+											<br> {{services.serviceName}}<br>
+											{{form2.id}}
+										</label></li>
 								</ul>
 							</div>
 						</div>
