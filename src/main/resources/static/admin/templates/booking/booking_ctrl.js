@@ -201,7 +201,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		myObj.hour = objProps[0];
 		myObj.minutes = objProps[1];
 		myObj.second = objProps[2];
-		return new Date().getTime()+(1000*60*60*myObj.hour+1000*60*myObj.minutes+1000*myObj.second+2);
+		return new Date().getTime()+(1000*60*60*myObj.hour+1000*60*myObj.minutes+(1000*60-(1000*60-1000*myObj.second)));
 	}
 	var targetDate=$scope.targetDate1();
 	$scope.day=0;
