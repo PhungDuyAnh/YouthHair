@@ -43,13 +43,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.employee1=resp.data;
 		})
 
+		$http.get("/rest/booking/checkedService").then(resp=>{
+			$scope.db=resp.data;
+		})
+
 	}
 
-	$scope.showBookingWating=function (item){
-		$http.get("/rest/booking/stylist/waiting").then(resp=>{
-			$scope.itemWaiting=resp.data;
-			return $scope.itemWaiting.findIndex(a=>a.id==item.id)
-		})
+	$scope.showBookingWating=function (bookingId,serviceId){
+		return $scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
 	}
 
 

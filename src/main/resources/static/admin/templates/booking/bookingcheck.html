@@ -208,9 +208,12 @@
 							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
 									class="text-danger">(*)</span></label>
 							<ul class="services-form">
-								<li><input type="checkbox" id="myCheckboxCho1" /> <label
-										for="myCheckboxCho1"> <img src="/images/haircut/2.jpg" />
-									<br> Service 1
+								<li ng-repeat="services in db.services"><input type="checkbox"
+								    id="{{services.id}}"
+								  ng-checked="showBookingWating(form2.id,services.id)>=0"/>
+									<label for="{{services.id}}"> <img src="/images/haircut/2.jpg" />
+									<br> {{services.serviceName}}<br>
+										{{form2.id}}
 								</label></li>
 							</ul>
 						</div>
