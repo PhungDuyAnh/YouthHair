@@ -62,22 +62,27 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.showDetail=function (item){
+		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form=angular.copy(item);
 	}
 	$scope.showDetail1=function (item){
+		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form1=angular.copy(item);
 	}
 	$scope.showDetail2=function (item){
+		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form2=angular.copy(item);
 	}
 	$scope.showDetail3=function (item){
+		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form3=angular.copy(item);
 	}
 	$scope.showDetail5=function (item){
+		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form5=angular.copy(item)
 	}
@@ -195,6 +200,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	$scope.counter = 0;
 	$scope.targetDate1=function (time){
+
 			var time="01:50:55";
 		var objProps = time.split(':');
 		var myObj = {};
