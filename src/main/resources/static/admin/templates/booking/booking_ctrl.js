@@ -3,8 +3,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.items1=[];
 	$scope.items2=[];
 	$scope.form={};
-	$scope.form1={
-	};
+	$scope.form1={};
 	$scope.form2={};
 	$scope.form3={};
 	$scope.form5={};
@@ -43,13 +42,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.employee1=resp.data;
 		})
 
+		$http.get("/rest/booking/checkedService").then(resp=>{
+			$scope.db=resp.data;
+		})
+
 	}
 
-	$scope.showBookingWating=function (item){
-		$http.get("/rest/booking/stylist/waiting").then(resp=>{
-			$scope.itemWaiting=resp.data;
-			return $scope.itemWaiting.findIndex(a=>a.id==item.id)
-		})
+	$scope.showBookingWating=function (bookingId,serviceId){
+		return $scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
 	}
 
 
@@ -201,7 +201,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		myObj.hour = objProps[0];
 		myObj.minutes = objProps[1];
 		myObj.second = objProps[2];
-		return new Date().getTime()+(1000*myObj.second*60*myObj.hour);
+		return new Date().getTime()+(1000*60*60*myObj.hour+1000*60*myObj.minutes+(1000*60-(1000*60-1000*myObj.second)));
 	}
 	var targetDate=$scope.targetDate1();
 	$scope.day=0;
@@ -266,8 +266,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.voucherByCus = [];
-	$scope.voucherByCustomer= function (id){
-
+	$scope.voucherCus={
+		voucherByCustomer(id){
 		$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
 			$scope.voucherByCus.length=0;
 			$scope.formCPM={};
@@ -275,7 +275,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.formCPM.CusId = id;
 		})
 	}
-
+}
 	var total = 0;
 	$scope.pay={
 		get totalPrice(){
@@ -302,6 +302,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			var item = angular.copy($scope.formCPM);
 
 			var item2=angular.copy(item);
+
 			if($scope.formCPM.voting==null){
 				item2.voting = 2;
 			}else {
@@ -319,7 +320,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			console.log(item2);
 			$http.post(`/rest/voucherdetailByCustomer`, item2).then(resp => {
 				alert("Thanh toan thành công!");
-				$scope.formCPM={};
+				// $scope.formCPM={};
 				// location.reload();
 			}).catch(error => {
 				alert("Thanh toan thất bại!")
@@ -327,14 +328,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		}
 	}
+	$scope.listSer= []
 	$scope.serviceByBooking= {
-		listSer: [],
 		getSerDetail(id) {
 			$http.get(`/rest/bookingdetailByIdBooking/${id}`).then(resp => {
-				this.listSer=[];
-				this.listSer.push(resp.data);
-				console.log(this.listSer[0])
+				$scope.listSer=[];
+				$scope.listSer=resp.data;console.log($scope.listSer)
 			})
+
 		}
 	}
 })

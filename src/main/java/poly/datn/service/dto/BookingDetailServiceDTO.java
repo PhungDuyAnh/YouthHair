@@ -7,13 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VoucherDetailInfoDTO {
-    private int CusId;
-    private String voucherId;
-    private int voting;
-    private float totalPrice;
+public class BookingDetailServiceDTO {
 
-
-
-
+    private String serviceName;
+    private String image;
 }

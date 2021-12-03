@@ -7,8 +7,14 @@ import poly.datn.dao.*;
 import poly.datn.entity.*;
 import poly.datn.service.BookingCustomerService;
 import poly.datn.service.dto.BookingCustomerDTO;
+import poly.datn.service.dto.BookingIatDTO;
+import poly.datn.service.dto.StylistDTO;
 
+import javax.persistence.Tuple;
+import java.sql.Time;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -103,4 +109,16 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 		return bookingDao.bookingCusByStylist(id);
 	}
 
+	public List<BookingIatDTO> bookingIAT(){
+
+		List<Tuple> stockTotalTuples = bookingDao.bookingIAT();
+		List<BookingIatDTO> stockTotalDto = stockTotalTuples.stream()
+				.map(t -> new BookingIatDTO(
+						t.get(0, Integer.class),
+						t.get(1, Time.class)
+				))
+				.collect(Collectors.toList());
+
+		return stockTotalDto;
+	}
 }

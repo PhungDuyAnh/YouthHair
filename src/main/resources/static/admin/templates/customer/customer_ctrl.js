@@ -1,44 +1,74 @@
 app.controller("customer-ctrl",function($scope,$http){
 	$scope.items=[];
-	$scope.form=[];
+	$scope.vouchers=[];
+	$scope.voucherDetails=[];
+	$scope.form={};
+	$scope.formVoucherGift={
+		status: true,
+		customer: null,
+		voucher: {
+            id: ""
+        }
+	};
 	$scope.initialize=function (){
 		//load customer
 		$http.get("/rest/customer").then(resp=>{
-			$scope.items=resp.data;
+			$scope.items = resp.data;
+		})
+		//load voucher
+		$http.get("/rest/voucher").then(resp=>{
+			$scope.vouchers = resp.data;
 		})
 	}
+	
+	
 
 	$scope.initialize();
-
-	//xoa reset form
-	$scope.reset=function (){
-		$scope.form={
-
-		}
-	}
 	
 	//hien thi len form
-	$scope.edit = function(item){
+	$scope.showDetail = function(item){
 		$scope.form = angular.copy(item);
-		$(".nav-tabs a:eq(0)").tab('show');
 	}
 	
+	$scope.openGiftForm = function(item){
+		$scope.formVoucherGift.customer = angular.copy(item);
+	}
 	
+	//Tang voucher
+	$scope.giftVoucher = function(){
+		var item = angular.copy($scope.formVoucherGift);
+		if(item.voucher.id == null){
+			alert("Bạn chưa chọn voucher để tặng!")
+		}else{			
+			$http.post(`/rest/voucherDetail`, item).then(resp => {
+				var index = $scope.vouchers.findIndex(v => v.id === item.voucher.id);
+				$scope.vouchers[index] = item.voucher;			
+	            $scope.voucherDetails.push(resp.data);        
+	            alert("Tặng voucher " + item.voucher.id + " thành công cho khách hàng "+ item.customer.fullName +"!");
+				$(".close").click(); 
+	        }).catch(error => {
+	            alert("Tặng voucher không thành công!");
+	            console.log("Error", error);
+	        });
+		}
+		
+	}
 
 	
 	//cap nhat 
 	$scope.update = function(){
 		var item = angular.copy($scope.form);
-		$http.put(`/rest/customer/${item.id}`,item).then(resp => {
-			var index = $scope.items.findIndex(p => p.id === item.id);
-			$scope.items[index] = item;
-			$scope.reset();
-			$(".nav-tabs a:eq(1)").tab('show');
-			alert("Chỉnh sửa thông tin thành công!");
-		}).catch(error => {
-			alert(" Chỉnh sửa thông tin không thành công!");
-			console.log("Error",error);
-		});
+		if(item.phone != null && item.email != null){
+			$http.put(`/rest/customer/${item.id}`,item).then(resp => {
+				var index = $scope.items.findIndex(p => p.id === item.id);
+				$scope.items[index] = item;
+				alert("Chỉnh sửa thông tin thành công!");
+				$(".close").click(); 
+			}).catch(error => {
+				alert(" Chỉnh sửa thông tin không thành công!");
+				console.log("Error",error);
+			});
+		}	
 	}
 	
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import poly.datn.entity.BookingDetail;
 import poly.datn.service.BookingDetailService;
+import poly.datn.service.dto.BookingDetailServiceDTO;
 
 @RestController
 public class BookingDetailRestController {
@@ -22,7 +23,7 @@ public class BookingDetailRestController {
 	}
 
 	@GetMapping("/rest/bookingdetailByIdBooking/{id}")
-	public List<BookingDetail> getServiceByIdBooking(@PathVariable("id") Integer id){
+	public List<BookingDetailServiceDTO> getServiceByIdBooking(@PathVariable("id") Integer id){
 		return bookingDetailService.getServiceByIdBooking(id);
 	}
 }

@@ -123,7 +123,7 @@
     </div>
 
 	
-	<div th:replace="/layout/booking-form.html"></div>
+	<div  th:replace="/layout/booking-form.html"></div>
 	
     
 
@@ -144,64 +144,79 @@
 
 
     <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="mb-5">
-                        <h3 class="footer-heading mb-4">Giới Thiệu</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Saepe pariatur reprehenderit vero atque, consequatur id ratione,
-                            et non dignissimos culpa? Ut veritatis, quos illum totam quis
-                            blanditiis, minima minus odio!</p>
-                    </div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="mb-5">
+						<h3 class="footer-heading mb-4">Giới Thiệu</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+							Saepe pariatur reprehenderit vero atque, consequatur id ratione,
+							et non dignissimos culpa? Ut veritatis, quos illum totam quis
+							blanditiis, minima minus odio!</p>
+					</div>
 
 
-                </div>
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <div class="row mb-5">
-                        <div class="col-md-12">
-                            <h3 class="footer-heading mb-4">Danh Mục</h3>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="/">Trang Chủ</a></li>
-                                <li><a href="/services">Dịch Vụ</a></li>
-                                <li><a href="/about">Giới Thiệu</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="/contact">Liên hệ</a></li>
-                                <li><a href="/booking">Đặt Lịch</a></li>
-                                <li><a href="/profile">Membership</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
-                </div>
+				</div>
+				<div class="col-lg-4 mb-5 mb-lg-0">
+					<div class="row mb-5">
+						<div class="col-md-12">
+							<h3 class="footer-heading mb-4">Danh Mục</h3>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<ul class="list-unstyled">
+								<li><a href="/">Trang Chủ</a></li>
+								<li><a href="/services">Dịch Vụ</a></li>
+								<li><a href="/about">Giới Thiệu</a></li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<ul class="list-unstyled">
+								<li><a href="/contact">Liên hệ</a></li>
+								<li><a href="/booking">Đặt Lịch</a></li>
+							</ul>
+						</div>
+					</div>
 
-
-            </div>
-            <div class="row pt-5 mt-5 text-center">
-                <div class="col-md-12">
+				</div>
+				<!-- 
+				<div class="col-lg-4 mb-5 mb-lg-0">
 
 
-                    <p>
-                        Copyright &copy;
-                        <script data-cfasync="false"
-                                src=""></script>
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        Youth's Hairs | This template is made with <i
-                            class="icon-heart-o" aria-hidden="true"></i> by <a href="/"
-                                                                               target="_blank">Youth's Hairs</a>
-                    </p>
-                </div>
+					<div class="mb-5">
+						<h3 class="footer-heading mb-2">Đăng Nhập</h3>
+						<p>Hay đăng nhập vào hệ thống để biết thêm các thông tin chi
+							tiết.</p>
 
-            </div>
-        </div>
-    </footer>
+						<a class="btn btn-info text-white" id="button-addon2"
+							href="/login"> Đăng Nhập </a>
+
+					</div>
+
+				</div>
+-->
+			</div>
+			<div class="row pt-5 mt-5 text-center">
+				<div class="col-md-12">
+
+
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script data-cfasync="false"></script>
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
+						Youth's Hairs | This template is made with <i
+							class="icon-heart-o" aria-hidden="true"></i> by <a href="/"
+							target="_blank">Youth's Hairs</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+
+			</div>
+		</div>
+	</footer>
 </div>
 
 
@@ -221,33 +236,6 @@
 <script src="js/main.js"></script>
 
 <script type="text/javascript" src="js/controller/bookingCustomer_ctrl.js"></script>
-
-<script>
-    $(function(){
-        var dtToday = new Date();
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if(month < 10)
-            month = '0' + month.toString();
-        if(day < 10)
-            day = '0' + day.toString();
-        var minDate= year + '-' + month + '-' + day;
-        $('#txtDate').attr('min', minDate);
-        var today = new Date();
-        var dd = today.getDate() + 7 ;
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        today = yyyy + '-' + mm + '-' + dd;
-        $('#txtDate').attr("max", today);
-    });
-</script>
 
 </body>
 </html>

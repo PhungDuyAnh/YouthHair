@@ -45,35 +45,27 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable">
+					<table class="table table-hover table-secondary text-dark text-center">
 						<thead>
 							<tr >
-								<th>Name</th>
-								<th>Price</th>
-								<th>Time</th>
-								<th>Status</th>
-								<th>note</th>
+								<th>Tên Dịch Vụ</th>
+								<th>Giá Dịch Vụ</th>
+								<th>Thời Gian Thực Hiện</th>
+								<th>Trạng Thái</th>
 								<th class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="item in pager.items">
+							<tr class="table-info" ng-repeat="item in pager.items">
 								<td>{{item.serviceName}}</td>
 								<td>{{item.price}} đ</td>
 								<td>{{item.time}}</td>
-								<td>{{item.status == true ? 'Đang hoạt động' : 'Dừng hoạt động'}}</td>
-								<td>{{item.note}}</td>
+								<td>{{item.status == true ? 'Đang hoạt động' : 'Dừng hoạt động'}}</td>								
 								<td class="text-center">
-
-
-								<a ng-click="edit(item)"class="btn btn-info btn-circle">
-									<i class="fas fa-info-circle"></i>
-								</a>
-
-
-									<a href="#!stylist" class="btn btn-danger btn-circle"> <i
-										class="fas fa-trash"></i>
-								</a></td>
+									<button ng-click="edit(item)"class="btn btn-info btn-circle">
+										<i class="fas fa-info-circle"></i>
+									</button>
+								</td>
 							</tr>
 
 						</tbody>
