@@ -1,6 +1,8 @@
 package poly.datn.rest.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
 import poly.datn.entity.Statusbooking;
+import poly.datn.service.BookingDetailService;
 import poly.datn.service.BookingService;
+import poly.datn.service.IServiceService;
 import poly.datn.service.StatusBookingService;
 
 @RestController
@@ -26,6 +30,12 @@ public class BookingRestController {
 
 	@Autowired
 	StatusBookingService statusBookingService;
+
+	@Autowired
+	IServiceService iServiceService;
+
+	@Autowired
+	BookingDetailService bookingDetailService;
 
 	@GetMapping("")
 	public List<Booking> getAll(){
@@ -62,6 +72,15 @@ public class BookingRestController {
 	@GetMapping("/stylist/waiting/{id}")
 	public  List<Booking> findByStatusWFCAndStylist(@PathVariable int id){
 		return bookingService.findByStatusWFCAndStylist(id);
+	}
+
+	@GetMapping("/checkedService")
+	public Map<String,Object> getSerciceChecked(){
+		Map<String,Object> data=new HashMap<>();
+		data.put("bookings",bookingService.findAll());
+		data.put("bookingDetails",bookingDetailService.findAll());
+		data.put("services",iServiceService.findAll());
+		return data;
 	}
 
 
