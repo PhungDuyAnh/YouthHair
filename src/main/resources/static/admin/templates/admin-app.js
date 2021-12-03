@@ -3,7 +3,8 @@ app = angular.module("admin_app", ["ngRoute"]);
 app.config(function($routeProvider){
 	$routeProvider
 	.when("/", {
-		templateUrl:"/admin/templates/dashboard.html"
+		templateUrl:"/admin/templates/dashboard.html",
+		controller:"booking-ctrl"
 	})
 	.when("/booking", {
 		templateUrl:"/admin/templates/booking/index.html",

@@ -1,107 +1,134 @@
-<!-- Topbar -->
-<nav
-	class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-
-	<!-- Topbar Navbar -->
-	<ul class="navbar-nav ml-auto">
-
-		<!-- Nav Item - Alerts -->
-		<li class="nav-item dropdown no-arrow mx-1"><a
-			class="nav-link dropdown-toggle" href="#!contacts" id="alertsDropdown"
-			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"> <i class="fas fa-bell fa-fw"></i> <!-- Counter - Alerts -->
-				<span class="badge badge-danger badge-counter">3+</span>
-		</a> <!-- Dropdown - Alerts -->
-			<div
-				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-				aria-labelledby="alertsDropdown">
-				<h6 class="dropdown-header">Alerts Center</h6>
-				<a class="dropdown-item d-flex align-items-center" href="#">
-					<div class="mr-3">
-						<div class="icon-circle bg-primary">
-							<i class="fas fa-file-alt text-white"></i>
-						</div>
-					</div>
-					<div>
-						<div class="small text-gray-500">December 12, 2019</div>
-						<span class="font-weight-bold">A new monthly report is
-							ready to download!</span>
-					</div>
-				</a> <a class="dropdown-item d-flex align-items-center" href="#">
-					<div class="mr-3">
-						<div class="icon-circle bg-success">
-							<i class="fas fa-donate text-white"></i>
-						</div>
-					</div>
-					<div>
-						<div class="small text-gray-500">December 7, 2019</div>
-						$290.29 has been deposited into your account!
-					</div>
-				</a> <a class="dropdown-item d-flex align-items-center" href="#">
-					<div class="mr-3">
-						<div class="icon-circle bg-warning">
-							<i class="fas fa-exclamation-triangle text-white"></i>
-						</div>
-					</div>
-					<div>
-						<div class="small text-gray-500">December 2, 2019</div>
-						Spending Alert: We've noticed unusually high spending for your
-						account.
-					</div>
-				</a> <a class="dropdown-item text-center small text-gray-500" href="#">Show
-					All Alerts</a>
-			</div></li>
-
-
-		<div class="topbar-divider d-none d-sm-block"></div>
-
-		<!-- Nav Item - User Information -->
-		<li class="nav-item dropdown no-arrow"><a
-			class="nav-link dropdown-toggle" href="#!contacts" id="userDropdown"
-			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"> <span
-				class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
-					McGee</span> <img class="img-profile rounded-circle"
-				src="/admin/img/undraw_profile.svg">
-		</a> <!-- Dropdown - User Information -->
-			<div
-				class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-				aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="#!contacts" data-toggle="modal"
-					data-target="#logoutModal"> <i
-					class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-					Đăng Xuất
-				</a>
-			</div></li>
-
-	</ul>
-
-</nav>
-<!-- End of Topbar -->
-
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-	<!-- 
-	<ul class="nav nav-tabs">
-		<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-			href="#form">Chi Tiết</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			data-bs-toggle="tab" href="#list">Danh Sách</a></li>
-	</ul>
-	<div class="tab-content">
-		<div id="form" class="tab-pane fade">
-			<br>
-			<div ng-include="'/admin/templates/contact/_form.html'"></div>
-		</div>
-		<div id="list" class="tab-pane active">
-			<br>
-			<div ng-include="'/admin/templates/contact/_table.html'"></div>
-		</div>
-	</div> -->
-	
 	<div ng-include="'/admin/templates/contact/_table.html'"></div>
 </div>
 
+<!-- The Modal NewBookingModal -->
+<div class="modal" id="NewBookingModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body p-5">
+				<div class="">
+					<h3 class="text-dark">Hãy nhập thông tin của khách ở dưới
+						đây...</h3>
+					<h6>
+						<span class="text-danger">(*)</span> Vui lòng nhập thông tin bắt
+						buộc
+					</h6>
+					<hr>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-12">
+						<label class="text-black" for="fname">Họ Tên Khách Hàng<span
+							class="text-danger">(*)</span></label> <input type="text" id="fname"
+							class="form-control" placeholder="Họ Tên...">
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-md-6 mb-3 mb-md-0">
+						<label class="text-black" for="email">Email <span
+							class="text-danger">(*)</span></label> <input type="email" id="email"
+							class="form-control" placeholder="Email">
+					</div>
+					<div class="col-md-6">
+						<label class="text-black" for="lname">Số Điện Thoại <span
+							class="text-danger">(*)</span></label> <input type="text" id="lname"
+							class="form-control" placeholder="Số Điện Thoại...">
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-6 mb-3 mb-md-0">
+						<label class="text-black" for="date">Chọn Ngày <span
+							class="text-danger">(*)</span></label> <input type="date" id="date"
+							class="form-control datepicker px-2"
+							placeholder="Chọn Ngày Làm Tóc...">
+					</div>
+					<div class="col-md-6">
+						<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
+							type="time" id="time" class="form-control datepicker px-2"
+							placeholder="Khung Giờ Làm Tóc...">
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-12">
+						<label class="text-black" for="treatment">Chọn Dịch Vụ <span
+							class="text-danger">(*)</span></label>
+						<ul class="services-form">
+							<li><input type="checkbox" id="myCheckbox1" /> <label
+								for="myCheckbox1"> <img src="/images/haircut/2.jpg" />
+									<br> Service 1
+							</label></li>
+							<li><input type="checkbox" id="myCheckbox2" /> <label
+								for="myCheckbox2"> <img src="/images/haircut/4.jpg" />
+									<br> Service 2
+							</label></li>
+							<li><input type="checkbox" id="myCheckbox3" /> <label
+								for="myCheckbox3"> <img src="/images/haircut/6.jpg" />
+									<br> Service 3
+							</label></li>
+							<li><input type="checkbox" id="myCheckbox4" /> <label
+								for="myCheckbox4"> <img src="/images/haircut/8.jpg" />
+									<br> Service 4
+							</label></li>
+							<li><input type="checkbox" id="myCheckbox5" /> <label
+								for="myCheckbox5"> <img src="/images/haircut/10.jpg" />
+									<br> Service 5
+							</label></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-12">
+						<h5 class="text-black">
+							Tổng Thời Gian: <span class="text-info">40 phút</span>
+						</h5>
+						<h4 class="text-black">
+							Tổng Tiền: <span class="text-warning">100,000 VNĐ</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-12">
+						<label class="text-black" for="stylist">Chọn Stylist <span
+							class="text-danger">(*)</span></label> <select class="form-control"
+							id="stylist">
+							<option disabled selected>Hãy Chọn 1 Stylist</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-12">
+						<label class="text-black" for="note">Ghi Chú</label>
+						<textarea name="note" id="note" cols="30" rows="5"
+							class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-12">
+						<input type="submit" value="Đặt Lịch"
+							class="btn btn-primary py-2 px-4 text-white">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
