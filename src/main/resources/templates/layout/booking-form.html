@@ -23,14 +23,14 @@
                      th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}"><!-- >-->
                     <div class=" p-4 p-lg-5 site-block-feature-7" align="center"
                          th:attr="ng-click=@{|styId(${sty.id})|}"
-                         style="border-radius: 100%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
+                         style="border-radius: 25%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
                         <input ng-model="form.StylistId" hidden="true" th:attr="ng-value=${sty.id}"/>
                         <img alt="" th:src="@{|/images/${sty.image}|}" style="cursor: pointer;"
                              class="icon display-3 mb-4 d-block rounded-circle" width="50%"
                              data-toggle="modal" data-target="#myModal">
-                        <h3 class="text-black h3">[[${sty.fullName}]]</h3>
+                        <h2 class="text-light h2">[[${sty.fullName}]]</h2>
                         <p>
-                            <strong class="font-weight-bold text-light" >{{getAllSty.totalTimeStylist}}</strong>
+                            <strong class="font-weight-bold text-light" ></strong>
                         </p>
                     </div>
                 </div>
