@@ -19,19 +19,16 @@
                 </div>
             </div>
             <div class="row" >
-                <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" th:each="sty,state:${stylist}"
+                <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;" class="col-md-6 col-lg-4 mb-5 mb-lg-5" th:each="sty,state:${stylist}"
                      th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}"><!-- >-->
                     <div class=" p-4 p-lg-5 site-block-feature-7" align="center"
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 30%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
                         <input ng-model="form.StylistId" hidden="true" th:attr="ng-value=${sty.id}"/>
-                        <img alt="" th:src="@{|/images/${sty.image}|}" style="cursor: pointer;"
-                             class="icon display-3 mb-4 d-block rounded-circle" width="50%"
-                             data-toggle="modal" data-target="#myModal">
+                        <img alt="" th:src="@{|/images/${sty.image}|}"
+                             class="icon display-3 mb-4 d-block rounded-circle" width="50%">
                         <h2 class="text-light h2">[[${sty.fullName}]]</h2>
-                        <p>
-                            <strong class="font-weight-bold text-light" ></strong>
-                        </p>
+                        
                     </div>
                 </div>
 
@@ -101,7 +98,7 @@
                         <label class="text-black" for="email">Email <span
                                 class="text-danger">(*)</span></label> <input type="email" id="email"
                                                                               ng-model="form.email" name="email"
-                                                                               class="form-control" placeholder="Email"
+                                                                              class="form-control" placeholder="Email"
                                                                               ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})$/"
                                                                               ng-required="true">
                         <span ng-show="myForm.$submitted ">
@@ -117,11 +114,7 @@
                                 class="text-danger">(*)</span></label> <input name="somedate" type="date" id="txtDate"
                                                                               ng-model="form.createDate"
                                                                               class="form-control px-2"
-                                                                              placeholder="Chọn Ngày Làm Tóc..."  ng-required="true">
-                        <span ng-show="myForm.$submitted ">
-      					<span ng-show="myForm.somedate.$error.required"
-                              class="error-msg text-danger">Bạn chưa chọn ngày.</span>
-   													 </span>
+                                                                              placeholder="Chọn Ngày Làm Tóc..."  >                        
                     </div>
                 </div>
 
@@ -177,6 +170,7 @@
 
 <script type="text/javascript">
     var input = document.getElementById("txtDate");
+
 	function myFunction() {
 	    var today = new Date();
         var dd = today.getDate();
@@ -213,7 +207,6 @@
 
         var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
         input.setAttribute("max", maxDate);
-        
 	}
 	
 	myFunction();
