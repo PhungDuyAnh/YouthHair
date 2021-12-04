@@ -45,10 +45,7 @@ public class VoucherDetailServiceImpl implements VoucherDetailService{
 				 voucherdetail = voucherDetailDAO.selectVoucherDetailByCus(voucherDetailInfoDTO.getVoucherId());
 				voucherdetail.setStatus(false);
 				voucherDetailDAO.save(voucherdetail);
-			}else{
-				System.out.println("voucherDetailInfoDTO.getVoucherId() = null");
 			}
-
 			Statusbooking statusbooking= statusBookingDAO.StatusbookingbyIdCPM();
 			Voting voting = votingDAO.selectVotingById(voucherDetailInfoDTO.getVoting());
 

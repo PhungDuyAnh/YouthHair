@@ -15,6 +15,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             } else {
                 this.listSty.push(id);
             }
+            console.log(id)
         }
     }
     //lấy tất cả booking có status = IAT
@@ -41,9 +42,9 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                     }
             }console.log(this.a)
            return this.a;
-
         }
     }
+
 //form lưu thôg tin từ ng dùng nhập vào UI
     $scope.form = {
         email: null,
@@ -137,11 +138,12 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         purchase() {
             var bookings = angular.copy($scope.form);
             const value = moment($scope.form.createDate).format('YYYY-MM-DD');
-            if ($scope.form.totalPrice > 0) {
+            if (toprice > 0) {
                 bookings.totalTime = totime;
                 bookings.totalPrice = toprice;
                 bookings.createDate = value;
                 bookings.listSer = $scope.cart.items;
+alert(toprice)
             } else {
                 bookings.totalTime = null;
                 bookings.totalPrice = null;
@@ -164,5 +166,6 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
         }
     }
+
 
 });

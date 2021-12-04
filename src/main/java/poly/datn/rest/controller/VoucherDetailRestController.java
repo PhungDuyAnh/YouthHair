@@ -32,9 +32,11 @@ public class VoucherDetailRestController {
 		return voucherDetailService.VoucherByCus(id);
 	}
 
-	@PostMapping("/rest/voucherdetailByCustomer")
-	public VoucherDetailInfoDTO PayBooking(VoucherDetailInfoDTO voucherDetailInfoDTO){
+	@PostMapping("/rest/payVoucherdetail")
+	public VoucherDetailInfoDTO PayBooking(@RequestBody VoucherDetailInfoDTO voucherDetailInfoDTO){
+		System.out.println(voucherDetailInfoDTO);
 		return voucherDetailService.completeBooking(voucherDetailInfoDTO);
+
 	}
 	
 	@PostMapping("/rest/voucherDetail")
