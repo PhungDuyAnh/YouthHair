@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VoucherDetailInfoDTO {
-    private int CusId;
+    private Integer CusId;
     private String voucherId;
     private int voting;
     private float totalPrice;

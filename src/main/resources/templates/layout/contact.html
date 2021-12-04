@@ -177,12 +177,16 @@
 										name="email" 
 										ng-model="form.email"
 										ng-required="true"
+										ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
 									>
 									<span ng-show="myForm.$submitted ">
 										<span 
 										ng-show="myForm.email.$error.required" 
 										class="text-danger" >Bạn chưa nhập email.</span>
    									</span>
+   									<span class="text-danger" ng-show="myForm.email.$dirty && myForm.email.$error.pattern">
+						            	Vui lòng nhập đúng định dạng email!
+						         	</span>
 								</div>
 							</div>
 
@@ -192,7 +196,7 @@
 									<label class="text-black" for="number">Số Điện Thoại <span
 											class="text-danger">(*)</span></label> 
 									<input
-										type="number" 
+										type="text" 
 										id="number" 
 										class="form-control" 
 										name="phone" 

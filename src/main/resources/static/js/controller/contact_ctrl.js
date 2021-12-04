@@ -14,7 +14,7 @@ app.controller("contact_ctrl", function ($scope, $http) {
 			alert("Vui lòng nhập thông tin đầy đủ");
 		}else{
 			$http.post("/rest/contact", contacts).then(resp => {
-	            alert("Bạn đã gửi thông tin thành công! Chúng tôi sẽ liên hệ lại với bạn trong vòng 24 giờ tới!");				           
+	            alert("Bạn đã gửi thông tin thành công! Chúng tôi sẽ liên hệ lại với bạn trong vòng 24 giờ tới!" + $scope.form.phone);				           
 	            location.href = "/";
 	        }).catch(error => {
 	            alert("Gửi liên hệ thất bại!")
