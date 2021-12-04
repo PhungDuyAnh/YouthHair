@@ -178,7 +178,7 @@
 <script type="text/javascript">
     var input = document.getElementById("txtDate");
 	function myFunction() {
-	    var today = new Date("2021-12-30");
+	    var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
@@ -200,9 +200,15 @@
         }               
         if (mmMax < 10) {
     		if (mmMax == 2) {
-                dd = today.getDate() - 3;
+    			ddMax = today.getDate() - 3;
             }
             mmMax = '0' + mmMax;
+        }
+        if (ddMax < 10) {
+        	if(ddMax <= 0){
+        		ddMax = today.getDate(); 
+        	}
+        	ddMax = '0' + ddMax;
         }
 
         var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
