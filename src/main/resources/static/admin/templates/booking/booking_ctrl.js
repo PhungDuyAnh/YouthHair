@@ -260,13 +260,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	$scope.formCPM={
 		voting: null,
-		CusId: null,
+		cusId: null,
 		voucherId:null,
 		totalPrice:null
 	}
 	$scope.formTT={
 		voting: null,
-		CusId: null,
+		cusId: null,
 		voucherId:null,
 		totalPrice:null
 	}
@@ -282,7 +282,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.voucherByCus.length=0;
 			$scope.formCPM={};
 			$scope.voucherByCus = resp.data;
-			$scope.formCPM.CusId = id;
+			$scope.formCPM.cusId = id;
 		})
 	}
 }
@@ -292,26 +292,27 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.a=function (){console.log("asd") ;return 1;}
 
 //total Price Thanh toan
-	$scope.total = 0;
+	$scope.total=0;
 	$scope.pay={
 		get totalPrice1(){
+
 			if($scope.formCPM.voucherId == null ){
-				$scope.total = $scope.form1.totalPrice;
+				this.total = $scope.form1.totalPrice;
 			}else{
 				for(var i =0; i < $scope.voucherByCus.length; i++){
 					if($scope.formCPM.voucherId.id == $scope.voucherByCus[i].id){
-						if($scope.total > $scope.voucherByCus[i].condition){
-							$scope.total = $scope.form1.totalPrice- $scope.voucherByCus[i].price
+						if(this.total  > $scope.voucherByCus[i].condition){
+							this.total  = $scope.form1.totalPrice- $scope.voucherByCus[i].price
 						}else{
 							// console.log("Khong ap dung")
 							console.log("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
-							$scope.total = $scope.form1.totalPrice;
+							this.total  = $scope.form1.totalPrice;
 
 						}
 					}
 				}console.log("else")
 			}
-			return $scope.total;
+			return this.total ;
 		},
 
 		purchase() {
@@ -324,8 +325,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}else {
 				item2.voting=$scope.formCPM.voting;
 			}
-			item2.totalPrice = total
-			item2.CusId = $scope.formCPM.CusId
+			item2.totalPrice = $scope.pay.totalPrice1;
+			item2.cusId = $scope.formCPM.cusId
 
 			if($scope.formCPM.voucherId==null){
 				item2.voucherId = null;
@@ -336,14 +337,16 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			console.log(item2);
 			$http.post("/rest/payVoucherdetail", item2).then(resp => {
 				alert("Thanh toan thành công!");
-				// $scope.formCPM={};
-				// location.reload();
+				$scope.formCPM={};
+				location.reload();
 			}).catch(error => {
 				alert("Thanh toan thất bại!")
 				console.log(error);
 			})
 		}
 	}
+
+	$scope.totalPriceIAT=function (){return $scope.pay.totalPrice1},
 	$scope.listSer= []
 	$scope.serviceByBooking= {
 		getSerDetail(id) {
