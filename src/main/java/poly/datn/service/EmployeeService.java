@@ -63,7 +63,9 @@ public interface EmployeeService {
 
 	List<Employee> findAll(Sort sort);
 
-	List<Employee> findAll();
+    List<Employee> bookingByStylist();
+
+    List<Employee> findAll();
 
 	Page<Employee> findAll(Pageable pageable);
 
