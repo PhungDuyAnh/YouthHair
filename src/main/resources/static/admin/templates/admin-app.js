@@ -1,4 +1,4 @@
-app = angular.module("admin_app", ["ngRoute"]);
+const app = angular.module("admin_app", ["ngRoute"]);
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -42,3 +42,4 @@ app.config(function($routeProvider){
 		templateUrl:"/admin/templates/404.html"
 	})
 })
+
