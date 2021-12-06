@@ -154,7 +154,7 @@
 							<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label>
 							<select class="form-control" id="stylist"
 									ng-model="form2.employee1.fullName"
-									ng-options="x for x in employee1">
+									ng-options="x as x.fullName for x in itemConfirm track by x.id">
 							</select>
 						</div>
 					</div>

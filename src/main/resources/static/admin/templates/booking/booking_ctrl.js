@@ -11,6 +11,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.employee=[];
 	$scope.employee1=[];
 	$scope.itemWaiting=[];
+	$scope.itemConfirm=[];
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -44,6 +45,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 		$http.get("/rest/booking/checkedService").then(resp=>{
 			$scope.db=resp.data;
+		})
+
+		$http.get("/rest/booking/EmployeeConfirm").then(resp=>{
+			$scope.itemConfirm=resp.data;
 		})
 
 	}
