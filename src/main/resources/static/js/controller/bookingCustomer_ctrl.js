@@ -148,7 +148,7 @@ alert(toprice)
                 bookings.totalTime = null;
                 bookings.totalPrice = null;
             }
-            if (bookings.fullName == null || bookings.email == null
+            if (bookings.fullName == null || bookings.email == null || bookings.createDate == null
                 || bookings.phone == null || bookings.createDate == undefined) {
                 alert("Vui lòng nhập thông tin đầy đủ")
             } else {

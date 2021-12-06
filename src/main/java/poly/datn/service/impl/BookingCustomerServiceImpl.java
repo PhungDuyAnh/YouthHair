@@ -94,7 +94,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bDetailDAO.save(bookingDetail);
 				}}else{
 
-				throw new Exception("c error");
+				throw new Exception("Booking Cus error");
 
 			}
 

@@ -181,7 +181,7 @@
 					<div class="row form-group">
 						<div class="col-md-6">
 							<label class="text-black" for="voucher" >Voucher</label>
-							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" ng-value="{{x.id}}">
+							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" >
 <!--								 	<option  value="">Chon Voucher</option>-->
 <!--									<option  ng-repeat="x in voucherByCus" >-->
 <!--										{{x.id}}</option>-->
@@ -190,7 +190,7 @@
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{pay.totalPrice1}} VNĐ</span></h4>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{totalPriceIAT()}} VNĐ</span></h4>
 						</div>
 					</div>
 
