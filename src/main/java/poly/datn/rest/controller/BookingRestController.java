@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
 import poly.datn.entity.Statusbooking;
-import poly.datn.service.BookingDetailService;
-import poly.datn.service.BookingService;
-import poly.datn.service.IServiceService;
-import poly.datn.service.StatusBookingService;
+import poly.datn.service.*;
 
 @RestController
 @RequestMapping("/rest/booking")
@@ -36,6 +33,9 @@ public class BookingRestController {
 
 	@Autowired
 	BookingDetailService bookingDetailService;
+
+	@Autowired
+	EmployeeService employeeService;
 
 	@GetMapping("")
 	public List<Booking> getAll(){
@@ -81,6 +81,11 @@ public class BookingRestController {
 		data.put("bookingDetails",bookingDetailService.findAll());
 		data.put("services",iServiceService.findAll());
 		return data;
+	}
+
+	@GetMapping("/EmployeeConfirm")
+	public List<Employee> employeeConfirm(){
+		return employeeService.bookingByStylist();
 	}
 
 

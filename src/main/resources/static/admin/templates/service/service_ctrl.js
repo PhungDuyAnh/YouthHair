@@ -10,8 +10,7 @@ app.controller("service-ctrl",function($scope,$http){
     $scope.disabledBtnDelete = false;
     $scope.disabledBtnCreate = false;
     $scope.doSubmitForm = function(event) {
-        alert("OK: " + $scope.myForm.$submitted);
-
+        // alert("OK: " + $scope.myForm.$submitted);
     }
 
     $scope.initialize=function (){
@@ -53,6 +52,8 @@ app.controller("service-ctrl",function($scope,$http){
             $scope.reset();
             $scope.initialize();
             alert("Cập nhập vụ thành công ");
+            location.reload();
+            // $(".nav-tabs a:eq(1)").tab('show');
         }).catch(error =>{
 
             alert("Cập nhập dịch vụ thất bại ");

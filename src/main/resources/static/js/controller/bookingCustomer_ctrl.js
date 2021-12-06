@@ -50,7 +50,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         email: null,
         fullName: null,
         phone: null,
-        createDate: null,
+        createDate: new Date(),
         note: null,
         stylistId: null,
         totalPrice: null,

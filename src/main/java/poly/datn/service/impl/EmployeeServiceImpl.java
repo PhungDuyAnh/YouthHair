@@ -12,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import poly.datn.dao.EmployeeDAO;
@@ -40,6 +41,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public Page<Employee> findAll(Pageable pageable) {
 		return employeeDAO.findAll(pageable);
+	}
+
+	@Override
+	public List<Employee> bookingByStylist() {
+		return employeeDAO.bookingByStylist();
 	}
 
 	@Override
@@ -206,5 +212,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return stockTotalDto;
 	}
+
+
 
 }
