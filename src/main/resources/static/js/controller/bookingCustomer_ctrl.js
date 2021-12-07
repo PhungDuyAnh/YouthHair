@@ -4,44 +4,45 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     var totime;
     var toprice;
 
-//Lấy tất cả id của stylist => return: listSty: []
-    $scope.Stylist = {
-        listSty: [],
-        addSty(id) {
-            var item = this.listSty.find(item => item.id == id);
-            var index = this.listSty.findIndex(item => item.id == id);
-            if (item) {
-                this.listSty.splice(index, 1);
-            } else {
-                this.listSty.push(id);
-            }
-            console.log(id)
-        }
-    }
-    //lấy tất cả booking có status = IAT
-    $scope. AllbookingIAT= [],
-        $scope.initialize=function (){
-            $http.get("/rest/bookingIAT").then(resp => {
-                this.AllbookingIAT = resp.data;
-            } )
-        }
-    $scope.initialize();
+// //Lấy tất cả id của stylist => return: listSty: []
+//     $scope.Stylist = {
+//         listSty: [],
+//         addSty(id) {
+//             var item = this.listSty.find(item => item.id == id);
+//             var index = this.listSty.findIndex(item => item.id == id);
+//             if (item) {
+//                 this.listSty.splice(index, 1);
+//             } else {
+//                 this.listSty.push(id);
+//             }
+//             console.log(id)
+//         }
+//     }
+    // //lấy tất cả booking có status = IAT
+    // $scope.AllbookingIAT = [],
+    //     $scope.initialize = function () {
+    //         $http.get("/rest/bookingIAT").then(resp => {
+    //             this.AllbookingIAT = resp.data;
+    //         })
+    //     }
+    // $scope.initialize();
 
     //lấy totalTime theo từng stylist
     $scope.getAllSty = {
-         a : [],
-       get totalTimeStylist() {
-           this.a=[]
-            for(var i =0; i<$scope.Stylist.listSty.length;i++){
-                    for(var j =0; j<$scope.AllbookingIAT.length;j++){
-                        if($scope.Stylist.listSty[i] == $scope.AllbookingIAT[j].idSty){
-                            this.a=$scope.AllbookingIAT[j].totalTime
-                        }else{
-                            this.a="00:00:00"
-                        }
+        a: [],
+        get totalTimeStylist() {
+            this.a = []
+            for (var i = 0; i < $scope.Stylist.listSty.length; i++) {
+                for (var j = 0; j < $scope.AllbookingIAT.length; j++) {
+                    if ($scope.Stylist.listSty[i] == $scope.AllbookingIAT[j].idSty) {
+                        this.a = $scope.AllbookingIAT[j].totalTime
+                    } else {
+                        this.a = "00:00:00"
                     }
-            }console.log(this.a)
-           return this.a;
+                }
+            }
+            console.log(this.a)
+            return this.a;
         }
     }
 
@@ -126,11 +127,26 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             return value.replace(":", " Giờ ");
         },
     }
+
+
+    //checkBooking UCF by Customer
+
+    $scope.bookingUCF = {}
+    // $scope.checkBooking=function (){
+    //     var phone = $scope.form.phone;
+    //     $http.get(`rest/checkBooking/${phone}`).then(resp => {
+    //         $scope.bookingUCF = {}
+    //         $scope.bookingUCF= resp.data;
+    //         // console.log( $scope.bookingUCF)
+    //     })
+    // }
+
 //Lay booking theo stylist
     $scope.bookingSty = []
     $scope.bookingByStylist = function () {
         $http.get("rest/bookingCusByStylist/").then(resp => {
             $scope.bookingSty.push(resp.data);
+
         })
     }
     //thực hiện đặt lịch
@@ -143,24 +159,43 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                 bookings.totalPrice = toprice;
                 bookings.createDate = value;
                 bookings.listSer = $scope.cart.items;
-alert(toprice)
+
             } else {
-                bookings.totalTime = null;
-                bookings.totalPrice = null;
+                bookings.totalTime = 0;
+                bookings.totalPrice = 0;
             }
-            if (bookings.fullName == null || bookings.email == null || bookings.createDate == null
-                || bookings.phone == null || bookings.createDate == undefined) {
+            if (bookings.fullName == null || bookings.email == null
+                || bookings.createDate == null || bookings.phone == null
+                || bookings.createDate == undefined || bookings.totalPrice==0) {
+
                 alert("Vui lòng nhập thông tin đầy đủ")
+
             } else {
-                $http.post("/rest/bookingCus", bookings).then(resp => {
-                    alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
-                    $scope.cart.clear();
-                    location.href = "/booking";
-                }).catch(error => {
-                    alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
-                    // $scope.form.data = null;
-                    console.log(error);
+                //checkBooking UCF by phone
+                $http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+                    $scope.bookingUCF = {}
+                    $scope.bookingUCF= resp.data;
+                    console.log( $scope.bookingUCF)
                 })
+                console.log($scope.bookingUCF)
+
+                //add data => BE
+                if($scope.bookingUCF === {}){
+                    console.log("oke roi")
+                    $http.post("/rest/bookingCus", bookings).then(resp => {
+                        alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+                        $scope.cart.clear();
+                        location.href = "/booking";
+                    }).catch(error => {
+                        alert("Đặt lịch thất bại!")
+                        // $scope.form.data = null;
+                        console.log(error);
+                    })
+                }else {
+                    alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
+                    // location.href = "/booking";
+                }
+
             }
 
 

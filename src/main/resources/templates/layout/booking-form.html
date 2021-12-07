@@ -20,7 +20,7 @@
             </div>
             <div class="row" >
                 <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;" class="col-md-6 col-lg-4 mb-5 mb-lg-5" th:each="sty,state:${stylist}"
-                     th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}"><!-- >-->
+                     ><!--th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}" >-->
                     <div class=" p-4 p-lg-5 site-block-feature-7" align="center"
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 30%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
@@ -159,6 +159,8 @@
                     <div class="col-md-12">
                         <input type="submit" value="Đặt Lịch" ng-click="booking.purchase()"
                                class="btn btn-primary py-2 px-4 text-white">
+
+
                     </div>
                 </div>
             </div>
