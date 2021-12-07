@@ -129,7 +129,7 @@
 									class="text-danger">(*)</span></label>
 							<ul class="services-form">
 								<li ng-repeat="services in db.services"><input type="checkbox"
-								    id="{{services.id}}"
+								    id="{{services.id}}" ng-click="cart.add(services.id)"
 								  ng-checked="showBookingWating(form2.id,services.id)>=0"/>
 									<label for="{{services.id}}"> <img src="/images/haircut/2.jpg" />
 									<br> {{services.serviceName}}
@@ -137,23 +137,11 @@
 							</ul>
 						</div>
 					</div>
-
-					<div class="row form-group">
-						<div class="col-md-12">
-							<h5 class="text-black">
-								Tổng Thời Gian: <span class="text-info">{{form2.totalTime}}</span>
-							</h5>
-							<h4 class="text-black">
-								Tổng Tiền: <span class="text-warning">{{form2.totalPrice}} VNĐ</span>
-							</h4>
-						</div>
-					</div>
-
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label>
 							<select class="form-control" id="stylist"
-									ng-model="form2.employee1.fullName"
+									ng-model="form2.employee1"
 									ng-options="x as x.fullName for x in itemConfirm track by x.id">
 							</select>
 						</div>
@@ -167,6 +155,16 @@
 						</div>
 					</div>
 
+					<div class="row form-group">
+						<div class="col-md-12">
+							<h5 class="text-black">
+								Tổng Thời Gian: <span class="text-info">{{cart.totalTime}} phút</span>
+							</h5>
+							<h4 class="text-black">
+								Tổng Tiền: <span class="text-warning">{{cart.amount}} VNĐ</span>
+							</h4>
+						</div>
+					</div>
 					<div class="row form-group">
 						<div class="col-md-12">
 							<!--
