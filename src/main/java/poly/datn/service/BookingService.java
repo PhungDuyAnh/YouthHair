@@ -79,4 +79,8 @@ public interface BookingService {
 	List<Employee> findByRoleAndSatus();
 
     List<Booking> findByStatusWFCAndStylist(int id);
+
+	Booking findBookingIATbyStylist(Integer id);
+
+	List<Booking> findBookingWFCbyStylist(Integer id);
 }

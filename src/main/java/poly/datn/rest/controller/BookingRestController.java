@@ -88,5 +88,13 @@ public class BookingRestController {
 		return employeeService.bookingByStylist();
 	}
 
+	@GetMapping("/stylist/cutting/{id}")
+	public  Booking findBookingIATbyStylist(@PathVariable Integer id){
+		return bookingService.findBookingIATbyStylist(id);
+	}
 
+	@GetMapping("/bookingWaiting/{id}")
+	public  List<Booking> findBookingWFCbyStylist(@PathVariable Integer id){
+		return bookingService.findBookingWFCbyStylist(id);
+	}
 }
