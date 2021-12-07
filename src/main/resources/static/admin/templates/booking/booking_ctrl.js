@@ -208,7 +208,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.counter = 0;
 	$scope.targetDate1=function (time){
 
-		var time="01:50:55";
+			var time="01:50:55";
 		var objProps = time.split(':');
 		var myObj = {};
 		myObj.hour = objProps[0];
@@ -280,14 +280,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.voucherByCus = [];
 	$scope.voucherCus={
 		voucherByCustomer(id){
-			$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
-				$scope.voucherByCus.length=0;
-				$scope.formCPM={};
-				$scope.voucherByCus = resp.data;
-				$scope.formCPM.cusId = id;
-			})
-		}
+		$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
+			$scope.voucherByCus.length=0;
+			$scope.formCPM={};
+			$scope.voucherByCus = resp.data;
+			$scope.formCPM.cusId = id;
+		})
 	}
+}
 
 
 
@@ -349,7 +349,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.totalPriceIAT=function (){return $scope.pay.totalPrice1},
-		$scope.listSer= []
+	$scope.listSer= []
 	$scope.serviceByBooking= {
 		getSerDetail(id) {
 			$http.get(`/rest/bookingdetailByIdBooking/${id}`).then(resp => {

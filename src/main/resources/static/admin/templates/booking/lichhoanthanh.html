@@ -33,8 +33,8 @@
 					<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 					<td>{{item.statusbooking.statusName}}</td>
 					<td align="center"><a style="cursor: pointer;" ng-click="showDetail1(item);
-																	voucherCus.voucherByCustomer(item.customer.id);
-																	 serviceByBooking.getSerDetail(item.id) "
+																voucherCus.voucherByCustomer(item.customer.id);
+																serviceByBooking.getSerDetail(item.id) "
 										  class="btn btn-success" data-toggle="modal"
 										  data-target="#confirmModal"> Thanh Toán
 					</a>
@@ -75,7 +75,7 @@
 <!-- confirmModal-->
 <div class="modal fade" tabindex="-1" role="dialog"
 	 aria-labelledby="exampleModalLabel" aria-hidden="true" id="confirmModal">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 
 			<!-- Modal Header -->
@@ -181,7 +181,7 @@
 					<div class="row form-group">
 						<div class="col-md-6">
 							<label class="text-black" for="voucher" >Voucher</label>
-							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" ng-value="{{x.id}}">
+							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" >
 <!--								 	<option  value="">Chon Voucher</option>-->
 <!--									<option  ng-repeat="x in voucherByCus" >-->
 <!--										{{x.id}}</option>-->
@@ -190,7 +190,7 @@
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning">{{pay.totalPrice1}} VNĐ</span></h4>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning" ng-bind="totalPriceIAT()"> VNĐ</span></h4>
 						</div>
 					</div>
 

@@ -94,7 +94,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bDetailDAO.save(bookingDetail);
 				}}else{
 
-				throw new Exception("c error");
+				throw new Exception("Booking Cus error");
 
 			}
 
@@ -120,5 +120,10 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 				.collect(Collectors.toList());
 
 		return stockTotalDto;
+	}
+
+	@Override
+	public Booking checkBookingIAT(String phone) {
+		return bookingDao.checkBookingIAT(phone);
 	}
 }

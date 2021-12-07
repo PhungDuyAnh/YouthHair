@@ -10,4 +10,6 @@ public interface BookingCustomerService {
 	BookingCustomerDTO AddInfoBookingCustomer(BookingCustomerDTO bookingCustomerDTO);
 	Booking bookingStatusIAT(Integer id);
 	List<BookingIatDTO> bookingIAT();
+
+    Booking checkBookingIAT(String phone);
 }
