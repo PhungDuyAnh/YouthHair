@@ -8,9 +8,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.form3={};
 	$scope.form5={};
 	$scope.sizePage = [5,10,15,20];
-	$scope.employee=[];
+	$scope.stylist=[];
+	$scope.formCutting={};
 	$scope.employee1=[];
-	$scope.itemWaiting=[];
+	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
 	$scope.initialize=function (){
 		//load booking
@@ -36,7 +37,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		})
 
 		$http.get("/rest/booking/stylist").then(resp=>{
-			$scope.employee=resp.data;
+			$scope.stylist=resp.data;
 		})
 
 		$http.get("/rest/booking/employee").then(resp=>{
@@ -58,7 +59,18 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		return $scope.a;
 	}
 
-
+	$scope.getDataBookingWaitting = function (stylistId){
+		$http.get(`/rest/booking/bookingWaiting/${stylistId}`).then(resp=>{
+			$scope.bookingWaiting = resp.data;			
+		})
+	}
+	
+	$scope.showBookingCutting = function (stylistId){
+		$http.get(`/rest/booking/stylist/cutting/${stylistId}`).then(resp=>{
+			$scope.formCutting = resp.data;
+			console.log(resp.data);
+		})
+	}
 
 	$scope.initialize();
 

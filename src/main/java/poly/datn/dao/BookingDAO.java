@@ -39,4 +39,10 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
 
     @Query(value = "SELECT b FROM Booking b WHERE b.customer.phone = ?1  and b.statusbooking.id='UCF' ")
     Booking checkBookingIAT(String phone);
+
+    @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'IAT' AND b.employee1.id = ?1 ")
+	Booking findBookingIATbyStylist(Integer id);
+    
+    @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'WFC' AND b.employee1.id = ?1 ")
+    List<Booking> findBookingWFCbyStylist(Integer id);
 }
