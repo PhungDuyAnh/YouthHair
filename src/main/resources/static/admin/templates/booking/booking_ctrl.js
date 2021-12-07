@@ -79,6 +79,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$scope.form1=angular.copy(item);
 	}
 	$scope.showDetail2=function (item){
+		$scope.cart.clear();
 		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form2=angular.copy(item);
