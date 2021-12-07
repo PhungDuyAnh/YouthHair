@@ -54,8 +54,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
-		return $scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
+		$scope.a=$scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
+		return $scope.a;
 	}
+
 
 
 	$scope.initialize();
@@ -206,7 +208,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.counter = 0;
 	$scope.targetDate1=function (time){
 
-			var time="01:50:55";
+		var time="01:50:55";
 		var objProps = time.split(':');
 		var myObj = {};
 		myObj.hour = objProps[0];
@@ -260,13 +262,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	$scope.formCPM={
 		voting: null,
-		CusId: null,
+		cusId: null,
 		voucherId:null,
 		totalPrice:null
 	}
 	$scope.formTT={
 		voting: null,
-		CusId: null,
+		cusId: null,
 		voucherId:null,
 		totalPrice:null
 	}
@@ -278,40 +280,41 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.voucherByCus = [];
 	$scope.voucherCus={
 		voucherByCustomer(id){
-		$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
-			$scope.voucherByCus.length=0;
-			$scope.formCPM={};
-			$scope.voucherByCus = resp.data;
-			$scope.formCPM.CusId = id;
-		})
+			$http.get(`/rest/voucherdetailByCustomer/${id}`).then(resp=>{
+				$scope.voucherByCus.length=0;
+				$scope.formCPM={};
+				$scope.voucherByCus = resp.data;
+				$scope.formCPM.cusId = id;
+			})
+		}
 	}
-}
 
 
 
 	$scope.a=function (){console.log("asd") ;return 1;}
 
 //total Price Thanh toan
-	$scope.total = 0;
+	$scope.total=0;
 	$scope.pay={
 		get totalPrice1(){
+
 			if($scope.formCPM.voucherId == null ){
-				$scope.total = $scope.form1.totalPrice;
+				this.total = $scope.form1.totalPrice;
 			}else{
 				for(var i =0; i < $scope.voucherByCus.length; i++){
 					if($scope.formCPM.voucherId.id == $scope.voucherByCus[i].id){
-						if($scope.total > $scope.voucherByCus[i].condition){
-							$scope.total = $scope.form1.totalPrice- $scope.voucherByCus[i].price
+						if(this.total  > $scope.voucherByCus[i].condition){
+							this.total  = $scope.form1.totalPrice- $scope.voucherByCus[i].price
 						}else{
 							// console.log("Khong ap dung")
 							console.log("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
-							$scope.total = $scope.form1.totalPrice;
+							this.total  = $scope.form1.totalPrice;
 
 						}
 					}
 				}console.log("else")
 			}
-			return $scope.total;
+			return this.total ;
 		},
 
 		purchase() {
@@ -324,8 +327,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}else {
 				item2.voting=$scope.formCPM.voting;
 			}
-			item2.totalPrice = total
-			item2.CusId = $scope.formCPM.CusId
+			item2.totalPrice = $scope.pay.totalPrice1;
+			item2.cusId = $scope.formCPM.cusId
 
 			if($scope.formCPM.voucherId==null){
 				item2.voucherId = null;
@@ -336,15 +339,17 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			console.log(item2);
 			$http.post("/rest/payVoucherdetail", item2).then(resp => {
 				alert("Thanh toan thành công!");
-				// $scope.formCPM={};
-				// location.reload();
+				$scope.formCPM={};
+				location.reload();
 			}).catch(error => {
 				alert("Thanh toan thất bại!")
 				console.log(error);
 			})
 		}
 	}
-	$scope.listSer= []
+
+	$scope.totalPriceIAT=function (){return $scope.pay.totalPrice1},
+		$scope.listSer= []
 	$scope.serviceByBooking= {
 		getSerDetail(id) {
 			$http.get(`/rest/bookingdetailByIdBooking/${id}`).then(resp => {
@@ -353,5 +358,60 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 
 		}
+	}
+
+	//Lấy list service người dùng chọn
+	$scope.cart = {
+		items: [],
+		//Them service vao list
+
+		add(id) {
+			var item = this.items.find(item => item.id == id);
+			var index = this.items.findIndex(item => item.id == id);
+			if (item) {
+				this.items.splice(index, 1);
+			} else {
+				$http.get(`/rest/services/${id}`).then(resp => {
+					this.items.push(resp.data);
+				})
+			}
+		},
+		// Xóa sạch list
+		clear() {
+			this.items = [];
+		},
+		// Tông thành tiền các service trong list
+		get amount() {
+			return this.items
+				.map(item => item.price)
+				.reduce((total, price) => toprice = (total += price), 0,);
+
+		},
+//tổng time trong list
+		get totalTime() {
+			var convertDate1 = null;
+			var totalHour = 0;
+			var totalMinutes = 0;
+			var totalSeconds = 0;
+			for (var i = 0; i < $scope.cart.items.length; i++) {
+				convertDate1 = new Date("1970-01-01 " + $scope.cart.items[i].time);
+				totalHour += convertDate1.getHours();
+				totalMinutes += convertDate1.getMinutes();
+				totalSeconds += convertDate1.getSeconds();
+			}
+			if (totalSeconds > 59) {
+				totalSeconds -= 60;
+				totalMinutes += 1;
+			} else if (totalMinutes > 59) {
+				totalMinutes -= 60;
+				totalHour += 1;
+			}
+			var convertTotal = String(totalHour + ":" + totalMinutes + ":" + totalSeconds);
+			var newDateByTotal = new Date("1970-01-01 " + convertTotal)
+			const value = moment(new Date(newDateByTotal)).format('HH:mm');
+			var value1 = moment(new Date(newDateByTotal)).format('HH:mm:ss');
+			totime = value1;
+			return value.replace(":", " Giờ ");
+		},
 	}
 })
