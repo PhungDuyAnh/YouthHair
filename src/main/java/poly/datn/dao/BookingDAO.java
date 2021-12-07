@@ -36,4 +36,7 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
 
     @Query(value = "SELECT b.employee1.id , b.totalTime FROM Booking b WHERE b.statusbooking.id = 'IAT' ")
     List<Tuple> bookingIAT();
+
+    @Query(value = "SELECT b FROM Booking b WHERE b.customer.phone = ?1  and b.statusbooking.id='UCF' ")
+    Booking checkBookingIAT(String phone);
 }

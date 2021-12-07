@@ -121,4 +121,9 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 
 		return stockTotalDto;
 	}
+
+	@Override
+	public Booking checkBookingIAT(String phone) {
+		return bookingDao.checkBookingIAT(phone);
+	}
 }

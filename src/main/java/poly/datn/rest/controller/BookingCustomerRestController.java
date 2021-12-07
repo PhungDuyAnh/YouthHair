@@ -22,6 +22,8 @@ public class BookingCustomerRestController {
     @Autowired
     ServiceService serService;
 
+
+
     @PostMapping("rest/bookingCus")
     public ResponseEntity<BookingCustomerDTO> AddBookingInfo(@RequestBody BookingCustomerDTO bookingCustomerDTO) {
        bcService.AddInfoBookingCustomer(bookingCustomerDTO);
@@ -37,5 +39,10 @@ public class BookingCustomerRestController {
     @GetMapping("rest/bookingIAT")
     public List<BookingIatDTO> bookingIAT(){
         return bcService.bookingIAT();
+    }
+
+    @GetMapping("rest/checkBooking/{phone}")
+    public Booking checkBooking(@PathVariable("phone") String phone){
+        return bcService.checkBookingIAT(phone);
     }
 }
