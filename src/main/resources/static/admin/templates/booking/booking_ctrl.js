@@ -44,6 +44,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 		$http.get("/rest/booking/checkedService").then(resp=>{
 			$scope.db=resp.data;
+			$scope.servicesChecked=$scope.db.services;
 		})
 
 		$http.get("/rest/booking/EmployeeConfirm").then(resp=>{
@@ -83,6 +84,17 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
         }
 		return $scope.cusIAT;					
 	}
+	// $scope.servicesChecked=[];
+	// $scope.showServiceChecked=function (){
+	// 	// for (var i=0;i<$scope.db.services.length;i++){
+	// 	// 	for (var j=0;j<$scope.db.bookingDetails.length;i++){
+	// 	// 		// alert($scope.db.services[i].id+" dsfsafs " +$scope.db.bookingDetails[j].service.id)
+	// 	// 		if ($scope.db.services[i].id==$scope.db.bookingDetails[j].service.id){
+	// 	// 			$scope.servicesChecked[i]=$scope.db.bookingDetails[j];
+	// 	// 		}
+	// 	// 	}
+	// 	// }
+	// }
 	
 	$scope.setBookingCutting = function (booking){		
 		$http.get(`/rest/booking/stylist/cutting/${booking.employee1.id}`).then(resp=>{
@@ -125,11 +137,18 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form1=angular.copy(item);
 	}
+
+	$scope.cccccc=[];
 	$scope.showDetail2=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form2=angular.copy(item);
+		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
+			for (var i=0;i<resp.data.length;i++){
+				$scope.cart.add(resp.data[i].id)
+			}
+		});
 	}
 	$scope.showDetail3=function (item){
 		$scope.initialize();
