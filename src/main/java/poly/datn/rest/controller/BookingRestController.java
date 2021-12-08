@@ -104,4 +104,10 @@ public class BookingRestController {
 	public Booking setWorkForStylist(@PathVariable("id")Integer id,@RequestBody Booking booking) {
 		return bookingService.save(booking);
 	}
+	
+	@GetMapping("/bookingIAT")
+	public  List<Booking> getAllBookingIAT(){
+		return bookingService.getAllBookingIAT();
+	}
+	
 }

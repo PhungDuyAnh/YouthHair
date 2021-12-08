@@ -9,11 +9,12 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.form5={};
 	$scope.sizePage = [5,10,15,20];
 	$scope.stylist=[];
-	$scope.formCutting={};
+	$scope.listCutting=[];
 	$scope.employee1=[];
 	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
 	var toprice;
+	
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -51,7 +52,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 		//getDataStylist
 		$http.get("/rest/booking/stylist").then(resp=>{
-			$scope.stylist=resp.data;
+			$scope.stylist = resp.data;
+		})
+		
+		$http.get("/rest/booking/bookingIAT").then(resp=>{
+			$scope.listCutting = resp.data;
 		})
 
 	}
@@ -67,6 +72,17 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.bookingWaiting = resp.data;			
 		})
 	}
+	$scope.cus = [];	
+	$scope.showInfoCustomerCutting = function(){		
+		for (var i = 0; i < $scope.stylist.length; i++) {
+            for (var j = 0; j < $scope.listCutting.length; j++) {
+                if ($scope.stylist[i].id == $scope.listCutting[j].employee1.id) {
+                    $scope.cus[i] = $scope.listCutting[j];					
+                }
+            }
+        }
+		return $scope.cus;					
+	}
 	
 	$scope.setBookingCutting = function (booking){		
 		$http.get(`/rest/booking/stylist/cutting/${booking.employee1.id}`).then(resp=>{
@@ -78,6 +94,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		            $scope.bookingWaiting[index] = booking;
 		            alert("Thêm công việc thành công cho "+ booking.employee1.fullName  +"!");
 					$("#closeStylistModal").click();
+					$scope.initialize();
 		        }).catch(error => {
 		            alert("Lỗi cập nhật liên hệ!");
 		            console.log("Error",error);
