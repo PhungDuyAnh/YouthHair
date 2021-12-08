@@ -178,12 +178,17 @@
         var dd = today.getDate();
         var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
+        
+		if (today.getHours() > 21){
+			dd = today.getDate() + 1;
+        }
         if (dd < 10) {
             dd = '0' + dd;
         }
         if (mm < 10) {
             mm = '0' + mm;
         }
+        
         var minDate = yyyy + '-' + mm + '-' + dd;
         input.setAttribute("min", minDate);
         
@@ -209,6 +214,7 @@
 
         var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
         input.setAttribute("max", maxDate);
+        input.setAttribute("value", minDate);
 	}
 	
 	myFunction();
