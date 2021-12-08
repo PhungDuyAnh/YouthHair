@@ -6,30 +6,37 @@
 
 	<div class="card-body">
 		<div class="row" >
-			<div class="col-xl-3 col-md-6 mb-4" ng-repeat="item in employee">
-				<div class="card border-left-success shadow h-100" >
-					<div class="card-header ">
-						<div class="dropdown no-arrow" align="right">
-                             <a style="cursor: pointer;" data-toggle="modal" data-target="#BookingEditModal">
-                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                             </a>
-                         </div>
+			<div class="col-xl-3 col-md-6 mb-4" ng-repeat="sty in stylist" ng-value="showInfoCustomerCutting()">
+				<div class="card border-left-primary shadow h-100" >
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 text-xl font-weight-bold text-primary">{{sty.fullName}}</h6>
+                        <div class="dropdown no-arrow">
+                            <a style="cursor: pointer;" data-toggle="modal" data-target="#BookingEditModal">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                        </div>
 					</div>
 					<div class="card-body">
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
-								<div
-									class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-									{{item.fullName}}</div>
-<!--								<input type="checkbox" ng-checked="index_of(item.totalTime)">-->
-								<div class="h5 mb-0 font-weight-bold text-gray-800" ng-model="demo">{{demo}}</div>
+								<div ng-if="cus[$index] == null">
+							        <div class="mb-0 font-weight-bold text-info">									
+										Đang rảnh.
+									</div>
+							    </div>
+								<div class="text-xs mb-0 font-weight-bold text-gray-800">									
+									{{cus[$index].customer.fullName}} 
+								</div>
+								<div class="text-xs font-weight-bold text-success mb-1">
+									{{cus[$index].customer.phone}} 
+								</div>
 							</div>
 							<div class="col-auto">
-								<a style="cursor: pointer;" data-toggle="modal" data-target="#StylistModal" ng-click="getType2(item.id)">
-									<i class="fas fa-calendar-plus fa-2x text-gray-300"></i>
+								<a style="cursor: pointer;" data-toggle="modal" data-target="#StylistModal" ng-click="getDataBookingWaitting(sty.id)">
+									<i class="fas fa-calendar-plus fa-2x text-primary"></i>
 								</a> 
 								<a style="cursor: pointer;">
-									<i class="fas fa-check-circle fa-2x text-gray-300"></i>
+									<i class="fas fa-check-circle fa-2x text-success"></i>
 								</a>
 							</div>
 						</div> 
@@ -48,18 +55,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Thêm Việc Làm</h5>
-					<button class="close" type="button" data-dismiss="modal"
+					<button class="close" id="closeStylistModal" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body" ng-repeat="item in itemWaiting" >
-					<a style="cursor: pointer;" class="btn btn-info btn-block"><i
+				<div class="modal-body">
+					<a style="cursor: pointer;" class="btn btn-info btn-block" ng-repeat="item in bookingWaiting" ng-click="setBookingCutting(item)"><i
 						class="fas fa-user-tie"></i> {{item.customer.fullName}}</a>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </div>
 
 

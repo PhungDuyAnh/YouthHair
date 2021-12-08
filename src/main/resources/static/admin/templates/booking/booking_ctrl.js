@@ -8,10 +8,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.form3={};
 	$scope.form5={};
 	$scope.sizePage = [5,10,15,20];
-	$scope.employee=[];
+	$scope.stylist=[];
+	$scope.listCutting=[];
 	$scope.employee1=[];
-	$scope.itemWaiting=[];
+	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
+	var toprice;
+	
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -35,10 +38,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		})
 
-		$http.get("/rest/booking/stylist").then(resp=>{
-			$scope.employee=resp.data;
-		})
-
 		$http.get("/rest/booking/employee").then(resp=>{
 			$scope.employee1=resp.data;
 		})
@@ -51,12 +50,62 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.itemConfirm=resp.data;
 		})
 
+		//getDataStylist
+		$http.get("/rest/booking/stylist").then(resp=>{
+			$scope.stylist = resp.data;
+		})
+		
+		$http.get("/rest/booking/bookingIAT").then(resp=>{
+			$scope.listCutting = resp.data;
+		})
+
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
-		return $scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
+		$scope.a=$scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
+		return $scope.a;
 	}
 
+	//namnt stylist
+	$scope.getDataBookingWaitting = function (stylistId){
+		$http.get(`/rest/booking/bookingWaiting/${stylistId}`).then(resp=>{
+			$scope.bookingWaiting = resp.data;			
+		})
+	}
+	$scope.cus = [];	
+	$scope.showInfoCustomerCutting = function(){		
+		for (var i = 0; i < $scope.stylist.length; i++) {
+            for (var j = 0; j < $scope.listCutting.length; j++) {
+                if ($scope.stylist[i].id == $scope.listCutting[j].employee1.id) {
+                    $scope.cus[i] = $scope.listCutting[j];					
+                }
+            }
+        }
+		return $scope.cus;					
+	}
+	
+	$scope.setBookingCutting = function (booking){		
+		$http.get(`/rest/booking/stylist/cutting/${booking.employee1.id}`).then(resp=>{
+			
+			if(resp.data == ''){
+				booking.statusbooking.id = 'IAT';
+				$http.put(`/rest/booking/setWorkForStylist/${booking.id}`,booking).then(resp => {
+		            var index = $scope.bookingWaiting.findIndex(p => p.id == booking.id);			
+		            $scope.bookingWaiting[index] = booking;
+		            alert("Thêm công việc thành công cho "+ booking.employee1.fullName  +"!");
+					$("#closeStylistModal").click();
+					$scope.initialize();
+		        }).catch(error => {
+		            alert("Lỗi cập nhật liên hệ!");
+		            console.log("Error",error);
+		        });
+			}else{
+				console.log(resp.data);
+				alert("Stylist " + resp.data.employee1.fullName + " đang bận!")
+			}			
+		});
+		
+	}
 
 	$scope.initialize();
 
@@ -77,6 +126,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$scope.form1=angular.copy(item);
 	}
 	$scope.showDetail2=function (item){
+		$scope.cart.clear();
 		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form2=angular.copy(item);
@@ -303,6 +353,22 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			voucherIdPay = null;
 			voucherIdPay = voucher.id;
 			console.log(voucherIdPay)}
+			if($scope.formCPM.voucherId == null ){
+				this.total = $scope.form1.totalPrice;
+			}else{
+				for(var i =0; i < $scope.voucherByCus.length; i++){
+					if($scope.formCPM.voucherId.id == $scope.voucherByCus[i].id){
+						if(this.total  > $scope.voucherByCus[i].condition){
+							this.total  = $scope.form1.totalPrice- $scope.voucherByCus[i].price
+						}else{
+							// console.log("Khong ap dung")
+							console.log("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
+							this.total  = $scope.form1.totalPrice;
+						}
+					}
+				}console.log("else")
+			}
+			return this.total ;
 		},
 		purchase() {
 			var item = angular.copy($scope.formCPM);
@@ -378,6 +444,127 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					console.log(resp.data)
 				})
 			}console.log(this.total + "DM")
+		}
+	}
+
+	//Lấy list service người dùng chọn
+	$scope.cart = {
+		items: [],
+		//Them service vao list
+
+		add(id) {
+			var item = this.items.find(item => item.id == id);
+			var index = this.items.findIndex(item => item.id == id);
+			if (item) {
+				this.items.splice(index, 1);
+			} else {
+				$http.get(`/rest/services/${id}`).then(resp => {
+					this.items.push(resp.data);
+				})
+			}
+		},
+		// Xóa sạch list
+		clear() {
+			this.items = [];
+		},
+		// Tông thành tiền các service trong list
+		get amount() {
+			return this.items
+				.map(item => item.price)
+				.reduce((total, price) => toprice = (total += price), 0,);
+
+		},
+//tổng time trong list
+		get totalTime() {
+			var convertDate1 = null;
+			var totalHour = 0;
+			var totalMinutes = 0;
+			var totalSeconds = 0;
+			for (var i = 0; i < $scope.cart.items.length; i++) {
+				convertDate1 = new Date("1970-01-01 " + $scope.cart.items[i].time);
+				totalHour += convertDate1.getHours();
+				totalMinutes += convertDate1.getMinutes();
+				totalSeconds += convertDate1.getSeconds();
+			}
+			if (totalSeconds > 59) {
+				totalSeconds -= 60;
+				totalMinutes += 1;
+			} else if (totalMinutes > 59) {
+				totalMinutes -= 60;
+				totalHour += 1;
+			}
+			var convertTotal = String(totalHour + ":" + totalMinutes + ":" + totalSeconds);
+			var newDateByTotal = new Date("1970-01-01 " + convertTotal)
+			const value = moment(new Date(newDateByTotal)).format('HH:mm');
+			var value1 = moment(new Date(newDateByTotal)).format('HH:mm:ss');
+			totime = value1;
+			return value.replace(":", " Giờ ");
+		},
+	}
+
+
+	//form lưu thôg tin từ ng dùng nhập vào UI
+	$scope.form2 = {
+		email: null,
+		fullName: null,
+		phone: null,
+		createDate: new Date(),
+		note: null,
+		stylistId: null,
+		totalPrice: null,
+		totalTime: null,
+		listSer: [],
+	};
+
+
+	//thực hiện đặt lịch
+	$scope.booking = {
+		purchase() {
+			var bookings = angular.copy($scope.form);
+			const value = moment($scope.form.createDate).format('YYYY-MM-DD');
+			if (toprice > 0) {
+				bookings.totalTime = totime;
+				bookings.totalPrice = toprice;
+				bookings.createDate = value;
+				bookings.listSer = $scope.cart.items;
+
+			} else {
+				bookings.totalTime = 0;
+				bookings.totalPrice = 0;
+			}
+			if (bookings.fullName == null || bookings.email == null
+				|| bookings.createDate == null || bookings.phone == null
+				|| bookings.createDate == undefined || bookings.totalPrice==0) {
+				console.log($scope.form2)
+				console.log($scope.cart.items)
+				alert("Vui lòng nhập thông tin đầy đủ")
+
+			} else {
+				//checkBooking UCF by phone
+				$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+					$scope.bookingUCF = {}
+					$scope.bookingUCF= resp.data;
+					console.log( $scope.bookingUCF)
+				})
+				console.log($scope.bookingUCF)
+
+				//add data => BE
+				if($scope.bookingUCF === {}){
+					console.log("oke roi")
+					$http.post("/rest/bookingCus", bookings).then(resp => {
+						alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+						$scope.cart.clear();
+						location.href = "/booking";
+					}).catch(error => {
+						alert("Đặt lịch thất bại!")
+						// $scope.form.data = null;
+						console.log(error);
+					})
+				}else {
+					alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
+					// location.href = "/booking";
+				}
+			}
 		}
 	}
 })

@@ -190,4 +190,19 @@ public class BookingServiceImpl implements BookingService {
 	public List<Booking> findByStatusWFCAndStylist(int id) {
 		return bookingDAO.findByStatusWFCAndStylist(id);
 	}
+
+	@Override
+	public Booking findBookingIATbyStylist(Integer id) {
+		return bookingDAO.findBookingIATbyStylist(id);
+	}
+
+	@Override
+	public List<Booking> findBookingWFCbyStylist(Integer id) {
+		return bookingDAO.findBookingWFCbyStylist(id);
+	}
+
+	@Override
+	public List<Booking> getAllBookingIAT() {
+		return bookingDAO.getAllBookingIAT();
+	}
 }
