@@ -1,6 +1,4 @@
 # YouthHairs
 
-DATN - Fpoly – YouthHairs
+DATN - Fpoly  YouthHairs
 
-
-HaiNVPH11578
