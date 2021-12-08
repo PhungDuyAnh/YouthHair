@@ -72,16 +72,16 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.bookingWaiting = resp.data;			
 		})
 	}
-	$scope.cus = [];	
+	$scope.cusIAT = [];	
 	$scope.showInfoCustomerCutting = function(){		
 		for (var i = 0; i < $scope.stylist.length; i++) {
             for (var j = 0; j < $scope.listCutting.length; j++) {
                 if ($scope.stylist[i].id == $scope.listCutting[j].employee1.id) {
-                    $scope.cus[i] = $scope.listCutting[j];					
+                    $scope.cusIAT[i] = $scope.listCutting[j];					
                 }
             }
         }
-		return $scope.cus;					
+		return $scope.cusIAT;					
 	}
 	
 	$scope.setBookingCutting = function (booking){		
