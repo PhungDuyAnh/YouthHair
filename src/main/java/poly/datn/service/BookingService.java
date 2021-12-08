@@ -83,4 +83,6 @@ public interface BookingService {
 	Booking findBookingIATbyStylist(Integer id);
 
 	List<Booking> findBookingWFCbyStylist(Integer id);
+
+	List<Booking> getAllBookingIAT();
 }
