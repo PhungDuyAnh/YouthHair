@@ -83,6 +83,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             var index = this.items.findIndex(item => item.id == id);
             if (item) {
                 this.items.splice(index, 1);
+                $scope.form.totalPrice==0;
             } else {
                 $http.get(`/rest/services/${id}`).then(resp => {
                     this.items.push(resp.data);
@@ -173,8 +174,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             }
             if (bookings.fullName == null || bookings.email == null
                 || bookings.createDate == null || bookings.phone == null
-                || bookings.createDate == undefined || bookings.totalPrice==0) {
-
+                || bookings.createDate == undefined || $scope.cart.items.length==0) {
                 alert("Vui lòng nhập thông tin đầy đủ")
 
             } else {
