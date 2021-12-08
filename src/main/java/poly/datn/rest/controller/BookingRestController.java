@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -96,5 +98,10 @@ public class BookingRestController {
 	@GetMapping("/bookingWaiting/{id}")
 	public  List<Booking> findBookingWFCbyStylist(@PathVariable Integer id){
 		return bookingService.findBookingWFCbyStylist(id);
+	}
+	
+	@PutMapping("/setWorkForStylist/{id}")
+	public Booking setWorkForStylist(@PathVariable("id")Integer id,@RequestBody Booking booking) {
+		return bookingService.save(booking);
 	}
 }

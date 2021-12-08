@@ -19,9 +19,17 @@
 					<div class="card-body">
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
-								<div class="h5 mb-0 font-weight-bold text-gray-800">{{formCutting.id}}</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800">
+									
+									<div ng-if="formCutting.id == null">
+									    Tên Khách Hàng
+									</div>
+									<div ng-if="formCutting.id != null">
+									    {{formCutting.fullName}}
+									</div>
+								</div>
 								<div class="text-xs font-weight-bold text-success mb-1">
-									SDT
+									SĐT
 								</div>
 							</div>
 							<div class="col-auto">
@@ -48,13 +56,13 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Thêm Việc Làm</h5>
-					<button class="close" type="button" data-dismiss="modal"
+					<button class="close" id="closeStylistModal" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<a style="cursor: pointer;" class="btn btn-info btn-block" ng-repeat="item in bookingWaiting"><i
+					<a style="cursor: pointer;" class="btn btn-info btn-block" ng-repeat="item in bookingWaiting" ng-click="setBookingCutting(item)"><i
 						class="fas fa-user-tie"></i> {{item.customer.fullName}}</a>
 				</div>
 			</div>
