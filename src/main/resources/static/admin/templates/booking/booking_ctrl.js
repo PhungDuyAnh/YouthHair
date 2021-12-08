@@ -81,7 +81,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
                 }
             }
         }
-		return $scope.cusIAT;					
+		//return $scope.cusIAT;					
 	}
 	
 	$scope.setBookingCutting = function (booking){		
