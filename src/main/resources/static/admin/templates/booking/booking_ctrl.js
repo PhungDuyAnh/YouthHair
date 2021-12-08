@@ -13,6 +13,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.employee1=[];
 	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
+	var toprice;
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -322,7 +323,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 							// console.log("Khong ap dung")
 							console.log("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
 							this.total  = $scope.form1.totalPrice;
-
 						}
 					}
 				}console.log("else")
@@ -426,5 +426,71 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			totime = value1;
 			return value.replace(":", " Giờ ");
 		},
+	}
+
+
+	//form lưu thôg tin từ ng dùng nhập vào UI
+	$scope.form2 = {
+		email: null,
+		fullName: null,
+		phone: null,
+		createDate: new Date(),
+		note: null,
+		stylistId: null,
+		totalPrice: null,
+		totalTime: null,
+		listSer: [],
+	};
+
+
+	//thực hiện đặt lịch
+	$scope.booking = {
+		purchase() {
+			var bookings = angular.copy($scope.form);
+			const value = moment($scope.form.createDate).format('YYYY-MM-DD');
+			if (toprice > 0) {
+				bookings.totalTime = totime;
+				bookings.totalPrice = toprice;
+				bookings.createDate = value;
+				bookings.listSer = $scope.cart.items;
+
+			} else {
+				bookings.totalTime = 0;
+				bookings.totalPrice = 0;
+			}
+			if (bookings.fullName == null || bookings.email == null
+				|| bookings.createDate == null || bookings.phone == null
+				|| bookings.createDate == undefined || bookings.totalPrice==0) {
+				console.log($scope.form2)
+				console.log($scope.cart.items)
+				alert("Vui lòng nhập thông tin đầy đủ")
+
+			} else {
+				//checkBooking UCF by phone
+				$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+					$scope.bookingUCF = {}
+					$scope.bookingUCF= resp.data;
+					console.log( $scope.bookingUCF)
+				})
+				console.log($scope.bookingUCF)
+
+				//add data => BE
+				if($scope.bookingUCF === {}){
+					console.log("oke roi")
+					$http.post("/rest/bookingCus", bookings).then(resp => {
+						alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+						$scope.cart.clear();
+						location.href = "/booking";
+					}).catch(error => {
+						alert("Đặt lịch thất bại!")
+						// $scope.form.data = null;
+						console.log(error);
+					})
+				}else {
+					alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
+					// location.href = "/booking";
+				}
+			}
+		}
 	}
 })
