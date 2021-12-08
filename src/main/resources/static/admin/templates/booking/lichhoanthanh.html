@@ -188,7 +188,7 @@
 <!--							</select>-->
 							<ul class="services-form" >
 								<li ng-repeat="item in voucherByCus">
-									<input type="radio" id="{{item.id}}" ng-click="pay.add(item);totalPricebyVoucher.totalPrice1()"/>
+									<input type="checkbox" id="{{item.id}}" ng-click="pay.add(item);totalPricebyVoucher.totalPrice1()"/>
 									<label for="{{item.id}}" >
 										<br>
 										{{item.id}}
