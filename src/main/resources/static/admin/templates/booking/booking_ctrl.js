@@ -346,13 +346,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	var voucherIdPay = null;
 	$scope.pay={
 		add(voucher){
-			if (voucherIdPay = voucher) {
-				voucherIdPay = null;
-
-			} else {
+			// if (voucherIdPay = voucher) {
+			// 	voucherIdPay = null;
+			//
+			// } else {
 			voucherIdPay = null;
 			voucherIdPay = voucher.id;
-			console.log(voucherIdPay)}
+			console.log(voucherIdPay)
+		// }
 			if($scope.formCPM.voucherId == null ){
 				this.total = $scope.form1.totalPrice;
 			}else{
