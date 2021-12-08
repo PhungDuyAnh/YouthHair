@@ -1,7 +1,6 @@
 package poly.datn.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,10 @@ public class AccountServiceImpl implements AccountService {
 	AccountDAO accountDAO;
 
 	@Override
-	public Optional<Account> findById(Integer id) {
-		return accountDAO.findById(id);
+	public Account findById(String id) {
+		return accountDAO.findById(id).get();
 	}
+
 
 	@Override
 	public Account findByName(String username) {

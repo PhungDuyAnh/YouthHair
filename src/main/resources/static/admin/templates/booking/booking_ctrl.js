@@ -289,32 +289,21 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 
 
-	$scope.a=function (){console.log("asd") ;return 1;}
+	$scope.a=function (voucher){console.log("asd") ;return 1;}
 
-//total Price Thanh toan
-	$scope.total=0;
+
+	$scope.voucherPay={}
+	var voucherIdPay = null;
 	$scope.pay={
-		get totalPrice1(){
+		add(voucher){
+			if (voucherIdPay = voucher) {
+				voucherIdPay = null;
 
-			if($scope.formCPM.voucherId == null ){
-				this.total = $scope.form1.totalPrice;
-			}else{
-				for(var i =0; i < $scope.voucherByCus.length; i++){
-					if($scope.formCPM.voucherId.id == $scope.voucherByCus[i].id){
-						if(this.total  > $scope.voucherByCus[i].condition){
-							this.total  = $scope.form1.totalPrice- $scope.voucherByCus[i].price
-						}else{
-							// console.log("Khong ap dung")
-							console.log("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
-							this.total  = $scope.form1.totalPrice;
-
-						}
-					}
-				}console.log("else")
-			}
-			return this.total ;
+			} else {
+			voucherIdPay = null;
+			voucherIdPay = voucher.id;
+			console.log(voucherIdPay)}
 		},
-
 		purchase() {
 			var item = angular.copy($scope.formCPM);
 
@@ -346,7 +335,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		}
 	}
 
-	$scope.totalPriceIAT=function (){return $scope.pay.totalPrice1},
+
 	$scope.listSer= []
 	$scope.serviceByBooking= {
 		getSerDetail(id) {
@@ -354,7 +343,41 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				$scope.listSer=[];
 				$scope.listSer=resp.data;console.log($scope.listSer)
 			})
+			$scope.totalPricebyVoucher.total=$scope.form1.totalPrice
+		}
+	}
 
+//total Price Thanh toan
+	$scope.totalPricebyVoucher={
+		total:$scope.form1.totalPrice,
+		  totalPrice1(){
+			  console.log(this.total)
+			if(voucherIdPay == null ){
+				this.total = $scope.form1.totalPrice;
+			}else{
+				// for(var i =0; i < $scope.voucherByCus.length; i++){
+				// 	if($scope.formCPM.voucherId.id == $scope.voucherByCus[i].id){
+				// 		if(this.total  > $scope.voucherByCus[i].condition){
+				// 			this.total  = $scope.form1.totalPrice- $scope.voucherByCus[i].price
+				// 		}else{
+				// 			// console.log("Khong ap dung")
+				// 			console.log("Không áp dụng được voucher vì tiền phải tối thiểu "+ $scope.voucherByCus[i].condition)
+				// 			this.total  = $scope.form1.totalPrice;
+				// 		}
+				// 	}
+				// }console.log("else")
+				$http.get(`/rest/voucher/${voucherIdPay}`).then(resp=>{
+					$scope.voucherPay=resp.data;
+					if(this.total  > resp.data.condition){
+						this.total = $scope.form1.totalPrice - resp.data.price
+					} else {
+						// console.log("Khong ap dung")
+						console.log("Không áp dụng được voucher vì tiền phải tối thiểu " + resp.data.condition)
+						this.total = $scope.form1.totalPrice;
+					}
+					console.log(resp.data)
+				})
+			}console.log(this.total + "DM")
 		}
 	}
 })

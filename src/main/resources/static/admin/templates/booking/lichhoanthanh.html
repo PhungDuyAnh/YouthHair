@@ -121,7 +121,7 @@
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="treatment">Các Dịch Vụ Sử Dụng</label>
+							<label class="text-black" for="treatment">Các Dịch Vụ Đã Sử Dụng</label>
 							<ul class="services-form" >
 								<li ng-repeat="item in listSer">
 									<input type="checkbox" id="{{item.serviceName}}" disabled checked/>
@@ -181,16 +181,24 @@
 					<div class="row form-group">
 						<div class="col-md-6">
 							<label class="text-black" for="voucher" >Voucher</label>
-							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" >
-<!--								 	<option  value="">Chon Voucher</option>-->
-<!--									<option  ng-repeat="x in voucherByCus" >-->
-<!--										{{x.id}}</option>-->
-							</select>
+<!--							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" >-->
+<!--&lt;!&ndash;								 	<option  value="">Chon Voucher</option>&ndash;&gt;-->
+<!--&lt;!&ndash;									<option  ng-repeat="x in voucherByCus" >&ndash;&gt;-->
+<!--&lt;!&ndash;										{{x.id}}</option>&ndash;&gt;-->
+<!--							</select>-->
+							<ul class="services-form" >
+								<li ng-repeat="item in voucherByCus">
+									<input type="radio" id="{{item.id}}" ng-click="pay.add(item);totalPricebyVoucher.totalPrice1()"/>
+									<label for="{{item.id}}" >
+										<br>
+										{{item.id}}
+									</label></li>
 
+							</ul>
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning" ng-bind="totalPriceIAT()"> VNĐ</span></h4>
+							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning" >{{totalPricebyVoucher.total}} VNĐ</span></h4>
 						</div>
 					</div>
 

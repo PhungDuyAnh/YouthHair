@@ -106,19 +106,23 @@
 			</a></li>
 
 			<!-- Nav Item - Employees -->
-			<li class="nav-item"><a class="nav-link" href="#!employees">
+			<li class="nav-item" th:if="${#request.isUserInRole('1')}">
+				<a class="nav-link" href="#!employees">
 					<i class="fas fa-fw fa-id-card"></i> <span>Nhân Viên</span>
-			</a></li>
+			</a>
+				<a class="nav-link" href="#!vouchers">
+					<i class="fas fa-fw fa-gift"></i> <span>Vouchers</span>
+				</a>
+				<a class="nav-link" href="#!billpaid">
+				<i class="fas fa-fw fa-file-alt"></i> <span>Hoá Đơn</span>
+			</a>
+			</li>
 
 			<!-- Nav Item - Vouchers -->
-			<li class="nav-item"><a class="nav-link" href="#!vouchers">
-					<i class="fas fa-fw fa-gift"></i> <span>Vouchers</span>
-			</a></li>
+<!--			<li class="nav-item"></li>-->
 
-			<!-- Nav Item - bill -->
-			<li class="nav-item"><a class="nav-link" href="#!billpaid">
-					<i class="fas fa-fw fa-file-alt"></i> <span>Hoá Đơn</span>
-			</a></li>
+<!--			&lt;!&ndash; Nav Item - bill &ndash;&gt;-->
+<!--			<li class="nav-item"></li>-->
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
