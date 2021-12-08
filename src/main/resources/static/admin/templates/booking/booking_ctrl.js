@@ -13,8 +13,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.employee1=[];
 	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
+
 	var toprice;
-	
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
