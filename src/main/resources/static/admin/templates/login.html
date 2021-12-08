@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-gradient-info">
+<body class="bg-gradient-info" th:action="@{/security/login}">
 
     <div class="container">
 
@@ -43,24 +43,26 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input  class="form-control form-control-user" name="username"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" class="form-control form-control-user" name="password"
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember-me">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-info btn-user btn-block">
-                                            Login
-                                        </a>
+
+                                        <div class="panel-footer text-right">
+                                            <i class="pull-left text-danger" th:text="${message}"></i>
+                                            <button class="btn btn-success">Login</button>
+                                        </div>
                                        
                                     </form>
                                 </div>

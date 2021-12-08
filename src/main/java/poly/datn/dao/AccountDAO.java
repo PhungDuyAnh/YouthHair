@@ -8,7 +8,7 @@ import poly.datn.entity.Booking;
 
 import java.util.List;
 
-public interface AccountDAO extends JpaRepository<Account, Integer> {
+public interface AccountDAO extends JpaRepository<Account, String> {
 
     @Query(value = "SELECT b FROM Account b WHERE b.username = ?1")
     Account findByName(String username);

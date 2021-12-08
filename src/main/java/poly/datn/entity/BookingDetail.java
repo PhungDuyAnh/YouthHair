@@ -2,6 +2,7 @@ package poly.datn.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,8 +32,10 @@ public class BookingDetail implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	private float price;
 
+	@NotNull
 	private Time time;
 
 	//bi-directional many-to-one association to Booking
