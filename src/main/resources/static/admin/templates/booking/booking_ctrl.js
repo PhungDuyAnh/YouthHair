@@ -274,8 +274,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	$scope.counter = 0;
 	$scope.targetDate1=function (time){
-
-			var time="01:50:55";
+		var time="01:50:55";
 		var objProps = time.split(':');
 		var myObj = {};
 		myObj.hour = objProps[0];
