@@ -36,10 +36,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		})
 
-		$http.get("/rest/booking/stylist").then(resp=>{
-			$scope.stylist=resp.data;
-		})
-
 		$http.get("/rest/booking/employee").then(resp=>{
 			$scope.employee1=resp.data;
 		})
@@ -52,6 +48,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.itemConfirm=resp.data;
 		})
 
+		//getDataStylist
+		$http.get("/rest/booking/stylist").then(resp=>{
+			$scope.stylist=resp.data;
+		})
+
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
@@ -59,17 +60,33 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		return $scope.a;
 	}
 
+	//namnt stylist
 	$scope.getDataBookingWaitting = function (stylistId){
 		$http.get(`/rest/booking/bookingWaiting/${stylistId}`).then(resp=>{
 			$scope.bookingWaiting = resp.data;			
 		})
 	}
 	
-	$scope.showBookingCutting = function (stylistId){
-		$http.get(`/rest/booking/stylist/cutting/${stylistId}`).then(resp=>{
-			$scope.formCutting = resp.data;
-			console.log(resp.data);
-		})
+	$scope.setBookingCutting = function (booking){		
+		$http.get(`/rest/booking/stylist/cutting/${booking.employee1.id}`).then(resp=>{
+			
+			if(resp.data == ''){
+				booking.statusbooking.id = 'IAT';
+				$http.put(`/rest/booking/setWorkForStylist/${booking.id}`,booking).then(resp => {
+		            var index = $scope.bookingWaiting.findIndex(p => p.id == booking.id);			
+		            $scope.bookingWaiting[index] = booking;
+		            alert("Thêm công việc thành công cho "+ booking.employee1.fullName  +"!");
+					$("#closeStylistModal").click();
+		        }).catch(error => {
+		            alert("Lỗi cập nhật liên hệ!");
+		            console.log("Error",error);
+		        });
+			}else{
+				console.log(resp.data);
+				alert("Stylist " + resp.data.employee1.fullName + " đang bận!")
+			}			
+		});
+		
 	}
 
 	$scope.initialize();
