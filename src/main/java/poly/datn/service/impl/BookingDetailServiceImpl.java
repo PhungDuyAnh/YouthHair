@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import poly.datn.dao.BookingDetailDAO;
@@ -41,7 +40,7 @@ public class BookingDetailServiceImpl implements BookingDetailService {
 	}
 
 	@Override
- 	public List<ServicesIdDTO> getBookingByIDBooking(Integer id) {
+	public List<ServicesIdDTO> getBookingByIDBooking(Integer id) {
 		List<Tuple> stockTotalTuples = bookingDetailDAO.getBookingByIDBooking(id);
 		List<ServicesIdDTO> stockTotalDto = stockTotalTuples.stream()
 				.map(t -> new ServicesIdDTO(
@@ -51,4 +50,5 @@ public class BookingDetailServiceImpl implements BookingDetailService {
 
 		return stockTotalDto;
 	}
+
 }

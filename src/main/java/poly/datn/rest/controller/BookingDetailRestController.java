@@ -15,7 +15,7 @@ import poly.datn.service.dto.ServicesIdDTO;
 @RestController
 public class BookingDetailRestController {
 
-	
+
 	@Autowired
 	BookingDetailService bookingDetailService;
 	@GetMapping("/rest/bookingdetail")
