@@ -514,8 +514,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	//thực hiện đặt lịch
 	$scope.booking = {
 		purchase() {
-			var bookings = angular.copy($scope.form);
-			const value = moment($scope.form.createDate).format('YYYY-MM-DD');
+			var bookings = angular.copy($scope.form2);
+			const value = moment($scope.form2.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
 				bookings.totalTime = totime;
 				bookings.totalPrice = toprice;
@@ -526,8 +526,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				bookings.totalTime = 0;
 				bookings.totalPrice = 0;
 			}
-			if (bookings.fullName == null || bookings.email == null
-				|| bookings.createDate == null || bookings.phone == null
+			if (bookings.customer.fullName == null || bookings.customer.email == null
+				|| bookings.createDate == null || bookings.customer.phone == null
 				|| bookings.createDate == undefined || bookings.totalPrice==0) {
 				console.log($scope.form2)
 				console.log($scope.cart.items)
@@ -541,7 +541,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					console.log( $scope.bookingUCF)
 				})
 				console.log($scope.bookingUCF)
-
+				console.log($scope.form2)
+				console.log($scope.cart.items)
 				//add data => BE
 				if($scope.bookingUCF === {}){
 					console.log("oke roi")
