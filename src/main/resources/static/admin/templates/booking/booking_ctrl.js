@@ -13,6 +13,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.employee1=[];
 	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
+	$scope.cusIAT = [];
 
 	var toprice;
 	$scope.initialize=function (){
@@ -59,7 +60,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$http.get("/rest/booking/bookingIAT").then(resp=>{
 			$scope.listCutting = resp.data;
 		})
-
+	
+		$scope.showInfoCustomerCutting();
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
@@ -73,7 +75,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.bookingWaiting = resp.data;
 		})
 	}
-	$scope.cusIAT = [];
+	
 	$scope.showInfoCustomerCutting = function(){
 		for (var i = 0; i < $scope.stylist.length; i++) {
 			for (var j = 0; j < $scope.listCutting.length; j++) {
@@ -116,6 +118,23 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 		});
 
+	}
+	
+	$scope.tickDone = function(booking){
+		if(confirm("Bạn có muốn hoàn thành công việc cho stylist "+ booking.employee1.fullName +" không?")){
+			booking.statusbooking.id = 'WFP';
+			$http.put(`/rest/booking/setWorkForStylist/${booking.id}`,booking).then(resp => {
+				var index = $scope.bookingWaiting.findIndex(p => p.id == booking.id);
+				$scope.bookingWaiting[index] = booking;
+				alert("Kết thúc công việc thành công cho "+ booking.employee1.fullName  +"!");				
+				$scope.cusIAT = [];		
+				$scope.initialize();
+			}).catch(error => {
+				alert("Lỗi cập nhật liên hệ!");
+				console.log("Error",error);
+			});
+		}
+		
 	}
 
 	$scope.initialize();

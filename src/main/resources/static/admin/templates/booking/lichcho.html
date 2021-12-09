@@ -11,8 +11,8 @@
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-hover table-secondary text-dark text-center" id="dataTable">
-				<thead>
+			<table class="table table-hover table-striped text-dark text-center" id="dataTable">
+				<thead class="thead-dark">
 					<tr>
 						<th>Khách Hàng</th>
 						<th>Stylist</th>
@@ -24,7 +24,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="table-primary" ng-repeat="item in pager.items | filter:searchText" >
+					<tr ng-repeat="item in pager.items | filter:searchText" >
 						<td>{{item.customer.fullName}}</td>
 						<td>{{item.employee1.fullName}}</td>
 						<td>{{item.totalTime}}</td>
@@ -38,7 +38,7 @@
 							<a style="cursor: pointer;" class="btn btn-danger"> Huỷ</i></a>
 						</td>
 					</tr>
-				</tbody>
+				</tbody>				
 			</table>
 			<div class="d-none d-sm-inline-block form-inline">
 				<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">

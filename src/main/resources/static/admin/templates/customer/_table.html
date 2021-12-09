@@ -45,8 +45,8 @@
 			<div class="card-body">
 
 				<div class="table-responsive">
-					<table class="table table-hover table-secondary text-dark text-center">
-						<thead>
+					<table class="table table-hover table-striped text-dark text-center">
+						<thead class="thead-dark">
 							<tr>
 								<th>Tên khách hàng</th>
 								<th>Email</th>
@@ -56,7 +56,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="table-info" ng-repeat="item in pager.items | filter:searchText">
+							<tr ng-repeat="item in pager.items | filter:searchText">
 								<td>{{item.fullName}}</td>
 								<td>{{item.email}}</td>
 								<td>{{item.phone}}</td>								
