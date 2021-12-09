@@ -180,7 +180,7 @@
 
 					<div class="row form-group">
 						<div class="col-md-6">
-							<label class="text-black" for="voucher" >Voucher</label>
+							<label id="left" class="text-black" for="voucher" >Voucher</label>
 <!--							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" >-->
 <!--&lt;!&ndash;								 	<option  value="">Chon Voucher</option>&ndash;&gt;-->
 <!--&lt;!&ndash;									<option  ng-repeat="x in voucherByCus" >&ndash;&gt;-->
@@ -188,7 +188,7 @@
 <!--							</select>-->
 							<ul class="services-form" >
 								<li ng-repeat="item in voucherByCus">
-									<input type="checkbox" id="{{item.id}}" ng-click="pay.add(item);totalPricebyVoucher.totalPrice1()"/>
+									<input type="checkbox"  id="{{item.id}}" ng-click="pay.add(item);totalPricebyVoucher.totalPrice1()"/>
 									<label for="{{item.id}}" >
 										<br>
 										{{item.id}}
@@ -198,7 +198,7 @@
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
-							<h4 class="text-black" >Tổng Tiền: <br> <span class="text-warning" >{{totalPricebyVoucher.total}} VNĐ</span></h4>
+							<h4 id="right" class="text-black" >Tổng Tiền: <br> <span class="text-warning" >{{totalPricebyVoucher.total}} VNĐ</span></h4>
 						</div>
 					</div>
 

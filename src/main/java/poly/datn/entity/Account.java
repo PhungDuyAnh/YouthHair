@@ -30,7 +30,7 @@ public class Account implements Serializable {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy="account")
+    @OneToMany(mappedBy="account",fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Authority> authorities;
 }

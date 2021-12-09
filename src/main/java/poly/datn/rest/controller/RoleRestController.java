@@ -10,7 +10,8 @@ import poly.datn.entity.Role;
 import poly.datn.service.RoleService;
 
 @RestController
-public class RoleRestController {
+public class
+RoleRestController {
 
 	@Autowired
 	RoleService roleService;
