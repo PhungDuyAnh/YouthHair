@@ -3,7 +3,7 @@
 <body>
 <form class="css-form" name="myForm" ng-submit="myForm.$valid && doSubmitForm($event)" novalidate>
 <div class="site-section" 
-     style="background-image: url('/images/background-booking.jpg'); background-size: cover;">
+     style="background-image: url('assets/images/background-booking.jpg'); background-size: cover;">
 
 
         <br>
@@ -25,7 +25,7 @@
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 30%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
                         <input ng-model="form.StylistId" hidden="true" th:attr="ng-value=${sty.id}"/>
-                        <img alt="" th:src="@{|/images/${sty.image}|}"
+                        <img alt="" th:src="@{|assets/images/${sty.image}|}"
                              class="icon display-3 mb-4 d-block rounded-circle" width="50%">
                         <h2 class="text-light h2">[[${sty.fullName}]]</h2>
                         
@@ -127,7 +127,7 @@
                                 <input type="checkbox" th:id="${state.index}" name="service"
                                        th:attr="ng-click=@{|cart.add(${s.id})|}" ng-required="true"/>
                                 <label th:for="${state.index}"
-                                > <img th:src="@{|/images/haircut/${s.image}|}"/>
+                                > <img th:src="@{|assets/images/haircut/${s.image}|}"/>
                                     <br><a> [[${s.serviceName}]]</a>
                                 </label>
                             </li>
@@ -178,12 +178,17 @@
         var dd = today.getDate();
         var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
+        
+		if (today.getHours() > 21){
+			dd = today.getDate() + 1;
+        }
         if (dd < 10) {
             dd = '0' + dd;
         }
         if (mm < 10) {
             mm = '0' + mm;
         }
+        
         var minDate = yyyy + '-' + mm + '-' + dd;
         input.setAttribute("min", minDate);
         
@@ -209,6 +214,7 @@
 
         var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
         input.setAttribute("max", maxDate);
+        input.setAttribute("value", minDate);
 	}
 	
 	myFunction();
