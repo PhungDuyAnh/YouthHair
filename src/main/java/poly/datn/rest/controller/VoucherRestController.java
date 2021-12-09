@@ -26,7 +26,7 @@ public class VoucherRestController {
 	}
 
 	@PostMapping("/rest/voucher")
-	public Voucher create(@RequestBody Voucher voucher) {
+	public Voucher create( @RequestBody Voucher voucher) {
 		return voucherService.save(voucher);
 	}
 
