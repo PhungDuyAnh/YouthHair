@@ -82,7 +82,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
                 }
             }
         }
-		return $scope.cusIAT;					
+		//return $scope.cusIAT;					
 	}
 	// $scope.servicesChecked=[];
 	// $scope.showServiceChecked=function (){
