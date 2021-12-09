@@ -61,6 +61,11 @@
 					</button>
 				</div>
 				<div class="modal-body">
+					<div ng-if="bookingWaiting[0] == null">
+				        <div class="text-lg font-weight-bold text-secondary text-center">									
+							Không có lịch hẹn.
+						</div>
+				    </div>
 					<a style="cursor: pointer;" class="btn btn-info btn-block" ng-repeat="item in bookingWaiting" ng-click="setBookingCutting(item)"><i
 						class="fas fa-user-tie"></i> {{item.customer.fullName}}</a>
 				</div>

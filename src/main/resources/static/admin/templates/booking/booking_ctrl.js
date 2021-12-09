@@ -81,8 +81,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					$scope.cusIAT[i] = $scope.listCutting[j];
 				}
 			}
-		}
-		//return $scope.cusIAT;					
+		}				
 	}
 	// $scope.servicesChecked=[];
 	// $scope.showServiceChecked=function (){
@@ -363,7 +362,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		add(voucher){
 			if (voucherIdPay == voucher.id) {
 				voucherIdPay = null;
-				$scope.totalPricebyVoucher.total = $scope.form1.totalPrice;
+				$scope.totalPricebyVoucher.total = $scope.form1.totalPrice;				
 			} else {
 				voucherIdPay = voucher.id;
 				console.log(voucherIdPay)
@@ -413,6 +412,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 //total Price Thanh toan
+	$scope.tenbuadi = '';
 	$scope.totalPricebyVoucher={
 		total:$scope.form1.totalPrice,
 		totalPrice1(){
@@ -424,13 +424,18 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				$http.get(`/rest/voucher/${voucherIdPay}`).then(resp=>{
 					$scope.voucherPay=resp.data;
 					if(this.total  > resp.data.condition){
-						this.total = $scope.form1.totalPrice - resp.data.price
+						this.total = $scope.form1.totalPrice - resp.data.price;
+						$scope.tenbuadi = voucherIdPay;
+						alert("Áp dụng voucher thành công!");
+						$("#closeVoucherModal").click();
 					} else {
 						// console.log("Khong ap dung")
-						alert("Không áp dụng được voucher vì tiền phải tối thiểu " + resp.data.condition)
+						alert("Không áp dụng được voucher vì tiền phải tối thiểu " + resp.data.condition);
 						this.total = $scope.form1.totalPrice;
 
 					}
+					
+					
 					console.log(resp.data)
 				})
 			}

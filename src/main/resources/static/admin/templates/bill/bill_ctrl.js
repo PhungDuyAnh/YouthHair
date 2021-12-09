@@ -13,6 +13,7 @@ app.controller("bill-ctrl",function($scope,$http){
 	}	
 	
 	$scope.showDetail = function(item){
+		$scope.form={};
 		$scope.form = angular.copy(item);
 	}
 	
