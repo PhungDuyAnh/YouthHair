@@ -34,7 +34,7 @@
 						<td>{{item.totalPrice}}</td>
 						<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 						<td>{{item.statusbooking.statusName}}</td>
-						<td class="text-center"><button ng-click="showDetail2(item)"
+						<td class="text-center"><button ng-click="showDetail2(item);showServiceChecked()"
 												   class="btn btn-info btn-circle" data-toggle="modal" data-target="#InfoCheckModal"> <i
 								class="fas fa-info-circle"></i>
 						</button> <button class="btn btn-danger btn-circle"> <i
@@ -128,9 +128,10 @@
 							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
 									class="text-danger">(*)</span></label>
 							<ul class="services-form">
-								<li ng-repeat="services in db.services"><input type="checkbox"
+								<li ng-if="servicesChecked[$index] !=null" ng-repeat="services in db.services"><input type="checkbox"
 								    id="{{services.id}}" ng-click="cart.add(services.id)"
-								  ng-checked="showBookingWating(form2.id,services.id)>=0"/>
+								  ng-checked="showBookingWating(form2.id,services.id)>=0"
+								  	/>
 									<label for="{{services.id}}"> <img src="/assets/images/haircut/2.jpg" />
 									<br> {{services.serviceName}}
 								</label></li>
