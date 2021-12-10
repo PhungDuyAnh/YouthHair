@@ -3,6 +3,7 @@ package poly.datn.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import poly.datn.entity.Booking;
 import poly.datn.entity.BookingDetail;
@@ -23,5 +24,8 @@ public interface BookingDetailDAO extends JpaRepository<BookingDetail, BookingDe
 
     @Query(value = "DELETE FROM BookingDetail b where b.booking.id=?1")
     void deleteById(int id);
+
+    @Procedure
+    void procedure_delete(int id);
 
 }

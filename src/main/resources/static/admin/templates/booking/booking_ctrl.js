@@ -579,7 +579,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 						// $scope.form.data = null;
 						console.log(error);
 					})
-
 			}
 		}
 	}

@@ -51,4 +51,8 @@ public class BookingDetailServiceImpl implements BookingDetailService {
 		return stockTotalDto;
 	}
 
+	@Override
+	public void procedure_delete(int id) {
+		bookingDetailDAO.procedure_delete(id);
+	}
 }
