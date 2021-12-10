@@ -70,4 +70,5 @@ public interface StatusBookingService {
 
 	<S extends Statusbooking> S save(S entity);
 
+    Statusbooking StatusbookingbyIdWFC();
 }

@@ -22,6 +22,6 @@ public interface BookingDetailDAO extends JpaRepository<BookingDetail, BookingDe
     List<BookingDetail> findByBooking(Integer id);
 
     @Query(value = "DELETE FROM BookingDetail b where b.booking.id=?1")
-    Booking deleteByIdDetail(int id);
+    void deleteById(int id);
 
 }

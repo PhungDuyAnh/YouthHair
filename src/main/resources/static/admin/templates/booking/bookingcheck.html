@@ -118,8 +118,8 @@
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="time">Khung Giờ Làm Tóc <span
-									class="text-danger">(*)</span></label> <input ng-model="form2.time"
-																				  type="time" id="time" class="form-control datepicker px-2"
+									class="text-danger">(*)</span></label> <input type="time" ng-model="form2.time"
+																				  class="form-control " id="time" name="time"
 																				  placeholder="Khung Giờ Làm Tóc...">
 						</div>
 					</div>
@@ -130,8 +130,8 @@
 									class="text-danger">(*)</span></label>
 							<ul class="services-form">
 								<li ng-if="servicesChecked[$index] !=null" ng-repeat="services in db.services"><input type="checkbox"
-																													  id="{{services.id}}" ng-click="cart.add(services.id)"
-																													  ng-checked="showBookingWating(form2.id,services.id)>=0"
+								  id="{{services.id}}" ng-click="cart.add(services.id)"
+								  ng-checked="showBookingWating(form2.id,services.id)>=0"
 								/>
 									<label for="{{services.id}}"> <img src="/assets/images/haircut/2.jpg" />
 										<br> {{services.serviceName}}

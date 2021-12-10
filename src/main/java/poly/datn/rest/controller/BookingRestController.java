@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import poly.datn.entity.Booking;
@@ -15,6 +17,8 @@ import poly.datn.entity.BookingDetail;
 import poly.datn.entity.Employee;
 import poly.datn.entity.Statusbooking;
 import poly.datn.service.*;
+import poly.datn.service.dto.BookingCustomerDTO;
+import poly.datn.service.dto.BookingDTO;
 
 @RestController
 @RequestMapping("/rest/booking")
@@ -105,6 +109,13 @@ public class BookingRestController {
 	public  List<Booking> getAllBookingIAT(){
 		return bookingService.getAllBookingIAT();
 	}
+
+	@PostMapping("/updateToWFC")
+	public BookingDTO AddBookingInfo(@RequestBody BookingDTO bookingDTO) {
+		bookingService.AddInfoBookingUpdate(bookingDTO);
+		return bookingDTO;
+	}
+
 
 	
 }
