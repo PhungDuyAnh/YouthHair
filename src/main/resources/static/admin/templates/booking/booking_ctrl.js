@@ -545,6 +545,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				bookings.totalPrice = toprice;
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
+				bookings.employee1=$scope.form2.employee1
 
 			} else {
 				bookings.totalTime = 0;
@@ -568,21 +569,17 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				console.log($scope.form2)
 				console.log($scope.cart.items)
 				//add data => BE
-				if($scope.bookingUCF === {}){
 					console.log("oke roi")
-					$http.post("/rest/bookingCus", bookings).then(resp => {
-						alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+					$http.post("/rest/booking/updateToWFC", bookings).then(resp => {
+						alert("Cập nhật thành công !");
 						$scope.cart.clear();
-						location.href = "/booking";
+						location.href = "/admin/templates/index.html#!/checkbooking";
 					}).catch(error => {
-						alert("Đặt lịch thất bại!")
+						alert("Cập nhật thất bại!")
 						// $scope.form.data = null;
 						console.log(error);
 					})
-				}else {
-					alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
-					// location.href = "/booking";
-				}
+
 			}
 		}
 	}

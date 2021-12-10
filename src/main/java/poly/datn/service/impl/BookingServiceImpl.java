@@ -12,15 +12,27 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import poly.datn.dao.BookingDAO;
-import poly.datn.entity.Booking;
-import poly.datn.entity.Employee;
+import poly.datn.dao.BookingDetailDAO;
+import poly.datn.dao.EmployeeDAO;
+import poly.datn.dao.StatusBookingDAO;
+import poly.datn.entity.*;
 import poly.datn.service.BookingService;
+import poly.datn.service.dto.BookingDTO;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
 	@Autowired
 	BookingDAO bookingDAO;
+
+	@Autowired
+	EmployeeDAO employeeDAO;
+
+	@Autowired
+	BookingDetailDAO bookingDetailDAO;
+
+	@Autowired
+	StatusBookingDAO statusBookingDAO;
 
 	@Override
 	public <S extends Booking> S save(S entity) {
@@ -204,5 +216,36 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Booking> getAllBookingIAT() {
 		return bookingDAO.getAllBookingIAT();
+	}
+
+	@Override
+	public BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO) {
+		try {
+			Statusbooking statusBooking = statusBookingDAO.StatusbookingbyIdWFC();
+			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
+				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
+				booking1.setCreateDate(bookingDTO.getCreateDate());
+				booking1.setTime(bookingDTO.getTime());
+				booking1.setNote(bookingDTO.getNote());
+				booking1.setEmployee1(stylist);
+				booking1.setTotalPrice(bookingDTO.getTotalPrice());
+				booking1.setTotalTime(bookingDTO.getTotalTime());
+				booking1.setStatusbooking(statusBooking);
+				bookingDAO.save(booking1);
+
+				for(int i=0; i<bookingDTO.getListSer().size();i++ ){
+					bookingDetailDAO.deleteById(booking1.getId());
+					BookingDetail bookingDetail = new BookingDetail();
+					bookingDetail.setBooking(booking1);
+					bookingDetail.setService(bookingDTO.getListSer().get(i));
+					bookingDetail.setPrice(bookingDTO.getListSer().get(i).getPrice());
+					bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
+					bookingDetailDAO.save(bookingDetail);
+				}
+
+	} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bookingDTO;
 	}
 }
