@@ -526,17 +526,21 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	};
 
 
-	//thực hiện đặt lịch
+	//thực hiện sửa lịch
 	$scope.booking = {
 		purchase() {
 			var bookings = angular.copy($scope.form2);
+			alert(bookings.time)
+			const value1 = moment($scope.form2.time).format('DD/MM/yyyy HH:mm:ss');
+			bookings.time=value1;
 			const value = moment($scope.form2.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
 				bookings.totalTime = totime;
 				bookings.totalPrice = toprice;
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
-				bookings.employee1=$scope.form2.employee1
+				bookings.employee1=$scope.form2.employee1;
+				alert(value1)
 
 			} else {
 				bookings.totalTime = 0;
@@ -564,7 +568,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					$http.post("/rest/booking/updateToWFC", bookings).then(resp => {
 						alert("Cập nhật thành công !");
 						$scope.cart.clear();
-						location.href = "/admin/templates/index.html#!/checkbooking";
 					}).catch(error => {
 						alert("Cập nhật thất bại!")
 						// $scope.form.data = null;

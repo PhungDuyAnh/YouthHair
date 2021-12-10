@@ -32,7 +32,7 @@ public class BookingDTO {
 
     private Time totalTime;
 
-    private Time time;
+    private String time;
 
     //Service
     private List<Services> listSer;
