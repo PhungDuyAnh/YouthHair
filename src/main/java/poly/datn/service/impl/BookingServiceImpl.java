@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import poly.datn.dao.BookingDAO;
 import poly.datn.dao.BookingDetailDAO;
 import poly.datn.dao.EmployeeDAO;
@@ -240,7 +241,6 @@ public class BookingServiceImpl implements BookingService {
 				bookingDAO.save(booking1);
 				bookingDetailDAO.procedure_delete(bookingDTO.getId());
 				for(int i=0; i<bookingDTO.getListSer().size();i++ ){
-
 					BookingDetail bookingDetail = new BookingDetail();
 					bookingDetail.setBooking(booking1);
 					bookingDetail.setService(bookingDTO.getListSer().get(i));
@@ -253,5 +253,14 @@ public class BookingServiceImpl implements BookingService {
 			e.printStackTrace();
 		}
 		return bookingDTO;
+	}
+
+	@Override
+	public Booking updateCAN(int id){
+		Booking booking=bookingDAO.findById(id).get();
+		Statusbooking statusbooking=statusBookingDAO.StatusBookigByIdCAN();
+		booking.setStatusbooking(statusbooking);
+		bookingDAO.save(booking);
+		return booking;
 	}
 }

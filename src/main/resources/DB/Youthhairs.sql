@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: localhost    Database: youthhairs
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `accounts` (
   `Username` varchar(45) NOT NULL,
   `Password` varchar(45) NOT NULL,
@@ -45,11 +45,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `authorities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `authorities` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(45) NOT NULL,
-  `RoleId` int NOT NULL,
+  `RoleId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `FK_authority_account_idx` (`Username`),
   KEY `FK_authority_role_idx` (`RoleId`),
@@ -74,19 +74,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `booking` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `CreateDate` date NOT NULL,
   `TotalPrice` float NOT NULL,
   `TotalTime` varchar(45) NOT NULL,
   `Time` time DEFAULT NULL,
   `Note` varchar(455) DEFAULT NULL,
-  `StylistId` int NOT NULL,
+  `StylistId` int(11) NOT NULL,
   `StatusId` varchar(5) NOT NULL,
-  `CustormerId` int NOT NULL,
-  `VotingId` int DEFAULT NULL,
-  `VoucherDetailsID` int DEFAULT NULL,
+  `CustormerId` int(11) NOT NULL,
+  `VotingId` int(11) DEFAULT NULL,
+  `VoucherDetailsID` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `FK_booking_statusbooking_idx` (`StatusId`),
   KEY `FK_booking_customer_idx` (`CustormerId`),
@@ -107,9 +107,54 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00',NULL,'A',1,'CAN',1,NULL,NULL),(2,'2021-11-11',50000,'00:40:00',NULL,'BV',2,'CPM',2,3,NULL),(3,'2021-11-11',100000,'00:40:00',NULL,'C',3,'WFP',3,1,NULL),(4,'2021-11-11',500000,'00:40:00',NULL,'D',1,'CPM',1,2,NULL),(5,'2021-11-11',500000,'00:40:00',NULL,'F',2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00',NULL,'G',3,'CPM',3,2,NULL),(8,'2021-11-21',500000,'00:40:00',NULL,'TestData',3,'CPM',3,3,NULL),(9,'2021-11-21',1000000,'01:30:00',NULL,'TestData2',2,'CPM',1,2,NULL),(10,'2021-11-19',100000,'00:30:00',NULL,'A2',1,'CAN',6,NULL,NULL),(11,'2021-11-25',21.22,'00:30:00',NULL,'aaaaa',1,'UCF',12,NULL,NULL),(12,'2021-11-25',21.22,'00:30:00',NULL,'aaaaa',1,'UCF',16,NULL,NULL),(13,'2021-11-27',130000,'00:40:00',NULL,NULL,1,'UCF',22,NULL,NULL),(14,'2021-11-27',130000,'00:40:00',NULL,'lobo',1,'UCF',23,NULL,NULL),(15,'2021-11-28',530000,'02:10:00',NULL,NULL,1,'UCF',26,NULL,NULL),(16,'2021-11-28',530000,'02:10:00',NULL,'ádfghjkl',7,'UCF',28,NULL,NULL),(17,'2021-11-29',130000,'00:40:00',NULL,NULL,1,'UCF',25,NULL,NULL),(18,'2021-11-30',30000,'00:00:00',NULL,NULL,1,'UCF',29,NULL,NULL),(19,'2021-12-01',130000,'00:40:00',NULL,NULL,1,'IAT',30,NULL,NULL),(20,'2021-12-30',100000,'00:30:00',NULL,NULL,1,'UCF',30,NULL,NULL),(21,'2021-12-31',130000,'00:40:00',NULL,NULL,3,'UCF',31,NULL,NULL),(22,'2021-12-08',100000,'00:30:00',NULL,NULL,1,'UCF',32,NULL,NULL),(23,'2021-12-08',100000,'00:30:00',NULL,NULL,8,'UCF',33,NULL,NULL),(24,'2021-12-08',100000,'00:30:00',NULL,NULL,1,'UCF',34,NULL,NULL),(25,'2021-12-08',100000,'00:30:00',NULL,NULL,1,'UCF',35,NULL,NULL),(26,'2021-12-08',130000,'00:40:00',NULL,NULL,1,'UCF',36,NULL,NULL);
+INSERT INTO `booking` VALUES (1,'2021-11-11',500000,'00:40:00','00:30:00','A',1,'CAN',1,NULL,NULL),(2,'2021-11-11',50000,'00:40:00','00:30:00','BV',2,'CPM',2,3,NULL),(3,'2021-11-11',100000,'00:40:00','00:30:00','C',3,'WFP',3,1,NULL),(4,'2021-11-11',500000,'00:40:00','00:30:00','D',1,'CPM',1,2,NULL),(5,'2021-11-11',500000,'00:40:00','00:30:00','F',2,'WFC',2,3,NULL),(6,'2021-11-11',500000,'00:40:00','00:30:00','G',3,'CPM',3,2,NULL),(8,'2021-11-21',500000,'00:40:00','00:30:00','TestData',3,'CPM',3,3,NULL),(9,'2021-11-21',1000000,'01:30:00','00:30:00','TestData2',2,'CPM',1,2,NULL),(10,'2021-11-19',100000,'00:30:00','00:30:00','A2',1,'CAN',6,NULL,NULL),(11,'2021-11-25',330000,'01:40:00','00:30:00','aaaaa',1,'WFC',12,NULL,NULL),(12,'2021-11-25',400000,'02:00:00','00:30:00','aaaaa',1,'WFC',16,NULL,NULL),(13,'2021-11-27',800000,'03:30:00','00:30:00',NULL,1,'WFC',22,NULL,NULL),(14,'2021-11-27',700000,'03:00:00','00:30:00','lobo',1,'WFC',23,NULL,NULL),(15,'2021-11-28',300000,'01:30:00','00:30:00',NULL,1,'WFC',26,NULL,NULL),(16,'2021-11-28',300000,'01:30:00','00:30:00','ádfghjkl',7,'WFC',28,NULL,NULL),(17,'2021-11-29',700000,'03:00:00','02:31:00','Cccccc',3,'WFC',25,NULL,NULL),(18,'2021-11-30',30000,'00:00:00','00:30:00',NULL,1,'UCF',29,NULL,NULL),(19,'2021-12-01',130000,'00:40:00','00:30:00',NULL,1,'IAT',30,NULL,NULL),(20,'2021-12-30',100000,'00:30:00','00:30:00',NULL,1,'UCF',30,NULL,NULL),(21,'2021-12-31',130000,'00:40:00',NULL,NULL,3,'UCF',31,NULL,NULL),(22,'2021-12-08',100000,'00:30:00','00:30:00',NULL,1,'UCF',32,NULL,NULL),(23,'2021-12-08',100000,'00:30:00','00:30:00',NULL,8,'UCF',33,NULL,NULL),(24,'2021-12-08',100000,'00:30:00','00:30:00',NULL,1,'UCF',34,NULL,NULL),(25,'2021-12-08',100000,'00:30:00','00:30:00',NULL,1,'UCF',35,NULL,NULL),(26,'2021-12-08',130000,'00:40:00','00:30:00',NULL,1,'UCF',36,NULL,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `booking_detail_views`
+--
+
+DROP TABLE IF EXISTS `booking_detail_views`;
+/*!50001 DROP VIEW IF EXISTS `booking_detail_views`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `booking_detail_views` AS SELECT 
+ 1 AS `BookingID`,
+ 1 AS `CreateDate`,
+ 1 AS `TotalPrice`,
+ 1 AS `TotalTime`,
+ 1 AS `Time`,
+ 1 AS `Note`,
+ 1 AS `CustomerName`,
+ 1 AS `CustomerEmail`,
+ 1 AS `CustomerPhone`,
+ 1 AS `StylistName`,
+ 1 AS `ServiceName`,
+ 1 AS `StatusName`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `booking_views`
+--
+
+DROP TABLE IF EXISTS `booking_views`;
+/*!50001 DROP VIEW IF EXISTS `booking_views`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `booking_views` AS SELECT 
+ 1 AS `BookingID`,
+ 1 AS `CreateDate`,
+ 1 AS `TotalPrice`,
+ 1 AS `TotalTime`,
+ 1 AS `Time`,
+ 1 AS `Note`,
+ 1 AS `CustomerName`,
+ 1 AS `CustomerEmail`,
+ 1 AS `CustomerPhone`,
+ 1 AS `StylistName`,
+ 1 AS `StatusName`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `bookingbystylist`
@@ -118,7 +163,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `bookingbystylist`;
 /*!50001 DROP VIEW IF EXISTS `bookingbystylist`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+SET character_set_client = utf8mb4;
 /*!50001 CREATE VIEW `bookingbystylist` AS SELECT 
  1 AS `Id`,
  1 AS `CreateDate`,
@@ -137,13 +182,14 @@ SET character_set_client = @saved_cs_client;
 -- Table structure for table `bookingdetails`
 --
 
+
 DROP TABLE IF EXISTS `bookingdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `bookingdetails` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `BookingId` int NOT NULL,
-  `ServiceId` int NOT NULL,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `BookingId` int(11) NOT NULL,
+  `ServiceId` int(11) NOT NULL,
   `Price` float NOT NULL,
   `Time` time NOT NULL,
   PRIMARY KEY (`Id`),
@@ -151,7 +197,7 @@ CREATE TABLE `bookingdetails` (
   KEY `FK_BookingDetai_Booking` (`BookingId`),
   CONSTRAINT `FK_BookingDetai_Booking` FOREIGN KEY (`BookingId`) REFERENCES `booking` (`Id`),
   CONSTRAINT `FK_BookingDetai_Service` FOREIGN KEY (`ServiceId`) REFERENCES `services` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +206,7 @@ CREATE TABLE `bookingdetails` (
 
 LOCK TABLES `bookingdetails` WRITE;
 /*!40000 ALTER TABLE `bookingdetails` DISABLE KEYS */;
-INSERT INTO `bookingdetails` VALUES (4,1,1,100000,'00:30:00'),(5,1,2,30000,'00:10:00'),(6,2,1,100000,'00:30:00'),(7,11,2,30000,'00:10:00'),(8,3,1,123,'23:28:00'),(9,3,2,123,'23:28:00'),(10,12,1,123,'23:28:00'),(11,12,2,123,'23:28:00'),(12,13,1,100000,'00:30:00'),(13,13,2,30000,'00:10:00'),(14,14,1,100000,'00:30:00'),(15,14,2,30000,'00:10:00'),(16,15,1,100000,'00:30:00'),(17,15,2,30000,'00:10:00'),(18,15,3,400000,'01:30:00'),(19,16,1,100000,'00:30:00'),(20,16,2,30000,'00:10:00'),(21,16,3,400000,'01:30:00'),(22,17,1,100000,'00:30:00'),(23,17,2,30000,'00:10:00'),(24,19,1,100000,'00:30:00'),(25,19,2,30000,'00:10:00'),(26,6,3,30000,'00:10:00'),(27,20,1,100000,'00:30:00'),(28,21,1,100000,'00:30:00'),(29,21,2,30000,'00:10:00'),(30,22,1,100000,'00:30:00'),(31,23,1,100000,'00:30:00'),(32,24,1,100000,'00:30:00'),(33,25,1,100000,'00:30:00'),(34,26,1,100000,'00:30:00'),(35,26,2,30000,'00:10:00');
+INSERT INTO `bookingdetails` VALUES (36,17,3,400000,'01:30:00'),(37,17,4,300000,'01:30:00');
 /*!40000 ALTER TABLE `bookingdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,13 +216,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `contacts` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `FullName` varchar(45) NOT NULL,
   `Phone` varchar(11) NOT NULL,
   `Email` varchar(45) NOT NULL,
-  `Status` tinyint NOT NULL,
+  `Status` tinyint(4) NOT NULL,
   `CreateDate` date NOT NULL,
   `Note` varchar(455) DEFAULT NULL,
   PRIMARY KEY (`Id`)
@@ -199,9 +245,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `customers` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `FullName` varchar(45) NOT NULL,
   `Email` varchar(145) NOT NULL,
   `Phone` varchar(11) NOT NULL,
@@ -225,18 +271,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `employees` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `FullName` varchar(45) NOT NULL,
-  `Gender` tinyint NOT NULL,
+  `Gender` tinyint(4) NOT NULL,
   `Image` varchar(145) NOT NULL,
   `Phone` varchar(11) NOT NULL,
   `Address` varchar(45) NOT NULL,
-  `Salary` int NOT NULL,
+  `Salary` int(11) NOT NULL,
   `StartDate` date NOT NULL,
-  `StatusWork` tinyint NOT NULL,
-  `RolesId` int NOT NULL,
+  `StatusWork` tinyint(4) NOT NULL,
+  `RolesId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `FK_Emloyee_Role_idx` (`RolesId`),
   CONSTRAINT `FK_Emloyee_Role` FOREIGN KEY (`RolesId`) REFERENCES `roles` (`Id`)
@@ -260,7 +306,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `new_view`;
 /*!50001 DROP VIEW IF EXISTS `new_view`*/;
 SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
+SET character_set_client = utf8mb4;
 /*!50001 CREATE VIEW `new_view` AS SELECT 
  1 AS `Id`,
  1 AS `CreateDate`,
@@ -281,9 +327,9 @@ SET character_set_client = @saved_cs_client;
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `roles` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -305,13 +351,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `services` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ServiceName` varchar(45) NOT NULL,
   `Price` float NOT NULL,
   `Time` time NOT NULL,
-  `Status` tinyint NOT NULL,
+  `Status` tinyint(4) NOT NULL,
   `Image` varchar(145) NOT NULL,
   `Note` varchar(455) DEFAULT NULL,
   PRIMARY KEY (`Id`)
@@ -334,7 +380,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `statusbooking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `statusbooking` (
   `Id` varchar(5) NOT NULL,
   `StatusName` varchar(45) NOT NULL,
@@ -358,9 +404,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `voting`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `voting` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -382,12 +428,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `voucherdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `voucherdetail` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `VoucherId` varchar(5) NOT NULL,
-  `CustomerId` int NOT NULL,
-  `Status` tinyint NOT NULL DEFAULT '0',
+  `CustomerId` int(11) NOT NULL,
+  `Status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id`),
   KEY `FK_VoucherDetail_Voucher_idx` (`VoucherId`),
   KEY `FK_VoucherDetail_Customer_idx` (`CustomerId`),
@@ -412,7 +458,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vouchers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `vouchers` (
   `Id` varchar(5) NOT NULL,
   `Price` float NOT NULL,
@@ -431,6 +477,42 @@ LOCK TABLES `vouchers` WRITE;
 INSERT INTO `vouchers` VALUES ('HAI',10000,100000,'A'),('HAI1',10000,100000,'A'),('HAI2',10000,100000,'A'),('HUY',20000,50000,'B'),('NAM1',1000,800000,'H'),('NAM2',50000,10000,'D'),('NAW',30000,100000,'C');
 /*!40000 ALTER TABLE `vouchers` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `booking_detail_views`
+--
+
+/*!50001 DROP VIEW IF EXISTS `booking_detail_views`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `booking_detail_views` AS select `b`.`Id` AS `BookingID`,`b`.`CreateDate` AS `CreateDate`,`b`.`TotalPrice` AS `TotalPrice`,`b`.`TotalTime` AS `TotalTime`,`b`.`Time` AS `Time`,`b`.`Note` AS `Note`,`c`.`FullName` AS `CustomerName`,`c`.`Email` AS `CustomerEmail`,`c`.`Phone` AS `CustomerPhone`,`r`.`Name` AS `StylistName`,`ser`.`ServiceName` AS `ServiceName`,`s`.`StatusName` AS `StatusName` from ((((((`booking` `b` join `customers` `c` on((`b`.`CustormerId` = `c`.`Id`))) join `employees` `e` on((`b`.`StylistId` = `e`.`RolesId`))) join `roles` `r` on((`r`.`Id` = `b`.`StylistId`))) join `statusbooking` `s` on((`b`.`StatusId` = `s`.`Id`))) join `bookingdetails` `bd` on((`b`.`Id` = `bd`.`BookingId`))) join `services` `ser` on((`bd`.`ServiceId` = `ser`.`Id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `booking_views`
+--
+
+/*!50001 DROP VIEW IF EXISTS `booking_views`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `booking_views` AS select `b`.`Id` AS `BookingID`,`b`.`CreateDate` AS `CreateDate`,`b`.`TotalPrice` AS `TotalPrice`,`b`.`TotalTime` AS `TotalTime`,`b`.`Time` AS `Time`,`b`.`Note` AS `Note`,`c`.`FullName` AS `CustomerName`,`c`.`Email` AS `CustomerEmail`,`c`.`Phone` AS `CustomerPhone`,`r`.`Name` AS `StylistName`,`s`.`StatusName` AS `StatusName` from (((`booking` `b` join `customers` `c` on((`b`.`CustormerId` = `c`.`Id`))) join `roles` `r` on((`r`.`Id` = `b`.`StylistId`))) join `statusbooking` `s` on((`b`.`StatusId` = `s`.`Id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `bookingbystylist`
@@ -477,4 +559,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-08 16:08:00
+-- Dump completed on 2021-12-10 21:58:12

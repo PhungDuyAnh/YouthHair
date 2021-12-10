@@ -116,6 +116,10 @@ public class BookingRestController {
 		return bookingDTO;
 	}
 
+	@PutMapping("/updateToCan/{id}")
+	public void updateBookingToCAN(@PathVariable int id){
+		System.out.println(id);
+		bookingService.updateCAN(id);
+	}
 
-	
 }
