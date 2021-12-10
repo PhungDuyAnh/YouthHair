@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.PathVariable;
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
 import poly.datn.service.dto.BookingDTO;
@@ -88,4 +89,6 @@ public interface BookingService {
 	List<Booking> getAllBookingIAT();
 
     BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO);
+
+    Booking updateCAN(int id);
 }

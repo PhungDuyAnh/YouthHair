@@ -363,8 +363,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		}
 	}
-
-
 	$scope.voucherPay={}
 	var voucherIdPay = null;
 	$scope.pay={
@@ -530,7 +528,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.booking = {
 		purchase() {
 			var bookings = angular.copy($scope.form2);
-			alert(bookings.time)
 			const value1 = moment($scope.form2.time).format('DD/MM/yyyy HH:mm:ss');
 			bookings.time=value1;
 			const value = moment($scope.form2.createDate).format('YYYY-MM-DD');
@@ -540,7 +537,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
 				bookings.employee1=$scope.form2.employee1;
-				alert(value1)
 
 			} else {
 				bookings.totalTime = 0;
@@ -560,20 +556,29 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					$scope.bookingUCF= resp.data;
 					console.log( $scope.bookingUCF)
 				})
-				console.log($scope.bookingUCF)
-				console.log($scope.form2)
-				console.log($scope.cart.items)
 				//add data => BE
-					console.log("oke roi")
 					$http.post("/rest/booking/updateToWFC", bookings).then(resp => {
-						alert("Cập nhật thành công !");
+						alert("Xác nhận thành công !");
 						$scope.cart.clear();
+						$scope.initialize();
 					}).catch(error => {
 						alert("Cập nhật thất bại!")
 						// $scope.form.data = null;
 						console.log(error);
 					})
 			}
+		}
+	}
+
+	$scope.updateCAN=function (item){
+		var item1=angular.copy(item);
+		if (confirm("Bạn có muốn huỷ lịch chờ này không?")){
+			$http.put(`/rest/booking/updateToCan/${item1.id}`,item1).then(resp=>{
+				var index = $scope.items2.findIndex(a => a.id == item1.id);
+				$scope.items2[index] = item;
+				alert("Huỷ thành công !")
+				$scope.initialize();
+			})
 		}
 	}
 })
