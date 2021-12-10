@@ -6,7 +6,7 @@
 
 	<div class="card-body">
 		<div class="row" >
-			<div class="col-xl-3 col-md-6 mb-4" ng-repeat="sty in stylist" ng-value="showInfoCustomerCutting()">
+			<div class="col-xl-3 col-md-6 mb-4" ng-repeat="sty in stylist" ng-value="showInfoCustomerIAT()">
 				<div class="card border-left-primary shadow h-100" >
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 text-xl font-weight-bold text-primary">{{sty.fullName}}</h6>
@@ -19,23 +19,23 @@
 					<div class="card-body">
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
-								<div ng-if="cusIAT[$index] == null">
+								<div ng-if="customerInfoIAT[$index].customer == null">
 							        <div class="mb-0 font-weight-bold text-info">									
 										Đang rảnh.
 									</div>
 							    </div>
 								<div class="text-xs mb-0 font-weight-bold text-gray-800">									
-									{{cusIAT[$index].customer.fullName}} 
+									{{customerInfoIAT[$index].customer.fullName}} 
 								</div>
 								<div class="text-xs font-weight-bold text-success mb-1">
-									{{cusIAT[$index].customer.phone}} 
+									{{customerInfoIAT[$index].customer.phone}} 
 								</div>
 							</div>
 							<div class="col-auto">
 								<a style="cursor: pointer;" data-toggle="modal" data-target="#StylistModal" ng-click="getDataBookingWaitting(sty.id)">
 									<i class="fas fa-calendar-plus fa-2x text-primary"></i>
 								</a> 
-								<a style="cursor: pointer;" ng-click="tickDone(cusIAT[$index])">
+								<a style="cursor: pointer;" ng-click="tickDoneIAT(customerInfoIAT[$index]);">
 									<i class="fas fa-check-circle fa-2x text-success"></i>
 								</a>
 							</div>
