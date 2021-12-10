@@ -232,9 +232,9 @@ public class BookingServiceImpl implements BookingService {
 				booking1.setTotalTime(bookingDTO.getTotalTime());
 				booking1.setStatusbooking(statusBooking);
 				bookingDAO.save(booking1);
-
+				bookingDetailDAO.procedure_delete(bookingDTO.getId());
 				for(int i=0; i<bookingDTO.getListSer().size();i++ ){
-					bookingDetailDAO.deleteById(booking1.getId());
+
 					BookingDetail bookingDetail = new BookingDetail();
 					bookingDetail.setBooking(booking1);
 					bookingDetail.setService(bookingDTO.getListSer().get(i));

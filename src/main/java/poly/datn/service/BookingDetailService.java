@@ -16,4 +16,5 @@ public interface BookingDetailService {
 	List<ServicesIdDTO> getBookingByIDBooking(Integer id);
 
 
+    void procedure_delete(int id);
 }
