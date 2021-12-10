@@ -115,7 +115,7 @@ public class BookingRestController {
 		bookingService.AddInfoBookingUpdate(bookingDTO);
 		return bookingDTO;
 	}
-	
+
 
 	
 }
