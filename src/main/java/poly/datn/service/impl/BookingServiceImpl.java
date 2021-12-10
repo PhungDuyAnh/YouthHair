@@ -1,5 +1,8 @@
 package poly.datn.service.impl;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -220,12 +223,15 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO) {
+		Time time = null;
 		try {
 			Statusbooking statusBooking = statusBookingDAO.StatusbookingbyIdWFC();
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 				booking1.setCreateDate(bookingDTO.getCreateDate());
-				booking1.setTime(bookingDTO.getTime());
+				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
+				time = new Time(date1.getTime());
+				booking1.setTime(time);
 				booking1.setNote(bookingDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingDTO.getTotalPrice());
