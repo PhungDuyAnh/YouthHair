@@ -535,7 +535,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	};
 
 
-	//thực hiện đặt lịch
+	//thực hiện sửa lịch
 	$scope.booking = {
 		purchase() {
 			var bookings = angular.copy($scope.form2);
@@ -577,7 +577,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					$http.post("/rest/booking/updateToWFC", bookings).then(resp => {
 						alert("Cập nhật thành công !");
 						$scope.cart.clear();
-						location.href = "/admin/templates/index.html#!/checkbooking";
 					}).catch(error => {
 						alert("Cập nhật thất bại!")
 						// $scope.form.data = null;
