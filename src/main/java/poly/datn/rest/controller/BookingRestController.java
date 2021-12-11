@@ -116,10 +116,18 @@ public class BookingRestController {
 		return bookingDTO;
 	}
 
+
+	@PostMapping("/updateWFC")
+	public BookingDTO AddBookingInfoWFC(@RequestBody BookingDTO bookingDTO) {
+		bookingService.AddInfoBookingUpdateWFC(bookingDTO);
+		return bookingDTO;
+	}
+
 	@PutMapping("/updateToCan/{id}")
 	public void updateBookingToCAN(@PathVariable int id){
 		System.out.println(id);
 		bookingService.updateCAN(id);
 	}
+
 
 }
