@@ -256,6 +256,37 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
+	public BookingDTO AddInfoBookingUpdateWFC(BookingDTO bookingDTO) {
+		Time time = null;
+		try {
+			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
+			Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
+			booking1.setCreateDate(bookingDTO.getCreateDate());
+			Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
+			time = new Time(date1.getTime());
+			booking1.setTime(time);
+			booking1.setNote(bookingDTO.getNote());
+			booking1.setEmployee1(stylist);
+			booking1.setTotalPrice(bookingDTO.getTotalPrice());
+			booking1.setTotalTime(bookingDTO.getTotalTime());
+			bookingDAO.save(booking1);
+			bookingDetailDAO.procedure_delete(bookingDTO.getId());
+			for(int i=0; i<bookingDTO.getListSer().size();i++ ){
+				BookingDetail bookingDetail = new BookingDetail();
+				bookingDetail.setBooking(booking1);
+				bookingDetail.setService(bookingDTO.getListSer().get(i));
+				bookingDetail.setPrice(bookingDTO.getListSer().get(i).getPrice());
+				bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
+				bookingDetailDAO.save(bookingDetail);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bookingDTO;
+	}
+
+	@Override
 	public Booking updateCAN(int id){
 		Booking booking=bookingDAO.findById(id).get();
 		Statusbooking statusbooking=statusBookingDAO.StatusBookigByIdCAN();

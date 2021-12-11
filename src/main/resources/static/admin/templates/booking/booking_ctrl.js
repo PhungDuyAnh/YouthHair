@@ -2,6 +2,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.items=[];
 	$scope.items1=[];
 	$scope.items2=[];
+	$scope.item3=[];
 	$scope.form={};
 	$scope.form1={};
 	$scope.form2={};
@@ -34,6 +35,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$http.get("/rest/booking/UCF").then(resp=>{
 			$scope.items2=resp.data;
 			$scope.items2.forEach(item => {
+				item.createDate = new Date(item.createDate)
+			})
+		})
+
+		$http.get("/rest/booking").then(resp=>{
+			$scope.item3=resp.data;
+			$scope.item3.forEach(item => {
 				item.createDate = new Date(item.createDate)
 			})
 		})
@@ -137,9 +145,15 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	$scope.showDetail=function (item){
+		$scope.cart.clear();
 		$scope.initialize();
 		item.time= new Date("1970-01-01 "+item.time);
 		$scope.form=angular.copy(item);
+		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
+			for (var i=0;i<resp.data.length;i++){
+				$scope.cart.add(resp.data[i].id)
+			}
+		});
 	}
 	$scope.showDetail1=function (item){
 		$scope.initialize();
@@ -160,14 +174,20 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		});
 	}
 	$scope.showDetail3=function (item){
+		$scope.cart.clear();
 		$scope.initialize();
-		item.time= new Date("1970-01-01 "+item.time);
-		$scope.form3=angular.copy(item);
-	}
-	$scope.showDetail5=function (item){
-		$scope.initialize();
-		item.time= new Date("1970-01-01 "+item.time);
-		$scope.form5=angular.copy(item)
+		if (item !=null){
+			item.time=new Date("1970-01-01 "+item.time);
+			item.createDate=new Date(item.createDate);
+			$scope.form3=angular.copy(item);
+			$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
+				for (var i=0;i<resp.data.length;i++){
+					$scope.cart.add(resp.data[i].id)
+				}
+			});
+		}else{
+			$scope.form3=null;
+		}
 	}
 
 
@@ -561,11 +581,99 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 						alert("Xác nhận thành công !");
 						$scope.cart.clear();
 						$scope.initialize();
+						$("#closeModelUCF").click();
 					}).catch(error => {
 						alert("Cập nhật thất bại!")
 						// $scope.form.data = null;
 						console.log(error);
 					})
+			}
+		},
+		updateWFC() {
+			var bookings = angular.copy($scope.form);
+			const value1 = moment($scope.form.time).format('DD/MM/yyyy HH:mm:ss');
+			bookings.time=value1;
+			const value = moment($scope.form.createDate).format('YYYY-MM-DD');
+			if (toprice > 0) {
+				bookings.totalTime = totime;
+				bookings.totalPrice = toprice;
+				bookings.createDate = value;
+				bookings.listSer = $scope.cart.items;
+				bookings.employee1=$scope.form.employee1;
+
+			} else {
+				bookings.totalTime = 0;
+				bookings.totalPrice = 0;
+			}
+			if (bookings.customer.fullName == null || bookings.customer.email == null
+				|| bookings.createDate == null || bookings.customer.phone == null
+				|| bookings.createDate == undefined || bookings.totalPrice==0) {
+				console.log($scope.form)
+				console.log($scope.cart.items)
+				alert("Vui lòng nhập thông tin đầy đủ")
+
+			} else {
+				//checkBooking UCF by phone
+				$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+					$scope.bookingUCF = {}
+					$scope.bookingUCF= resp.data;
+					console.log( $scope.bookingUCF)
+				})
+				//add data => BE
+				$http.post("/rest/booking/updateWFC", bookings).then(resp => {
+					alert("Cập nhật thành công !");
+					$scope.cart.clear();
+					$scope.initialize();
+					$("#closeModelWFC").click();
+				}).catch(error => {
+					alert("Cập nhật thất bại!")
+					// $scope.form.data = null;
+					console.log(error);
+				})
+			}
+		},
+		capNhatDangCat() {
+			if ($scope.form3!=null){
+				var bookings = angular.copy($scope.form3);
+				const value1 = moment($scope.form3.time).format('DD/MM/yyyy HH:mm:ss');
+				bookings.time=value1;
+				const value = moment($scope.form3.createDate).format('YYYY-MM-DD');
+				if (toprice > 0) {
+					bookings.totalTime = totime;
+					bookings.totalPrice = toprice;
+					bookings.createDate = value;
+					bookings.listSer = $scope.cart.items;
+					bookings.employee1=$scope.form3.employee1;
+				} else {
+					bookings.totalTime = 0;
+					bookings.totalPrice = 0;
+				}
+				if (bookings.customer.fullName == null || bookings.customer.email == null
+					|| bookings.createDate == null || bookings.customer.phone == null
+					|| bookings.createDate == undefined || bookings.totalPrice==0) {
+					alert("Vui lòng nhập thông tin đầy đủ")
+
+				}else{
+					//checkBooking UCF by phone
+					$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+						$scope.bookingUCF = {}
+						$scope.bookingUCF= resp.data;
+						console.log( $scope.bookingUCF)
+					})
+					//add data => BE
+					$http.post("/rest/booking/updateWFC", bookings).then(resp => {
+						alert("Lưu thành công !");
+						$scope.cart.clear();
+						$scope.initialize();
+						$("#closeModalIAT").click();
+					}).catch(error => {
+						alert("Cập nhật thất bại!")
+						// $scope.form.data = null;
+						console.log(error);
+					})
+				}
+			}else {
+				alert("Không có dữ liệu để chỉnh sửa!")
 			}
 		}
 	}

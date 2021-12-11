@@ -82,7 +82,7 @@
 				<div class="modal-header">
 					<h4 class="m-0 font-weight-bold text-primary">Chỉnh sửa chi
 						tiết</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" id="closeModelUCF">&times;</button>
 				</div>
 
 				<!-- Modal body -->
@@ -126,14 +126,14 @@
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="treatment">Chọn Dịch Vụ <span
+							<label class="text-black" >Chọn Dịch Vụ <span
 									class="text-danger">(*)</span></label>
 							<ul class="services-form">
 								<li ng-if="servicesChecked[$index] !=null" ng-repeat="services in db.services"><input type="checkbox"
-								  id="{{services.id}}" ng-click="cart.add(services.id)"
+								  id="xn{{services.id}}" ng-click="cart.add(services.id)"
 								  ng-checked="showBookingWating(form2.id,services.id)>=0"
 								/>
-									<label for="{{services.id}}"> <img src="/assets/images/haircut/2.jpg" />
+									<label for="xn{{services.id}}"> <img ng-src="{{'/assets/images/haircut/' + services.image}}" />
 										<br> {{services.serviceName}}
 									</label></li>
 							</ul>
