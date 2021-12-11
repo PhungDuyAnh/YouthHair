@@ -129,4 +129,9 @@ public class VoucherServiceImpl implements VoucherService{
 	public Voucher findById(String id) {
 		return voucherDAO.findById(id).get();
 	}
+
+	@Override
+	public List<Voucher> seachVoucher(String id){
+		return voucherDAO.seachVoucher(id);
+	}
 }

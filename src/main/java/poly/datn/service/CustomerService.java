@@ -72,5 +72,7 @@ public interface CustomerService {
 
 	<S extends Customer> S save(S entity);
 
+	List<Customer> seachCustomer(String fullName);
+
 }
 

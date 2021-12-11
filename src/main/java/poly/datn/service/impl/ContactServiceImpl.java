@@ -169,7 +169,10 @@ public class ContactServiceImpl implements ContactService{
 	public List<Contact> findContactStatus(Boolean status, String keyword) {
 		return contactDAO.findContactStatus(status, keyword);
 	}
-	
-	
+
+	@Override
+	public  List<Contact> seachContact(String fullName, boolean status){
+		return contactDAO.seachContact(fullName,status);
+	}
 	
 }

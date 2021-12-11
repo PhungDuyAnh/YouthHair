@@ -54,4 +54,8 @@ public class EmployeeeRestController {
 		return employeeService.findStocktotal();
 	}
 
+	@GetMapping("/seachEmployee")
+	public List<Employee> seachEmployee(String fullName){
+		return employeeService.seachEmployee(fullName);
+	}
 }
