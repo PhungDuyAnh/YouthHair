@@ -213,6 +213,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return stockTotalDto;
 	}
 
-
+	@Override
+	public List<Employee> seachEmployee(String fullName){
+		return employeeDAO.seachEmployee(fullName);
+	}
 
 }

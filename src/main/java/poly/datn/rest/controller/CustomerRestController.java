@@ -34,5 +34,8 @@ public class CustomerRestController {
 		return customerSerivce.save(customer);
 	}
 
-	
+	@GetMapping("/rest/customer/seachCustomer")
+	public List<Customer> seachCustomer(String fullName){
+		return customerSerivce.seachCustomer(fullName);
+	}
 }

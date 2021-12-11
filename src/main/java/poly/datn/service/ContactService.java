@@ -72,4 +72,6 @@ public interface ContactService {
 
 	List<Contact> findContactStatus(Boolean status, String keyword);
 
+	List<Contact> seachContact(String fullName, boolean status);
+
 }
