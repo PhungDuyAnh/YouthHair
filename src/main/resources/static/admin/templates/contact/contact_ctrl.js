@@ -3,10 +3,14 @@ app.controller("contact-ctrl",function($scope,$http){
 	$scope.items=[];
 	$scope.form={};
 	$scope.statusContact = '';
-	
+	$scope.seachContact = {
+		status:'true',
+		fullName:''
+	};
+
 	$scope.initialize=function (){
 		//load contacts
-		$http.get(`/rest/contact/${$scope.statusContact}`).then(resp=>{
+		$http.get(`/rest/contact/seachContact?fullName=${$scope.seachContact.fullName}&status=${$scope.seachContact.status}`).then(resp=>{
 			$scope.items = resp.data;
 		});
 	}
@@ -102,4 +106,17 @@ app.controller("contact-ctrl",function($scope,$http){
 	
 	//start
 	$scope.initialize();
+
+	$scope.loadContactByCusName = function (){
+		var item=angular.copy($scope.seachContact);
+		$scope.seachContact.fullName =item.fullName;
+		$scope.pager.first();
+		$scope.initialize();
+	}
+	$scope.loadTableByStatus = function(){
+		var item=angular.copy($scope.seachContact);
+		$scope.seachContact.status = item.status;
+		$scope.initialize();
+		$scope.pager.first();
+	}
 })

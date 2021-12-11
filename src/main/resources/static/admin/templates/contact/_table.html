@@ -7,9 +7,9 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Tìm Kiếm</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-	                    <input type="text" ng-keyup="search"
-						class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
-						aria-label="Search">
+						<input type="text" ng-keyup="search"
+						   class="form-control bg-light border-0 small" placeholder="Nhập tên để tìm kiếm..."
+						   aria-label="Search" ng-model="seachContact.fullName" ng-change="loadContactByCusName()">
                     </div>
                </div>
            </div>
@@ -38,33 +38,33 @@
                         Các Liên Hệ</div>
                     <div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-click="loadTableCXL()">Chưa Xử Lý
+						  <input type="radio" class="form-check-input" name="optradio" ng-model="seachContact.status"  ng-change="loadTableByStatus()" value="false">Chưa Xử Lý
 					  </label>
 					</div>
 					<div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-click="loadTableDXL()">Đã Xử Lý
+						  <input type="radio" class="form-check-input" name="optradio" ng-model="seachContact.status" ng-change="loadTableByStatus()" value="true">Đã Xử Lý
 					  </label>
 					</div>
                </div>
            </div>
 		</div>
-		
+
 	</div>
-	
+
 	<div class="col-xl-10 col-lg-9">
 		<div class="card shadow border-left-info mb-4">
 			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 				<h6 class="m-0 font-weight-bold text-info">Danh Sách Liên Hệ</h6>
 				<div align="right">
-					<span class="font-weight-bold text-primary">Thêm lịch hẹn:</span> 
+					<span class="font-weight-bold text-primary">Thêm lịch hẹn:</span>
 					<button class="btn btn-primary btn-circle" data-toggle="modal" data-target="#NewBookingModal">
 		                <i class="fas fa-calendar-plus"></i>
 		            </button>
                 </div>
 			</div>
 			<div class="card-body">
-				
+
 				<div class="table-responsive">
 					<table class="table table-hover table-striped text-dark text-center">
 						<thead class="thead-dark">
@@ -78,7 +78,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat ="item in pager.items"> 
+							<tr ng-repeat ="item in pager.items">
 								<td>{{item.fullName}}</td>
 								<td>{{item.phone}}</td>
 								<td>{{item.email}}</td>
@@ -97,17 +97,17 @@
 						</tbody>
 					</table>
 					<div class="text-center">
-						<button ng-click="pager.first()" class="btn btn-info btn-circle" ng-disabled="disabledBtnFisrt"> 
+						<button ng-click="pager.first()" class="btn btn-info btn-circle" ng-disabled="disabledBtnFisrt">
 							<i class="fas fa-angle-double-left"></i>
-						</button> 
-						<button ng-click="pager.prev()" class="btn btn-info btn-circle"> 
+						</button>
+						<button ng-click="pager.prev()" class="btn btn-info btn-circle">
 							<i class="fas fa-angle-left"></i>
 						</button>
 						<button class="btn btn-info" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-						<button ng-click="pager.next()" class="btn btn-info btn-circle"> 
+						<button ng-click="pager.next()" class="btn btn-info btn-circle">
 							<i class="fas fa-angle-right"></i>
-						</button> 
-						<button ng-click="pager.last()" class="btn btn-info btn-circle" ng-disabled="disabledBtnLast"> 
+						</button>
+						<button ng-click="pager.last()" class="btn btn-info btn-circle" ng-disabled="disabledBtnLast">
 							<i class="	fas fa-angle-double-right"></i>
 						</button>
 					</div>
@@ -174,13 +174,13 @@
 											<textarea class="form-control" id="note" rows="" ng-model="form.note"
 												cols=""></textarea>
 										</div>
-									</div>										
-								</div>											
+									</div>
+								</div>
 							</div>
 
 							<hr>
 							<div class="text-right">
-								<button class="btn btn-warning" ng-click="update()"> Update </button> 
+								<button class="btn btn-warning" ng-click="update()"> Update </button>
 								<button class="btn btn-danger" ng-click="delete(form)"> Delete </button>
 							</div>
 					</div>

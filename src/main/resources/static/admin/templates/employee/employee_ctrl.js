@@ -15,7 +15,10 @@ app.controller("employee-ctrl",function($scope,$http){
 	$scope.form.statusWork = "";
 	$scope.form.role = "";
 	$scope.form.startDate = "";
-	
+
+    $scope.seachEmployee={
+        fullName:''
+    }
 
     $scope.doSubmitForm = function(event) {
         alert("OK: " + $scope.myForm.$submitted);
@@ -34,7 +37,7 @@ app.controller("employee-ctrl",function($scope,$http){
 
     $scope.initialize = function(){
         //load product
-        $http.get("/rest/employee").then(resp => {
+        $http.get(`/rest/employee/seachEmployee?fullName=${$scope.seachEmployee.fullName}`).then(resp => {
             $scope.items = resp.data;
             $scope.reset();
             $scope.items.forEach(item => {
@@ -228,8 +231,14 @@ app.controller("employee-ctrl",function($scope,$http){
 			$scope.disabledBtnLast = true;
         }
 	}
-	
-	
+
+    //tim kiem
+    $scope.seachEmployeeByName=function (){
+        var item=angular.copy($scope.seachEmployee);
+        $scope.seachEmployee.fullName =item.fullName;
+        $scope.pager.first();
+        $scope.initialize();
+    }
 	
 
 
