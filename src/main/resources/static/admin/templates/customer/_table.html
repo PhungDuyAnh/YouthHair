@@ -8,9 +8,10 @@
 						class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 						Tìm kiếm</div>
 					<div class="h5 mb-0 font-weight-bold text-gray-800">
-						<input type="text" ng-model="searchText"
-							class="form-control bg-light border-0 small"
-							placeholder="Tìm kiếm..." aria-label="Search">
+						<input type="text" ng-model="seachCustomer.fullName"
+						   ng-change="seachCustomerByName()"
+						   class="form-control bg-light border-0 small"
+						   placeholder="Tìm kiếm..." aria-label="Search">
 					</div>
 				</div>
 			</div>

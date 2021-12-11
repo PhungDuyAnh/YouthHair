@@ -4,8 +4,11 @@ app.controller("voucher-ctrl", function ($scope, $http) {
     $scope.disabledId = false;
     $scope.disabledBtnUpdate = true;
     $scope.disabledBtnCreate = false;
+    $scope.seachVoucher={
+        id:''
+    };
     $scope.initialize = function () {
-        $http.get("/rest/voucher").then(resp => {
+        $http.get(`/rest/voucher/seachVoucher?id=${$scope.seachVoucher.id}`).then(resp => {
             $scope.items = resp.data;
         })
     }
@@ -111,6 +114,13 @@ app.controller("voucher-ctrl", function ($scope, $http) {
         }
     }
 
+    //tim kiem
+    $scope.seachVoucherByName=function (){
+        var item=angular.copy($scope.seachVoucher);
+        $scope.seachVoucher.id =item.id;
+        $scope.pager.first();
+        $scope.initialize();
+    }
 })
 
 
