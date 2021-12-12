@@ -336,8 +336,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		})
 	}
 }
-
-
 	$scope.voucherPay={}
 	var voucherIdPay = null;
 	$scope.pay={
@@ -418,7 +416,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 		}
 	}
-	
+
 //Hainv end
 
 

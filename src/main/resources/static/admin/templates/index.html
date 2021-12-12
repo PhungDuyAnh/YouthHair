@@ -39,9 +39,9 @@
 
 </head>
 
-<body id="page-top" ng-app="admin_app">
+<body id="page-top" ng-app="admin_app;login_app" ng-controller="login_ctrl">
 
-<!--
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -297,6 +297,7 @@
 <script type="text/javascript" src="contact/contact_ctrl.js"></script>
 <script type="text/javascript" src="bill/bill_ctrl.js"></script>
 
+<script type="text/javascript" src="assets/controller/login_ctrl.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#export').on('click', function (e) {
