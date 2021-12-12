@@ -294,4 +294,37 @@ public class BookingServiceImpl implements BookingService {
 		bookingDAO.save(booking);
 		return booking;
 	}
+
+	@Override
+	public List<Booking> seachBooking(String toDateStr, String formDateStr, String statusId, String cusName) {
+		java.sql.Date toDate=null;
+		java.sql.Date formDate=null;
+		//check thêm điều kiện
+		if(!toDateStr.equals("undefined")){
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			Date toDateUt = null;
+			Date formDateUt = null;
+			try {
+				toDateUt = format.parse(toDateStr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			toDate = new java.sql.Date(toDateUt.getTime());
+		}
+
+		if(!formDateStr.equals("undefined")){
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			Date formDateUt = null;
+			try {
+				formDateUt = format.parse(formDateStr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			formDate = new java.sql.Date(formDateUt.getTime());
+		}
+
+		List<Booking> bookings = bookingDAO.seachBooking(toDate,formDate,statusId,cusName);
+
+		return bookings;
+	}
 }

@@ -8,9 +8,10 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Tìm Kiếm</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-	                    <input type="text"
-						class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
-						aria-label="Search">
+						<input type="text"
+						   class="form-control bg-light border-0 small" placeholder="Nhập tên để tìm kiếm..."
+						   aria-label="Search"
+						   ng-model="seachBooking.cusName" ng-change="seachBookingByCusName()">
                     </div>
                </div>
            </div>
@@ -39,16 +40,17 @@
                         Lọc dữ liệu theo ngày</div>
                     <p class="text-xl text-info mb-1">Từ</p>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-						<input type="date" class="form-control border-1">
+						<input type="date" class="form-control border-1" ng-model="seachBooking.toDate" ng-change="loadTableToDate()">
                     </div>
                </div> <br>
                <div class=" no-gutters align-items-center">
                     <p class="text-xl text-info mb-1">Đến</p>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-						<input type="date" class="form-control border-1">
+						<input type="date" class="form-control border-1" ng-model="seachBooking.formDate" ng-change="loadTableFormDate()">
                     </div>
                </div>
            </div>
+			<input type="button" value="0000" ng-click="resetSeach()">
 		</div> <br>
 		<div class="card border-left-primary shadow  py-2">
 			<div class="card-body">
@@ -57,12 +59,12 @@
                         Các Hoá Đơn</div>
                     <div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-model="statusBooking" ng-change="loadTableCPM()" value="CPM">Đã Thanh Toán
+						  <input type="radio" class="form-check-input" name="optradio" ng-model="seachBooking.statusBooking" ng-change="loadTableCPM()" value="CPM">Đã Thanh Toán
 					  </label>
 					</div>
 					<div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-model="statusBooking" ng-change="loadTableCAN()" value="CAN">Đã Huỷ
+						  <input type="radio" class="form-check-input" name="optradio" ng-model="seachBooking.statusBooking" ng-change="loadTableCAN()" value="CAN">Đã Huỷ
 					  </label>
 					</div>
                </div>

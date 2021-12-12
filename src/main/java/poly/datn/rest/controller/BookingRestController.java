@@ -129,5 +129,8 @@ public class BookingRestController {
 		bookingService.updateCAN(id);
 	}
 
-
+	@GetMapping("/seachBooking")
+	public List<Booking> seachBooking(String toDateStr, String formDateStr,String statusId, String cusName){
+		return bookingService.seachBooking(toDateStr, formDateStr,statusId,cusName);
+	}
 }

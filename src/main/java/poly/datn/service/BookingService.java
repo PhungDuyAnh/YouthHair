@@ -93,4 +93,6 @@ public interface BookingService {
     BookingDTO AddInfoBookingUpdateWFC(BookingDTO bookingDTO);
 
     Booking updateCAN(int id);
+
+	List<Booking>seachBooking(String toDate, String formDate, String statusId,String cusName);
 }
