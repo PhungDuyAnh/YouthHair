@@ -39,7 +39,7 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
     List<Tuple> bookingIAT();
 
     @Query(value = "SELECT b FROM Booking b WHERE b.customer.phone = ?1  and b.statusbooking.id='UCF' ")
-    Booking checkBookingIAT(String phone);
+    Booking checkBookingUCF(String phone);
     
     @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'IAT' ORDER BY b.employee1.id ASC")
     List<Booking> getAllBookingIAT();
@@ -55,4 +55,7 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
             "and (:statusId is null or b.statusbooking.id = :statusId)" +
             "and (:cusName is null or b.customer.fullName like :cusName%)")
     List<Booking> seachBooking(@Param("toDate") Date toDate, @Param("formDate") Date formDate, @Param("statusId") String statusId, @Param("cusName") String cusName);
+    
+    @Query(value = "SELECT b FROM Booking b  WHERE b.customer.id = :customer and b.statusbooking.id = 'WFC'")
+    Booking findCustomerInBookingWFC(@Param("customer") Integer customer );
 }

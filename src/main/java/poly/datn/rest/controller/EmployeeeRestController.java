@@ -37,7 +37,10 @@ public class EmployeeeRestController {
 		return employeeService.create(employee);
 	}
 	
-	
+	@GetMapping("/allStylist")
+	public List<Employee> employeeConfirm(){
+		return employeeService.bookingByStylist();
+	}
 	
 	@PutMapping("{id}")
 	public Employee update(@PathVariable("id")Integer id,@RequestBody Employee employee) {

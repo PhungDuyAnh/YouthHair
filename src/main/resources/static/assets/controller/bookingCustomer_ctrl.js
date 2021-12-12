@@ -190,7 +190,8 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                         $http.post("/rest/bookingCus", bookings).then(resp => {
                             alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
                             $scope.cart.clear();
-                            location.href = "/booking";
+							$("#closeModalBookingCustomer").click();
+                            //location.href = "/booking";
                         }).catch(error => {
                             alert("Đặt lịch thất bại!")
                             // $scope.form.data = null;
