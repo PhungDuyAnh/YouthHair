@@ -1,6 +1,64 @@
 app = angular.module("booking_Customer_app", [])
 app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
+	$scope.getMinMaxTime = {
+		today: new Date(),
+		minDate: '',
+		maxDate: '',
+		
+		FuncMinDate(){
+			var input = document.getElementById("txtDate");
+	        var dd = this.today.getDate() + 1;
+	        var mm = this.today.getMonth() + 1;
+	        var yyyy = this.today.getFullYear();
+	        
+			if (this.today.getHours() > 21){
+				dd = this.today.getDate() + 2;
+	        }
+	        if (dd < 10) {
+	            dd = '0' + dd;
+	        }
+	        if (mm < 10) {
+	            mm = '0' + mm;
+	        }
+	        
+	        this.minDate = yyyy + '-' + mm + '-' + dd;
+	        input.setAttribute("min", this.minDate);
+			return this.minDate;
+		},
+		
+		FuncMaxDate(){
+			var input = document.getElementById("txtDate");
+			var mmMax = this.today.getMonth() + 2;
+	        var ddMax = this.today.getDate() - 1;
+	        var yyyy = this.today.getFullYear();
+	        
+	        if (mmMax > 12) { 
+	            mmMax = this.today.getMonth() - 10;
+	            yyyy = this.today.getFullYear() + 1;
+	        }               
+	        if (mmMax < 10) {
+	    		if (mmMax == 2) {
+	    			ddMax = this.today.getDate() - 3;
+	            }
+	            mmMax = '0' + mmMax;
+	        }
+	        if (ddMax < 10) {
+	        	if(ddMax <= 0){
+	        		ddMax = this.today.getDate(); 
+	        	}
+	        	ddMax = '0' + ddMax;
+	        }
+	
+	        this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
+	        input.setAttribute("max", this.maxDate);
+		}
+	}
+	
+	
+	$scope.getMinMaxTime.FuncMinDate();
+	$scope.getMinMaxTime.FuncMaxDate();
+	
     var totime;
     var toprice;
 
@@ -51,14 +109,13 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         email: null,
         fullName: null,
         phone: null,
-        createDate: new Date(),
+        createDate: new Date($scope.getMinMaxTime.minDate),
         note: null,
         stylistId: null,
         totalPrice: null,
         totalTime: null,
         listSer: []
     };
-
 
     // $scope.form.fullName = "";
     // $scope.form.phone = "";
@@ -207,4 +264,6 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             }
         }
     }
+
+	
 });
