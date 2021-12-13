@@ -77,7 +77,8 @@
 
 
 <!-- The Modal BookingEdit -->
-	<div class="modal" id="BookingEditModal">
+	<div id="BookingEditModal" class="modal fade" tabindex="-1" role="dialog"
+		 aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 
@@ -139,12 +140,7 @@
 							</div>
 						</div>
 
-						<div class="row form-group">
-							<div class="col-md-12">
-								<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">{{cart.totalTime}} phút</span></h5>
-								<h4 class="text-black" >Tổng Tiền: <span class="text-warning">{{cart.amount | number:0}} VNĐ</span></h4>
-							</div>
-						</div>
+
 
 						<div class="row form-group">
 							<div class="col-md-12">
@@ -163,6 +159,13 @@
 									class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 							</div>
 						</div>
+
+					<div class="row form-group">
+						<div class="col-md-12">
+							<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">{{cart.totalTime}} phút</span></h5>
+							<h4 class="text-black" >Tổng Tiền: <span class="text-warning">{{cart.amount | number:0}} VNĐ</span></h4>
+						</div>
+					</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
