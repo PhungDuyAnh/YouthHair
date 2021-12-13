@@ -51,24 +51,14 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/contact")
-	public String contact(@ModelAttribute Contact contact, Model model) {
-//		model.addAttribute("contact", contact);
+	public String contact(Model model) {
+
 		return "layout/contact";
 	}
-	
-//	@PostMapping("/contact/save")
-//	public String saveContact(
-//			Contact contact
-//			) {
-//		
-//			contactService.save(new Contact(new Date(), contact.getEmail(), contact.getFullName(), contact.getNote(), contact.getPhone(), false));
-//			
-//			return "redirect:/"; 
-//		
-//	}
-	
+
 	@RequestMapping("/about")
-	public String about() {
+	public String about(Model model) {
+		model.addAttribute("stylists", employeeService.findAll());
 		
 		return "layout/about";
 	}
@@ -84,11 +74,6 @@ public class IndexController {
 		return "layout/booking";
 	}
 
-//	@RequestMapping("/profile")
-//	public String profile() {
-//
-//		return "layout/profile";
-//	}
 
 	@RequestMapping("/admin")
 	public String admin() {

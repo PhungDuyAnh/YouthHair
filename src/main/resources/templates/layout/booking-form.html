@@ -21,7 +21,7 @@
             <div class="row" >
                 <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;" class="col-md-6 col-lg-4 mb-5 mb-lg-5" th:each="sty,state:${stylist}"
                      ><!--th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}" >-->
-                    <div class=" p-4 p-lg-5 site-block-feature-7" align="center"
+                    <div class="h-100 p-4 p-lg-5 site-block-feature-7" align="center"
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 30%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
                         <input ng-model="form.StylistId" hidden="true" th:attr="ng-value=${sty.id}"/>
