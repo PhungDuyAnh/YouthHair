@@ -89,6 +89,10 @@
 				</div>
 
 				<!-- Modal body -->
+				<form class="css-form" name="myForm"
+					  ng-submit="myForm.$valid" novalidate>
+
+
 				<div class="modal-body p-5">
 
 						<div class="row form-group">
@@ -122,6 +126,9 @@
 								<label class="text-black" for="time">Khung Giờ Làm Tóc</label> <input
 									type="time" id="time" class="form-control datepicker px-2" ng-model="form3.time"
 									placeholder="Khung Giờ Làm Tóc..." readonly>
+								<span ng-show="myForm.$submitted ">
+      									<span ng-show="myForm.time.$error.required" class="error-msg">Bạn chưa chọn thời gian dịch vụ.</span>
+								</span>
 							</div>
 						</div>
 
@@ -175,6 +182,7 @@
 						</div>
 
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

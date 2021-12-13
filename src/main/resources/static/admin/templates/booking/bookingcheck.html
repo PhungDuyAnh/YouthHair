@@ -86,6 +86,8 @@
 				</div>
 
 				<!-- Modal body -->
+				<form class="css-form" name="myForm"
+					  ng-submit="myForm.$valid" novalidate>
 				<div class="modal-body p-5">
 
 					<div class="row form-group">
@@ -118,9 +120,12 @@
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="time">Khung Giờ Làm Tóc <span
-									class="text-danger">(*)</span></label> <input type="time" ng-model="form2.time"
+									class="text-danger">(*)</span></label> <input type="time" ng-model="form2.time" ng-required="true"
 																				  class="form-control " id="time" name="time"
 																				  placeholder="Khung Giờ Làm Tóc...">
+							<span ng-show="myForm.$submitted ">
+								<span ng-show="myForm.time.$error.required" class="error-msg">Bạn chưa chọn thời gian dịch vụ.</span>
+							</span>
 						</div>
 					</div>
 
@@ -177,7 +182,9 @@
 					</div>
 
 				</div>
+				</form>
 			</div>
+
 		</div>
 	</div>
 </div>
