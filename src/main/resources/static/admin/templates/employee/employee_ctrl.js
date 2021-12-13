@@ -130,7 +130,8 @@ app.controller("employee-ctrl",function($scope,$http){
             
             $(".nav-tabs a:eq(1)").tab('show');
         })
-    }
+    	}
+    
     
     
     

@@ -61,7 +61,7 @@
 				<tbody>
 					<tr ng-repeat="item in pager.items | filter:searchText " >						
                 		<td>{{item.fullName}}</td>
-                		<td>{{item.gender}}</td>
+                		<td>{{item.gender==true?'Nam':'Nữ'}}</td>
                 		<td>{{item.phone}}</td>
                 		<td>{{item.address}}</td>
                 		<td>{{item.startDate | date:'dd-MM-yyyy'}}</td>
