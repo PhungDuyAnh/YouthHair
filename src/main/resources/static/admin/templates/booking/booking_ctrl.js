@@ -564,13 +564,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 			if (bookings.customer.fullName == null || bookings.customer.email == null
 				|| bookings.createDate == null || bookings.customer.phone == null
-				|| bookings.createDate == undefined || bookings.totalPrice==0) {
+				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.time=="Invalid date") {
 				console.log($scope.form2)
 				console.log($scope.cart.items)
 				alert("Vui lòng nhập thông tin đầy đủ")
 
 			} else {
 				//checkBooking UCF by phone
+				alert(bookings.time)
 				$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
 					$scope.bookingUCF = {}
 					$scope.bookingUCF= resp.data;
@@ -607,7 +608,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 			if (bookings.customer.fullName == null || bookings.customer.email == null
 				|| bookings.createDate == null || bookings.customer.phone == null
-				|| bookings.createDate == undefined || bookings.totalPrice==0) {
+				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.time=="Invalid date") {
 				console.log($scope.form)
 				console.log($scope.cart.items)
 				alert("Vui lòng nhập thông tin đầy đủ")
@@ -650,7 +651,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				}
 				if (bookings.customer.fullName == null || bookings.customer.email == null
 					|| bookings.createDate == null || bookings.customer.phone == null
-					|| bookings.createDate == undefined || bookings.totalPrice==0) {
+					|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.time=="Invalid date") {
 					alert("Vui lòng nhập thông tin đầy đủ")
 
 				}else{
