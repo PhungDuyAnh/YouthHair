@@ -572,7 +572,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			} else {
 				//checkBooking UCF by phone
 				alert(bookings.time)
-				$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+				$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
 					$scope.bookingUCF = {}
 					$scope.bookingUCF= resp.data;
 					console.log( $scope.bookingUCF)
@@ -615,7 +615,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 			} else {
 				//checkBooking UCF by phone
-				$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+				$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
 					$scope.bookingUCF = {}
 					$scope.bookingUCF= resp.data;
 					console.log( $scope.bookingUCF)
@@ -656,7 +656,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 				}else{
 					//checkBooking UCF by phone
-					$http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+					$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
 						$scope.bookingUCF = {}
 						$scope.bookingUCF= resp.data;
 						console.log( $scope.bookingUCF)
