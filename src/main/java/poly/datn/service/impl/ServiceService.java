@@ -98,4 +98,14 @@ public class ServiceService implements IServiceService {
     public List<Services> seachServiceByName(String serviceName) {
         return serviceDAO.seachSericesByName(serviceName);
     }
+
+	@Override
+	public List<Services> findServicesActive() {
+		return serviceDAO.findServicesActive();
+	}
+
+	@Override
+	public List<Services> findServicesActiveTop3() {
+		return serviceDAO.findServicesActiveTop3();
+	}
 }
