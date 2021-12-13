@@ -38,7 +38,7 @@ public class EmployeeeRestController {
 	}
 	
 	@GetMapping("/allStylist")
-	public List<Employee> employeeConfirm(){
+	public List<Employee> stylistActive(){
 		return employeeService.bookingByStylist();
 	}
 	
