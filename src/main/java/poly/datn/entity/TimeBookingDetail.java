@@ -3,8 +3,6 @@ package poly.datn.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +32,8 @@ public class TimeBookingDetail implements Serializable {
 	private Integer stylistId;
 	
 	private Integer timeBookingId;
-	
+
+	private Date date;
 	
 	//bi-directional many-to-one association to Customer
 //	@ManyToOne
