@@ -74,7 +74,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 			if(!checkNullBooking(booking )) {
 				Booking booking1= new Booking();
 				booking1.setCreateDate(bookingCustomerDTO.getCreateDate());
-				booking1.setTime(null);
+//				booking1.setTime(null);
 				booking1.setNote(bookingCustomerDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingCustomerDTO.getTotalPrice());
@@ -90,7 +90,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bookingDetail.setBooking(booking1);
 					bookingDetail.setService(bookingCustomerDTO.getListSer().get(i));
 					bookingDetail.setPrice(bookingCustomerDTO.getListSer().get(i).getPrice());
-					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
+//					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
 					bDetailDAO.save(bookingDetail);
 				}}else{
 

@@ -79,7 +79,7 @@ public class BookingContactServiceImpl  implements BookingContactService{
 				booking1.setCreateDate(bookingContactDTO.getCreateDate());
 				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingContactDTO.getTime());
 				time = new Time(date1.getTime());
-				booking1.setTime(time);
+//				booking1.setTime(time);
 				booking1.setNote(bookingContactDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingContactDTO.getTotalPrice());
@@ -95,7 +95,7 @@ public class BookingContactServiceImpl  implements BookingContactService{
 					bookingDetail.setBooking(booking1);
 					bookingDetail.setService(bookingContactDTO.getListSer().get(i));
 					bookingDetail.setPrice(bookingContactDTO.getListSer().get(i).getPrice());
-					bookingDetail.setTime(bookingContactDTO.getListSer().get(i).getTime());
+//					bookingDetail.setTime(bookingContactDTO.getListSer().get(i).getTime());
 					bDetailDAO.save(bookingDetail);
 				}}else{
 

@@ -232,7 +232,7 @@ public class BookingServiceImpl implements BookingService {
 				booking1.setCreateDate(bookingDTO.getCreateDate());
 				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
 				time = new Time(date1.getTime());
-				booking1.setTime(time);
+//				booking1.setTime(time);
 				booking1.setNote(bookingDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingDTO.getTotalPrice());
@@ -245,7 +245,7 @@ public class BookingServiceImpl implements BookingService {
 					bookingDetail.setBooking(booking1);
 					bookingDetail.setService(bookingDTO.getListSer().get(i));
 					bookingDetail.setPrice(bookingDTO.getListSer().get(i).getPrice());
-					bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
+//					bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
 					bookingDetailDAO.save(bookingDetail);
 				}
 
@@ -264,7 +264,7 @@ public class BookingServiceImpl implements BookingService {
 			booking1.setCreateDate(bookingDTO.getCreateDate());
 			Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
 			time = new Time(date1.getTime());
-			booking1.setTime(time);
+//			booking1.setTime(time);
 			booking1.setNote(bookingDTO.getNote());
 			booking1.setEmployee1(stylist);
 			booking1.setTotalPrice(bookingDTO.getTotalPrice());
@@ -276,7 +276,7 @@ public class BookingServiceImpl implements BookingService {
 				bookingDetail.setBooking(booking1);
 				bookingDetail.setService(bookingDTO.getListSer().get(i));
 				bookingDetail.setPrice(bookingDTO.getListSer().get(i).getPrice());
-				bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
+//				bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
 				bookingDetailDAO.save(bookingDetail);
 			}
 
