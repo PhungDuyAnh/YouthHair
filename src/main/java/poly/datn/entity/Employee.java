@@ -36,6 +36,8 @@ public class Employee implements Serializable {
 	private String address;
 
 	private String fullName;
+	
+	private String nickname;
 
 	private Boolean gender;
 
@@ -55,11 +57,11 @@ public class Employee implements Serializable {
 	@OneToMany(mappedBy="employee1")
 	@JsonIgnore
 	private List<Booking> bookings;
-
-	//bi-directional one-to-one association to Booking
-//	@OneToOne(mappedBy="employee2")
-//	@JsonIgnore
-//	private Booking booking;
+	
+	//bi-directional many-to-one association to Workassign
+	@OneToMany(mappedBy="employee")
+	@JsonIgnore
+	private List<Workassign> workassign;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne

@@ -33,7 +33,7 @@ public class Booking implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
 
-	private Time time;
+	private String timeBooking;
 	
 	private String note;
 
