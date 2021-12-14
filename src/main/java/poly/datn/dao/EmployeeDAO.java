@@ -21,6 +21,6 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer> {
             "FROM Employee e left join Booking b on e.id = b.employee1.id where e.statusWork = true and e.role.id=2")
     List<Tuple> getAllStylistST();
 
-    @Query(value = "SELECT e FROM Employee e WHERE :fullName is null or e.fullName like :fullName% ")
+    @Query(value = "SELECT e FROM Employee e WHERE :fullName is null or e.fullName like %:fullName% ")
     List<Employee> seachEmployee(@Param("fullName") String fullName);
 }

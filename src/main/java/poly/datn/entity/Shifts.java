@@ -31,11 +31,11 @@ public class Shifts implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Employee
-	@OneToMany(mappedBy="shifts_Workassign")
+	@OneToMany(mappedBy="shifts")
 	@JsonIgnore
 	private List<Workassign> workassign;
 
-	@OneToMany(mappedBy="shifts_TimeBooking")
+	@OneToMany(mappedBy="shifts")
 	@JsonIgnore
 	private List<TimeBooking> TimeBooking;
 

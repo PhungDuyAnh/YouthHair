@@ -34,7 +34,7 @@ public class TimeBooking implements Serializable {
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="shifts_Id")
-	private Shifts shifts_TimeBooking;
+	private Shifts shifts;
 
 
 }

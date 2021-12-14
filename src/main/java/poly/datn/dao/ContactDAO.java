@@ -15,6 +15,6 @@ public interface ContactDAO extends JpaRepository<Contact, Integer> {
 			+ "ORDER BY c.createDate ASC")
 	List<Contact> findContactStatus(Boolean status, @Param("keyword") String keyword);
 
-	@Query(value = "SELECT c FROM Contact c WHERE (:fullName is null or c.fullName like :fullName%) and (:status is null or c.status = :status) ")
+	@Query(value = "SELECT c FROM Contact c WHERE (:fullName is null or c.fullName like %:fullName%) and (:status is null or c.status = :status) ")
 	List<Contact> seachContact(@Param("fullName") String fullName, @Param("status") boolean status);
 }
