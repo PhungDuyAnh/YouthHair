@@ -15,13 +15,28 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 			if (this.today.getHours() > 21){
 				dd = this.today.getDate() + 2;
 	        }
-	        if (dd < 10) {
-	            dd = '0' + dd;
-	        }
+
+			if(dd > 31){
+				dd = this.today.getDate() - 30;
+				mm = this.today.getMonth() + 2;
+			}else{
+				mm = this.today.getMonth() + 1;
+			}
+						
 	        if (mm < 10) {
+				if(mm == 2){
+					if(dd > 28){
+						dd = this.today.getDate() - 27;
+						mm = this.today.getMonth() + 2;
+					}
+					
+				}
 	            mm = '0' + mm;
 	        }
 	        
+	        if (dd < 10) {
+	            dd = '0' + dd;
+	        }
 	        this.minDate = yyyy + '-' + mm + '-' + dd;
 	        input.setAttribute("min", this.minDate);
 			return this.minDate;
@@ -34,13 +49,34 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 	        var yyyy = this.today.getFullYear();
 	        
 	        if (mmMax > 12) { 
-	            mmMax = this.today.getMonth() - 10;
-	            yyyy = this.today.getFullYear() + 1;
-	        }               
-	        if (mmMax < 10) {
-	    		if (mmMax == 2) {
-	    			ddMax = this.today.getDate() - 3;
-	            }
+				if(ddMax <= 23){
+	            	mmMax = this.today.getMonth() + 1;
+					ddMax = this.today.getDate() + 7;
+	            	yyyy = this.today.getFullYear();
+				}else{
+					ddMax = this.today.getDate() - 24;
+		            mmMax = this.today.getMonth() - 10;
+		            yyyy = this.today.getFullYear() + 1;
+				}
+	        }else{
+				if(ddMax <= 23){
+	            	mmMax = this.today.getMonth() + 1;
+					ddMax = this.today.getDate() + 7;
+	            	yyyy = this.today.getFullYear();
+					if(mmMax == 2){
+						ddMax = this.today.getDate() - 20;
+						mmMax = this.today.getMonth() + 2;
+					}
+				}else{
+					ddMax = this.today.getDate() - 23;
+		            mmMax = this.today.getMonth() + 2;
+					if(mmMax == 3){
+						ddMax = this.today.getDate() - 21;
+					}
+				}
+				
+			}               
+	        if (mmMax < 10) {	    		
 	            mmMax = '0' + mmMax;
 	        }
 	        if (ddMax < 10) {
@@ -52,6 +88,8 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 	
 	        this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
 	        input.setAttribute("max", this.maxDate);
+			console.log("minDate: " + this.minDate);
+			console.log("maxDate: " + this.maxDate);
 		}
 	}
 	
