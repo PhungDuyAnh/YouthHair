@@ -1,14 +1,4 @@
 <div class="container">
-
-	<style>
-.error-msg {
-	font-size: 90%;
-	font-style: italic;
-	color: red;
-}
-</style>
-
-
 	<!-- Outer Row -->
 	<div class="row justify-content-center" ng-app="admin-app">
 
@@ -45,7 +35,7 @@
 											ng-model="form.fullName" id="name"
 											placeholder="Tên Nhân Viên" ng-required="true" /> <span
 											ng-show="myForm.$submitted "> <span
-											ng-show="myForm.myFullName.$error.required" class="error-msg">Bạn
+											ng-show="myForm.myFullName.$error.required" class="text-danger">Bạn
 												chưa nhập tên.</span>
 										</span>
 									</div>
@@ -59,7 +49,7 @@
 														ng-value="true" ng-required="true" />Nam<br> <span
 														ng-show="myForm.$submitted "> <span
 															ng-show="myForm.available.$error.required"
-															class="error-msg">Chưa chọn giới tính.</span>
+															class="text-danger">Chưa chọn giới tính.</span>
 													</span>
 													</label>
 												</div>
@@ -69,7 +59,7 @@
 														ng-value="false" ng-required="true" />Nữ<br> <span
 														ng-show="myForm.$submitted "> <span
 															ng-show="myForm.available.$error.required"
-															class="error-msg">Chưa chọn giới tính.</span>
+															class="text-danger">Chưa chọn giới tính.</span>
 													</span>
 													</label>
 												</div>
@@ -84,7 +74,7 @@
 													
 
                             						<span ng-show="myForm.$submitted">
-                                    					<p ng-show="myForm.salary.$invalid"class="error-msg">Không để trống giá khuyến mãi,giá trị nhỏ nhất là 1.</p>
+                                    					<p ng-show="myForm.salary.$invalid"class="text-danger">Không để trống giá khuyến mãi,giá trị nhỏ nhất là 1.</p>
                             						</span>
                             						
                             													
@@ -102,12 +92,12 @@
 													ng-minlength="10" ng-maxlength="10" ng-pattern="/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/" 
 													ng-required="true" /> <span ng-show="myForm.$submitted ">
 													<span ng-show="myForm.phone.$error.required"
-													class="error-msg">Bạn chưa nhập số điện thoại.</span>
+													class="text-danger">Bạn chưa nhập số điện thoại.</span>
 												</span> <span class="error-msg"
 													ng-show="myForm.phone.$dirty && myForm.phone.$error.pattern">
-													Vui lòng nhập đúng định dạng số điện thoại! </span> <span class="error-msg"
+													Vui lòng nhập đúng định dạng số điện thoại! </span> <span class="text-danger"
 													ng-show="myForm.phone.$error.minlength">Nhập ít nhất
-													10 số. </span> <span class="error-msg"
+													10 số. </span> <span class="text-danger"
 													ng-show="myForm.phone.$error.maxlength"> Độ dài tối
 													đa là 10 số. </span>
 											</div>
@@ -119,7 +109,7 @@
 													class="form-control" id="address" placeholder="Địa Chỉ"
 													ng-required="true" /> <span ng-show="myForm.$submitted ">
 													<span ng-show="myForm.adress.$error.required"
-													class="error-msg">Bạn chưa nhập địa chỉ.</span>
+													class="text-danger">Bạn chưa nhập địa chỉ.</span>
 												</span>
 
 											</div>
@@ -134,7 +124,7 @@
 														ng-required="true" />True <span
 														ng-show="myForm.$submitted "> <span
 															ng-show="myForm.optradio.$error.required"
-															class="error-msg">Bạn chưa chọn trạng thái.</span>
+															class="text-danger">Bạn chưa chọn trạng thái.</span>
 
 													</span>
 													</label>
@@ -146,7 +136,7 @@
 														ng-required="true" /> False <span
 														ng-show="myForm.$submitted "> <span
 															ng-show="myForm.optradio.$error.required"
-															class="error-msg">Bạn chưa chọn trạng thái.</span>
+															class="text-danger">Bạn chưa chọn trạng thái.</span>
 													</span>
 													</label>
 												</div>
@@ -167,7 +157,7 @@
 															trò</option>
 														<option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
 													</select> <span ng-show="myForm.$submitted "> <span
-													ng-show="myForm.role.$error.required" class="error-msg">Bạn
+													ng-show="myForm.role.$error.required" class="text-danger">Bạn
 														chưa chọn vai trò.</span>
 												</span>
 
@@ -182,7 +172,7 @@
 
 												<span ng-show="myForm.$submitted "> <span
 													ng-show="myForm.startDate.$error.required"
-													class="error-msg">Bạn chưa chọn ngày bắt đầu làm.</span>
+													class="text-danger">Bạn chưa chọn ngày bắt đầu làm.</span>
 												</span>
 											</div>
 										</div>

@@ -16,6 +16,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.itemConfirm=[];
 
 	var toprice;
+	$scope.lichlamviec=[];
+	$scope.disctinctDate=[];
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -67,6 +69,22 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$http.get("/rest/booking/bookingIAT").then(resp=>{
 			$scope.listCutting = resp.data;
 		})
+		
+		
+		
+		$http.get("/rest/Workassign/disctinctDate").then(resp => {
+            $scope.disctinctDate = resp.data;
+			for(var i = 0; i < resp.data.length; i++){
+				$http.get(`/rest/Workassign/stylist/${resp.data[i].date}`).then(response => {
+		            $scope.lichlamviec = response.data;
+					console.log(response.data);
+		        });
+				console.log(resp.data[i].date);
+			}
+        });
+		
+		
+        
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
@@ -690,4 +708,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		}
 	}
+	
+	
 })

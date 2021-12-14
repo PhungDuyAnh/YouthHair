@@ -1,7 +1,12 @@
 package poly.datn.service.impl;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -15,7 +20,10 @@ import poly.datn.entity.*;
 import poly.datn.service.VoucherDetailService;
 import poly.datn.service.WorkassignService;
 import poly.datn.service.dto.BookingCustomerDTO;
+import poly.datn.service.dto.BookingDetailServiceDTO;
+import poly.datn.service.dto.BookingIatDTO;
 import poly.datn.service.dto.VoucherDetailInfoDTO;
+import poly.datn.service.dto.WorkassignDateDTO;
 
 @Service
 public class WorkassignServiceImpl implements WorkassignService{
@@ -31,6 +39,28 @@ public class WorkassignServiceImpl implements WorkassignService{
 	@Override
 	public Workassign save(Workassign workassign) {
 		return workassignDAO.save(workassign);
+	}
+
+	@Override
+	public List<Workassign> checkWorkassignNull(Integer id) {
+		return workassignDAO.checkWorkassignNull(id);
+	}
+
+	
+	public List<WorkassignDateDTO> disctinctDate() {
+		List<Tuple> stockDateTuples = workassignDAO.disctinctDate();
+		List<WorkassignDateDTO> stockTotalDto = stockDateTuples.stream()
+				.map(t -> new WorkassignDateDTO(
+						t.get(0, Date.class)
+				))
+				.collect(Collectors.toList());
+		
+		return stockTotalDto;
+	}
+
+	@Override
+	public List<Workassign> findWorkassignStylist(Date date) {
+		return workassignDAO.findWorkassignStylist(date);
 	}
 
 	
