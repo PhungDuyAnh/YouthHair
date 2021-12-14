@@ -164,5 +164,8 @@ public class StatusBookingServiceImpl implements StatusBookingService {
 	public <S extends Statusbooking> List<S> findAll(Example<S> example, Sort sort) {
 		return statusBookingDAO.findAll(example, sort);
 	}
-	
+	@Override
+	public Statusbooking StatusbookingbyIdWFC() {
+		return statusBookingDAO.StatusbookingbyIdWFC();
+	}
 }

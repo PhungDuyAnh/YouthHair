@@ -171,4 +171,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDAO.save(customer);
 	}
 
+	@Override
+	public List<Customer> seachCustomer(String fullName){
+		return customerDAO.seachCustomer(fullName);
+	}
+
 }

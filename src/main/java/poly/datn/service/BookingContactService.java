@@ -1,13 +1,13 @@
 package poly.datn.service;
 
-import poly.datn.entity.Booking;
-import poly.datn.service.dto.BookingCustomerDTO;
-import poly.datn.service.dto.BookingIatDTO;
-
 import java.util.List;
 
-public interface BookingCustomerService {
-	BookingCustomerDTO AddInfoBookingCustomer(BookingCustomerDTO bookingCustomerDTO);
+import poly.datn.entity.Booking;
+import poly.datn.service.dto.BookingContactDTO;
+import poly.datn.service.dto.BookingIatDTO;
+
+public interface BookingContactService {
+	BookingContactDTO AddInfoBookingCustomer(BookingContactDTO bookingContactDTO);
 	Booking bookingStatusIAT(Integer id);
 	List<BookingIatDTO> bookingIAT();
 

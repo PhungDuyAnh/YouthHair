@@ -10,6 +10,7 @@ import poly.datn.dao.BookingDetailDAO;
 import poly.datn.entity.BookingDetail;
 import poly.datn.service.BookingDetailService;
 import poly.datn.service.dto.BookingDetailServiceDTO;
+import poly.datn.service.dto.ServicesIdDTO;
 
 import javax.persistence.Tuple;
 
@@ -36,5 +37,22 @@ public class BookingDetailServiceImpl implements BookingDetailService {
 				.collect(Collectors.toList());
 
 		return stockTotalDto;
+	}
+
+	@Override
+	public List<ServicesIdDTO> getBookingByIDBooking(Integer id) {
+		List<Tuple> stockTotalTuples = bookingDetailDAO.getBookingByIDBooking(id);
+		List<ServicesIdDTO> stockTotalDto = stockTotalTuples.stream()
+				.map(t -> new ServicesIdDTO(
+						t.get(0, Integer.class)
+				))
+				.collect(Collectors.toList());
+
+		return stockTotalDto;
+	}
+
+	@Override
+	public void procedure_delete(int id) {
+		bookingDetailDAO.procedure_delete(id);
 	}
 }

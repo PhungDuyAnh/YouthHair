@@ -12,8 +12,8 @@
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-hover table-secondary text-dark text-center">
-				<thead>
+			<table class="table table-hover table-striped text-dark text-center">
+				<thead class="thead-dark">
 					<tr>
 						<th>Khách Hàng</th>
 						<th>Stylist</th>
@@ -25,7 +25,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<tr class="table-primary" ng-repeat="item in pager1.items1 | filter:searchText" >
+				<tr ng-repeat="item in pager1.items1 | filter:searchText" >
 					<td>{{item.customer.fullName}}</td>
 					<td>{{item.employee1.fullName}}</td>
 					<td>{{item.totalTime}}</td>
@@ -60,7 +60,7 @@
 				</button> <button ng-click="pager1.prev()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-left"></i>
 				</button>
-				<button class="btn btn-primary" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
+				<button class="btn btn-primary" disabled="disabled">{{pager1.page + 1}} of {{pager1.count}}</button>
 				<button ng-click="pager1.next()" class="btn btn-primary btn-circle"> <i
 						class="fas fa-angle-right"></i>
 				</button> <button ng-click="pager1.last()" class="btn btn-primary btn-circle"> <i
@@ -180,12 +180,19 @@
 
 					<div class="row form-group">
 						<div class="col-md-6">
-							<label id="left" class="text-black" for="voucher" >Voucher</label>
-<!--							<select class="form-control" id="voucher" ng-options="x.id for x in voucherByCus" ng-model = "formCPM.voucherId" >-->
-<!--&lt;!&ndash;								 	<option  value="">Chon Voucher</option>&ndash;&gt;-->
-<!--&lt;!&ndash;									<option  ng-repeat="x in voucherByCus" >&ndash;&gt;-->
-<!--&lt;!&ndash;										{{x.id}}</option>&ndash;&gt;-->
-<!--							</select>-->
+							<h5 id="left" class="text-black" for="voucher" >Voucher: 
+								<a style="cursor: pointer;" data-toggle="modal" data-target="#VoucherModal">
+								<b ng-if="tenbuadi == ''"  class="text-secondary">
+									VoucherID 
+								</b>
+								<b ng-if="tenbuadi != ''"  class="text-primary">
+									{{tenbuadi}}
+								</b>								
+								
+								</a> 
+							</h5>
+							
+							<!-- 
 							<ul class="services-form" >
 								<li ng-repeat="item in voucherByCus">
 									<input type="checkbox"  id="{{item.id}}" ng-click="pay.add(item);totalPricebyVoucher.totalPrice1()"/>
@@ -194,7 +201,7 @@
 										{{item.id}}
 									</label></li>
 
-							</ul>
+							</ul> -->
 						</div>
 						<div class="col-md-6 text-center">
 							<h5 class="text-black" >Tổng Thời Gian: <br> <span class="text-info">{{form1.totalTime}}</span></h5>
@@ -211,6 +218,31 @@
 						</div>
 					</div>
 
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Voucher Modal-->
+<div class="modal fade" id="VoucherModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-center" id="exampleModalLabel">Chọn Voucher</h5>
+				<button class="close" id="closeVoucherModal" type="button" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<a style="cursor: pointer;" 
+					class="btn btn-info btn-block" 
+					ng-repeat="item in voucherByCus" 
+					ng-click="pay.add(item);
+								totalPricebyVoucher.totalPrice1()">
+					<i class="fas fa-user-tie"></i> {{item.id}}</a>
 			</div>
 		</div>
 	</div>

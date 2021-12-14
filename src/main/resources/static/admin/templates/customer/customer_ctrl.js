@@ -10,9 +10,12 @@ app.controller("customer-ctrl",function($scope,$http){
             id: ""
         }
 	};
+	$scope.seachCustomer={
+		fullName:''
+	};
 	$scope.initialize=function (){
 		//load customer
-		$http.get("/rest/customer").then(resp=>{
+		$http.get(`/rest/customer/seachCustomer?fullName=${$scope.seachCustomer.fullName}`).then(resp=>{
 			$scope.items = resp.data;
 		})
 		//load voucher
@@ -111,5 +114,13 @@ app.controller("customer-ctrl",function($scope,$http){
 			$scope.disabledBtnFisrt = false;
 			$scope.disabledBtnLast = true;
 		}
+	}
+
+	//tim kiem
+	$scope.seachCustomerByName=function (){
+		var item=angular.copy($scope.seachCustomer);
+		$scope.seachCustomer.fullName =item.fullName;
+		$scope.pager.first();
+		$scope.initialize();
 	}
 })

@@ -8,17 +8,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import poly.datn.entity.Booking;
+import poly.datn.entity.BookingDetail;
 import poly.datn.entity.Employee;
 import poly.datn.entity.Statusbooking;
 import poly.datn.service.*;
+import poly.datn.service.dto.BookingCustomerDTO;
+import poly.datn.service.dto.BookingDTO;
 
 @RestController
 @RequestMapping("/rest/booking")
@@ -109,5 +109,28 @@ public class BookingRestController {
 	public  List<Booking> getAllBookingIAT(){
 		return bookingService.getAllBookingIAT();
 	}
-	
+
+	@PostMapping("/updateToWFC")
+	public BookingDTO AddBookingInfo(@RequestBody BookingDTO bookingDTO) {
+		bookingService.AddInfoBookingUpdate(bookingDTO);
+		return bookingDTO;
+	}
+
+
+	@PostMapping("/updateWFC")
+	public BookingDTO AddBookingInfoWFC(@RequestBody BookingDTO bookingDTO) {
+		bookingService.AddInfoBookingUpdateWFC(bookingDTO);
+		return bookingDTO;
+	}
+
+	@PutMapping("/updateToCan/{id}")
+	public void updateBookingToCAN(@PathVariable int id){
+		System.out.println(id);
+		bookingService.updateCAN(id);
+	}
+
+	@GetMapping("/seachBooking")
+	public List<Booking> seachBooking(String toDateStr, String formDateStr,String statusId, String cusName){
+		return bookingService.seachBooking(toDateStr, formDateStr,statusId,cusName);
+	}
 }

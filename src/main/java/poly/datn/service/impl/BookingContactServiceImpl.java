@@ -5,20 +5,23 @@ import org.springframework.stereotype.Service;
 
 import poly.datn.dao.*;
 import poly.datn.entity.*;
+import poly.datn.service.BookingContactService;
 import poly.datn.service.BookingCustomerService;
+import poly.datn.service.dto.BookingContactDTO;
 import poly.datn.service.dto.BookingCustomerDTO;
 import poly.datn.service.dto.BookingIatDTO;
 import poly.datn.service.dto.StylistDTO;
 
 import javax.persistence.Tuple;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 
-public class BookingCustomerServiceImpl  implements BookingCustomerService{
+public class BookingContactServiceImpl  implements BookingContactService{
 
 	@Autowired
 	BookingDAO bookingDao;
@@ -47,50 +50,52 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 		return booking != null ? true :false;
 	}
 
-	public BookingCustomerDTO AddInfoBookingCustomer(BookingCustomerDTO bookingCustomerDTO) {
-
+	public BookingContactDTO AddInfoBookingCustomer(BookingContactDTO bookingContactDTO) {
+		Time time = null;
 		try {
-			Customer cus = cusDAO.customerByPhone(bookingCustomerDTO.getPhone());
+			Customer cus = cusDAO.customerByPhone(bookingContactDTO.getPhone());
 			Booking booking = null;
 			if(!checkNullCustomer(cus)) {
 				Customer cus1 = new Customer();
-				cus1.setFullName(bookingCustomerDTO.getFullName());
-				cus1.setEmail(bookingCustomerDTO.getEmail());
-				cus1.setPhone(bookingCustomerDTO.getPhone());
+				cus1.setFullName(bookingContactDTO.getFullName());
+				cus1.setEmail(bookingContactDTO.getEmail());
+				cus1.setPhone(bookingContactDTO.getPhone());
 				cusDAO.save(cus1);
-				booking = bookingDao.bookingByCustomer(cus1.getId());
+				booking = bookingDao.findCustomerInBookingWFC(cus1.getId());
 				System.out.println(cus1.getId());
 			}else {
-				if(cus.getEmail()!= bookingCustomerDTO.getEmail()) {
-					cus.setFullName(bookingCustomerDTO.getFullName());
-					cus.setEmail(bookingCustomerDTO.getEmail());
+				if(cus.getEmail()!= bookingContactDTO.getEmail()) {
+					cus.setFullName(bookingContactDTO.getFullName());
+					cus.setEmail(bookingContactDTO.getEmail());
 					cusDAO.save(cus);
-					booking = bookingDao.bookingByCustomer(cus.getId());
+					booking = bookingDao.findCustomerInBookingWFC(cus.getId());
 				}
 			}
-			Statusbooking statusBooking = statusDAO.StatusbookingbyId();
-			Employee stylist = empDAO.employeeByIdStylist(bookingCustomerDTO.getStylistId());
-			Customer cus1 = cusDAO.customerByPhone(bookingCustomerDTO.getPhone());
+			Statusbooking statusBooking = statusDAO.StatusbookingbyIdWFC();
+			Employee stylist = empDAO.employeeByIdStylist(bookingContactDTO.getStylistId());
+			Customer cus1 = cusDAO.customerByPhone(bookingContactDTO.getPhone());
 			if(!checkNullBooking(booking )) {
 				Booking booking1= new Booking();
-				booking1.setCreateDate(bookingCustomerDTO.getCreateDate());
-				booking1.setTime(null);
-				booking1.setNote(bookingCustomerDTO.getNote());
+				booking1.setCreateDate(bookingContactDTO.getCreateDate());
+				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingContactDTO.getTime());
+				time = new Time(date1.getTime());
+				booking1.setTime(time);
+				booking1.setNote(bookingContactDTO.getNote());
 				booking1.setEmployee1(stylist);
-				booking1.setTotalPrice(bookingCustomerDTO.getTotalPrice());
-				booking1.setTotalTime(bookingCustomerDTO.getTotalTime());
+				booking1.setTotalPrice(bookingContactDTO.getTotalPrice());
+				booking1.setTotalTime(bookingContactDTO.getTotalTime());
 				booking1.setCustomer(cus1);
 				booking1.setStatusbooking(statusBooking);
 				booking1.setVoting(null);
 				booking1.setVoucherdetails(null);
 				bookingDao.save(booking1);
 
-				for(int i=0; i<bookingCustomerDTO.getListSer().size();i++ ){
+				for(int i=0; i<bookingContactDTO.getListSer().size();i++ ){
 					BookingDetail bookingDetail = new BookingDetail();
 					bookingDetail.setBooking(booking1);
-					bookingDetail.setService(bookingCustomerDTO.getListSer().get(i));
-					bookingDetail.setPrice(bookingCustomerDTO.getListSer().get(i).getPrice());
-					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
+					bookingDetail.setService(bookingContactDTO.getListSer().get(i));
+					bookingDetail.setPrice(bookingContactDTO.getListSer().get(i).getPrice());
+					bookingDetail.setTime(bookingContactDTO.getListSer().get(i).getTime());
 					bDetailDAO.save(bookingDetail);
 				}}else{
 
@@ -101,7 +106,7 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return bookingCustomerDTO;
+		return bookingContactDTO;
 	}
 
 

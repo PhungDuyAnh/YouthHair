@@ -1,5 +1,8 @@
 package poly.datn.service.impl;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,16 +14,29 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import poly.datn.dao.BookingDAO;
-import poly.datn.entity.Booking;
-import poly.datn.entity.Employee;
+import poly.datn.dao.BookingDetailDAO;
+import poly.datn.dao.EmployeeDAO;
+import poly.datn.dao.StatusBookingDAO;
+import poly.datn.entity.*;
 import poly.datn.service.BookingService;
+import poly.datn.service.dto.BookingDTO;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
 	@Autowired
 	BookingDAO bookingDAO;
+
+	@Autowired
+	EmployeeDAO employeeDAO;
+
+	@Autowired
+	BookingDetailDAO bookingDetailDAO;
+
+	@Autowired
+	StatusBookingDAO statusBookingDAO;
 
 	@Override
 	public <S extends Booking> S save(S entity) {
@@ -204,5 +220,111 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Booking> getAllBookingIAT() {
 		return bookingDAO.getAllBookingIAT();
+	}
+
+	@Override
+	public BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO) {
+		Time time = null;
+		try {
+			Statusbooking statusBooking = statusBookingDAO.StatusbookingbyIdWFC();
+			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
+				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
+				booking1.setCreateDate(bookingDTO.getCreateDate());
+				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
+				time = new Time(date1.getTime());
+				booking1.setTime(time);
+				booking1.setNote(bookingDTO.getNote());
+				booking1.setEmployee1(stylist);
+				booking1.setTotalPrice(bookingDTO.getTotalPrice());
+				booking1.setTotalTime(bookingDTO.getTotalTime());
+				booking1.setStatusbooking(statusBooking);
+				bookingDAO.save(booking1);
+				bookingDetailDAO.procedure_delete(bookingDTO.getId());
+				for(int i=0; i<bookingDTO.getListSer().size();i++ ){
+					BookingDetail bookingDetail = new BookingDetail();
+					bookingDetail.setBooking(booking1);
+					bookingDetail.setService(bookingDTO.getListSer().get(i));
+					bookingDetail.setPrice(bookingDTO.getListSer().get(i).getPrice());
+					bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
+					bookingDetailDAO.save(bookingDetail);
+				}
+
+	} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bookingDTO;
+	}
+
+	@Override
+	public BookingDTO AddInfoBookingUpdateWFC(BookingDTO bookingDTO) {
+		Time time = null;
+		try {
+			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
+			Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
+			booking1.setCreateDate(bookingDTO.getCreateDate());
+			Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
+			time = new Time(date1.getTime());
+			booking1.setTime(time);
+			booking1.setNote(bookingDTO.getNote());
+			booking1.setEmployee1(stylist);
+			booking1.setTotalPrice(bookingDTO.getTotalPrice());
+			booking1.setTotalTime(bookingDTO.getTotalTime());
+			bookingDAO.save(booking1);
+			bookingDetailDAO.procedure_delete(bookingDTO.getId());
+			for(int i=0; i<bookingDTO.getListSer().size();i++ ){
+				BookingDetail bookingDetail = new BookingDetail();
+				bookingDetail.setBooking(booking1);
+				bookingDetail.setService(bookingDTO.getListSer().get(i));
+				bookingDetail.setPrice(bookingDTO.getListSer().get(i).getPrice());
+				bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
+				bookingDetailDAO.save(bookingDetail);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bookingDTO;
+	}
+
+	@Override
+	public Booking updateCAN(int id){
+		Booking booking=bookingDAO.findById(id).get();
+		Statusbooking statusbooking=statusBookingDAO.StatusBookigByIdCAN();
+		booking.setStatusbooking(statusbooking);
+		bookingDAO.save(booking);
+		return booking;
+	}
+
+	@Override
+	public List<Booking> seachBooking(String toDateStr, String formDateStr, String statusId, String cusName) {
+		java.sql.Date toDate=null;
+		java.sql.Date formDate=null;
+		//check thêm điều kiện
+		if(!toDateStr.equals("undefined")){
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			Date toDateUt = null;
+			Date formDateUt = null;
+			try {
+				toDateUt = format.parse(toDateStr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			toDate = new java.sql.Date(toDateUt.getTime());
+		}
+
+		if(!formDateStr.equals("undefined")){
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			Date formDateUt = null;
+			try {
+				formDateUt = format.parse(formDateStr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			formDate = new java.sql.Date(formDateUt.getTime());
+		}
+
+		List<Booking> bookings = bookingDAO.seachBooking(toDate,formDate,statusId,cusName);
+
+		return bookings;
 	}
 }

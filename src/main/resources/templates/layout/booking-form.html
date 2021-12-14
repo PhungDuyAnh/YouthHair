@@ -21,7 +21,7 @@
             <div class="row" >
                 <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;" class="col-md-6 col-lg-4 mb-5 mb-lg-5" th:each="sty,state:${stylist}"
                      ><!--th:attr="ng-value=@{|Stylist.addSty(${sty.id})|}" >-->
-                    <div class=" p-4 p-lg-5 site-block-feature-7" align="center"
+                    <div class="h-100 p-4 p-lg-5 site-block-feature-7" align="center"
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 30%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
                         <input ng-model="form.StylistId" hidden="true" th:attr="ng-value=${sty.id}"/>
@@ -44,7 +44,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" id="closeModalBookingCustomer" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
@@ -147,6 +147,89 @@
                         Tiền: </label> <span>{{cart.amount}} VNĐ</span>
                     </div>
                 </div>
+                
+                <div class="row form-group">
+					<div class="col-md-12">
+						<label class="text-black" for="treatment">Chọn Đánh Giá <span
+								class="text-danger">(*)</span></label>
+							<ul class="status-form text-center" >	
+								<li><input type="radio" name="timeBooking" id="8h00" /> <label
+									for="8h00" class="btn-secondary btn-lg"> 8h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="8h30" /> <label
+									for="8h30" class="btn-secondary btn-lg"> 8h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="9h00" /> <label
+									for="9h00" class="btn-secondary btn-lg"> 9h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="9h30" /> <label
+									for="9h30" class="btn-secondary btn-lg"> 9h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="10h00" /> <label
+									for="10h00" class="btn-secondary btn-lg"> 10h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="10h30" /> <label
+									for="10h30" class="btn-secondary btn-lg"> 10h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="11h00" /> <label
+									for="11h00" class="btn-secondary btn-lg"> 11h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="11h30" /> <label
+									for="11h30" class="btn-secondary btn-lg"> 11h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="13h00" /> <label
+									for="13h00" class="btn-secondary btn-lg"> 13h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="13h30" /> <label
+									for="13h30" class="btn-secondary btn-lg"> 13h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="14h00" /> <label
+									for="14h00" class="btn-secondary btn-lg"> 14h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="14h30" /> <label
+									for="14h30" class="btn-secondary btn-lg"> 14h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="15h00" /> <label
+									for="15h00" class="btn-secondary btn-lg"> 15h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="15h30" /> <label
+									for="15h30" class="btn-secondary btn-lg"> 15h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="16h00" /> <label
+									for="16h00" class="btn-secondary btn-lg"> 16h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="16h30" /> <label
+									for="16h30" class="btn-secondary btn-lg"> 16h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="17h00" /> <label
+									for="17h00" class="btn-secondary btn-lg"> 17h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="17h30" /> <label
+									for="17h30" class="btn-secondary btn-lg"> 17h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="18h00" /> <label
+									for="18h00" class="btn-secondary btn-lg"> 18h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="18h30" /> <label
+									for="18h30" class="btn-secondary btn-lg"> 18h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="19h00" /> <label
+									for="19h00" class="btn-secondary btn-lg"> 19h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="19h30" /> <label
+									for="19h30" class="btn-secondary btn-lg"> 19h30
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="20h00" /> <label
+									for="20h00" class="btn-secondary btn-lg"> 20h00
+								</label> </li>
+								<li><input type="radio" name="timeBooking" id="20h30" /> <label
+									for="20h30" class="btn-secondary btn-lg"> 20h30
+								</label> </li>
+							</ul>
+						
+					</div>
+				</div>
+                
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label class="text-black" for="note">Ghi Chú</label>
@@ -170,54 +253,5 @@
 </div>
 </form>
 
-<script type="text/javascript">
-    var input = document.getElementById("txtDate");
-
-	function myFunction() {
-	    var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        
-		if (today.getHours() > 21){
-			dd = today.getDate() + 1;
-        }
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        
-        var minDate = yyyy + '-' + mm + '-' + dd;
-        input.setAttribute("min", minDate);
-        
-        var mmMax = today.getMonth() + 2;
-        var ddMax = today.getDate() - 1;
-        
-        if (mmMax > 12) { 
-            mmMax = today.getMonth() - 10;
-            yyyy = today.getFullYear() + 1;
-        }               
-        if (mmMax < 10) {
-    		if (mmMax == 2) {
-    			ddMax = today.getDate() - 3;
-            }
-            mmMax = '0' + mmMax;
-        }
-        if (ddMax < 10) {
-        	if(ddMax <= 0){
-        		ddMax = today.getDate(); 
-        	}
-        	ddMax = '0' + ddMax;
-        }
-
-        var maxDate = yyyy + '-' + mmMax + '-' + ddMax;
-        input.setAttribute("max", maxDate);
-        input.setAttribute("value", minDate);
-	}
-	
-	myFunction();
-</script>
 </body>
 </html>

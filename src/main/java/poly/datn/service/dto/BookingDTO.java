@@ -1,27 +1,41 @@
 package poly.datn.service.dto;
 
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import poly.datn.entity.Employee;
+import poly.datn.entity.Services;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookingDTO {
 
-    private String customer;
+    //booking
 
-    private String employee;
+    private Integer id;
 
-    private String stylistName;
+    private Date createDate;
 
-    private String totalTime;
+    private String note;
 
-    private String totalPrice;
+    //Employee
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private List<Employee> employee1;
 
-    private String createDate;
+    private float totalPrice;
 
-    private String status;
+    private Time totalTime;
 
+    private String time;
+
+    //Service
+    private List<Services> listSer;
 
 
 }

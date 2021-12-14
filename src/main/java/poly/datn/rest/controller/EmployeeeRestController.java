@@ -37,7 +37,10 @@ public class EmployeeeRestController {
 		return employeeService.create(employee);
 	}
 	
-	
+	@GetMapping("/allStylist")
+	public List<Employee> stylistActive(){
+		return employeeService.bookingByStylist();
+	}
 	
 	@PutMapping("{id}")
 	public Employee update(@PathVariable("id")Integer id,@RequestBody Employee employee) {
@@ -54,4 +57,8 @@ public class EmployeeeRestController {
 		return employeeService.findStocktotal();
 	}
 
+	@GetMapping("/seachEmployee")
+	public List<Employee> seachEmployee(String fullName){
+		return employeeService.seachEmployee(fullName);
+	}
 }

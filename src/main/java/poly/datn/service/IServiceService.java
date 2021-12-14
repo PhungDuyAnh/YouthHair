@@ -23,5 +23,7 @@ public interface IServiceService {
 
     List<Services> seachServiceByName(String serviceName);
 
+    List<Services> findServicesActive();
 
+	List<Services> findServicesActiveTop3();
 }

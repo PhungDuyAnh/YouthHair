@@ -7,9 +7,9 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Tìm Kiếm</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-	                    <input type="text" ng-keyup="search"
-						class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
-						aria-label="Search">
+						<input type="text" ng-keyup="search"
+						   class="form-control bg-light border-0 small" placeholder="Nhập tên để tìm kiếm..."
+						   aria-label="Search" ng-model="seachContact.fullName" ng-change="loadContactByCusName()">
                     </div>
                </div>
            </div>
@@ -38,36 +38,30 @@
                         Các Liên Hệ</div>
                     <div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-click="loadTableCXL()">Chưa Xử Lý
+						  <input type="radio" class="form-check-input" name="optradio" ng-model="seachContact.status"  ng-change="loadTableByStatus()" value="false">Chưa Xử Lý
 					  </label>
 					</div>
 					<div class="form-check">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" ng-click="loadTableDXL()">Đã Xử Lý
+						  <input type="radio" class="form-check-input" name="optradio" ng-model="seachContact.status" ng-change="loadTableByStatus()" value="true">Đã Xử Lý
 					  </label>
 					</div>
                </div>
            </div>
 		</div>
-		
+
 	</div>
-	
+
 	<div class="col-xl-10 col-lg-9">
 		<div class="card shadow border-left-info mb-4">
 			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-				<h6 class="m-0 font-weight-bold text-info">Danh Sách Liên Hệ</h6>
-				<div align="right">
-					<span class="font-weight-bold text-primary">Thêm lịch hẹn:</span> 
-					<button class="btn btn-primary btn-circle" data-toggle="modal" data-target="#NewBookingModal">
-		                <i class="fas fa-calendar-plus"></i>
-		            </button>
-                </div>
+				<h6 class="m-0 font-weight-bold text-info">Danh Sách Liên Hệ</h6>				
 			</div>
 			<div class="card-body">
-				
+
 				<div class="table-responsive">
-					<table class="table table-hover table-secondary text-dark text-center">
-						<thead>
+					<table class="table table-hover table-striped text-dark text-center">
+						<thead class="thead-dark">
 							<tr>
 								<th>Họ Tên Khách Hàng</th>
 								<th>Số Điện Thoại</th>
@@ -78,13 +72,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="table-info" ng-repeat ="item in pager.items"> 
+							<tr ng-repeat ="item in pager.items">
 								<td>{{item.fullName}}</td>
 								<td>{{item.phone}}</td>
 								<td>{{item.email}}</td>
 								<td>{{item.status == true ? 'Đã Xử lý' : 'Chưa Xử Lý'}}</td>
 								<td>{{item.createDate}}</td>
 								<td>
+									<button class="btn btn-primary btn-circle" ng-click="showBookingSave(item)"
+										data-toggle="modal" data-target="#NewBookingModal">
+						                <i class="fas fa-calendar-plus"></i>
+						            </button>
 									<button ng-click="showDetail(item)"
 										class="btn btn-info btn-circle" data-toggle="modal"
 										data-target="#infoContactModal"> <i class="fas fa-info-circle"></i>
@@ -97,17 +95,17 @@
 						</tbody>
 					</table>
 					<div class="text-center">
-						<button ng-click="pager.first()" class="btn btn-info btn-circle" ng-disabled="disabledBtnFisrt"> 
+						<button ng-click="pager.first()" class="btn btn-info btn-circle" ng-disabled="disabledBtnFisrt">
 							<i class="fas fa-angle-double-left"></i>
-						</button> 
-						<button ng-click="pager.prev()" class="btn btn-info btn-circle"> 
+						</button>
+						<button ng-click="pager.prev()" class="btn btn-info btn-circle">
 							<i class="fas fa-angle-left"></i>
 						</button>
 						<button class="btn btn-info" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-						<button ng-click="pager.next()" class="btn btn-info btn-circle"> 
+						<button ng-click="pager.next()" class="btn btn-info btn-circle">
 							<i class="fas fa-angle-right"></i>
-						</button> 
-						<button ng-click="pager.last()" class="btn btn-info btn-circle" ng-disabled="disabledBtnLast"> 
+						</button>
+						<button ng-click="pager.last()" class="btn btn-info btn-circle" ng-disabled="disabledBtnLast">
 							<i class="	fas fa-angle-double-right"></i>
 						</button>
 					</div>
@@ -119,72 +117,3 @@
 </div>
 
 
-<!-- Info Contact Modal-->
-<div class="modal fade" id="infoContactModal" tabindex="-1" role="dialog"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Thông Tin Liên Hệ</h5>
-				<button class="close" type="button" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="p-5">
-						<div class="text-center">
-							<h1 class="h4 text-gray-900 mb-4">Chi Tiết Liên Hệ!</h1>
-						</div>
-							<div class="form-group">
-								<label class="form-label" for="name">Tên Khách Hàng </label> <input type="text"
-									class="form-control" id="name" ng-model="form.fullName"
-									placeholder="Tên Khách Hàng..." readonly>
-							</div>
-							<div class="form-group">
-								<label class="form-label" for="email">Email </label> <input type="email"
-									class="form-control " id="email" ng-model="form.email"
-									placeholder="Nhập Email..." readonly>
-							</div>
-							<div class="form-group">
-								<label class="form-label" for="phone">Số Điện Thoại </label> <input type="text"
-									class="form-control " id="phone" ng-model="form.phone"
-									placeholder="Nhập Số Điện Thoại..." readonly>
-							</div>
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="form-group">
-										<label class="form-label" for="name">Trạng Thái</label>
-										<div class="form-check">
-											<input ng-model="form.status" type="radio" class="form-check-input" id="radio1"
-												name="status" ng-value="false" > <label
-												class="form-check-label" for="radio1">Chưa Xử Lý</label>
-										</div>
-										<div class="form-check">
-											<input ng-model="form.status" type="radio" class="form-check-input" id="radio2"
-												name="status" ng-value="true">
-											<label class="form-check-label" for="radio2">Đã Xử Lý</label>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-8">
-									<div class="form-group">
-										<div class="form-group">
-											<label class="form-label" for="note">Ghi Chú</label>
-											<textarea class="form-control" id="note" rows="" ng-model="form.note"
-												cols=""></textarea>
-										</div>
-									</div>										
-								</div>											
-							</div>
-
-							<hr>
-							<div class="text-right">
-								<button class="btn btn-warning" ng-click="update()"> Update </button> 
-								<button class="btn btn-danger" ng-click="delete(form)"> Delete </button>
-							</div>
-					</div>
-			</div>
-		</div>
-	</div>
-</div>

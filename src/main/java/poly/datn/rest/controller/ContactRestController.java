@@ -59,6 +59,9 @@ public class ContactRestController {
 		public List<Contact> getContactsCXL(@Param("keyword") String keyword){
 			return contactService.findContactStatus(false, keyword);
 		}
-		
 
+		@GetMapping("/rest/contact/seachContact")
+		public List<Contact> seachContact(String fullName, boolean status){
+			return contactService.seachContact(fullName, status);
+		}
 }
