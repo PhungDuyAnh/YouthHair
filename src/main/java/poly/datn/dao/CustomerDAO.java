@@ -13,6 +13,6 @@ public interface CustomerDAO extends JpaRepository<Customer, Integer> {
     @Query(value = "SELECT b FROM Customer b WHERE b.phone= ?1")
     Customer customerByPhone(String phone);
 
-    @Query(value = "SELECT c FROM Customer c WHERE :fullName is null or c.fullName like :fullName% ")
+    @Query(value = "SELECT c FROM Customer c WHERE :fullName is null or c.fullName like %:fullName% ")
     List<Customer> seachCustomer(@Param("fullName") String fullName);
 }

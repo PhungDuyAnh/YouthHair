@@ -26,6 +26,7 @@ public class Workassign implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @ManyToOne
@@ -34,6 +35,6 @@ public class Workassign implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="shifts_Id")
-    private Shifts shifts_Workassign;
+    private Shifts shifts;
 
 }
