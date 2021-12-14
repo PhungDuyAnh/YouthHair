@@ -35,8 +35,8 @@ public class BookingDetail implements Serializable {
 	@NotNull
 	private float price;
 
-	@NotNull
-	private Time time;
+//	@NotNull
+//	private Time time;
 
 	//bi-directional many-to-one association to Booking
 	@ManyToOne

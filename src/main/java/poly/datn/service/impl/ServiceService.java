@@ -67,7 +67,7 @@ public class ServiceService implements IServiceService {
         if (checkService(services)){
             System.out.println(services.getServiceName());
             services.setServiceName(serviceDTO.getServiceName());
-            services.setTime(time);
+//            services.setTime(time);
             services.setImage(serviceDTO.getImage());
             services.setNote(serviceDTO.getNote());
             services.setStatus(serviceDTO.getStatus());
@@ -78,13 +78,13 @@ public class ServiceService implements IServiceService {
             //set dữ liệu vào entity services
             Services servicesadd= new Services();
             servicesadd.setServiceName(serviceDTO.getServiceName());
-            servicesadd.setTime(time);
+//            servicesadd.setTime(time);
             servicesadd.setImage(serviceDTO.getImage());
             servicesadd.setNote(serviceDTO.getNote());
             servicesadd.setStatus(serviceDTO.getStatus());
             servicesadd.setPrice(serviceDTO.getPrice());
             serviceDAO.save(servicesadd);
-            System.out.println("2:" + servicesadd.getTime() + "3 : " + time);
+//            System.out.println("2:" + servicesadd.getTime() + "3 : " + time);
         }
         return serviceDTO;
     }

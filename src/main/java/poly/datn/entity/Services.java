@@ -40,8 +40,6 @@ public class Services implements Serializable {
 
 	private Boolean status;
 
-	private Time time;
-
 	//bi-directional many-to-one association to Bookingdetail
 	@OneToMany(mappedBy="service")
 	@JsonIgnore

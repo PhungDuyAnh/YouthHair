@@ -9,6 +9,6 @@ import poly.datn.entity.Voucher;
 import java.util.List;
 
 public interface VoucherDAO extends JpaRepository<Voucher, String>{
-    @Query(value = "SELECT v FROM Voucher v WHERE :id is null or v.id like :id% ")
+    @Query(value = "SELECT v FROM Voucher v WHERE :id is null or v.id like %:id% ")
     List<Voucher> seachVoucher(@Param("id") String id);
 }
