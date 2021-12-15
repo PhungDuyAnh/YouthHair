@@ -21,4 +21,6 @@ public interface WorkassignService {
 	List<WorkassignDateDTO> disctinctDate();
 
 	List<Workassign> findWorkassignStylist(Date date);
+
+	List<Workassign> findWorkassignAllStylist();
 }

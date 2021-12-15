@@ -2,7 +2,6 @@ package poly.datn.service.dto;
 
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Time;
 
 public class ServiceDTO implements Serializable {
     private Integer id;

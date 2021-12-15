@@ -63,5 +63,10 @@ public class WorkassignServiceImpl implements WorkassignService{
 		return workassignDAO.findWorkassignStylist(date);
 	}
 
+	@Override
+	public List<Workassign> findWorkassignAllStylist() {
+		return workassignDAO.findWorkassignAllStylist();
+	}
+
 	
 }

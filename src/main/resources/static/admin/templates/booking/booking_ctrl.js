@@ -18,8 +18,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.itemConfirm=[];
 
 	var toprice;
-	$scope.lichlamviec=[];
-	$scope.disctinctDate=[];
+	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -71,7 +70,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		})
 
 		//getDataStylist
-		$http.get("/rest/booking/stylist").then(resp=>{
+		$http.get(`/rest/Workassign/stylist/${$scope.getDate}`).then(resp=>{
 			$scope.stylist = resp.data;
 		})
 
@@ -79,22 +78,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.listCutting = resp.data;
 		})
 		
-		
-		
-		$http.get("/rest/Workassign/disctinctDate").then(resp => {
-            $scope.disctinctDate = resp.data;
-			for(var i = 0; i < resp.data.length; i++){
-				$http.get(`/rest/Workassign/stylist/${resp.data[i].date}`).then(response => {
-		            $scope.lichlamviec = response.data;
-					console.log(response.data);
-		        });
-				console.log(resp.data[i].date);
-			}
-        });
-		
-		
-        
 	}
+		
 
 	$scope.showBookingWating=function (bookingId,serviceId){
 		$scope.a=$scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
@@ -111,7 +96,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showInfoCustomerIAT =  function() {
 		for (var i = 0; i < $scope.stylist.length; i++) {
 			for (var j = 0; j < $scope.listCutting.length; j++) {
-				if ($scope.stylist[i].id == $scope.listCutting[j].employee1.id) {
+				if ($scope.stylist[i].employee.id == $scope.listCutting[j].employee1.id) {
 					$scope.customerInfoIAT[i] = $scope.listCutting[j];
 				}
 			}

@@ -31,6 +31,10 @@ public class EmployeeeRestController {
 		return employeeService.findAll();
 	}
 	
+	@GetMapping("/active")
+	public List<Employee> getAllEmployeeActive(){
+		return employeeService.getAllEmployeeActive();
+	}
 	
 	@PostMapping()
 	public Employee create(@RequestBody Employee employee) {
