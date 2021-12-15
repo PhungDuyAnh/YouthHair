@@ -58,4 +58,5 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
     
     @Query(value = "SELECT b FROM Booking b  WHERE b.customer.id = :customer and b.statusbooking.id = 'WFC'")
     Booking findCustomerInBookingWFC(@Param("customer") Integer customer );
+
 }
