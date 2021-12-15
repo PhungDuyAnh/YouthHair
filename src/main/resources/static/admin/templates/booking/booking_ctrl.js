@@ -2,12 +2,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.items=[];
 	$scope.items1=[];
 	$scope.items2=[];
+	$scope.itemsCOM=[];
 	$scope.item3=[];
 	$scope.form={};
 	$scope.form1={};
 	$scope.form2={};
 	$scope.form3={};
 	$scope.form5={};
+	$scope.formCOM={};
 	$scope.sizePage = [5,10,15,20];
 	$scope.stylist=[];
 	$scope.listCutting=[];
@@ -23,6 +25,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$http.get("/rest/booking/WFC").then(resp=>{
 			$scope.items=resp.data;
 			$scope.items.forEach(item => {
+				item.createDate = new Date(item.createDate);
+			})
+		})
+
+		$http.get("/rest/booking/COM").then(resp=>{
+			$scope.itemsCOM=resp.data;
+			$scope.itemsCOM.forEach(item => {
 				item.createDate = new Date(item.createDate);
 			})
 		})
@@ -166,7 +175,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showDetail=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
-		item.time= new Date("1970-01-01 "+item.time);
+		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.form=angular.copy(item);
 		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
 			for (var i=0;i<resp.data.length;i++){
@@ -174,9 +183,22 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 		});
 	}
+
+	$scope.showDetailCOM=function (item){
+		$scope.cart.clear();
+		$scope.initialize();
+		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
+		$scope.formCOM=angular.copy(item);
+		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
+			for (var i=0;i<resp.data.length;i++){
+				$scope.cart.add(resp.data[i].id)
+			}
+		});
+	}
+
 	$scope.showDetail1=function (item){
 		$scope.initialize();
-		item.time= new Date("1970-01-01 "+item.time);
+		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.form1=angular.copy(item);
 	}
 
@@ -184,7 +206,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showDetail2=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
-		item.time= new Date("1970-01-01 "+item.time);
+		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.form2=angular.copy(item);
 		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
 			for (var i=0;i<resp.data.length;i++){
@@ -196,7 +218,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$scope.cart.clear();
 		$scope.initialize();
 		if (item !=null){
-			item.time=new Date("1970-01-01 "+item.time);
+			item.timeBooking=new Date("1970-01-01 "+item.timeBooking);
 			item.createDate=new Date(item.createDate);
 			$scope.form3=angular.copy(item);
 			$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
@@ -287,6 +309,41 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		},
 		get count(){
 			return Math.ceil(1.0 *$scope.items2.length / this.size)
+		},
+
+		first(){
+			this.page = 0;
+		},
+		get setPage(){
+			return this.first();
+		},
+		prev(){
+			this.page--;
+			if(this.page<0){
+				this.last();
+			}
+		},
+		next(){
+			this.page++;
+			if(this.page>=this.count){
+				this.first();
+			}
+		},
+		last(){
+			this.page = this.count - 1;
+		}
+	}
+
+
+	$scope.pagerCOM = {
+		page: 0,
+		size: 5,
+		get itemsCOM(){
+			var start = this.page * this.size;
+			return $scope.itemsCOM.slice(start,start + this.size);
+		},
+		get count(){
+			return Math.ceil(1.0 *$scope.itemsCOM.length / this.size)
 		},
 
 		first(){

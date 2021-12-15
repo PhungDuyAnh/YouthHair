@@ -78,7 +78,6 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 				booking1.setNote(bookingCustomerDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingCustomerDTO.getTotalPrice());
-				booking1.setTotalTime(bookingCustomerDTO.getTotalTime());
 				booking1.setCustomer(cus1);
 				booking1.setStatusbooking(statusBooking);
 				booking1.setVoting(null);
