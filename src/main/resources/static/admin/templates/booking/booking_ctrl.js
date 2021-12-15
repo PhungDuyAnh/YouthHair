@@ -74,17 +74,18 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		
 		$http.get("/rest/Workassign/disctinctDate").then(resp => {
             $scope.disctinctDate = resp.data;
-			for(var i = 0; i < resp.data.length; i++){
-				$http.get(`/rest/Workassign/stylist/${resp.data[i].date}`).then(response => {
-		            $scope.lichlamviec = response.data;
-					console.log(response.data);
-		        });
-				console.log(resp.data[i].date);
-			}
+			
         });
 		
-		
         
+	}
+	
+	$scope.getDataStylistWorkassign = function(item){
+		for(var i = 0; i < $scope.disctinctDate.length; i++){
+			$http.get(`/rest/Workassign/stylist/${item.date}`).then(response => {
+	            $scope.lichlamviec = response.data;
+	        });
+		}
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
