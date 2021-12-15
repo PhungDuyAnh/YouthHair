@@ -205,8 +205,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 						t.get(0, Integer.class),
 						t.get(1, String.class),
 						t.get(2, String.class),
-						t.get(3, Time.class),
-						t.get(4, String.class)
+						//t.get(3, Time.class),
+						t.get(3, String.class)
 				))
 				.collect(Collectors.toList());
 
@@ -216,6 +216,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> seachEmployee(String fullName){
 		return employeeDAO.seachEmployee(fullName);
+	}
+
+	@Override
+	public List<Employee> getAllEmployeeActive() {
+		return employeeDAO.getAllEmployeeActive();
 	}
 
 }

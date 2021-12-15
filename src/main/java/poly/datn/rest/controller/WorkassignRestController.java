@@ -26,6 +26,11 @@ public class WorkassignRestController {
 		return workassignService.findAll();
 	}
 	
+	@GetMapping("/rest/Workassign/stylist")
+	public List<Workassign> findWorkassignAllStylist(){
+		return workassignService.findWorkassignAllStylist();
+	}
+	
 	@GetMapping("/rest/Workassign/stylist/{date}")
 	public List<Workassign> findWorkassignStylist(@PathVariable("date") Date date){
 		return workassignService.findWorkassignStylist(date);

@@ -85,4 +85,6 @@ public interface EmployeeService {
 	List<StylistDTO> findStocktotal();
 
 	List<Employee> seachEmployee(String fullName);
+
+	List<Employee> getAllEmployeeActive();
 }

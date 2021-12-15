@@ -37,8 +37,6 @@ public class BookingContactDTO {
 
 	private float totalPrice;
 
-	private Time totalTime;
-
 	//Service
 	private List<Services> listSer;
 

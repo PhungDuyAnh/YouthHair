@@ -35,8 +35,6 @@ public class BookingCustomerDTO {
 
 	private float totalPrice;
 
-	private Time totalTime;
-
 	//Service
 	private List<Services> listSer;
 
