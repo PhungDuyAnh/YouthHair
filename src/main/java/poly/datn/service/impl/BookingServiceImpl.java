@@ -236,7 +236,6 @@ public class BookingServiceImpl implements BookingService {
 				booking1.setNote(bookingDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingDTO.getTotalPrice());
-				booking1.setTotalTime(bookingDTO.getTotalTime());
 				booking1.setStatusbooking(statusBooking);
 				bookingDAO.save(booking1);
 				bookingDetailDAO.procedure_delete(bookingDTO.getId());
@@ -268,7 +267,6 @@ public class BookingServiceImpl implements BookingService {
 			booking1.setNote(bookingDTO.getNote());
 			booking1.setEmployee1(stylist);
 			booking1.setTotalPrice(bookingDTO.getTotalPrice());
-			booking1.setTotalTime(bookingDTO.getTotalTime());
 			bookingDAO.save(booking1);
 			bookingDetailDAO.procedure_delete(bookingDTO.getId());
 			for(int i=0; i<bookingDTO.getListSer().size();i++ ){
