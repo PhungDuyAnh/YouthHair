@@ -61,6 +61,9 @@ public class BookingRestController {
 	@GetMapping("/CAN")
 	public List<Booking> getByStatusBookingCAN(){return bookingService.findBookingByStatusbooking("CAN");}
 
+	@GetMapping("/COM")
+	public List<Booking> getByStatusBookingCOM(){return bookingService.findBookingByStatusbooking("COM");}
+
 	@GetMapping("/employee")
 	public String[] getAllEmployee(){
 		return bookingService.finbyEmployee();

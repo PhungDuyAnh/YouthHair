@@ -83,7 +83,6 @@ public class BookingContactServiceImpl  implements BookingContactService{
 				booking1.setNote(bookingContactDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingContactDTO.getTotalPrice());
-				booking1.setTotalTime(bookingContactDTO.getTotalTime());
 				booking1.setCustomer(cus1);
 				booking1.setStatusbooking(statusBooking);
 				booking1.setVoting(null);
