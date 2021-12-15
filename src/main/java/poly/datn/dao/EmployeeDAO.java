@@ -17,7 +17,7 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer> {
     @Query(value = "SELECT b FROM Employee b WHERE b.role.id= 2 and  b.statusWork = true")
     List<Employee> bookingByStylist();
 
-    @Query(value = "SELECT distinct(e.id),e.fullName,e.image,b.totalTime, b.statusbooking.id  " +
+    @Query(value = "SELECT distinct(e.id),e.fullName,e.image, b.statusbooking.id  " +
             "FROM Employee e left join Booking b on e.id = b.employee1.id where e.statusWork = true and e.role.id=2")
     List<Tuple> getAllStylistST();
 

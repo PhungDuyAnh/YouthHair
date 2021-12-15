@@ -326,22 +326,32 @@ app.controller("employee-ctrl",function($scope,$http){
 	// them ca lam
 	$scope.saveCaLam = function(){
 	    var item = angular.copy($scope.formPhanCa);
+		const valueDate = moment($scope.formPhanCa.date).format('yyyy-MM-DD');
+		item.date = valueDate;
+		$http.get(`/rest/checkWorkassignNull?id=${item.employee.id}`).then(resp => {
+			var indCheck = resp.data.findIndex(a => a.date == item.date);			
+			if(indCheck == -1){
+				if(item.shifts.id == null){
+                    alert("Bạn chưa chọn ca để thêm!")
+                }else{			
+                    $http.post(`/rest/Workassign`, item).then(resp => {
+                        var index = $scope.dsphanca.findIndex(c => c.id === item.id);
+                        $scope.dsphanca[index] = item;			
+                        $scope.dsphanca.push(resp.data);
+                        $scope.initialize();        
+                        alert("Thêm ca làm " + item.shifts.id + " thành công cho nhân viên "+ item.employee.fullName +"!");
+                        $("#closePhanCaModal").click(); 
+                    }).catch(error => {
+                        alert("Thêm ca làm không thành công!");
+                        console.log("Error", error);
+                    });
+                }
+			}else{
+				alert("Nhân viên này đã đăng ký ca làm cho ngày "+ item.date +"!")
+			}
+        });
 
-		if(item.shifts.id == null){
-			alert("Bạn chưa chọn ca để thêm!")
-		}else{			
-			$http.post(`/rest/Workassign`, item).then(resp => {
-				var index = $scope.dsphanca.findIndex(c => c.id === item.id);
-				$scope.dsphanca[index] = item;			
-	            $scope.dsphanca.push(resp.data);
-				$scope.initialize();        
-	            alert("Thêm ca làm " + item.shifts.id + " thành công cho nhân viên "+ item.employee.fullName +"!");
-				$("#closePhanCaModal").click(); 
-	        }).catch(error => {
-	            alert("Thêm ca làm không thành công!");
-	            console.log("Error", error);
-	        });
-		}
+		
     }
 
 	//sua ca lam
@@ -349,7 +359,6 @@ app.controller("employee-ctrl",function($scope,$http){
 		//date: new Date($scope.getMinMaxTime.minDate)
 	}
 	$scope.editCaLam = function(item){
-		item.date = new Date(item.date);        
         $scope.formEditCaLam = angular.copy(item);
     }
 	

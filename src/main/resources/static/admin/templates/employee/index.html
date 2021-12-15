@@ -111,7 +111,7 @@
 						<label class="text-black" for="fullName">Họ Tên Nhân Viên</label>
 						<input ng-model="formEditCaLam.employee.fullName" type="text"
 							class="form-control " id="fullname" placeholder="Họ Tên..."
-							disabled>
+							readonly>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -119,7 +119,7 @@
 						<label class="text-black" for="fullName">Biệt Danh Nhân Viên</label>
 						<input ng-model="formEditCaLam.employee.nickname" type="text"
 							class="form-control " id="fullname" placeholder="Biệt Danh..."
-							disabled>
+							readonly>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -127,15 +127,14 @@
 						<label class="text-black" for="fullName">Vai Trò</label>
 						<input ng-model="formEditCaLam.employee.role.name" type="text"
 							class="form-control " id="fullname" placeholder="Vai Trò..."
-							disabled>
+							readonly>
 					</div>
 				</div>
 				<div class="row form-group">
 					<div class="col-md-12">
-						<label class="text-black" for="dateUpdatePhanCa">Ngày Đăng Ký <span
-							class="text-danger">(*)</span></label>
-						<input ng-model="formEditCaLam.date" type="date"
-							class="form-control " id="dateUpdatePhanCa" placeholder="Ngày Đăng Ký..."
+						<label class="text-black" for="dateUpdatePhanCa">Ngày Đăng Ký</label>
+						<input ng-model="formEditCaLam.date" type="text" readonly
+							class="form-control" id="dateUpdatePhanCa" placeholder="Ngày Đăng Ký..."
 							>
 					</div>
 				</div>

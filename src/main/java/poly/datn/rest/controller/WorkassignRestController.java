@@ -1,5 +1,6 @@
 package poly.datn.rest.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import poly.datn.entity.Voucher;
-import poly.datn.entity.Voucherdetail;
 import poly.datn.entity.Workassign;
-import poly.datn.service.VoucherDetailService;
 import poly.datn.service.WorkassignService;
-import poly.datn.service.dto.VoucherDetailInfoDTO;
+import poly.datn.service.dto.WorkassignDateDTO;
 
 @RestController
 public class WorkassignRestController {
@@ -26,6 +24,21 @@ public class WorkassignRestController {
 	@GetMapping("/rest/Workassign")
 	public List<Workassign> findAll(){
 		return workassignService.findAll();
+	}
+	
+	@GetMapping("/rest/Workassign/stylist/{date}")
+	public List<Workassign> findWorkassignStylist(@PathVariable("date") Date date){
+		return workassignService.findWorkassignStylist(date);
+	}
+	
+	@GetMapping("/rest/checkWorkassignNull")
+	public List<Workassign> checkNull(Integer id){
+		return workassignService.checkWorkassignNull(id);
+	}
+	
+	@GetMapping("/rest/Workassign/disctinctDate")
+	public List<WorkassignDateDTO> disctinctDate(){
+		return workassignService.disctinctDate();
 	}
 	
 	@PostMapping("/rest/Workassign")

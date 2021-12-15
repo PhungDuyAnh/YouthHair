@@ -230,13 +230,12 @@ public class BookingServiceImpl implements BookingService {
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 				booking1.setCreateDate(bookingDTO.getCreateDate());
-				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
-				time = new Time(date1.getTime());
-//				booking1.setTime(time);
+				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTimeBooking());
+				String time1 = new Time(date1.getTime()).toString();
+				booking1.setTimeBooking(time1);
 				booking1.setNote(bookingDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingDTO.getTotalPrice());
-				booking1.setTotalTime(bookingDTO.getTotalTime());
 				booking1.setStatusbooking(statusBooking);
 				bookingDAO.save(booking1);
 				bookingDetailDAO.procedure_delete(bookingDTO.getId());
@@ -262,13 +261,12 @@ public class BookingServiceImpl implements BookingService {
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 			Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 			booking1.setCreateDate(bookingDTO.getCreateDate());
-			Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTime());
-			time = new Time(date1.getTime());
-//			booking1.setTime(time);
+			Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTimeBooking());
+			String time1 = new Time(date1.getTime()).toString();
+			booking1.setTimeBooking(time1);
 			booking1.setNote(bookingDTO.getNote());
 			booking1.setEmployee1(stylist);
 			booking1.setTotalPrice(bookingDTO.getTotalPrice());
-			booking1.setTotalTime(bookingDTO.getTotalTime());
 			bookingDAO.save(booking1);
 			bookingDetailDAO.procedure_delete(bookingDTO.getId());
 			for(int i=0; i<bookingDTO.getListSer().size();i++ ){
