@@ -38,6 +38,8 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 	@Autowired
 	EmployeeDAO empDAO;
 
+	@Autowired
+	TimeBookingDetailDAO timeBookingDetailDAO;
 
 	public boolean checkNullCustomer(Customer customer){
 		return customer != null ? true :false;
@@ -74,30 +76,32 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 			if(!checkNullBooking(booking )) {
 				Booking booking1= new Booking();
 				booking1.setCreateDate(bookingCustomerDTO.getCreateDate());
-//				booking1.setTime(null);
+				booking1.setTimeBooking(bookingCustomerDTO.getTimeBooking());
 				booking1.setNote(bookingCustomerDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingCustomerDTO.getTotalPrice());
-				booking1.setTotalTime(bookingCustomerDTO.getTotalTime());
 				booking1.setCustomer(cus1);
 				booking1.setStatusbooking(statusBooking);
 				booking1.setVoting(null);
 				booking1.setVoucherdetails(null);
 				bookingDao.save(booking1);
-
 				for(int i=0; i<bookingCustomerDTO.getListSer().size();i++ ){
 					BookingDetail bookingDetail = new BookingDetail();
 					bookingDetail.setBooking(booking1);
 					bookingDetail.setService(bookingCustomerDTO.getListSer().get(i));
 					bookingDetail.setPrice(bookingCustomerDTO.getListSer().get(i).getPrice());
-//					bookingDetail.setTime(bookingCustomerDTO.getListSer().get(i).getTime());
 					bDetailDAO.save(bookingDetail);
+				}
+				for(int i=0; i<bookingCustomerDTO.getListSer().size();i++ ){
+					TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
+					timeBookingDetailDetail.setBookingId(booking1.getId());
+					timeBookingDetailDetail.setTimeBookingId(bookingCustomerDTO.getListTime().get(i).getId());
+					timeBookingDetailDetail.setDate(bookingCustomerDTO.getCreateDate());
+					timeBookingDetailDetail.setStylistId(bookingCustomerDTO.getStylistId());
+					timeBookingDetailDAO.save(timeBookingDetailDetail);
 				}}else{
-
 				throw new Exception("Booking Cus error");
-
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

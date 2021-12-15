@@ -383,10 +383,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			})
 		}
 	}
-<<<<<<< HEAD
-}
-=======
->>>>>>> main
 	$scope.voucherPay={}
 	var voucherIdPay = null;
 	$scope.pay={
