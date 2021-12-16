@@ -1,6 +1,5 @@
 package poly.datn.service.impl;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -9,15 +8,10 @@ import java.util.stream.Collectors;
 import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import poly.datn.dao.*;
 import poly.datn.entity.*;
-import poly.datn.service.VoucherDetailService;
 import poly.datn.service.WorkassignService;
 import poly.datn.service.dto.*;
 
