@@ -41,11 +41,6 @@ public class Booking implements Serializable {
 
 	private float totalPrice;
 
-<<<<<<< HEAD
-//	private Time totalTime;
-
-=======
->>>>>>> eb9d14afed2a711aee3c544af13e7c98304fca9a
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="CustormerId")

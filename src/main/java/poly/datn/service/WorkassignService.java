@@ -7,6 +7,7 @@ import poly.datn.entity.Employee;
 import poly.datn.entity.Voucher;
 import poly.datn.entity.Voucherdetail;
 import poly.datn.entity.Workassign;
+import poly.datn.service.dto.ShiftByEmployeeDTO;
 import poly.datn.service.dto.VoucherDetailInfoDTO;
 import poly.datn.service.dto.WorkassignDateDTO;
 
@@ -21,4 +22,6 @@ public interface WorkassignService {
 	List<WorkassignDateDTO> disctinctDate();
 
 	List<Workassign> findWorkassignStylist(Date date);
+
+	Workassign selectShiftByEmployeeId(Integer id, Date date);
 }
