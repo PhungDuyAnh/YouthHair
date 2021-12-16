@@ -23,9 +23,7 @@ public interface WorkassignService {
 
 	List<Workassign> findWorkassignStylist(Date date);
 
-<<<<<<< HEAD
 	Workassign selectShiftByEmployeeId(Integer id, Date date);
-=======
+
 	List<Workassign> findWorkassignAllStylist();
->>>>>>> fec87b734a00088bda36081897696b449ae1ebc9
 }

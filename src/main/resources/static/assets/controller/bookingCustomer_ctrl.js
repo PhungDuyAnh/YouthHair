@@ -109,8 +109,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         stylistId: null,
         totalPrice: null,
         timeBooking: null,
-        listSer: [],
-        listTime: []
+        listSer: []
     };
 
     // $scope.form.fullName = "";
@@ -123,6 +122,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         // alert("OK: " + $scope.myForm.$submitted);
     }
 
+    $scope.allTimeBookingByShifts=[]
     $scope.shiftsByStylist= {};
     $scope.timeBookingByShifts=[]
     $scope.getDate=function() {
@@ -136,10 +136,15 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             $scope.shiftsByStylist = resp.data.shifts;
             console.log($scope.shiftsByStylist)
             //lay time booking
-            //     $http.get("rest/bookingCusByStylist/").then(resp => {
-            //         $scope.timeBookingByShifts.push(resp.data);
-            //     })
+            if($scope.shiftsByStylist != null){
+                $http.get(`/rest/getAllTimebyShift/${resp.data.shifts.id}`).then(resp1 => {
+                    $scope.allTimeBookingByShifts =resp1.data;
+                })
+            }
+
         })
+
+        console.log($scope.allTimeBookingByShifts)
     }
     $scope.data={
         id : '',
@@ -147,19 +152,19 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     }
 // lấy id stylist khi click vào ảnh
     $scope.styId = function (id) {
+
         this.form.stylistId = id;
-
         const value = moment($scope.form.createDate).format('YYYY-MM-DD');
-
         console.log(value)
         //lay shift
         $http.get(`/rest/selectShiftbyEmployee?id=${id}&date=${value}`).then(resp => {
             $scope.shiftsByStylist = resp.data.shifts;
-            console.log(resp.data.shifts)
+            console.log(resp.data.shifts.id)
             //lay time booking
-            //     $http.get("rest/bookingCusByStylist/").then(resp => {
-            //         $scope.timeBookingByShifts.push(resp.data);
-            //     })
+               $http.get(`/rest/getAllTimebyShift/${resp.data.shifts.id}`).then(resp1 => {
+                    $scope.allTimeBookingByShifts = resp1.data;
+                    console.log(resp1.data)
+                })
         })
     }
 
@@ -232,6 +237,15 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     //     })
     }
 
+    $scope.timeBooking=''
+    //Lay timebookingbystylist
+    $scope.timeByStylist = function (id){
+        $scope.timeBooking=id
+    }
+    $scope.timeNameByStylist = function (name){
+        $scope.form.timeBooking=name
+    }
+
 //Lay booking theo stylist
     $scope.bookingSty = []
     $scope.bookingByStylist = function () {
@@ -244,56 +258,50 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
     $scope.bookingUCF = {}
     $scope.booking = {
-        // purchase() {
-        //
-        //     var bookings = angular.copy($scope.form);
-        //     const value = moment($scope.form.createDate).format('YYYY-MM-DD');
-        //
-        //
-        //     if (toprice > 0) {
-        //         bookings.totalTime = totime;
-        //         bookings.totalPrice = toprice;
-        //         bookings.createDate = value;
-        //         bookings.listSer = $scope.cart.items;
-        //
-        //     } else {
-        //         bookings.totalTime = 0;
-        //         bookings.totalPrice = 0;
-        //     }
-        //     if (bookings.fullName == null || bookings.email == null
-        //         || bookings.createDate == null || bookings.phone == null
-        //         || bookings.createDate == undefined || $scope.cart.items.length == 0) {
-        //         alert("Vui lòng nhập thông tin đầy đủ")
-        //
-        //     } else {
-        //         //checkBooking UCF by phone
-        //         $http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
-        //             $scope.bookingUCF = {}
-        //             $scope.bookingUCF = resp.data;
-        //             console.log($scope.bookingUCF)
-        //
-        //             //add data => BE
-        //             if ($scope.bookingUCF == "") {
-        //                 console.log("oke roi")
-        //                 $http.post("/rest/bookingCus", bookings).then(resp => {
-        //                     alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
-        //                     $scope.cart.clear();
-        //                     $("#closeModalBookingCustomer").click();
-        //                     //location.href = "/booking";
-        //                 }).catch(error => {
-        //                     alert("Đặt lịch thất bại!")
-        //                     // $scope.form.data = null;
-        //                     console.log(error);
-        //                 })
-        //             } else {
-        //                 alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
-        //                 // location.href = "/booking";
-        //             }
-        //         })
-        //
-        //
-        //     }
-        // }
+        purchase() {
+
+            var bookings = angular.copy($scope.form);
+            const value = moment($scope.form.createDate).format('YYYY-MM-DD');
+            if (toprice > 0) {
+                bookings.totalPrice = toprice;
+                bookings.createDate = value;
+                bookings.listSer = $scope.cart.items;
+
+            } else {
+                bookings.totalPrice = 0;
+            }
+            if (bookings.fullName == null || bookings.email == null || bookings.totalPrice == 0
+                || bookings.createDate == null || bookings.phone == null
+                || bookings.createDate == undefined || $scope.cart.items.length == 0) {
+                alert("Vui lòng nhập thông tin đầy đủ")
+
+            } else {
+                //checkBooking UCF by phone
+                $http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+                    $scope.bookingUCF = {}
+                    $scope.bookingUCF = resp.data;
+                    console.log($scope.bookingUCF)
+
+                    //add data => BE
+                    if ($scope.bookingUCF == "") {
+                        console.log("oke roi")
+                        $http.post("/rest/bookingCus", bookings).then(resp => {
+                            alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+                            $scope.cart.clear();
+                            $("#closeModalBookingCustomer").click();
+                            //location.href = "/booking";
+                        }).catch(error => {
+                            alert("Đặt lịch thất bại!")
+                            // $scope.form.data = null;
+                            console.log(error);
+                        })
+                    } else {
+                        alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
+                        // location.href = "/booking";
+                    }
+                })
+            }
+        }
     }
 
 

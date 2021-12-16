@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="text-black" for="txtDate">Chọn Ngày <span
-                                class="text-danger">(*)</span></label> <input name="somedate" type="date" id="txtDate"
+                                class="text-danger">(*)</span></label> <input name="somedate" type="date" id="txtDate" draggable="true"
                                                                               ng-model="form.createDate"
                                                                               ng-change="getDate()"
                                                                               class="form-control px-2"
@@ -149,83 +149,18 @@
                 
                 <div class="row form-group">
 					<div class="col-md-12">
-						<label class="text-black" for="treatment">Chọn Đánh Giá <span
+						<label class="text-black" >Chọn Giờ Đến <span
 								class="text-danger">(*)</span></label>
-							<ul class="status-form text-center" >	
-								<li><input type="radio" name="timeBooking" id="8h00" /> <label
-									for="8h00" class="btn-secondary btn-lg"> 8h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="8h30" /> <label
-									for="8h30" class="btn-secondary btn-lg"> 8h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="9h00" /> <label
-									for="9h00" class="btn-secondary btn-lg"> 9h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="9h30" /> <label
-									for="9h30" class="btn-secondary btn-lg"> 9h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="10h00" /> <label
-									for="10h00" class="btn-secondary btn-lg"> 10h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="10h30" /> <label
-									for="10h30" class="btn-secondary btn-lg"> 10h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="11h00" /> <label
-									for="11h00" class="btn-secondary btn-lg"> 11h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="11h30" /> <label
-									for="11h30" class="btn-secondary btn-lg"> 11h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="13h00" /> <label
-									for="13h00" class="btn-secondary btn-lg"> 13h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="13h30" /> <label
-									for="13h30" class="btn-secondary btn-lg"> 13h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="14h00" /> <label
-									for="14h00" class="btn-secondary btn-lg"> 14h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="14h30" /> <label
-									for="14h30" class="btn-secondary btn-lg"> 14h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="15h00" /> <label
-									for="15h00" class="btn-secondary btn-lg"> 15h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="15h30" /> <label
-									for="15h30" class="btn-secondary btn-lg"> 15h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="16h00" /> <label
-									for="16h00" class="btn-secondary btn-lg"> 16h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="16h30" /> <label
-									for="16h30" class="btn-secondary btn-lg"> 16h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="17h00" /> <label
-									for="17h00" class="btn-secondary btn-lg"> 17h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="17h30" /> <label
-									for="17h30" class="btn-secondary btn-lg"> 17h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="18h00" /> <label
-									for="18h00" class="btn-secondary btn-lg"> 18h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="18h30" /> <label
-									for="18h30" class="btn-secondary btn-lg"> 18h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="19h00" /> <label
-									for="19h00" class="btn-secondary btn-lg"> 19h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="19h30" /> <label
-									for="19h30" class="btn-secondary btn-lg"> 19h30
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="20h00" /> <label
-									for="20h00" class="btn-secondary btn-lg"> 20h00
-								</label> </li>
-								<li><input type="radio" name="timeBooking" id="20h30" /> <label
-									for="20h30" class="btn-secondary btn-lg"> 20h30
-								</label> </li>
+							<ul class="status-form text-center" >
+
+                                <div ng-if="shiftsByStylist.id != null">
+                                    <li ng-repeat="item in allTimeBookingByShifts" >
+                                    <input type="radio" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
+                                    <label for="time{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
+                                </li> </div>
+                                <div ng-if="shiftsByStylist.id == null">Không có ca làm</div>
+
 							</ul>
-						
 					</div>
 				</div>
                 
