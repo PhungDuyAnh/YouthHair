@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import poly.datn.entity.Workassign;
 import poly.datn.service.WorkassignService;
+import poly.datn.service.dto.ShiftByEmployeeDTO;
 import poly.datn.service.dto.WorkassignDateDTO;
 
 @RestController
@@ -55,4 +56,10 @@ public class WorkassignRestController {
 	public Workassign update(@RequestBody Workassign workassign){
 		return workassignService.save(workassign);
 	}
+
+	@GetMapping("/rest/selectShiftbyEmployee")
+	public Workassign selectShift(Integer id , Date date){
+		return workassignService.selectShiftByEmployeeId(id,date);
+	}
+
 }

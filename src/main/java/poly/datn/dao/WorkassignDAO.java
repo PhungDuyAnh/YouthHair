@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import poly.datn.entity.Employee;
+import poly.datn.entity.Services;
 import poly.datn.entity.Workassign;
 
 import java.util.Date;
@@ -22,6 +23,9 @@ public interface WorkassignDAO extends JpaRepository<Workassign, Integer> {
 
 	@Query("SELECT w FROM Workassign w WHERE w.date = ?1  AND w.employee.role.id = 2 AND w.employee.statusWork = true")
 	List<Workassign> findWorkassignStylist(Date date);
+
+	@Query(value = "SELECT s FROM Workassign s WHERE s.employee.id = :id and s.date = :date")
+	Workassign selectShiftByEmployeeId(@Param("id") Integer id,@Param("date") Date date);
 
 	@Query("SELECT w FROM Workassign w WHERE w.employee.role.id = 2 ")
 	List<Workassign> findWorkassignAllStylist();

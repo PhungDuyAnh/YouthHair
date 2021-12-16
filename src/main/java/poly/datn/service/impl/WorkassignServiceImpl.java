@@ -19,11 +19,7 @@ import poly.datn.dao.*;
 import poly.datn.entity.*;
 import poly.datn.service.VoucherDetailService;
 import poly.datn.service.WorkassignService;
-import poly.datn.service.dto.BookingCustomerDTO;
-import poly.datn.service.dto.BookingDetailServiceDTO;
-import poly.datn.service.dto.BookingIatDTO;
-import poly.datn.service.dto.VoucherDetailInfoDTO;
-import poly.datn.service.dto.WorkassignDateDTO;
+import poly.datn.service.dto.*;
 
 @Service
 public class WorkassignServiceImpl implements WorkassignService{
@@ -63,6 +59,9 @@ public class WorkassignServiceImpl implements WorkassignService{
 		return workassignDAO.findWorkassignStylist(date);
 	}
 
+	public Workassign selectShiftByEmployeeId(Integer id, Date date){
+		return workassignDAO.selectShiftByEmployeeId(id,date);
+	}
 	@Override
 	public List<Workassign> findWorkassignAllStylist() {
 		return workassignDAO.findWorkassignAllStylist();
