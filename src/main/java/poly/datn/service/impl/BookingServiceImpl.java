@@ -226,7 +226,7 @@ public class BookingServiceImpl implements BookingService {
 	public BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO) {
 		Time time = null;
 		try {
-			Statusbooking statusBooking = statusBookingDAO.StatusbookingbyIdWFC();
+			Statusbooking statusBooking = statusBookingDAO.StatusBookigByIdCOM();
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 				booking1.setCreateDate(bookingDTO.getCreateDate());
