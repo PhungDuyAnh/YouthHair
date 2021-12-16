@@ -277,7 +277,7 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             if (bookings.fullName == null || bookings.email == null || bookings.totalPrice == 0
                 || bookings.createDate == null || bookings.phone == null
                 || bookings.createDate == undefined || $scope.cart.items.length == 0
-                || bookings.listTime == null) {
+                || bookings.listTime == null || bookings.listTime.length==0) {
                 alert("Vui lòng nhập thông tin đầy đủ")
             } else {
                 //checkBooking UCF by phone
