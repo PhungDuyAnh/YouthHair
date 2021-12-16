@@ -92,14 +92,14 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 					bookingDetail.setPrice(bookingCustomerDTO.getListSer().get(i).getPrice());
 					bDetailDAO.save(bookingDetail);
 				}
-//				for(int i=0; i<bookingCustomerDTO.getListSer().size();i++ ){
-//					TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
-//					timeBookingDetailDetail.setBookingId(booking1.getId());
-//					timeBookingDetailDetail.setTimeBookingId(bookingCustomerDTO.getListTime().get(i).getId());
-//					timeBookingDetailDetail.setDate(bookingCustomerDTO.getCreateDate());
-//					timeBookingDetailDetail.setStylistId(bookingCustomerDTO.getStylistId());
-//					timeBookingDetailDAO.save(timeBookingDetailDetail);
-//				}
+				for(int i=0; i<bookingCustomerDTO.getListTime().size();i++ ){
+					TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
+					timeBookingDetailDetail.setBookingId(booking1.getId());
+					timeBookingDetailDetail.setTimeBookingId(bookingCustomerDTO.getListTime().get(i));
+					timeBookingDetailDetail.setDate(bookingCustomerDTO.getCreateDate());
+					timeBookingDetailDetail.setStylistId(bookingCustomerDTO.getStylistId());
+					timeBookingDetailDAO.save(timeBookingDetailDetail);
+				}
 		}else{
 				throw new Exception("Booking Cus error");
 			}

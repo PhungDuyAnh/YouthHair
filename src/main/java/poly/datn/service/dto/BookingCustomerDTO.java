@@ -41,6 +41,6 @@ public class BookingCustomerDTO {
 	//Service
 	private List<Services> listSer;
 
-//	private List<TimeBookingDetail> listTime;
+	private List<Integer> listTime;
 
 }

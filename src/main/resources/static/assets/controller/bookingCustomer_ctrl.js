@@ -109,7 +109,8 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         stylistId: null,
         totalPrice: null,
         timeBooking: null,
-        listSer: []
+        listSer: [],
+        listTime: []
     };
 
     // $scope.form.fullName = "";
@@ -125,26 +126,22 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     $scope.allTimeBookingByShifts=[]
     $scope.shiftsByStylist= {};
     $scope.timeBookingByShifts=[]
+
+    // Lấy Shift time khi dổi date
     $scope.getDate=function() {
         var item = angular.copy($scope.form.createDate);
         const value = moment(item).format('YYYY-MM-DD');
 
-        console.log(value)
-        console.log($scope.form.stylistId)
         //lay shift
         $http.get(`/rest/selectShiftbyEmployee?id=${$scope.form.stylistId}&date=${value}`).then(resp => {
             $scope.shiftsByStylist = resp.data.shifts;
-            console.log($scope.shiftsByStylist)
             //lay time booking
             if($scope.shiftsByStylist != null){
                 $http.get(`/rest/getAllTimebyShift/${resp.data.shifts.id}`).then(resp1 => {
                     $scope.allTimeBookingByShifts =resp1.data;
                 })
             }
-
         })
-
-        console.log($scope.allTimeBookingByShifts)
     }
     $scope.data={
         id : '',
@@ -237,10 +234,18 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     //     })
     }
 
-    $scope.timeBooking=''
     //Lay timebookingbystylist
     $scope.timeByStylist = function (id){
-        $scope.timeBooking=id
+        if(id == 1){
+            $scope.form.listTime[0] = 1;
+            $scope.form.listTime[1] = 2;
+        }else if(id > 1){
+            $scope.form.listTime[0] = id-1;
+            $scope.form.listTime[1] = id;
+            $scope.form.listTime[2] = id+1;
+        }else{
+            $scope.form.timeBooking = null;
+        }
     }
     $scope.timeNameByStylist = function (name){
         $scope.form.timeBooking=name
@@ -266,22 +271,20 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                 bookings.totalPrice = toprice;
                 bookings.createDate = value;
                 bookings.listSer = $scope.cart.items;
-
             } else {
                 bookings.totalPrice = 0;
             }
             if (bookings.fullName == null || bookings.email == null || bookings.totalPrice == 0
                 || bookings.createDate == null || bookings.phone == null
-                || bookings.createDate == undefined || $scope.cart.items.length == 0) {
+                || bookings.createDate == undefined || $scope.cart.items.length == 0
+                || bookings.listTime == null) {
                 alert("Vui lòng nhập thông tin đầy đủ")
-
             } else {
                 //checkBooking UCF by phone
                 $http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
                     $scope.bookingUCF = {}
                     $scope.bookingUCF = resp.data;
                     console.log($scope.bookingUCF)
-
                     //add data => BE
                     if ($scope.bookingUCF == "") {
                         console.log("oke roi")
