@@ -18,8 +18,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.itemConfirm=[];
 
 	var toprice;
-	$scope.lichlamviec=[];
-	$scope.disctinctDate=[];
+	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -71,7 +70,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		})
 
 		//getDataStylist
-		$http.get("/rest/booking/stylist").then(resp=>{
+		$http.get(`/rest/Workassign/stylist/${$scope.getDate}`).then(resp=>{
 			$scope.stylist = resp.data;
 		})
 
@@ -79,22 +78,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			$scope.listCutting = resp.data;
 		})
 		
-		
-		
-		$http.get("/rest/Workassign/disctinctDate").then(resp => {
-            $scope.disctinctDate = resp.data;
-			for(var i = 0; i < resp.data.length; i++){
-				$http.get(`/rest/Workassign/stylist/${resp.data[i].date}`).then(response => {
-		            $scope.lichlamviec = response.data;
-					console.log(response.data);
-		        });
-				console.log(resp.data[i].date);
-			}
-        });
-		
-		
-        
 	}
+		
 
 	$scope.showBookingWating=function (bookingId,serviceId){
 		$scope.a=$scope.db.bookingDetails.findIndex(a=>a.booking.id==bookingId&&a.service.id==serviceId)
@@ -111,7 +96,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showInfoCustomerIAT =  function() {
 		for (var i = 0; i < $scope.stylist.length; i++) {
 			for (var j = 0; j < $scope.listCutting.length; j++) {
-				if ($scope.stylist[i].id == $scope.listCutting[j].employee1.id) {
+				if ($scope.stylist[i].employee.id == $scope.listCutting[j].employee1.id) {
 					$scope.customerInfoIAT[i] = $scope.listCutting[j];
 				}
 			}
@@ -583,7 +568,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			var totalMinutes = 0;
 			var totalSeconds = 0;
 			for (var i = 0; i < $scope.cart.items.length; i++) {
-				convertDate1 = new Date("1970-01-01 " + $scope.cart.items[i].time);
+				convertDate1 = new Date("1970-01-01 " + $scope.cart.items[i].timeBooking);
 				totalHour += convertDate1.getHours();
 				totalMinutes += convertDate1.getMinutes();
 				totalSeconds += convertDate1.getSeconds();
@@ -614,7 +599,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		note: null,
 		stylistId: null,
 		totalPrice: null,
-		totalTime: null,
 		listSer: [],
 	};
 
@@ -623,30 +607,28 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.booking = {
 		purchase() {
 			var bookings = angular.copy($scope.form2);
-			const value1 = moment($scope.form2.time).format('DD/MM/yyyy HH:mm:ss');
-			bookings.time=value1;
+			const value1 = moment($scope.form2.timeBooking).format('DD/MM/yyyy HH:mm:ss');
+			bookings.timeBooking=value1;
 			const value = moment($scope.form2.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
-				bookings.totalTime = totime;
 				bookings.totalPrice = toprice;
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
 				bookings.employee1=$scope.form2.employee1;
 
 			} else {
-				bookings.totalTime = 0;
 				bookings.totalPrice = 0;
 			}
 			if (bookings.customer.fullName == null || bookings.customer.email == null
 				|| bookings.createDate == null || bookings.customer.phone == null
-				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.time=="Invalid date") {
+				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.timeBooking=="Invalid date") {
 				console.log($scope.form2)
 				console.log($scope.cart.items)
 				alert("Vui lòng nhập thông tin đầy đủ")
 
 			} else {
 				//checkBooking UCF by phone
-				alert(bookings.time)
+				alert(bookings.timeBooking)
 				$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
 					$scope.bookingUCF = {}
 					$scope.bookingUCF= resp.data;
@@ -667,23 +649,21 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		},
 		updateWFC() {
 			var bookings = angular.copy($scope.form);
-			const value1 = moment($scope.form.time).format('DD/MM/yyyy HH:mm:ss');
-			bookings.time=value1;
+			const value1 = moment($scope.form.timeBooking).format('DD/MM/yyyy HH:mm:ss');
+			bookings.timeBooking=value1;
 			const value = moment($scope.form.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
-				bookings.totalTime = totime;
 				bookings.totalPrice = toprice;
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
 				bookings.employee1=$scope.form.employee1;
 
 			} else {
-				bookings.totalTime = 0;
 				bookings.totalPrice = 0;
 			}
 			if (bookings.customer.fullName == null || bookings.customer.email == null
 				|| bookings.createDate == null || bookings.customer.phone == null
-				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.time=="Invalid date") {
+				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.timeBooking=="Invalid date") {
 				console.log($scope.form)
 				console.log($scope.cart.items)
 				alert("Vui lòng nhập thông tin đầy đủ")
@@ -711,22 +691,20 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		capNhatDangCat() {
 			if ($scope.form3!=null){
 				var bookings = angular.copy($scope.form3);
-				const value1 = moment($scope.form3.time).format('DD/MM/yyyy HH:mm:ss');
-				bookings.time=value1;
+				const value1 = moment($scope.form3.timeBooking).format('DD/MM/yyyy HH:mm:ss');
+				bookings.timeBooking=value1;
 				const value = moment($scope.form3.createDate).format('YYYY-MM-DD');
 				if (toprice > 0) {
-					bookings.totalTime = totime;
 					bookings.totalPrice = toprice;
 					bookings.createDate = value;
 					bookings.listSer = $scope.cart.items;
 					bookings.employee1=$scope.form3.employee1;
 				} else {
-					bookings.totalTime = 0;
 					bookings.totalPrice = 0;
 				}
 				if (bookings.customer.fullName == null || bookings.customer.email == null
 					|| bookings.createDate == null || bookings.customer.phone == null
-					|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.time=="Invalid date") {
+					|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.timeBooking=="Invalid date") {
 					alert("Vui lòng nhập thông tin đầy đủ")
 
 				}else{

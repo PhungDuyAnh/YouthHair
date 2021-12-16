@@ -30,8 +30,6 @@ public class BookingDTO {
 
     private float totalPrice;
 
-    private Time totalTime;
-
     private String timeBooking;
 
     //Service

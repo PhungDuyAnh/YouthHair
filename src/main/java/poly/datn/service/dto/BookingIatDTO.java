@@ -11,6 +11,5 @@ import java.sql.Time;
 @NoArgsConstructor
 public class BookingIatDTO {
     private Integer idSty;
-    private Time totalTime;
 
 }

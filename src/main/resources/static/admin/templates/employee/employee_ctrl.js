@@ -329,22 +329,27 @@ app.controller("employee-ctrl",function($scope,$http){
 		const valueDate = moment($scope.formPhanCa.date).format('yyyy-MM-DD');
 		item.date = valueDate;
 		$http.get(`/rest/checkWorkassignNull?id=${item.employee.id}`).then(resp => {
-			var indCheck = resp.data.findIndex(a => a.date == item.date);			
+			var indCheck = resp.data.findIndex(a => a.date == item.date);
+			console.log(item.shifts)			
 			if(indCheck == -1){
-				if(item.shifts.id == null){
-                    alert("Bạn chưa chọn ca để thêm!")
-                }else{			
-                    $http.post(`/rest/Workassign`, item).then(resp => {
+				if(item.shifts.id != null){
+					$http.post(`/rest/Workassign`, item).then(resp => {
                         var index = $scope.dsphanca.findIndex(c => c.id === item.id);
                         $scope.dsphanca[index] = item;			
                         $scope.dsphanca.push(resp.data);
-                        $scope.initialize();        
+                        $scope.initialize();
+						$scope.formPhanCa = {
+							date: new Date($scope.getMinMaxTime.minDate)
+						};        
                         alert("Thêm ca làm " + item.shifts.id + " thành công cho nhân viên "+ item.employee.fullName +"!");
                         $("#closePhanCaModal").click(); 
                     }).catch(error => {
                         alert("Thêm ca làm không thành công!");
                         console.log("Error", error);
                     });
+                    
+                }else{			
+                    alert("Bạn chưa chọn ca để thêm!")
                 }
 			}else{
 				alert("Nhân viên này đã đăng ký ca làm cho ngày "+ item.date +"!")

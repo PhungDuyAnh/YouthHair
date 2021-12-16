@@ -54,11 +54,11 @@ public class ServiceService implements IServiceService {
     @Override
     public ServiceDTO save(ServiceDTO serviceDTO) {
         Services services=serviceDAO.selectById(serviceDTO.getId());
-        Time time = null;
+        //Time time = null;
         //get time
         try {
             Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(serviceDTO.getTime());
-            time = new Time(date1.getTime());
+            //time = new Time(date1.getTime());
             System.out.println("tostring: " + date1.toString());
             System.out.println(date1);
         } catch (ParseException e) {

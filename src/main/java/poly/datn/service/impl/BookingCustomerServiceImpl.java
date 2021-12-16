@@ -118,8 +118,8 @@ public class BookingCustomerServiceImpl  implements BookingCustomerService{
 		List<Tuple> stockTotalTuples = bookingDao.bookingIAT();
 		List<BookingIatDTO> stockTotalDto = stockTotalTuples.stream()
 				.map(t -> new BookingIatDTO(
-						t.get(0, Integer.class),
-						t.get(1, Time.class)
+						t.get(0, Integer.class)
+						//t.get(1, Time.class)
 				))
 				.collect(Collectors.toList());
 

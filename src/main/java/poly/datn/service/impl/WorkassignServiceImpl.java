@@ -62,4 +62,10 @@ public class WorkassignServiceImpl implements WorkassignService{
 	public Workassign selectShiftByEmployeeId(Integer id, Date date){
 		return workassignDAO.selectShiftByEmployeeId(id,date);
 	}
+	@Override
+	public List<Workassign> findWorkassignAllStylist() {
+		return workassignDAO.findWorkassignAllStylist();
+	}
+
+	
 }

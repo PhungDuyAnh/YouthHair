@@ -26,4 +26,8 @@ public interface WorkassignDAO extends JpaRepository<Workassign, Integer> {
 
 	@Query(value = "SELECT s FROM Workassign s WHERE s.employee.id = :id and s.date = :date")
 	Workassign selectShiftByEmployeeId(@Param("id") Integer id,@Param("date") Date date);
+
+	@Query("SELECT w FROM Workassign w WHERE w.employee.role.id = 2 ")
+	List<Workassign> findWorkassignAllStylist();
+    
 }
