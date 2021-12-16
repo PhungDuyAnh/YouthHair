@@ -13,7 +13,6 @@ import poly.datn.service.dto.BookingIatDTO;
 import poly.datn.service.dto.StylistDTO;
 
 import javax.persistence.Tuple;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +50,7 @@ public class BookingContactServiceImpl  implements BookingContactService{
 	}
 
 	public BookingContactDTO AddInfoBookingCustomer(BookingContactDTO bookingContactDTO) {
-		Time time = null;
+		//Time time = null;
 		try {
 			Customer cus = cusDAO.customerByPhone(bookingContactDTO.getPhone());
 			Booking booking = null;
@@ -78,7 +77,7 @@ public class BookingContactServiceImpl  implements BookingContactService{
 				Booking booking1= new Booking();
 				booking1.setCreateDate(bookingContactDTO.getCreateDate());
 				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingContactDTO.getTime());
-				time = new Time(date1.getTime());
+				//time = new Time(date1.getTime());
 //				booking1.setTime(time);
 				booking1.setNote(bookingContactDTO.getNote());
 				booking1.setEmployee1(stylist);

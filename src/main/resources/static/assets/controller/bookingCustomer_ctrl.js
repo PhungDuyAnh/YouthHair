@@ -88,8 +88,6 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
 
             this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
             input.setAttribute("max", this.maxDate);
-            console.log("minDate: " + this.minDate);
-            console.log("maxDate: " + this.maxDate);
         }
     }
 

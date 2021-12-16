@@ -58,7 +58,7 @@ public class IndexController {
 
 	@RequestMapping("/about")
 	public String about(Model model) {
-		model.addAttribute("stylists", employeeService.findAll());
+		model.addAttribute("stylists", employeeService.getAllEmployeeActive());
 		
 		return "layout/about";
 	}
