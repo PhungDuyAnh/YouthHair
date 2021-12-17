@@ -88,6 +88,8 @@ public interface BookingService {
 
 	List<Booking> getAllBookingIAT();
 
+    String[] getAllTimeBooking();
+
     BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO);
 
     BookingDTO AddInfoBookingUpdateWFC(BookingDTO bookingDTO);

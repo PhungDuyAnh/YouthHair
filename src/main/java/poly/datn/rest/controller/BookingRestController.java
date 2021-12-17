@@ -136,4 +136,9 @@ public class BookingRestController {
 	public List<Booking> seachBooking(String toDateStr, String formDateStr,String statusId, String cusName){
 		return bookingService.seachBooking(toDateStr, formDateStr,statusId,cusName);
 	}
+
+	@GetMapping("/getAllTimeBooking")
+	public String[] getALlTimeBooking(){
+		return bookingService.getAllTimeBooking();
+	}
 }
