@@ -14,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import poly.datn.dao.BookingDAO;
 import poly.datn.dao.BookingDetailDAO;
 import poly.datn.dao.EmployeeDAO;
@@ -223,6 +222,11 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
+	public String[] getAllTimeBooking(){
+		return bookingDAO.findByTimeBooking();
+	}
+
+	@Override
 	public BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO) {
 		Time time = null;
 		try {
@@ -230,9 +234,7 @@ public class BookingServiceImpl implements BookingService {
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 				booking1.setCreateDate(bookingDTO.getCreateDate());
-				Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTimeBooking());
-				String time1 = new Time(date1.getTime()).toString();
-				booking1.setTimeBooking(time1);
+				booking1.setTimeBooking(bookingDTO.getTimeBooking());
 				booking1.setNote(bookingDTO.getNote());
 				booking1.setEmployee1(stylist);
 				booking1.setTotalPrice(bookingDTO.getTotalPrice());
@@ -261,9 +263,7 @@ public class BookingServiceImpl implements BookingService {
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 			Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 			booking1.setCreateDate(bookingDTO.getCreateDate());
-			Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(bookingDTO.getTimeBooking());
-			String time1 = new Time(date1.getTime()).toString();
-			booking1.setTimeBooking(time1);
+			booking1.setTimeBooking(bookingDTO.getTimeBooking());
 			booking1.setNote(bookingDTO.getNote());
 			booking1.setEmployee1(stylist);
 			booking1.setTotalPrice(bookingDTO.getTotalPrice());

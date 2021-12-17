@@ -16,6 +16,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.employee1=[];
 	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
+	$scope.listTimeBooking=[];
 
 	var toprice;
 	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');
@@ -76,6 +77,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 		$http.get("/rest/booking/bookingIAT").then(resp=>{
 			$scope.listCutting = resp.data;
+		})
+
+		$http.get("/rest/booking/getAllTimeBooking").then(resp=>{
+			$scope.listTimeBooking=resp.data;
 		})
 		
 	}
@@ -159,7 +164,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showDetail=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
-		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.form=angular.copy(item);
 		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
 			for (var i=0;i<resp.data.length;i++){
@@ -171,7 +175,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showDetailCOM=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
-		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.formCOM=angular.copy(item);
 		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
 			for (var i=0;i<resp.data.length;i++){
@@ -182,7 +185,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	$scope.showDetail1=function (item){
 		$scope.initialize();
-		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.form1=angular.copy(item);
 	}
 
@@ -190,7 +192,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showDetail2=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
-		item.timeBooking= new Date("1970-01-01 "+item.timeBooking);
 		$scope.form2=angular.copy(item);
 		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
 			for (var i=0;i<resp.data.length;i++){
@@ -202,7 +203,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$scope.cart.clear();
 		$scope.initialize();
 		if (item !=null){
-			item.timeBooking=new Date("1970-01-01 "+item.timeBooking);
 			item.createDate=new Date(item.createDate);
 			$scope.form3=angular.copy(item);
 			$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
@@ -607,8 +607,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.booking = {
 		purchase() {
 			var bookings = angular.copy($scope.form2);
-			const value1 = moment($scope.form2.timeBooking).format('DD/MM/yyyy HH:mm:ss');
-			bookings.timeBooking=value1;
 			const value = moment($scope.form2.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
 				bookings.totalPrice = toprice;
@@ -649,8 +647,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		},
 		updateWFC() {
 			var bookings = angular.copy($scope.form);
-			const value1 = moment($scope.form.timeBooking).format('DD/MM/yyyy HH:mm:ss');
-			bookings.timeBooking=value1;
 			const value = moment($scope.form.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
 				bookings.totalPrice = toprice;
@@ -691,8 +687,6 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		capNhatDangCat() {
 			if ($scope.form3!=null){
 				var bookings = angular.copy($scope.form3);
-				const value1 = moment($scope.form3.timeBooking).format('DD/MM/yyyy HH:mm:ss');
-				bookings.timeBooking=value1;
 				const value = moment($scope.form3.createDate).format('YYYY-MM-DD');
 				if (toprice > 0) {
 					bookings.totalPrice = toprice;
