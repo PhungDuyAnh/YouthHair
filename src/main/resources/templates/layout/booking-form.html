@@ -158,7 +158,11 @@
                                     <input type="radio" ng-disabled="disableTime(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
                                     <label for="time{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
                                 </li> </div>
-                                <div ng-if="shiftsByStylist.id == null">Không có ca làm</div>
+                                <div ng-if="shiftsByStylist.id == null">
+	                                <h3 class="text-center text-lg text-info">
+	                                	Nhân Viên Bận!!!
+	                                </h3>                                
+                                </div>
 
 							</ul>
 					</div>
