@@ -52,8 +52,7 @@
 						<th>Họ Tên</th>
 						<th>Giới Tính</th>
 						<th>Điện Thoại</th>
-						<th>Địa Chỉ</th>
-						<th>Ngày Bắt Đầu Làm</th>						
+						<th>Địa Chỉ</th>					
 						<th>Vai Trò</th>
 						<th></th>
 					</tr>
@@ -63,8 +62,7 @@
                 		<td>{{item.fullName}}</td>
                 		<td>{{item.gender==true?'Nam':'Nữ'}}</td>
                 		<td>{{item.phone}}</td>
-                		<td>{{item.address}}</td>
-                		<td>{{item.startDate | date:'dd-MM-yyyy'}}</td>
+                		<td>{{item.nickname}}</td>
                 		<td>{{item.role.name}}</td>
 						<td class="text-center">
 							<a  class="btn btn-success btn-circle"

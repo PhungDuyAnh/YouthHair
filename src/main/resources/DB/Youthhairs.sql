@@ -106,7 +106,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (11,'2021-11-25',400000,'14h30','aaaaa',3,'IAT',12,NULL,NULL),(12,'2021-11-25',30000,'9h00','aaaaa',1,'WFC',16,NULL,NULL),(13,'2021-11-27',330000,'8h30',NULL,8,'IAT',22,NULL,NULL),(14,'2021-11-27',400000,'16h00','lobo',1,'WFC',23,NULL,NULL),(15,'2021-11-28',300000,'8h00',NULL,1,'WFC',26,NULL,NULL),(16,'2021-11-28',330000,'9h30','ádfghjkl',7,'IAT',28,NULL,NULL),(17,'2021-11-29',700000,'11h00','Cccccc',3,'WFC',25,NULL,NULL),(18,'2021-11-30',30000,'13h30',NULL,1,'CAN',29,NULL,NULL),(19,'2021-12-01',330000,'14h00',NULL,1,'IAT',30,NULL,NULL),(20,'2021-12-30',100000,'19h00',NULL,1,'UCF',30,NULL,NULL),(21,'2021-12-31',130000,'8h30',NULL,3,'UCF',31,NULL,NULL),(22,'2021-12-08',100000,'18h30',NULL,1,'UCF',32,NULL,NULL),(23,'2021-12-08',100000,'8h30',NULL,8,'UCF',33,NULL,NULL),(24,'2021-12-08',100000,'15h00',NULL,1,'UCF',34,NULL,NULL),(25,'2021-12-08',100000,'9h30',NULL,1,'COM',35,NULL,NULL),(26,'2021-12-08',130000,'8h00',NULL,1,'UCF',36,NULL,NULL),(27,'2021-12-18',300000,'17h30',NULL,3,'UCF',37,NULL,NULL);
+INSERT INTO `booking` VALUES (11,'2021-11-25',400000,'14h30','aaaaa',3,'WFP',12,NULL,NULL),(12,'2021-11-25',30000,'9h00','aaaaa',1,'WFC',16,NULL,NULL),(13,'2021-11-27',330000,'8h30',NULL,8,'WFP',22,NULL,NULL),(14,'2021-11-27',400000,'16h00','lobo',1,'WFC',23,NULL,NULL),(15,'2021-11-28',300000,'8h00',NULL,1,'WFC',26,NULL,NULL),(16,'2021-11-28',330000,'9h30','ádfghjkl',7,'IAT',28,NULL,NULL),(17,'2021-11-29',700000,'11h00','Cccccc',3,'WFC',25,NULL,NULL),(18,'2021-11-30',30000,'13h30',NULL,1,'CAN',29,NULL,NULL),(19,'2021-12-01',330000,'14h00',NULL,1,'IAT',30,NULL,NULL),(20,'2021-12-30',100000,'19h00',NULL,1,'COM',30,NULL,NULL),(21,'2021-12-31',130000,'8h30',NULL,3,'COM',31,NULL,NULL),(22,'2021-12-08',100000,'18h30',NULL,1,'UCF',32,NULL,NULL),(23,'2021-12-08',100000,'8h30',NULL,8,'UCF',33,NULL,NULL),(24,'2021-12-08',100000,'15h00',NULL,1,'UCF',34,NULL,NULL),(25,'2021-12-08',100000,'9h30',NULL,1,'COM',35,NULL,NULL),(26,'2021-12-08',130000,'8h00',NULL,1,'UCF',36,NULL,NULL),(27,'2021-12-18',300000,'17h30',NULL,3,'UCF',37,NULL,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +226,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Nguyễn Công Thành',NULL,1,'person_1.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',1,2),(2,'Nguyễn Thành Nam',NULL,1,'person_2.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',0,2),(3,'Phan Thị Huyền',NULL,1,'person_3.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',1,2),(4,'Phùng Duy Anh',NULL,0,'person_4.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',0,3),(5,'Ngô Văn Hải',NULL,0,'person_5.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',1,4),(6,'Lê Xuân Dương',NULL,0,'person_6.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',0,1),(7,'Đặng Thanh Phong',NULL,0,'person_6.jpg','031649555','aaaa',5000000,'2021-12-12',1,2),(8,'Nguyễn Thị Thùy Trang',NULL,1,'person_1.jpg','0968585858','viuyt@gmail.coij',5000000,'2021-11-10',1,2),(9,'Nguyễn Văn Đạt',NULL,0,'person_5.jpg','03121221221','cu@gmail.com',5000000,'2021-11-10',1,2);
+INSERT INTO `employees` VALUES (1,'Nguyễn Công Thành','Thành Công',1,'person_1.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',1,2),(2,'Nguyễn Thành Nam','Nam Barber',1,'person_2.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',0,2),(3,'Phan Thị Huyền','Huyền Phan',1,'person_3.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',1,2),(4,'Phùng Duy Anh','Danh Baber',0,'person_4.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',0,3),(5,'Ngô Văn Hải',NULL,0,'person_5.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',1,4),(6,'Lê Xuân Dương',NULL,0,'person_6.jpg','0987654321','Hai@gmail.com',5000000,'2021-11-11',0,1),(7,'Đặng Thanh Phong','Thanh Phong',0,'person_6.jpg','031649555','aaaa',5000000,'2021-12-12',1,2),(8,'Nguyễn Thị Thùy Trang','Trang Thuỳ',1,'person_1.jpg','0968585858','viuyt@gmail.coij',5000000,'2021-11-10',1,2),(9,'Nguyễn Văn Đạt','Đạt 09',0,'person_5.jpg','03121221221','cu@gmail.com',5000000,'2021-11-10',1,2);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -480,7 +480,7 @@ CREATE TABLE `workassign` (
   KEY `shifts_fk_idx` (`shifts_Id`),
   CONSTRAINT `workassign_employees_fk` FOREIGN KEY (`employees_Id`) REFERENCES `employees` (`Id`),
   CONSTRAINT `workassign_shifts_fk` FOREIGN KEY (`shifts_Id`) REFERENCES `shifts` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -489,7 +489,7 @@ CREATE TABLE `workassign` (
 
 LOCK TABLES `workassign` WRITE;
 /*!40000 ALTER TABLE `workassign` DISABLE KEYS */;
-INSERT INTO `workassign` VALUES (1,1,2,'2021-12-18'),(2,3,1,'2021-12-18');
+INSERT INTO `workassign` VALUES (1,1,2,'2021-12-18'),(2,3,1,'2021-12-18'),(3,1,1,'2021-12-19'),(4,1,2,'2021-12-20'),(5,1,2,'2021-12-21'),(6,1,1,'2021-12-22'),(7,3,1,'2021-12-19'),(8,3,2,'2021-12-20'),(9,7,2,'2021-12-21'),(10,7,1,'2021-12-22'),(11,8,1,'2021-12-19'),(12,8,1,'2021-12-18'),(13,8,2,'2021-12-20'),(14,8,1,'2021-12-21'),(15,9,1,'2021-12-18'),(16,9,2,'2021-12-19'),(17,9,2,'2021-12-20'),(18,9,2,'2021-12-21');
 /*!40000 ALTER TABLE `workassign` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -502,4 +502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-17  1:16:59
+-- Dump completed on 2021-12-17 11:08:43
