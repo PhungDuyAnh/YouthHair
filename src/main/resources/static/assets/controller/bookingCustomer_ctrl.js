@@ -141,6 +141,9 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
             }
         })
     }
+
+
+
     $scope.data={
         id : '',
         date: ''

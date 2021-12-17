@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import poly.datn.dao.TimeBookingDetailDAO;
 import poly.datn.entity.TimeBookingDetail;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -18,5 +19,11 @@ public class TimeBookingDetailRestcontroller {
     @GetMapping
     public List<TimeBookingDetail> getAllTimeBookingDetail(){
         return timeBookingDetailDAO.findAll();
+    }
+
+    @GetMapping("/getCheckTimeBooking")
+    public List<TimeBookingDetail> getCheckTimeBookingDetail(Integer cid, Date date, Integer bookingId){
+
+        return timeBookingDetailDAO.getCheckTimebooking(cid,date,bookingId);
     }
 }
