@@ -155,7 +155,7 @@
 
                                 <div ng-if="shiftsByStylist.id != null">
                                     <li ng-repeat="item in allTimeBookingByShifts" >
-                                    <input type="radio" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
+                                    <input type="radio" ng-disabled="disableTime(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
                                     <label for="time{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
                                 </li> </div>
                                 <div ng-if="shiftsByStylist.id == null">Không có ca làm</div>

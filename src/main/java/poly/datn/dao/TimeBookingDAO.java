@@ -11,4 +11,6 @@ import java.util.List;
 public interface TimeBookingDAO extends JpaRepository<TimeBooking, Integer> {
     @Query(value = "SELECT b FROM TimeBooking b  WHERE b.shifts.id = ?1 ")
     List<TimeBooking> getTimeBookingByShift(Integer id);
+
+
 }

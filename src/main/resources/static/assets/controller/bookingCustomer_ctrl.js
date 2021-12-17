@@ -145,9 +145,11 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         id : '',
         date: ''
     }
+
+    $scope.idStylist=null;
 // lấy id stylist khi click vào ảnh
     $scope.styId = function (id) {
-
+        this.idStylist=id;
         this.form.stylistId = id;
         const value = moment($scope.form.createDate).format('YYYY-MM-DD');
         console.log(value)
@@ -160,6 +162,10 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                     $scope.allTimeBookingByShifts = resp1.data;
                     console.log(resp1.data)
                 })
+        })
+
+        $http.get("/rest/getAllTimeBookingDetail").then(resp=>{
+            $scope.allTimeBookingDetail=resp.data;
         })
     }
 
@@ -247,6 +253,10 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     }
     $scope.timeNameByStylist = function (name){
         $scope.form.timeBooking=name
+    }
+
+    $scope.disableTime=function (timeBookingId){
+        return $scope.allTimeBookingDetail.findIndex(a=>a.stylistId==$scope.idStylist&&a.timeBookingId==timeBookingId)
     }
 
 //Lay booking theo stylist
