@@ -212,8 +212,8 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public List<Booking> findBookingWFCbyStylist(Integer id) {
-		return bookingDAO.findBookingWFCbyStylist(id);
+	public List<Booking> findBookingWFCbyStylist(Integer id, Date date) {
+		return bookingDAO.findBookingWFCbyStylist(id, date);
 	}
 
 	@Override

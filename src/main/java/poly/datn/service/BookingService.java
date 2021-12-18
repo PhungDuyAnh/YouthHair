@@ -1,5 +1,6 @@
 package poly.datn.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,7 +85,7 @@ public interface BookingService {
 
 	Booking findBookingIATbyStylist(Integer id);
 
-	List<Booking> findBookingWFCbyStylist(Integer id);
+	List<Booking> findBookingWFCbyStylist(Integer id, Date date);
 
 	List<Booking> getAllBookingIAT();
 

@@ -33,7 +33,7 @@
 								</div>
 							</div>
 							<div class="col-auto">
-								<a style="cursor: pointer;" data-toggle="modal" data-target="#StylistModal" ng-click="getDataBookingWaitting(sty.id)">
+								<a style="cursor: pointer;" data-toggle="modal" data-target="#StylistModal" ng-click="getDataBookingWaitting(sty.employee.id)">
 									<i class="fas fa-calendar-plus fa-2x text-primary"></i>
 								</a> 
 								<a style="cursor: pointer;" ng-click="tickDoneIAT(customerInfoIAT[$index]);">
@@ -170,7 +170,6 @@
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<h5 class="text-black" >Tổng Thời Gian: <span class="text-info">{{cart.totalTime}} phút</span></h5>
 							<h4 class="text-black" >Tổng Tiền: <span class="text-warning">{{cart.amount | number:0}} VNĐ</span></h4>
 						</div>
 					</div>

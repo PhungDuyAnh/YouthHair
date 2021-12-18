@@ -123,7 +123,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 			this.minDate = yyyy + '-' + mm + '-' + dd;
 			input.setAttribute("min", this.minDate);
-			return this.minDate;
+			
 		},
 
 		FuncMaxDate() {
@@ -170,7 +170,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 
 			this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
-			input.setAttribute("max", this.maxDate);
+			//input.setAttribute("max", this.maxDate);
 		}
 	}
 
@@ -200,9 +200,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 	//namnt stylist
-	$scope.getDataBookingWaitting = function (stylistId){
-		$http.get(`/rest/booking/bookingWaiting/${stylistId}`).then(resp=>{
-			$scope.bookingWaiting = resp.data;
+	$scope.getDataBookingWaitting = function (stylistId){		
+		$http.get(`/rest/booking/bookingWaiting/${stylistId}?date=${$scope.getDate}`).then(resp=>{
+			$scope.bookingWaiting = resp.data;			
 		})
 	}
 	$scope.customerInfoIAT = [];

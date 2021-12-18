@@ -1,5 +1,6 @@
 package poly.datn.rest.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,8 +100,8 @@ public class BookingRestController {
 	}
 
 	@GetMapping("/bookingWaiting/{id}")
-	public  List<Booking> findBookingWFCbyStylist(@PathVariable Integer id){
-		return bookingService.findBookingWFCbyStylist(id);
+	public  List<Booking> findBookingWFCbyStylist(@PathVariable Integer id, Date date){
+		return bookingService.findBookingWFCbyStylist(id, date);
 	}
 	
 	@PutMapping("/setWorkForStylist/{id}")
