@@ -15,7 +15,9 @@ public interface TimeBookingDetailDAO extends JpaRepository<TimeBookingDetail, I
 //    @Query(value = "SELECT b FROM TimeBookingDetail b WHERE b.username = ?1")
 //    Account findByName(String username);
 
-      @Query(value = "SELECT b from TimeBookingDetail b where (b.stylistId=:styId) and (b.date=:date) and (b.bookingId =:bookingId)")
+      @Query(value = "SELECT b from TimeBookingDetail b where (b.stylistId=:styId) and (b.date=:date) and (b.bookingId <>:bookingId)")
       List<TimeBookingDetail> getCheckTimebooking(@Param("styId") Integer id, @Param("date") Date date , @Param("bookingId") Integer bookingId);
+
+
 
 }

@@ -130,7 +130,7 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="fname">Họ Tên</label><input
-								type="text" id="fname" class="form-control" ng-model="form2.customer.fullName"
+								type="text" id="fname" class="form-control" ng-model="formChoXacNhan.customer.fullName"
 								placeholder="Họ Tên..." readonly>
 						</div>
 					</div>
@@ -138,12 +138,12 @@
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
 							<label class="text-black" for="email">Email</label> <input
-								type="email" id="email" class="form-control" placeholder="Email" ng-model="form2.customer.email"
+								type="email" id="email" class="form-control" placeholder="Email" ng-model="formChoXacNhan.customer.email"
 								readonly>
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="lname">Số Điện Thoại </label> <input
-								type="text" id="lname" class="form-control" ng-model="form2.customer.phone"
+								type="text" id="lname" class="form-control" ng-model="formChoXacNhan.customer.phone"
 								placeholder="Số Điện Thoại..." readonly>
 						</div>
 					</div>
@@ -151,13 +151,13 @@
 					<div class="row form-group">
 						<div class="col-md-6 mb-3 mb-md-0">
 							<label class="text-black" for="date">Ngày Làm Tóc <span
-									class="text-danger">(*)</span></label> <input ng-model="form2.createDate"
+									class="text-danger">(*)</span></label> <input ng-model="formChoXacNhan.createDate"
 								type="date" id="date" class="form-control datepicker px-2"
 								placeholder="Ngày Làm Tóc...">
 						</div>
 						<div class="col-md-6">
 							<label class="text-black" for="time">Khung Giờ Làm Tóc <span
-									class="text-danger">(*)</span></label> <input ng-model="form2.time"
+									class="text-danger">(*)</span></label> <input ng-model="formChoXacNhan.time"
 								type="time" id="time" class="form-control datepicker px-2"
 								placeholder="Khung Giờ Làm Tóc...">
 						</div>
@@ -170,10 +170,10 @@
 							<ul class="services-form">
 								<li ng-repeat="services in db.services"><input type="checkbox"
 								    id="{{services.id}}"
-								  ng-checked="showBookingWating(form2.id,services.id)>=0"/>
+								  ng-checked="showBookingWating(formChoXacNhan.id,services.id)>=0"/>
 									<label for="{{services.id}}"> <img src="/assets/images/haircut/2.jpg" />
 									<br> {{services.serviceName}}<br>
-										{{form2.id}}
+										{{formChoXacNhan.id}}
 								</label></li>
 							</ul>
 						</div>
@@ -182,10 +182,10 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<h5 class="text-black">
-								Tổng Thời Gian: <span class="text-info">{{form2.totalTime}}</span>
+								Tổng Thời Gian: <span class="text-info">{{formChoXacNhan.totalTime}}</span>
 							</h5>
 							<h4 class="text-black">
-								Tổng Tiền: <span class="text-warning">{{form2.totalPrice}} VNĐ</span>
+								Tổng Tiền: <span class="text-warning">{{formChoXacNhan.totalPrice}} VNĐ</span>
 							</h4>
 						</div>
 					</div>
@@ -194,7 +194,7 @@
 						<div class="col-md-12">
 							<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label>
 							<select class="form-control" id="stylist"
-									ng-model="form2.employee1.fullName"
+									ng-model="formChoXacNhan.employee1.fullName"
 									ng-options="x for x in employee1">
 							</select>
 						</div>
@@ -203,7 +203,7 @@
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label class="text-black" for="note">Ghi Chú</label>
-							<textarea name="note" id="note" cols="30" rows="5" ng-model="form2.note"
+							<textarea name="note" id="note" cols="30" rows="5" ng-model="formChoXacNhan.note"
 									  class="form-control" placeholder="Để lại ghi chú tại đây..."></textarea>
 						</div>
 					</div>

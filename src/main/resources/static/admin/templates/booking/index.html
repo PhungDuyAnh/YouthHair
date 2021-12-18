@@ -43,7 +43,9 @@
 						</div>
 						<div class="col-md-6 mb-3 mb-md-0">
 							<label class="text-black" for="date">Ngày Làm Tóc</label> <input
-								type="date" id="date" class="form-control datepicker px-2" ng-model="form.createDate"
+								type="date" id="date" class="form-control datepicker px-2"
+								ng-model="form.createDate"
+								ng-change="getDate2()"
 								placeholder="Ngày Làm Tóc..." readonly>
 						</div>
 					</div>
@@ -72,6 +74,7 @@
 							<label class="text-black" for="stylist">Chọn Stylist <span class="text-danger">(*)</span></label>
 							<select class="form-control" id="stylist"
 									ng-model="form.employee1"
+									ng-change="getDate2()"
 									ng-options="x as x.fullName for x in itemConfirm track by x.id">
 							</select>
 						</div>
@@ -79,11 +82,21 @@
 
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" for="timeBooking">Chọn Thời Gian Đến <span class="text-danger">(*)</span></label>
-							<select class="custom-select" id="timeBooking"
-									ng-model="form.timeBooking"
-									ng-options="x for x in listTimeBooking">
-							</select>
+							<label class="text-black" >Chọn Giờ Đến <span
+									class="text-danger">(*)</span></label>
+							<ul class="status-form text-center" >
+								<div ng-if="shiftsByStylist.id != null">
+									<li ng-repeat="item in allTimeBookingByShifts" >
+										<input type="radio" ng-disabled="disableTime1(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
+										<label for="time{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
+									</li> </div>
+								<div ng-if="shiftsByStylist.id == null">
+									<h3 class="text-center text-lg text-info">
+										Nhân Viên Bận!!!
+									</h3>
+								</div>
+
+							</ul>
 						</div>
 					</div>
 

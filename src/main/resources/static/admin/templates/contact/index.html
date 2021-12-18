@@ -137,7 +137,7 @@
 						<ul class="services-form">
 							<li ng-if="servicesChecked[$index] !=null" ng-repeat="services in db.services"><input type="checkbox"
 							  id="tm{{services.id}}" ng-click="cart.add(services.id)"
-							  ng-checked="showBookingWating(form2.id,services.id)>=0"
+							  ng-checked="showBookingWating(formChoXacNhan.id,services.id)>=0"
 							/>
 								<label for="tm{{services.id}}"> <img ng-src="{{'/assets/images/haircut/' + services.image}}" />
 									<br> {{services.serviceName}}

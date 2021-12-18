@@ -32,7 +32,7 @@
 						<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 						<td>{{item.statusbooking.statusName}}</td>
 						<td>
-							<a style="cursor: pointer;" ng-click="showDetail(item);styId(item.employee1.id)"
+							<a style="cursor: pointer;" ng-click="showDetail(item);styId(item.employee1.id);getDate2()"
 								class="btn btn-primary" data-toggle="modal" data-target="#infoWFCModal"> Chi Tiết</i>
 							</a>
 							<a style="cursor: pointer;" class="btn btn-danger" ng-click="updateCAN(item)"> Huỷ</i></a>
