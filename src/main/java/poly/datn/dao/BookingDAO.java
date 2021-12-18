@@ -9,7 +9,7 @@ import poly.datn.entity.Employee;
 
 import javax.persistence.Tuple;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public interface BookingDAO extends JpaRepository<Booking, Integer> {
@@ -51,8 +51,8 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
     @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'IAT' AND b.employee1.id = ?1 ")
 	Booking findBookingIATbyStylist(Integer id);
     
-    @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'WFC' AND b.employee1.id = ?1 ")
-    List<Booking> findBookingWFCbyStylist(Integer id);
+    @Query(value = "SELECT b FROM Booking b WHERE b.statusbooking.id = 'WFC' AND b.employee1.id = ?1 AND b.createDate = ?2")
+    List<Booking> findBookingWFCbyStylist(Integer id, Date date);
 
     @Query("SELECT b FROM Booking b WHERE (:toDate is null or b.createDate >= :toDate) " +
             "and (:formDate is null or b.createDate <= :formDate)" +
