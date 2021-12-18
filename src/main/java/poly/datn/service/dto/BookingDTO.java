@@ -35,5 +35,7 @@ public class BookingDTO {
     //Service
     private List<Services> listSer;
 
+    private List<Integer> listTime;
+
 
 }

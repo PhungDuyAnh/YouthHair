@@ -6,7 +6,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.item3=[];
 	$scope.form={};
 	$scope.form1={};
-	$scope.form2={};
+	$scope.formChoXacNhan={};
 	$scope.form3={};
 	$scope.form5={};
 	$scope.formCOM={};
@@ -17,6 +17,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.bookingWaiting=[];
 	$scope.itemConfirm=[];
 	$scope.listTimeBooking=[];
+	$scope.disableTime=[];
 
 	var toprice;
 	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');
@@ -81,6 +82,10 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 		$http.get("/rest/booking/getAllTimeBooking").then(resp=>{
 			$scope.listTimeBooking=resp.data;
+		})
+
+		$http.get("/rest/getAllTimeBookingDetail").then(resp=>{
+			$scope.allTimeBookingDetail=resp.data;
 		})
 
 	}
@@ -170,7 +175,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			}
 
 			this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
-			//input.setAttribute("max", this.maxDate);
+			input.setAttribute("max", this.maxDate);
 		}
 	}
 
@@ -179,11 +184,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	// Lấy Shift time khi dổi date
 	$scope.getDate1=function() {
-		var item = angular.copy($scope.form2.createDate);
+		var item = angular.copy($scope.formChoXacNhan.createDate);
 		const value = moment(item).format('YYYY-MM-DD');
 
 		//lay shift
-		$http.get(`/rest/selectShiftbyEmployee?id=${$scope.form2.employee1.id}&date=${value}`).then(resp => {
+		$http.get(`/rest/selectShiftbyEmployee?id=${$scope.formChoXacNhan.employee1.id}&date=${value}`).then(resp => {
 			$scope.shiftsByStylist = resp.data.shifts;
 			//lay time booking
 			if($scope.shiftsByStylist != null){
@@ -192,6 +197,242 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				})
 			}
 		})
+	}
+
+	$scope.getMinMaxTime1 = {
+		today: new Date(),
+		minDate: '',
+		maxDate: '',
+
+		FuncMinDate() {
+			var input = document.getElementById("date");
+			var dd = this.today.getDate() + 1;
+			var mm = this.today.getMonth() + 1;
+			var yyyy = this.today.getFullYear();
+
+			if (this.today.getHours() > 21) {
+				dd = this.today.getDate() + 2;
+			}
+
+			if (dd > 31) {
+				dd = this.today.getDate() - 30;
+				mm = this.today.getMonth() + 2;
+			} else {
+				mm = this.today.getMonth() + 1;
+			}
+
+			if (mm < 10) {
+				if (mm == 2) {
+					if (dd > 28) {
+						dd = this.today.getDate() - 27;
+						mm = this.today.getMonth() + 2;
+					}
+
+				}
+				mm = '0' + mm;
+			}
+
+			if (dd < 10) {
+				dd = '0' + dd;
+			}
+			this.minDate = yyyy + '-' + mm + '-' + dd;
+			input.setAttribute("min", this.minDate);
+
+		},
+
+		FuncMaxDate() {
+			var input = document.getElementById("date");
+			var mmMax = this.today.getMonth() + 2;
+			var ddMax = this.today.getDate() - 1;
+			var yyyy = this.today.getFullYear();
+
+			if (mmMax > 12) {
+				if (ddMax <= 23) {
+					mmMax = this.today.getMonth() + 1;
+					ddMax = this.today.getDate() + 7;
+					yyyy = this.today.getFullYear();
+				} else {
+					ddMax = this.today.getDate() - 24;
+					mmMax = this.today.getMonth() - 10;
+					yyyy = this.today.getFullYear() + 1;
+				}
+			} else {
+				if (ddMax <= 23) {
+					mmMax = this.today.getMonth() + 1;
+					ddMax = this.today.getDate() + 7;
+					yyyy = this.today.getFullYear();
+					if (mmMax == 2) {
+						ddMax = this.today.getDate() - 20;
+						mmMax = this.today.getMonth() + 2;
+					}
+				} else {
+					ddMax = this.today.getDate() - 23;
+					mmMax = this.today.getMonth() + 2;
+					if (mmMax == 3) {
+						ddMax = this.today.getDate() - 21;
+					}
+				}
+			}
+			if (mmMax < 10) {
+				mmMax = '0' + mmMax;
+			}
+			if (ddMax < 10) {
+				if (ddMax <= 0) {
+					ddMax = this.today.getDate();
+				}
+				ddMax = '0' + ddMax;
+			}
+
+			this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
+			input.setAttribute("max", this.maxDate);
+		}
+	}
+
+	$scope.getMinMaxTime1.FuncMinDate();
+	$scope.getMinMaxTime1.FuncMaxDate();
+
+	// Lấy Shift time khi dổi date
+	$scope.getDate2=function() {
+		var item = angular.copy($scope.form.createDate);
+		const value = moment(item).format('YYYY-MM-DD');
+
+		//lay shift
+		$http.get(`/rest/selectShiftbyEmployee?id=${$scope.form.employee1.id}&date=${value}`).then(resp => {
+			$scope.shiftsByStylist = resp.data.shifts;
+			//lay time booking
+			if($scope.shiftsByStylist != null){
+				$http.get(`/rest/getAllTimebyShift/${resp.data.shifts.id}`).then(resp1 => {
+					$scope.allTimeBookingByShifts =resp1.data;
+				})
+			}
+		})
+	}
+
+	$scope.getMinMaxTime2 = {
+		today: new Date(),
+		minDate: '',
+		maxDate: '',
+
+		FuncMinDate() {
+			var input = document.getElementById("date1");
+			var dd = this.today.getDate() + 1;
+			var mm = this.today.getMonth() + 1;
+			var yyyy = this.today.getFullYear();
+
+			if (this.today.getHours() > 21) {
+				dd = this.today.getDate() + 2;
+			}
+
+			if (dd > 31) {
+				dd = this.today.getDate() - 30;
+				mm = this.today.getMonth() + 2;
+			} else {
+				mm = this.today.getMonth() + 1;
+			}
+
+			if (mm < 10) {
+				if (mm == 2) {
+					if (dd > 28) {
+						dd = this.today.getDate() - 27;
+						mm = this.today.getMonth() + 2;
+					}
+
+				}
+				mm = '0' + mm;
+			}
+
+			if (dd < 10) {
+				dd = '0' + dd;
+			}
+			this.minDate = yyyy + '-' + mm + '-' + dd;
+			input.setAttribute("min", this.minDate);
+
+		},
+
+		FuncMaxDate() {
+			var input = document.getElementById("date1");
+			var mmMax = this.today.getMonth() + 2;
+			var ddMax = this.today.getDate() - 1;
+			var yyyy = this.today.getFullYear();
+
+			if (mmMax > 12) {
+				if (ddMax <= 23) {
+					mmMax = this.today.getMonth() + 1;
+					ddMax = this.today.getDate() + 7;
+					yyyy = this.today.getFullYear();
+				} else {
+					ddMax = this.today.getDate() - 24;
+					mmMax = this.today.getMonth() - 10;
+					yyyy = this.today.getFullYear() + 1;
+				}
+			} else {
+				if (ddMax <= 23) {
+					mmMax = this.today.getMonth() + 1;
+					ddMax = this.today.getDate() + 7;
+					yyyy = this.today.getFullYear();
+					if (mmMax == 2) {
+						ddMax = this.today.getDate() - 20;
+						mmMax = this.today.getMonth() + 2;
+					}
+				} else {
+					ddMax = this.today.getDate() - 23;
+					mmMax = this.today.getMonth() + 2;
+					if (mmMax == 3) {
+						ddMax = this.today.getDate() - 21;
+					}
+				}
+			}
+			if (mmMax < 10) {
+				mmMax = '0' + mmMax;
+			}
+			if (ddMax < 10) {
+				if (ddMax <= 0) {
+					ddMax = this.today.getDate();
+				}
+				ddMax = '0' + ddMax;
+			}
+
+			this.maxDate = yyyy + '-' + mmMax + '-' + ddMax;
+			input.setAttribute("max", this.maxDate);
+		}
+	}
+
+	$scope.getMinMaxTime2.FuncMinDate();
+	$scope.getMinMaxTime2.FuncMaxDate();
+
+	// Lấy Shift time khi dổi date
+	$scope.getDate3=function() {
+		var item = angular.copy($scope.formCOM.createDate);
+		const value = moment(item).format('YYYY-MM-DD');
+
+		//lay shift
+		$http.get(`/rest/selectShiftbyEmployee?id=${$scope.formCOM.employee1.id}&date=${value}`).then(resp => {
+			$scope.shiftsByStylist = resp.data.shifts;
+			//lay time booking
+			if($scope.shiftsByStylist != null){
+				$http.get(`/rest/getAllTimebyShift/${resp.data.shifts.id}`).then(resp1 => {
+					$scope.allTimeBookingByShifts =resp1.data;
+				})
+			}
+		})
+	}
+
+	//Lay timebookingbystylist
+	$scope.timeByStylist = function (id){
+		if(id == 1){
+			$scope.formChoXacNhan.listTime[0] = 1;
+			$scope.formChoXacNhan.listTime[1] = 2;
+		}else if(id > 1){
+			$scope.formChoXacNhan.listTime[0] = id-1;
+			$scope.formChoXacNhan.listTime[1] = id;
+			$scope.formChoXacNhan.listTime[2] = id+1;
+		}else if (id==13){
+			$scope.formChoXacNhan.listTime[0] = 13;
+			$scope.formChoXacNhan.listTime[1] = 14;
+		}
+		else{
+			$scope.formChoXacNhan.timeBooking = null;
+		}
 	}
 
 	$scope.showBookingWating=function (bookingId,serviceId){
@@ -214,7 +455,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				}
 			}
 		}		
-	}	
+	}
 
 	$scope.setBookingCutting = function (booking){
 		$http.get(`/rest/booking/stylist/cutting/${booking.employee1.id}`).then(resp=>{
@@ -237,7 +478,30 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		});
 
 	}
-	
+	$scope.getDisableTime=function (cid,date,bookingId){
+		var convertDate=moment($scope.formChoXacNhan.createDate).format('YYYY-MM-DD')
+		$http.get(`/rest/getAllTimeBookingDetail/getCheckTimeBooking?cid=${cid}&date=${convertDate}&bookingId=${bookingId}`).then(resp=>{
+			$scope.disableTime=resp.data;
+		})
+	}
+
+	$scope.disableTime1=function (timeId){
+		return $scope.disableTime.findIndex(a=>a.stylistId==$scope.formChoXacNhan.employee1.id
+			&&a.timeBookingId==timeId&&a.bookingId!=$scope.formChoXacNhan.id)
+	}
+
+	$scope.getDisableTime1=function (cid,date,bookingId){
+		var convertDate=moment($scope.formCOM.createDate).format('YYYY-MM-DD')
+		$http.get(`/rest/getAllTimeBookingDetail/getCheckTimeBooking?cid=${cid}&date=${convertDate}&bookingId=${bookingId}`).then(resp=>{
+			$scope.disableTimeCOM=resp.data;
+		})
+	}
+
+	$scope.disableTime2=function (timeId){
+		return $scope.disableTimeCOM.findIndex(a=>a.stylistId==$scope.formCOM.employee1.id
+			&&a.timeBookingId==timeId&&a.bookingId!=$scope.formCOM.id)
+	}
+
 	$scope.tickDoneIAT = function(booking){
 		if(booking == null || booking.customer == null){
 			alert("Stylist đang không làm việc!!!")
@@ -300,7 +564,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	$scope.showDetail2=function (item){
 		$scope.cart.clear();
 		$scope.initialize();
-		$scope.form2=angular.copy(item);
+		$scope.formChoXacNhan=angular.copy(item);
 		$http.get(`/rest/bookingDetailsByBookingID/${item.id}`).then(resp=>{
 			for (var i=0;i<resp.data.length;i++){
 				$scope.cart.add(resp.data[i].id)
@@ -699,7 +963,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 
 	//form lưu thôg tin từ ng dùng nhập vào UI
-	$scope.form2 = {
+	$scope.formChoXacNhan = {
 		email: null,
 		fullName: null,
 		phone: null,
@@ -714,13 +978,13 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	//thực hiện sửa lịch
 	$scope.booking = {
 		purchase() {
-			var bookings = angular.copy($scope.form2);
-			const value = moment($scope.form2.createDate).format('YYYY-MM-DD');
+			var bookings = angular.copy($scope.formChoXacNhan);
+			const value = moment($scope.formChoXacNhan.createDate).format('YYYY-MM-DD');
 			if (toprice > 0) {
 				bookings.totalPrice = toprice;
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
-				bookings.employee1=$scope.form2.employee1;
+				bookings.employee1=$scope.formChoXacNhan.employee1;
 
 			} else {
 				bookings.totalPrice = 0;
@@ -728,7 +992,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 			if (bookings.customer.fullName == null || bookings.customer.email == null
 				|| bookings.createDate == null || bookings.customer.phone == null
 				|| bookings.createDate == undefined || bookings.totalPrice==0||bookings.timeBooking=="Invalid date") {
-				console.log($scope.form2)
+				console.log($scope.formChoXacNhan)
 				console.log($scope.cart.items)
 				alert("Vui lòng nhập thông tin đầy đủ")
 

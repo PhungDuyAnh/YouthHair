@@ -23,7 +23,8 @@ public class TimeBookingDetailRestcontroller {
 
     @GetMapping("/getCheckTimeBooking")
     public List<TimeBookingDetail> getCheckTimeBookingDetail(Integer cid, Date date, Integer bookingId){
-
         return timeBookingDetailDAO.getCheckTimebooking(cid,date,bookingId);
     }
+
+
 }
