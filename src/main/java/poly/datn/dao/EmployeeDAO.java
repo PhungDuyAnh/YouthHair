@@ -26,4 +26,10 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer> {
     
     @Query(value = "SELECT e FROM Employee e WHERE e.statusWork= true")
 	List<Employee> getAllEmployeeActive();
+
+    @Query(value = "SELECT count(e) FROM Employee e")
+    Integer countNv();
+
+    @Query(value = "SELECT count(e) FROM Employee e where e.role = 2")
+    Integer countStyList();
 }

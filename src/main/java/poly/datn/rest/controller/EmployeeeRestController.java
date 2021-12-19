@@ -65,4 +65,14 @@ public class EmployeeeRestController {
 	public List<Employee> seachEmployee(String fullName){
 		return employeeService.seachEmployee(fullName);
 	}
+
+	@GetMapping("/countNv")
+	public Integer countNv(){
+		return employeeService.countNv();
+	}
+
+	@GetMapping("/countStyList")
+	public Integer countStyList(){
+		return employeeService.countStyList();
+	}
 }
