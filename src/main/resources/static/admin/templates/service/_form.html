@@ -57,7 +57,7 @@
 											<span class="text-danger">(*)</span></label>
 										<input type="number" ng-model="form.price"
 											class="form-control " id="price" name="price"
-											placeholder="Giá Dịch Vụ" ng-required="true">
+											placeholder="Giá Dịch Vụ" ng-required="true" min="0">
 										<span ng-show="myForm.$submitted ">
       									<span ng-show="myForm.price.$error.required" class="error-msg">Bạn chưa nhập giá dịch vụ.</span>
     									</span>

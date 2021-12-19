@@ -79,7 +79,6 @@ app.controller("service-ctrl",function($scope,$http){
             headers: {'Content-Type': undefined}
         }).then(resp =>{
             $scope.form.image = resp.data.name
-            alert($scope.form.image);
         }).catch(error => {
             alert("Lỗi update hình ảnh");
             console.log("Error" ,error);
