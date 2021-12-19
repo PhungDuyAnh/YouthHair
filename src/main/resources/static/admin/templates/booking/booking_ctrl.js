@@ -90,6 +90,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 
 	}
 
+
 	$scope.getMinMaxTime = {
 		today: new Date(),
 		minDate: '',
