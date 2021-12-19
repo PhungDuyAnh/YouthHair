@@ -114,12 +114,18 @@ public class BookingRestController {
 		return bookingService.getAllBookingIAT();
 	}
 
-	@PostMapping("/updateToWFC")
+	@PostMapping("/updateToCOM")
 	public BookingDTO AddBookingInfo(@RequestBody BookingDTO bookingDTO) {
 		bookingService.AddInfoBookingUpdate(bookingDTO);
 		return bookingDTO;
 	}
 
+	@PostMapping("/updateToWFC")
+	public BookingDTO AddBookingInfoToWFC(@RequestBody BookingDTO bookingDTO) {
+		System.out.println("Update com to wfc");
+		bookingService.AddInfoBookingUpdateToWFC(bookingDTO);
+		return bookingDTO;
+	}
 
 	@PostMapping("/updateWFC")
 	public BookingDTO AddBookingInfoWFC(@RequestBody BookingDTO bookingDTO) {
