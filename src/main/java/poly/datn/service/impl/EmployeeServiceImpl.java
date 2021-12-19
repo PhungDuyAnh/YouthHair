@@ -223,4 +223,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDAO.getAllEmployeeActive();
 	}
 
+	@Override
+	public Integer countNv() {
+		Integer countNV= employeeDAO.countNv();
+		return countNV;
+	}
+
+	@Override
+	public Integer countStyList() {
+		Integer countStyList= employeeDAO.countStyList();
+		return countStyList;
+	}
+
 }

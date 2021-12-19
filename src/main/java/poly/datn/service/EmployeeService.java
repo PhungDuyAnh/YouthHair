@@ -87,4 +87,8 @@ public interface EmployeeService {
 	List<Employee> seachEmployee(String fullName);
 
 	List<Employee> getAllEmployeeActive();
+
+	Integer countNv();
+
+	Integer countStyList();
 }
