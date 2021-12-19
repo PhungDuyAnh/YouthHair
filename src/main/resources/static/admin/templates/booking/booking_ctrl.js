@@ -91,6 +91,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 	}
 
 
+
 	$scope.getMinMaxTime = {
 		today: new Date(),
 		minDate: '',
@@ -418,18 +419,21 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		})
 	}
 
+
+	$scope.listTime= [];
+
 	//Lay timebookingbystylist
 	$scope.timeByStylist = function (id){
 		if(id == 1){
-			$scope.formChoXacNhan.listTime[0] = 1;
-			$scope.formChoXacNhan.listTime[1] = 2;
+			$scope.listTime[0] = 1;
+			$scope.listTime[1] = 2;
 		}else if(id > 1){
-			$scope.formChoXacNhan.listTime[0] = id-1;
-			$scope.formChoXacNhan.listTime[1] = id;
-			$scope.formChoXacNhan.listTime[2] = id+1;
+			$scope.listTime[0] = id-1;
+			$scope.listTime[1] = id;
+			$scope.listTime[2] = id+1;
 		}else if (id==13){
-			$scope.formChoXacNhan.listTime[0] = 13;
-			$scope.formChoXacNhan.listTime[1] = 14;
+			$scope.listTime[0] = 13;
+			$scope.listTime[1] = 14;
 		}
 		else{
 			$scope.formChoXacNhan.timeBooking = null;
@@ -973,7 +977,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		stylistId: null,
 		totalPrice: null,
 		listSer: [],
+		listTime: []
 	};
+
 
 
 	//thực hiện sửa lịch
@@ -986,6 +992,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
 				bookings.employee1=$scope.formChoXacNhan.employee1;
+				bookings.timeBooking=$scope.listTime[1];
 
 			} else {
 				bookings.totalPrice = 0;
