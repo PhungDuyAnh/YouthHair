@@ -155,15 +155,12 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
         this.idStylist=id;
         this.form.stylistId = id;
         const value = moment($scope.form.createDate).format('YYYY-MM-DD');
-        console.log(value)
         //lay shift
         $http.get(`/rest/selectShiftbyEmployee?id=${id}&date=${value}`).then(resp => {
             $scope.shiftsByStylist = resp.data.shifts;
-            console.log(resp.data.shifts.id)
             //lay time booking
                $http.get(`/rest/getAllTimebyShift/${resp.data.shifts.id}`).then(resp1 => {
                     $scope.allTimeBookingByShifts = resp1.data;
-                    console.log(resp1.data)
                 })
         })
 
@@ -291,29 +288,30 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                 || bookings.listTime == null || bookings.listTime.length==0) {
                 alert("Vui lòng nhập thông tin đầy đủ")
             } else {
-                //checkBooking UCF by phone
-                $http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
-                    $scope.bookingUCF = {}
-                    $scope.bookingUCF = resp.data;
-                    console.log($scope.bookingUCF)
-                    //add data => BE
-                    if ($scope.bookingUCF == "") {
-                        console.log("oke roi")
-                        $http.post("/rest/bookingCus", bookings).then(resp => {
-                            alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
-                            $scope.cart.clear();
-                            $("#closeModalBookingCustomer").click();
-                            //location.href = "/booking";
-                        }).catch(error => {
-                            alert("Đặt lịch thất bại!")
-                            // $scope.form.data = null;
-                            console.log(error);
-                        })
-                    } else {
-                        alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
-                        // location.href = "/booking";
-                    }
-                })
+                if (confirm("Cơ chế tiếp nhận và giải quyết lịch đặt làm tóc của salon\n" +
+                    "- Vui lòng chờ nhân viên gọi xác nhận lịch đặt.\n" +
+                    "- Trong quá trình làm tóc nếu phát sinh thêm dịch vụ thì cửa hàng sẽ phân công thợ bất kì thực hiện.")){
+                    //checkBooking UCF by phone
+                    $http.get(`rest/checkBooking/${bookings.phone}`).then(resp => {
+                        $scope.bookingUCF = {}
+                        $scope.bookingUCF = resp.data;
+                        //add data => BE
+                        if ($scope.bookingUCF == "") {
+                            $http.post("/rest/bookingCus", bookings).then(resp => {
+                                alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
+                                $scope.cart.clear();
+                                $("#closeModalBookingCustomer").click();
+                                //location.href = "/booking";
+                            }).catch(error => {
+                                alert("Đặt lịch thất bại!")
+                                // $scope.form.data = null;
+                            })
+                        } else {
+                            alert("Đặt lịch thất bại! Có vẻ bạn đã có lịch đang chờ nhân viên xác nhận, hãy liên hệ với chúng tôi để được hỗ trợ.")
+                            // location.href = "/booking";
+                        }
+                    })
+                }
             }
         }
     }

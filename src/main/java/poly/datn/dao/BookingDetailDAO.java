@@ -2,6 +2,7 @@ package poly.datn.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
@@ -10,6 +11,7 @@ import poly.datn.entity.BookingDetail;
 import poly.datn.entity.BookingDetailPK;
 
 import javax.persistence.Tuple;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface BookingDetailDAO extends JpaRepository<BookingDetail, BookingDetailPK>{
@@ -27,5 +29,10 @@ public interface BookingDetailDAO extends JpaRepository<BookingDetail, BookingDe
 
     @Procedure
     void procedure_delete(int id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM BookingDetail b where b.booking.id=?1")
+    void deleteByBookingId(int id);
 
 }

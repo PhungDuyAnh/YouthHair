@@ -93,6 +93,8 @@ public interface BookingService {
 
     BookingDTO AddInfoBookingUpdate(BookingDTO bookingDTO);
 
+    BookingDTO AddInfoBookingUpdateToWFC(BookingDTO bookingDTO);
+
     BookingDTO AddInfoBookingUpdateWFC(BookingDTO bookingDTO);
 
     Booking updateCAN(int id);

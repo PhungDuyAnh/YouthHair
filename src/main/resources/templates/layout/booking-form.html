@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<form class="css-form" name="myForm" ng-submit="myForm.$valid && doSubmitForm($event)" novalidate>
+<form class="css-form" name="myForm" ng-submit="myForm.$valid " novalidate>
 <div class="site-section" 
      style="background-image: url('assets/images/background-booking.jpg'); background-size: cover;">
 
@@ -65,7 +65,8 @@
                         <input type="text" id="fname" name="fullName"
                                ng-model="form.fullName"
                                class="form-control"
-                               placeholder="Họ Tên..." ng-required="true">
+                               placeholder="Họ Tên..."
+                               ng-required="true">
                         <span ng-show="myForm.$submitted ">
       							<span ng-show="myForm.fullName.$error.required" class="error-msg text-danger" >Bạn chưa nhập tên.</span>
     								</span>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import poly.datn.dao.BookingDetailDAO;
@@ -54,5 +55,10 @@ public class BookingDetailServiceImpl implements BookingDetailService {
 	@Override
 	public void procedure_delete(int id) {
 		bookingDetailDAO.procedure_delete(id);
+	}
+
+	@Override
+	public void deleteByBookingId(int id) {
+		bookingDetailDAO.deleteByBookingId(id);
 	}
 }
