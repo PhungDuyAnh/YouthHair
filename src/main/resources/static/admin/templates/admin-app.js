@@ -43,3 +43,49 @@ app.config(function($routeProvider){
 	})
 })
 
+app.controller("main-ctrl",function($scope,$http, $interval){
+	$scope.bookingUCF = [];
+	$scope.alertBookingUCF = [];
+	$scope.doanhThu = 0;
+	$scope.lienHe = 0;
+	$scope.lichhenAll=0;
+	$scope.lichhenCPM=0;
+	$scope.monthYear=moment(new Date()).format('yyyy-MM');
+	
+	$scope.initialize=function (){
+		$http.get("/rest/booking/alertBookingUCF").then(resp=>{
+			$scope.alertBookingUCF = resp.data;
+		})
+		
+		$http.get("/rest/booking/UCF").then(resp=>{
+			$scope.bookingUCF = resp.data;
+		})
+		
+		//thong ke
+		$http.get(`/rest/thongKeDT?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.doanhThu=resp.data;
+		})
+		
+		$http.get(`/rest/thongKeLichHenCPM?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.lichhenCPM=resp.data;
+		})
+		
+		$http.get(`/rest/thongKeLichHen?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.lichhenAll=resp.data;
+		})
+
+		$http.get(`/rest/lienHeTk?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.lienHe=resp.data;
+		})
+		
+	}
+	
+	$scope.getMonthYear= function (){
+		var item=angular.copy($scope.monthYear);
+		$scope.monthYear=moment(new Date(item)).format('yyyy-MM');
+		$scope.initialize();
+	}	
+		
+	$scope.initialize();
+	$interval($scope.initialize, 10000);
+})

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
+import poly.datn.entity.ThongBaoUCF;
 
 import javax.persistence.Tuple;
 
@@ -62,5 +63,8 @@ public interface BookingDAO extends JpaRepository<Booking, Integer> {
     
     @Query(value = "SELECT b FROM Booking b  WHERE b.customer.id = :customer and b.statusbooking.id = 'WFC'")
     Booking findCustomerInBookingWFC(@Param("customer") Integer customer );
+
+    @Query(value = "SELECT b FROM ThongBaoUCF b")
+	List<ThongBaoUCF> alertBookingUCF();
 
 }

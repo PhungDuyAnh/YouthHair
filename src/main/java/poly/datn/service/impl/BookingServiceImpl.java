@@ -404,4 +404,9 @@ public class BookingServiceImpl implements BookingService {
 
 		return bookings;
 	}
+
+	@Override
+	public List<ThongBaoUCF> alertBookingUCF() {
+		return bookingDAO.alertBookingUCF();
+	}
 }

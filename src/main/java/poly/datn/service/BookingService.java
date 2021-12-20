@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PathVariable;
 import poly.datn.entity.Booking;
 import poly.datn.entity.Employee;
+import poly.datn.entity.ThongBaoUCF;
 import poly.datn.service.dto.BookingDTO;
 
 public interface BookingService {
@@ -100,4 +101,6 @@ public interface BookingService {
     Booking updateCAN(int id);
 
 	List<Booking>seachBooking(String toDate, String formDate, String statusId,String cusName);
+
+	List<ThongBaoUCF> alertBookingUCF();
 }
