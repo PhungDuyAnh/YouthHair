@@ -17,6 +17,7 @@ import poly.datn.entity.Booking;
 import poly.datn.entity.BookingDetail;
 import poly.datn.entity.Employee;
 import poly.datn.entity.Statusbooking;
+import poly.datn.entity.ThongBaoUCF;
 import poly.datn.service.*;
 import poly.datn.service.dto.BookingCustomerDTO;
 import poly.datn.service.dto.BookingDTO;
@@ -147,5 +148,10 @@ public class BookingRestController {
 	@GetMapping("/getAllTimeBooking")
 	public String[] getALlTimeBooking(){
 		return bookingService.getAllTimeBooking();
+	}
+	
+	@GetMapping("/alertBookingUCF")
+	public List<ThongBaoUCF> alertBookingUCF(){
+		return bookingService.alertBookingUCF();
 	}
 }

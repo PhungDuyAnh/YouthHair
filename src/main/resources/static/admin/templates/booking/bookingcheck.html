@@ -34,7 +34,7 @@
 							<td>{{item.totalPrice}}</td>
 							<td>{{item.createDate | date:'dd-MM-yyyy'}}</td>
 							<td>{{item.statusbooking.statusName}}</td>
-							<td class="text-center"><button ng-click="showDetail2(item);getDate1();showServiceChecked();getDisableTime(item.employee1.id,item.createDate,item.id)"
+							<td class="text-center"><button ng-click="showDetail2(item);getDate1();showServiceChecked();getDisableTime(item.employee1.id,item.createDate,item.id);"
 															class="btn btn-info btn-circle" data-toggle="modal" data-target="#InfoCheckModal"> <i
 									class="fas fa-info-circle"></i>
 							</button> <button class="btn btn-danger btn-circle" ng-click="updateCAN(item)"> <i
@@ -246,7 +246,12 @@
 						<ul class="timeBooking-form text-center" >
 							<div ng-if="shiftsByStylist.id != null">
 								<li ng-repeat="item in allTimeBookingByShifts" >
-									<input type="radio" ng-disabled="disableTime1(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
+									<input type="radio" 
+									ng-disabled="disableTime1(item.id)>=0" 
+									ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" 
+									name="timeBooking" id="time{{$index}}" 
+									ng-checked="checkTimeBookingUCF(formChoXacNhan,item.name)>=0"
+									/>
 									<label for="time{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
 								</li> </div>
 							<div ng-if="shiftsByStylist.id == null">
@@ -368,7 +373,9 @@
 							<ul class="timeBooking-form text-center" >
 								<div ng-if="shiftsByStylist.id != null">
 									<li ng-repeat="item in allTimeBookingByShifts" >
-										<input type="radio" ng-checked="checkedTime(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time2{{$index}}"   />
+										<input type="radio" ng-checked="checkTimeBookingCOM(formCOM,item.name)>=0" 
+										ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" 
+										name="timeBooking" id="time2{{$index}}"   />
 										<label for="time2{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
 									</li> </div>
 								<div ng-if="shiftsByStylist.id == null">

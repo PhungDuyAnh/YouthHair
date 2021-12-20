@@ -300,6 +300,9 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                             $http.post("/rest/bookingCus", bookings).then(resp => {
                                 alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
                                 $scope.cart.clear();
+								$scope.form = {
+								    createDate: new Date($scope.getMinMaxTime.minDate)
+								};
                                 $("#closeModalBookingCustomer").click();
                                 //location.href = "/booking";
                             }).catch(error => {

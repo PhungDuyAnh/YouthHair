@@ -19,14 +19,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 	$scope.itemConfirm=[];
 	$scope.listTimeBooking=[];
 	$scope.disableTime=[];
-	$scope.doanhThu = 0;
-	$scope.lienHe = 0;
-	$scope.lichhenAll=0;
-	$scope.lichhenCPM=0;
-	$scope.monthYear=moment(new Date()).format('yyyy-MM');
+	
 
 	var toprice;
-	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');
+	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');	
+	
 	$scope.initialize=function (){
 		//load booking
 		$http.get("/rest/booking/WFC").then(resp=>{
@@ -92,24 +89,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 
 		$http.get("/rest/getAllTimeBookingDetail").then(resp=>{
 			$scope.allTimeBookingDetail=resp.data;
-		})
-
-		//thong ke
-		$http.get(`/rest/thongKeDT?monthYear=${$scope.monthYear}`).then(resp=>{
-			$scope.doanhThu=resp.data;
-		})
-		
-		$http.get(`/rest/thongKeLichHenCPM?monthYear=${$scope.monthYear}`).then(resp=>{
-			$scope.lichhenCPM=resp.data;
-		})
-		
-		$http.get(`/rest/thongKeLichHen?monthYear=${$scope.monthYear}`).then(resp=>{
-			$scope.lichhenAll=resp.data;
-		})
-
-		$http.get(`/rest/lienHeTk?monthYear=${$scope.monthYear}`).then(resp=>{
-			$scope.lienHe=resp.data;
-		})
+		})	
 		
 	}
 
@@ -206,7 +186,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 
 	$scope.getMinMaxTime.FuncMinDate();
 	$scope.getMinMaxTime.FuncMaxDate();
-
+//$scope.allTimeBookingByShifts =[];
 	// Lấy Shift time khi dổi date
 	$scope.getDate1=function() {
 		var item = angular.copy($scope.formChoXacNhan.createDate);
@@ -1047,6 +1027,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 					$http.post("/rest/booking/updateToCOM", bookings).then(resp => {
 						alert("Xác nhận thành công !");
 						$scope.cart.clear();
+						$scope.pager2.first();
 						$scope.initialize();
 						$("#closeModelUCF").click();
 					}).catch(error => {
@@ -1201,12 +1182,14 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 			})
 		}
 	}
-
-	$scope.getMonthYear= function (){
-		var item=angular.copy($scope.monthYear);
-		$scope.monthYear=moment(new Date(item)).format('yyyy-MM');
-		$scope.initialize();
+	
+	$scope.checkTimeBookingUCF = function(bookingForm, timeBooking){
+		return $scope.items2.findIndex(a=> a.id==bookingForm.id && a.timeBooking==timeBooking);		
 	}
 	
-	$interval($scope.initialize, 15000);
+	$scope.checkTimeBookingCOM = function(bookingForm, timeBooking){
+		return $scope.itemsCOM.findIndex(a=> a.id==bookingForm.id && a.timeBooking==timeBooking);		
+	}
+	
+	$interval($scope.initialize, 30000);
 })
