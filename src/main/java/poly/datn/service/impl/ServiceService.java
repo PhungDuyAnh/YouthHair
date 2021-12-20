@@ -13,7 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import poly.datn.dao.DichVuHotDAO;
 import poly.datn.dao.ServiceDAO;
+import poly.datn.entity.DichVuHot;
 import poly.datn.entity.Services;
 import poly.datn.service.IServiceService;
 import poly.datn.service.dto.ServiceDTO;
@@ -22,6 +24,8 @@ import poly.datn.service.dto.ServiceDTO;
 public class ServiceService implements IServiceService {
     @Autowired
     ServiceDAO serviceDAO;
+    @Autowired
+    DichVuHotDAO dichVuHotDAO;
 
 
     @Override
@@ -105,7 +109,7 @@ public class ServiceService implements IServiceService {
 	}
 
 	@Override
-	public List<Services> findServicesActiveTop3() {
-		return serviceDAO.findServicesActiveTop3();
+	public List<DichVuHot> findServicesActiveTop3() {
+		return dichVuHotDAO.findServicesActiveTop3();
 	}
 }
