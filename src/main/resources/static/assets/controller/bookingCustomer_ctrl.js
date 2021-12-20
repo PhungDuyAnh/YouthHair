@@ -256,7 +256,13 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
     }
 
     $scope.disableTime=function (timeBookingId){
-        return $scope.allTimeBookingDetail.findIndex(a=>a.stylistId==$scope.idStylist&&a.timeBookingId==timeBookingId)
+		var getDate = moment(new Date($scope.form.createDate)).format('yyyy-MM-DD');
+		var index = $scope.allTimeBookingDetail.findIndex(a=>a.stylistId==$scope.idStylist && a.timeBookingId==timeBookingId && a.date == getDate);
+		if(index >= 0){
+			//$("#labelTimeBooking")
+			return index;
+		}
+        
     }
 
 //Lay booking theo stylist
@@ -299,12 +305,9 @@ app.controller("booking_Customer_ctrl", function ($scope, $http) {
                         if ($scope.bookingUCF == "") {
                             $http.post("/rest/bookingCus", bookings).then(resp => {
                                 alert("Bạn đã đặt lich thành công! Hãy đợi nhân viên xác nhận trước khi đặt đơn mới. Thanks!");
-                                $scope.cart.clear();
-								$scope.form = {
-								    createDate: new Date($scope.getMinMaxTime.minDate)
-								};
-                                $("#closeModalBookingCustomer").click();
-                                //location.href = "/booking";
+                                $scope.cart.clear();								
+                                //$("#closeModalBookingCustomer").click();
+                                location.href = "/";
                             }).catch(error => {
                                 alert("Đặt lịch thất bại!")
                                 // $scope.form.data = null;
