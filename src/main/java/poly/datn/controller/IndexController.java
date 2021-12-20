@@ -41,6 +41,7 @@ public class IndexController {
 	@RequestMapping("/services")
 	public String service(Model model) {
 		model.addAttribute("services",iService.findServicesActive());
+		model.addAttribute("serviceTop3",iService.findServicesActiveTop3());
 		return "layout/services";
 	}
 	
