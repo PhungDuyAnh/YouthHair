@@ -1,4 +1,4 @@
-app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
+app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 	$scope.items=[];
 	$scope.items1=[];
 	$scope.items2=[];
@@ -88,7 +88,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		$http.get("/rest/getAllTimeBookingDetail").then(resp=>{
 			$scope.allTimeBookingDetail=resp.data;
 		})
-
+		console.log("ồ")
 	}
 
 
@@ -1180,5 +1180,5 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 		}
 	}
 	
-	
+	$interval($scope.initialize, 15000);
 })
