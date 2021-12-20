@@ -65,7 +65,7 @@ public class IndexController {
 
 	@RequestMapping("/booking")
 	public String booking(Model model) {
-		model.addAttribute("sers",iService.findAll());
+		model.addAttribute("sers",iService.findServicesActive());
 		List<Employee> listStylist = employeeService.loadStylist();
 		model.addAttribute("stylist",listStylist);
 //		for(int i=0; i<listStylist.size();i++){

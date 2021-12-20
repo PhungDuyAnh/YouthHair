@@ -25,9 +25,9 @@
                          th:attr="ng-click=@{|styId(${sty.id})|}"
                          style="border-radius: 30%; box-shadow: 1px 1px 4px 4px #F1F3CE; background-image: linear-gradient(to top, rgba(255, 0, 0, 0), #D0E1F9);">
                         <input ng-model="form.StylistId" hidden="true" th:attr="ng-value=${sty.id}"/>
-                        <img alt="" th:src="@{|assets/images/${sty.image}|}"
-                             class="icon display-3 mb-4 d-block rounded-circle" width="50%">
-                        <h2 class="text-light h2">[[${sty.fullName}]]</h2>
+                        <img alt="" th:src="@{|../../../../images/${sty.image}|}"
+                             class="icon display-3 mb-4 d-block rounded-circle" width="150px" height="150px">
+                        <h5 class="text-light h5"> <strong>[[${sty.fullName}]]</strong> </h5>
                         
                     </div>
                 </div>
@@ -124,12 +124,12 @@
                     <div class="col-md-12">
                         <label class="text-black">Chọn Dịch Vụ <span
                                 class="text-danger">(*)</span></label>
-                        <ul class="services-form">
+                        <ul class="services-form text-center">
                             <li th:each="s,state:${sers} " >
                                 <input type="checkbox" th:id="${state.index}" name="service"
                                        th:attr="ng-click=@{|cart.add(${s.id})|}" ng-required="true"/>
                                 <label th:for="${state.index}"
-                                > <img th:src="@{|assets/images/haircut/${s.image}|}"/>
+                                > <img th:src="@{|../../../../images/${s.image}|}"/>
                                     <br><a> [[${s.serviceName}]]</a>
                                 </label>
                             </li>
