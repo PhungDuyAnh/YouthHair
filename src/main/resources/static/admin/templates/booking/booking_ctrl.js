@@ -21,8 +21,8 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 	$scope.disableTime=[];
 	$scope.doanhThu = 0;
 	$scope.lienHe = 0;
-	$scope.tongNhanVien=0;
-	$scope.stylistCount=0;
+	$scope.lichhenAll=0;
+	$scope.lichhenCPM=0;
 	$scope.monthYear=moment(new Date()).format('yyyy-MM');
 
 	var toprice;
@@ -94,23 +94,23 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 			$scope.allTimeBookingDetail=resp.data;
 		})
 
+		//thong ke
 		$http.get(`/rest/thongKeDT?monthYear=${$scope.monthYear}`).then(resp=>{
 			$scope.doanhThu=resp.data;
+		})
+		
+		$http.get(`/rest/thongKeLichHenCPM?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.lichhenCPM=resp.data;
+		})
+		
+		$http.get(`/rest/thongKeLichHen?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.lichhenAll=resp.data;
 		})
 
 		$http.get(`/rest/lienHeTk?monthYear=${$scope.monthYear}`).then(resp=>{
 			$scope.lienHe=resp.data;
 		})
-
-		$http.get(`/rest/employee/countNv`).then(resp=>{
-			$scope.tongNhanVien=resp.data;
-		})
-
-		$http.get(`/rest/employee/countStyList`).then(resp=>{
-			$scope.stylistCount=resp.data;
-		})
-
-		console.log("ồ")
+		
 	}
 
 

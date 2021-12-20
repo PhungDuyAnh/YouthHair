@@ -13,4 +13,10 @@ public interface ThongKeDAO extends JpaRepository<ThongKeDT,String> {
 
     @Query(value = "SELECT tk from ThongKeDT tk where (:monthYear is null or tk.monthYear = :monthYear)")
     ThongKeDT thongKeDT(@Param("monthYear") String monthYear);
+    
+    @Query(value = "SELECT COUNT (t.doanhThu) from ThongKeDT t where (t.monthYear is null or t.monthYear = :monthYear)")
+	float thongKeLichHenCPM(String monthYear);
+
+    @Query(value = "SELECT COUNT (t) from ThongKeHD t where (t.monthYear is null or t.monthYear = :monthYear)")
+	float thongKeLichHenAll(String monthYear);
 }

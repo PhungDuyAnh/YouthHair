@@ -30,4 +30,22 @@ public class ThongkeServicempl implements ThongKeService {
     public boolean checkDT(ThongKeDT dt) {
         return dt != null ? true :false;
     }
+
+	@Override
+	public float thongKeLichHenCPM(String monthYear) {
+		if(monthYear.equals("") || monthYear==null){
+            System.out.println("Nếu không chọn tháng thì sẽ lấy tháng hiện tại");
+        }
+        
+        return thongKeDAO.thongKeLichHenCPM(monthYear);
+	}
+
+	@Override
+	public float thongKeLichHenAll(String monthYear) {
+		if(monthYear.equals("") || monthYear==null){
+            System.out.println("Nếu không chọn tháng thì sẽ lấy tháng hiện tại");
+        }
+        
+        return thongKeDAO.thongKeLichHenAll(monthYear);
+	}
 }

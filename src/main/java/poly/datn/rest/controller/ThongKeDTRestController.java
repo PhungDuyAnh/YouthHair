@@ -16,4 +16,14 @@ public class ThongKeDTRestController {
     public float thongKeDT(String monthYear) {
         return thongKeService.getDTByMonth(monthYear);
     }
+    
+    @GetMapping("/thongKeLichHenCPM")
+    public float thongKeLichHenCPM(String monthYear) {
+        return thongKeService.thongKeLichHenCPM(monthYear);
+    }
+    
+    @GetMapping("/thongKeLichHen")
+    public float thongKeLichHen(String monthYear) {
+        return thongKeService.thongKeLichHenAll(monthYear);
+    }
 }
