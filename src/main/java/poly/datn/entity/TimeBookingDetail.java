@@ -32,7 +32,8 @@ public class TimeBookingDetail implements Serializable {
 	private Integer stylistId;
 	
 	private Integer timeBookingId;
-
+	
+	@Temporal(TemporalType.DATE)
 	private Date date;
 	
 	//bi-directional many-to-one association to Customer

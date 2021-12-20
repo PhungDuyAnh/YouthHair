@@ -97,7 +97,7 @@ CREATE TABLE `booking` (
   CONSTRAINT `FK_booking_stylist` FOREIGN KEY (`StylistId`) REFERENCES `employees` (`Id`),
   CONSTRAINT `FK_booking_voting` FOREIGN KEY (`VotingId`) REFERENCES `voting` (`Id`),
   CONSTRAINT `FK_booking_voucher` FOREIGN KEY (`VoucherDetailsID`) REFERENCES `voucherdetail` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +106,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (11,'2021-11-25',400000,'14h30','aaaaa',3,'WFP',12,NULL,NULL),(12,'2021-12-18',30000,'9h00','aaaaa',1,'CPM',16,NULL,NULL),(13,'2021-11-27',330000,'8h30',NULL,8,'WFP',22,NULL,NULL),(14,'2021-11-27',400000,'16h00','lobo',1,'CPM',23,NULL,NULL),(15,'2021-11-28',300000,'8h00',NULL,1,'WFC',26,NULL,NULL),(16,'2021-11-28',330000,'9h30','ádfghjkl',7,'CPM',28,NULL,NULL),(17,'2021-11-29',700000,'11h00','Cccccc',3,'WFC',25,NULL,NULL),(18,'2021-11-30',30000,'13h30',NULL,1,'CAN',29,NULL,NULL),(19,'2021-12-01',330000,'14h00',NULL,1,'WFP',30,NULL,NULL),(20,'2021-12-30',100000,'19h00',NULL,1,'COM',30,NULL,NULL),(21,'2021-12-31',130000,'8h30',NULL,3,'COM',31,NULL,NULL),(22,'2021-12-18',100000,'18h30',NULL,1,'WFC',32,NULL,NULL),(23,'2021-12-18',100000,'8h30',NULL,8,'CPM',33,NULL,NULL),(24,'2021-12-08',100000,'15h00',NULL,1,'UCF',34,NULL,NULL),(25,'2021-12-08',100000,'9h30',NULL,1,'COM',35,NULL,NULL),(26,'2021-12-08',130000,'8h00',NULL,1,'CPM',36,NULL,NULL),(27,'2021-12-18',300000,'17h30',NULL,3,'UCF',37,NULL,NULL),(28,'2021-12-21',130000,'17h30','alo',7,'UCF',38,NULL,NULL),(29,'2021-12-20',300000,'20h30',NULL,8,'UCF',39,NULL,NULL),(30,'2021-12-20',530000,'16h30','qưe',3,'UCF',40,NULL,NULL);
+INSERT INTO `booking` VALUES (32,'2021-12-21',430000,'15h00',NULL,1,'UCF',42,NULL,NULL),(33,'2021-12-22',130000,'15h00','2',3,'UCF',43,NULL,NULL),(34,'2021-12-21',330000,'17h30','cho em một cô em xin gái gội đầu',7,'UCF',44,NULL,NULL),(35,'2021-12-21',130000,'13h00',NULL,8,'UCF',37,NULL,NULL),(36,'2021-12-21',430000,'20h00','hihi',1,'UCF',45,NULL,NULL),(37,'2021-12-21',500000,'17h00','đặt lịch 5h đến nhé',1,'UCF',46,NULL,NULL),(38,'2021-12-23',400000,'17h00','huyhoang',1,'COM',47,NULL,NULL),(39,'2021-12-20',400000,'17h00',NULL,3,'WFC',9,NULL,NULL),(40,'2021-12-20',400000,'15h00',NULL,9,'WFC',11,NULL,NULL),(41,'2021-12-20',100000,'8h00',NULL,8,'WFC',16,NULL,NULL),(42,'2021-12-22',99999,'9h00','cắt nhanh giúp tôi',7,'COM',48,NULL,NULL),(43,'2021-12-22',400000,'13h00',NULL,7,'UCF',49,NULL,NULL);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +127,7 @@ CREATE TABLE `bookingdetails` (
   KEY `FK_BookingDetai_Booking` (`BookingId`),
   CONSTRAINT `FK_BookingDetai_Booking` FOREIGN KEY (`BookingId`) REFERENCES `booking` (`Id`),
   CONSTRAINT `FK_BookingDetai_Service` FOREIGN KEY (`ServiceId`) REFERENCES `services` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `bookingdetails` (
 
 LOCK TABLES `bookingdetails` WRITE;
 /*!40000 ALTER TABLE `bookingdetails` DISABLE KEYS */;
-INSERT INTO `bookingdetails` VALUES (62,27,4,300000),(63,28,1,100000),(64,28,2,30000),(65,29,4,300000),(66,30,1,100000),(67,30,3,400000),(68,30,2,30000);
+INSERT INTO `bookingdetails` VALUES (76,32,2,30000),(77,32,3,400000),(78,33,2,30000),(79,33,1,100000),(80,34,2,30000),(81,34,4,300000),(82,35,1,100000),(83,35,2,30000),(84,36,2,30000),(85,36,3,400000),(86,37,3,400000),(87,37,1,100000),(90,38,4,300000),(91,38,1,100000),(93,42,5,99999),(94,43,1,100000),(95,43,4,300000);
 /*!40000 ALTER TABLE `bookingdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +182,7 @@ CREATE TABLE `customers` (
   `Email` varchar(145) NOT NULL,
   `Phone` varchar(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (8,'Nguyễn Công Thành','test@gmail.com','0987654321'),(9,'Dương Xuân Pháp','test2@gmail.com','0987654322'),(10,'Dương Lan Hương','test3@gmail.com','0987654323'),(11,'Nguyễn Thị Thùy Trang','test4@gmail.com','0987654324'),(12,'Nguyễn Lê Hoàng','dmNccm@jsdg','0987652122'),(13,'Hoàng Quang Minh','dmNccm@jsdg','0987652123'),(14,'Nguyễn Minh Đức','dmNccm@jsdg','0987652124'),(15,'Viên Văn Thoại','dmNccm@jsdg','0987652125'),(16,'Nguyễn Ngọc Anh','dmuyt@jsdg','0987652126'),(22,'Nguyễn Hồng Gấm','hainvph11578@fpt.edu.vn','0123456'),(23,'Bùi Thị Hoàng','hainvph11578@fpt.edu.vn','05555555555'),(24,'Nguyễn Vũ Hồng Nhung','hai@gmail.com','031321113'),(25,'Trần Thị Hậu','admin@gmail.com','123'),(26,'Nguyễn Văn Đạt','dd@gaiiii','0123'),(27,'Nguyễn Trung kiên','haii123@haaaa','0321654'),(28,'Hoàng Thanh Bình','admin@gmail.com','036987125'),(29,'Nguyễn Thị Phượng','',''),(30,'Nguyễn Thị Mỹ Duyên','kimtinh324@gmail.com','0977116022'),(31,'Lê Thành Hưng','hainv578@gmail.com','0977111111'),(32,'Lê Đắc Tùng','kimtinh324@gmail.com','0911116022'),(33,'Vũ Văn Tuấn','buidao1705@gmail.com','0977116027'),(34,'Phùng Duy Anh','kimtinh324@gmail.com','0977116026'),(35,'Nguyễn Thành Nam','kimtinh324@gmail.com','0977116025'),(36,'Nguyễn Đăng Khoa','kimtinh324@gmail.com','0977116033'),(37,'Nam Nguyen Thanh','thanhnam692001@gmail.com','0344129025'),(38,'Nguyễn Thành Kiên','thanhnam692001@gmail.com','0358766782'),(39,'Thành Đại','thanhnam692001@gmail.com','0978399876'),(40,'Ngô Hải','hiango@gmail.com','0998877667');
+INSERT INTO `customers` VALUES (8,'Nguyễn Công Thành','test@gmail.com','0987654321'),(9,'Dương Xuân Pháp','test2@gmail.com','0987654322'),(10,'Dương Lan Hương','test3@gmail.com','0987654323'),(11,'Nguyễn Thị Thùy Trang','test4@gmail.com','0987654324'),(12,'Nguyễn Lê Hoàng','dmNccm@jsdg','0987652122'),(13,'Hoàng Quang Minh','dmNccm@jsdg','0987652123'),(14,'Nguyễn Minh Đức','dmNccm@jsdg','0987652124'),(15,'Viên Văn Thoại','dmNccm@jsdg','0987652125'),(16,'Nguyễn Ngọc Anh','dmuyt@jsdg','0987652126'),(22,'Nguyễn Hồng Gấm','hainvph11578@fpt.edu.vn','0123456'),(23,'Bùi Thị Hoàng','hainvph11578@fpt.edu.vn','05555555555'),(24,'Nguyễn Vũ Hồng Nhung','hai@gmail.com','031321113'),(25,'Trần Thị Hậu','admin@gmail.com','123'),(26,'Nguyễn Văn Đạt','dd@gaiiii','0123'),(27,'Nguyễn Trung kiên','haii123@haaaa','0321654'),(28,'Hoàng Thanh Bình','admin@gmail.com','036987125'),(29,'Nguyễn Thị Phượng','',''),(30,'Nguyễn Thị Mỹ Duyên','kimtinh324@gmail.com','0977116022'),(31,'Lê Thành Hưng','hainv578@gmail.com','0977111111'),(32,'Lê Đắc Tùng','kimtinh324@gmail.com','0911116022'),(33,'Vũ Văn Tuấn','buidao1705@gmail.com','0977116027'),(34,'Phùng Duy Anh','kimtinh324@gmail.com','0977116026'),(35,'Nguyễn Thành Nam','kimtinh324@gmail.com','0977116025'),(36,'Nguyễn Đăng Khoa','kimtinh324@gmail.com','0977116033'),(37,'Nam Nguyen Thanh','thanhnam692001@gmail.com','0344129025'),(38,'Nguyễn Thành Kiên','thanhnam692001@gmail.com','0358766782'),(39,'Thành Đại','thanhnam692001@gmail.com','0978399876'),(40,'Ngô Hải','hiango@gmail.com','0998877667'),(41,'Nam Nguyễn','namn@gmail.com','0987897654'),(42,'Huyền Phan','huyen123@gmail.com','0987656789'),(43,'Phùng Thanh Duy','duypt001@gmail.com','0378291089'),(44,'Hải Văn Trần','haivt1234@gmail.com','0323876584'),(45,'Nguyễn Văn Nữ','nuvanng321@gmail.com','0981235648'),(46,'Ngô Hoàng Hải','haingh2123@gmail.com','0983728172'),(47,'Hoàng Văn Huy','huyhoang12@gmail.com','0898328727'),(48,'Đặng Minh','minh@gmail.com','0987665276'),(49,'Nguyễn Nam Thành','namnt123@gmail.com','0344332211');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,7 +299,7 @@ CREATE TABLE `services` (
   `Image` varchar(145) NOT NULL,
   `Note` varchar(455) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,7 +308,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (1,'Cắt tóc',100000,1,'1.jpg','A'),(2,'Gội đầu',30000,1,'2.jpg','B'),(3,'Uốn tóc',400000,1,'3.jpg','C'),(4,'Nhuộm tóc',300000,1,'4.jpg','D');
+INSERT INTO `services` VALUES (1,'Cắt tóc',100000,1,'1.jpg','A'),(2,'Gội đầu',30000,1,'2.jpg','B'),(3,'Uốn tóc',400000,1,'3.jpg','C'),(4,'Nhuộm tóc',300000,1,'4.jpg','D'),(5,'Combo Noel',99999,1,'67b6da6f.png','Gồm cắt tóc, gội đầu, tư vấn tạo kiểu, sấy tóc vuốt vuốt các thứ các thứ');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,6 +359,22 @@ LOCK TABLES `statusbooking` WRITE;
 INSERT INTO `statusbooking` VALUES ('CAN','Hủy đơn'),('COM','Đã Xác Nhận'),('CPM','Đã thanh toán'),('IAT','Đang cắt'),('UCF','Chưa xác nhận'),('WFC','Chờ cắt'),('WFP','Chờ thanh toán');
 /*!40000 ALTER TABLE `statusbooking` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `thongbaoucf`
+--
+
+DROP TABLE IF EXISTS `thongbaoucf`;
+/*!50001 DROP VIEW IF EXISTS `thongbaoucf`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `thongbaoucf` AS SELECT 
+ 1 AS `Id`,
+ 1 AS `CreateDate`,
+ 1 AS `TimeBooking`,
+ 1 AS `StylistId`,
+ 1 AS `CustormerId`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `thongkedt`
@@ -428,7 +444,7 @@ CREATE TABLE `timebookingdetail` (
   `TimeBookingId` int NOT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,7 +453,7 @@ CREATE TABLE `timebookingdetail` (
 
 LOCK TABLES `timebookingdetail` WRITE;
 /*!40000 ALTER TABLE `timebookingdetail` DISABLE KEYS */;
-INSERT INTO `timebookingdetail` VALUES (1,27,3,3,'2021-12-18'),(2,27,3,4,'2021-12-18'),(3,27,3,5,'2021-12-18'),(4,28,7,17,'2021-12-21'),(5,28,7,18,'2021-12-21'),(6,28,7,19,'2021-12-21'),(7,29,8,23,'2021-12-20'),(8,29,8,24,'2021-12-20'),(9,29,8,25,'2021-12-20'),(10,30,3,15,'2021-12-20'),(11,30,3,16,'2021-12-20'),(12,30,3,17,'2021-12-20');
+INSERT INTO `timebookingdetail` VALUES (19,32,1,12,'2021-12-21'),(20,32,1,13,'2021-12-21'),(21,32,1,14,'2021-12-21'),(22,33,3,12,'2021-12-22'),(23,33,3,13,'2021-12-22'),(24,33,3,14,'2021-12-22'),(25,34,7,17,'2021-12-21'),(26,34,7,18,'2021-12-21'),(27,34,7,19,'2021-12-21'),(28,35,8,8,'2021-12-21'),(29,35,8,9,'2021-12-21'),(30,35,8,10,'2021-12-21'),(31,36,1,22,'2021-12-21'),(32,36,1,23,'2021-12-21'),(33,36,1,24,'2021-12-21'),(34,37,1,16,'2021-12-21'),(35,37,1,17,'2021-12-21'),(36,37,1,18,'2021-12-21'),(40,38,1,16,'2021-12-23'),(41,38,1,17,'2021-12-23'),(42,38,1,18,'2021-12-23'),(46,43,7,8,'2021-12-22'),(47,43,7,9,'2021-12-22'),(48,43,7,10,'2021-12-22');
 /*!40000 ALTER TABLE `timebookingdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -537,7 +553,7 @@ CREATE TABLE `workassign` (
   KEY `shifts_fk_idx` (`shifts_Id`),
   CONSTRAINT `workassign_employees_fk` FOREIGN KEY (`employees_Id`) REFERENCES `employees` (`Id`),
   CONSTRAINT `workassign_shifts_fk` FOREIGN KEY (`shifts_Id`) REFERENCES `shifts` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -546,7 +562,7 @@ CREATE TABLE `workassign` (
 
 LOCK TABLES `workassign` WRITE;
 /*!40000 ALTER TABLE `workassign` DISABLE KEYS */;
-INSERT INTO `workassign` VALUES (1,1,2,'2021-12-18'),(2,3,1,'2021-12-18'),(3,1,1,'2021-12-19'),(4,1,2,'2021-12-20'),(5,1,2,'2021-12-21'),(6,1,1,'2021-12-22'),(7,3,1,'2021-12-19'),(8,3,2,'2021-12-20'),(9,7,2,'2021-12-21'),(10,7,1,'2021-12-22'),(11,8,1,'2021-12-19'),(12,8,1,'2021-12-18'),(13,8,2,'2021-12-20'),(14,8,1,'2021-12-21'),(15,9,1,'2021-12-18'),(16,9,2,'2021-12-19'),(17,9,2,'2021-12-20'),(18,9,2,'2021-12-21');
+INSERT INTO `workassign` VALUES (1,1,2,'2021-12-18'),(2,3,1,'2021-12-18'),(3,1,1,'2021-12-19'),(4,1,2,'2021-12-20'),(5,1,2,'2021-12-21'),(6,1,2,'2021-12-22'),(7,3,1,'2021-12-19'),(8,3,2,'2021-12-20'),(9,7,2,'2021-12-21'),(10,7,1,'2021-12-22'),(11,8,1,'2021-12-19'),(12,8,1,'2021-12-18'),(13,8,2,'2021-12-20'),(14,8,1,'2021-12-21'),(15,9,1,'2021-12-18'),(16,9,2,'2021-12-19'),(17,9,2,'2021-12-20'),(18,9,2,'2021-12-21'),(19,1,2,'2021-12-23');
 /*!40000 ALTER TABLE `workassign` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -582,6 +598,24 @@ UNLOCK TABLES;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `lienhetk` AS select substr(cast(`contacts`.`CreateDate` as char charset utf8mb4),1,7) AS `monthYear`,`contacts`.`Phone` AS `Phone` from `contacts` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `thongbaoucf`
+--
+
+/*!50001 DROP VIEW IF EXISTS `thongbaoucf`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `thongbaoucf` AS select `booking`.`Id` AS `Id`,`booking`.`CreateDate` AS `CreateDate`,`booking`.`TimeBooking` AS `TimeBooking`,`booking`.`StylistId` AS `StylistId`,`booking`.`CustormerId` AS `CustormerId` from `booking` where (`booking`.`StatusId` = 'UCF') order by `booking`.`Id` desc,`booking`.`CreateDate` limit 3 */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -631,4 +665,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-20 16:05:59
+-- Dump completed on 2021-12-20 23:58:50
