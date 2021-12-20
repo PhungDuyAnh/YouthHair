@@ -85,7 +85,6 @@ app.controller("bill-ctrl",function($scope,$http){
 			$scope.seachBooking.toDate = moment(item.toDate).format('MM/DD/yyyy');
 			$scope.pager.first();
 			$scope.initialize();
-			$scope.seachBooking.toDate=item.toDate;
 		}else {
 			$scope.seachBooking.toDate= undefined;
 			$scope.pager.first();
@@ -104,7 +103,6 @@ app.controller("bill-ctrl",function($scope,$http){
 			$scope.seachBooking.formDate = moment(item.formDate).format('MM/DD/yyyy');
 			$scope.pager.first();
 			$scope.initialize();
-			$scope.seachBooking.formDate=item.formDate;
 		}else {
 			$scope.seachBooking.formDate= undefined;
 			$scope.pager.first();
