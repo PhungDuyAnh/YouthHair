@@ -494,8 +494,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 	}
 
 	$scope.disableTime1=function (timeId){
+		var getDate = moment(new Date($scope.formChoXacNhan.createDate)).format('yyyy-MM-DD');
 		return $scope.disableTime.findIndex(a=>a.stylistId==$scope.formChoXacNhan.employee1.id
-			&&a.timeBookingId==timeId&&a.bookingId!=$scope.formChoXacNhan.id)
+			&&a.timeBookingId==timeId&&a.bookingId!=$scope.formChoXacNhan.id&& a.date == getDate)
 	}
 
 	$scope.getDisableTime1=function (cid,date,bookingId){
@@ -506,8 +507,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 	}
 
 	$scope.disableTime2=function (timeId){
+		var getDate = moment(new Date($scope.formCOM.createDate)).format('yyyy-MM-DD');
 		return $scope.disableTimeCOM.findIndex(a=>a.stylistId==$scope.formCOM.employee1.id
-			&&a.timeBookingId==timeId&&a.bookingId!=$scope.formCOM.id)
+			&&a.timeBookingId==timeId&&a.bookingId!=$scope.formCOM.id&&a.date==getDate)
 	}
 
 	$scope.tickDoneIAT = function(booking){
