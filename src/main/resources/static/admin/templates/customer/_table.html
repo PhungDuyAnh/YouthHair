@@ -67,8 +67,7 @@
 										data-target="#infoCustomerModal"> <i class="fas fa-info-circle"></i>
 									</button>
 								</td>								
-								<td th:if="${#request.isUserInRole('Quản lý')}">
-
+								<td>
 									<a
 									ng-click="openGiftForm(item)"	href="#!customers"
 									data-toggle="modal" data-target="#GiftVoucherModal"

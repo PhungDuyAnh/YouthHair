@@ -142,7 +142,7 @@
 				<div class="row">
 					<div class="col-md-6 col-lg-4 text-center mb-5 mb-lg-5" th:each="serv,state:${services}" >
 						<div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7" align="center">
-							<img alt="" th:src="@{|assets/images/haircut/${serv.image}|}"
+							<img alt="" th:src="@{|../../../../images/${serv.image}|}"
                              class="icon display-3 mb-4 d-block rounded-circle" width="60%" height="40%" >
 							<h3 class="text-black h4">[[${serv.serviceName}]]</h3>
 							<p>[[${serv.note}]]</p>
@@ -162,7 +162,7 @@
 				<div class="container" >
 					<div class="row" >
 						<div class="col-lg-6 mb-5">
-							<img th:src="@{|assets/images/haircut/${serv.image}|}" alt="Image" class="img-md-fluid">
+							<img th:src="@{|../../../../images/${serv.image}|}" alt="Image" class="img-md-fluid" width="500px" height="500px">
 						</div>
 						<div class="col-lg-6 bg-white p-md-5 align-self-center">
 							<h2
@@ -206,10 +206,11 @@
 					<div class="col-lg-8">
 						<div class="mb-5">
 							<h3 class="footer-heading mb-4">Giới Thiệu</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Saepe pariatur reprehenderit vero atque, consequatur id ratione,
-								et non dignissimos culpa? Ut veritatis, quos illum totam quis
-								blanditiis, minima minus odio!</p>
+							<p>Đến với Tùng Ken Salon quý khách hàng sẽ được nhà tạo
+							mẫu tóc Tùng Ken - Một trong những nhà tạo mẫu tóc hàng
+							đầu của TP Thanh Hoá với vốn kinh nghiệm lâu năm nhưng anh vẫn luôn
+							tìm tòi và sáng tạo để đưa đến cho khách hàng những mẫu tóc hợp
+							thời trang, đẹp để khách hàng luôn cảm thấy hài lòng nhất.</p>
 						</div>
 
 

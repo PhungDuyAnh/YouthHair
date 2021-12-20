@@ -228,7 +228,7 @@
 											<input type="checkbox"
 												   id="st{{services.id}}" ng-click="cart.add(services.id)"
 												   ng-checked="showBookingWating(form3.id,services.id)>=0"/>
-											<label for="st{{services.id}}"> <img ng-src="{{'/assets/images/haircut/' + services.image}}" />
+											<label for="st{{services.id}}"> <img ng-src="{{'../../../../images/' + services.image}}" />
 												<br> {{services.serviceName}}
 											</label></li>
 									</ul>
@@ -395,7 +395,7 @@
 								<li ng-repeat="item in listSer">
 									<input type="checkbox" id="{{item.serviceName}}" disabled checked/>
 									<label for="{{item.serviceName}}">
-										<img src="/assets/images/haircut/{{item.image}}" />
+										<img src="../../../../images/{{item.image}}" />
 										<br>
 										{{item.serviceName}}
 									</label></li>
@@ -558,7 +558,7 @@
 								<li ng-repeat="services in db.services"><input type="checkbox"
 								    id="{{services.id}}"
 								  ng-checked="showBookingWating(formChoXacNhan.id,services.id)>=0"/>
-									<label for="{{services.id}}"> <img src="/assets/images/haircut/2.jpg" />
+									<label for="{{services.id}}"> <img src="../../../../images/{{services.image}}" />
 									<br> {{services.serviceName}}<br>
 										{{formChoXacNhan.id}}
 								</label></li>
@@ -609,4 +609,26 @@
 		</div>
 	</div>
 
-
+<!-- Voucher Modal-->
+<div class="modal fade" id="VoucherModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-center" id="exampleModalLabel">Chọn Voucher</h5>
+				<button class="close" id="closeVoucherModal" type="button" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<a style="cursor: pointer;" 
+					class="btn btn-info btn-block" 
+					ng-repeat="item in voucherByCus" 
+					ng-click="pay.add(item);
+								totalPricebyVoucher.totalPrice1()">
+					<i class="fas fa-user-tie"></i> {{item.id}}</a>
+			</div>
+		</div>
+	</div>
+</div>

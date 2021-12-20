@@ -1,17 +1,12 @@
 package poly.datn.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import poly.datn.entity.Contact;
 import poly.datn.entity.Employee;
 import poly.datn.service.ContactService;
 import poly.datn.service.EmployeeService;
@@ -34,6 +29,7 @@ public class IndexController {
 		model.addAttribute("sers",iService.findServicesActive());
 		List<Employee> listStylist = employeeService.loadStylist();
 		model.addAttribute("stylist",listStylist);
+		model.addAttribute("serviceTop3",iService.findServicesActiveTop3());
 		
 		return "layout/home";
 	}
@@ -45,14 +41,10 @@ public class IndexController {
 		return "layout/services";
 	}
 	
-	@RequestMapping("/haircut")
-	public String haircut() {
-		
-		return "layout/haircut";
-	}
 	
 	@RequestMapping("/contact")
 	public String contact(Model model) {
+		model.addAttribute("serviceTop3",iService.findServicesActiveTop3());
 
 		return "layout/contact";
 	}
@@ -60,6 +52,7 @@ public class IndexController {
 	@RequestMapping("/about")
 	public String about(Model model) {
 		model.addAttribute("stylists", employeeService.getAllEmployeeActive());
+		model.addAttribute("serviceTop3",iService.findServicesActiveTop3());
 		
 		return "layout/about";
 	}

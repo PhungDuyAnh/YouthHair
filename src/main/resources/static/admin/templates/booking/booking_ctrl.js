@@ -857,15 +857,18 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 				item2.voucherId = $scope.formCPM.voucherId.id
 			}
 
-			console.log(item2);
-			$http.post("/rest/payVoucherdetail", item2).then(resp => {
-				alert("Thanh toan thành công!");
-				$scope.formCPM={};
-				location.reload();
-			}).catch(error => {
-				alert("Thanh toan thất bại!")
-				console.log(error);
-			})
+			if(confirm("Vui lòng xác nhận thanh toán!")){
+				$http.post("/rest/payVoucherdetail", item2).then(resp => {
+					alert("Thanh toan thành công!");
+					$scope.formCPM={};
+					//location.reload();
+					$scope.initialize();
+					$(".close").click();
+				}).catch(error => {
+					alert("Thanh toan thất bại!")
+					console.log(error);
+				})
+			}			
 		}
 	}
 

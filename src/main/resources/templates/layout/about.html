@@ -196,8 +196,8 @@
 				<div class="row">
 					<div class="col-md-6 col-lg-4 text-center mb-5" data-aos="fade-up"
 						th:each="sty,state:${stylists}">
-						<img th:src="@{|assets/images/${sty.image}|}" alt="Image"
-							class="img-fluid w-50 rounded-circle mb-4">
+						<img th:src="@{|../../../../images/${sty.image}|}" alt="Image"
+							class="img-fluid w-50 rounded-circle mb-4" style="max-width: 100%; height: 169px;">
 						<h2 class="text-black font-weight-light mb-4">[[${sty.fullName}]]</h2>
 						<p class="mb-4">[[${sty.role.name}]]</p>
 
@@ -208,54 +208,26 @@
 		</div>
 
 
+
 		<div class="slide-one-item home-slider owl-carousel">
 
-			<div class="site-section ">
-				<div class="container">
-					<div class="row">
+			<div class="site-section bg-light" th:each="serv,state:${serviceTop3}">
+				<div class="container" >
+					<div class="row" >
 						<div class="col-lg-6 mb-5">
-							<img src="assets/images/person_1.jpg" alt="Image"
-								class="img-md-fluid">
+							<img th:src="@{|../../../../images/${serv.image}|}" alt="Image" class="img-md-fluid" width="500px" height="500px">
 						</div>
 						<div class="col-lg-6 bg-white p-md-5 align-self-center">
 							<h2
-								class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Dịch
-								Vụ Mới!</h2>
+									class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Dịch Vụ Hot!</h2>
+							<p class="text-black lead"></p>
+							<h3>[[${serv.serviceName}]]</h3>
+							
 							<p class="text-black lead">
-								<em>&ldquo;Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Similique dolorem quisquam laudantium,
-									incidunt id laborum, tempora aliquid labore minus. Nemo maxime,
-									veniam! Fugiat odio nam eveniet ipsam atque, corrupti
-									porro&rdquo;</em>
+								<em>"[[${serv.note}]]"</em>
 							</p>
 							<p class="lead text-black">
-								&mdash; <em>Stellla Martin</em>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="site-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 mb-5">
-							<img src="assets/images/person_2.jpg" alt="Image"
-								class="img-md-fluid">
-						</div>
-						<div class="col-lg-6 bg-white p-md-5 align-self-center">
-							<h2
-								class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Dịch
-								Vụ Mới!</h2>
-							<p class="text-black lead">
-								<em>&ldquo;Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Similique dolorem quisquam laudantium,
-									incidunt id laborum, tempora aliquid labore minus. Nemo maxime,
-									veniam! Fugiat odio nam eveniet ipsam atque, corrupti
-									porro&rdquo;</em>
-							</p>
-							<p class="lead text-black">
-								&mdash; <em>Stellla Martin</em>
+								<b>Giá: </b><em>[[${serv.price}]] VND</em>
 							</p>
 						</div>
 					</div>
@@ -265,7 +237,8 @@
 		</div>
 
 
-		<div class="site-section bg-light">
+
+		<div class="site-section">
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-md-12">

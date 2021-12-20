@@ -222,7 +222,7 @@
 							  id="xn{{services.id}}" ng-click="cart.add(services.id)"
 							  ng-checked="showBookingWating(formChoXacNhan.id,services.id)>=0"
 							/>
-								<label for="xn{{services.id}}"> <img ng-src="{{'/assets/images/haircut/' + services.image}}" />
+								<label for="xn{{services.id}}"> <img ng-src="{{'../../../../images/' + services.image}}" />
 									<br> {{services.serviceName}}
 								</label></li>
 						</ul>
@@ -349,7 +349,7 @@
 																													  id="xn1{{services.id}}" ng-click="cart.add(services.id)"
 																													  ng-checked="showBookingWating(formCOM.id,services.id)>=0"
 								/>
-									<label for="xn1{{services.id}}"> <img ng-src="{{'/assets/images/haircut/' + services.image}}" />
+									<label for="xn1{{services.id}}"> <img ng-src="{{'../../../../images/' + services.image}}" />
 										<br> {{services.serviceName}}
 									</label></li>
 							</ul>
