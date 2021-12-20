@@ -999,7 +999,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
 				bookings.employee1=$scope.formChoXacNhan.employee1;
-				bookings.timeBooking=$scope.listTime[1];
+				if ($scope.listTime.length!=0){
+					bookings.timeBooking=$scope.listTime[1];
+				}
 				console.log(bookings)
 
 			} else {
@@ -1040,6 +1042,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				bookings.createDate = value;
 				bookings.listSer = $scope.cart.items;
 				bookings.employee1=$scope.formCOM.employee1;
+				if ($scope.listTime.length!=0){
+					bookings.timeBooking=$scope.listTime[1];
+				}
 			} else {
 				bookings.totalPrice = 0;
 			}
@@ -1051,23 +1056,25 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 				alert("Vui lòng nhập thông tin đầy đủ")
 
 			} else {
-				//checkBooking UCF by phone
-				$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
-					$scope.bookingUCF = {}
-					$scope.bookingUCF= resp.data;
-					console.log(bookings)
-				})
-				//add data => BE
-				$http.post("/rest/booking/updateToWFC", bookings).then(resp => {
-					alert("Cập nhật thành công !");
-					$scope.cart.clear();
-					$scope.initialize();
-					$("#closeModelCOM").click();
-				}).catch(error => {
-					alert("Cập nhật thất bại!")
-					// $scope.form.data = null;
-					console.log(error);
-				})
+				if (confirm("Bạn có chắc muốn thêm vào lịch chờ cắt không?")){
+					//checkBooking UCF by phone
+					$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
+						$scope.bookingUCF = {}
+						$scope.bookingUCF= resp.data;
+						console.log(bookings)
+					})
+					//add data => BE
+					$http.post("/rest/booking/updateToWFC", bookings).then(resp => {
+						alert("Đã thêm vào lịch chờ cắt !");
+						$scope.cart.clear();
+						$scope.initialize();
+						$("#closeModelCOM").click();
+					}).catch(error => {
+						alert("Thêm vào lịch chờ cắt thất bại!")
+						// $scope.form.data = null;
+						console.log(error);
+					})
+				}
 			}
 		},
 		capNhatDangCat() {
@@ -1079,6 +1086,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					bookings.createDate = value;
 					bookings.listSer = $scope.cart.items;
 					bookings.employee1=$scope.form.employee1;
+					if ($scope.listTime.length!=0){
+						bookings.timeBooking=$scope.listTime[1];
+					}
 				} else {
 					bookings.totalPrice = 0;
 				}
@@ -1088,22 +1098,24 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					alert("Vui lòng nhập thông tin đầy đủ")
 
 				}else{
-					//checkBooking UCF by phone
-					$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
-						$scope.bookingUCF = {}
-						$scope.bookingUCF= resp.data;
-					})
-					//add data => BE
-					$http.post("/rest/booking/updateWFC", bookings).then(resp => {
-						alert("Lưu thành công !");
-						$scope.cart.clear();
-						$scope.initialize();
-						$("#closeModelWFC").click();
-					}).catch(error => {
-						alert("Cập nhật thất bại!")
-						// $scope.form.data = null;
-						console.log(error);
-					})
+					if (confirm("Bạn có chắc muốn cập nhật dữ liệu không ?")){
+						//checkBooking UCF by phone
+						$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
+							$scope.bookingUCF = {}
+							$scope.bookingUCF= resp.data;
+						})
+						//add data => BE
+						$http.post("/rest/booking/updateWFC", bookings).then(resp => {
+							alert("Lưu thành công !");
+							$scope.cart.clear();
+							$scope.initialize();
+							$("#closeModelWFC").click();
+						}).catch(error => {
+							alert("Cập nhật thất bại!")
+							// $scope.form.data = null;
+							console.log(error);
+						})
+					}
 				}
 			}else {
 				alert("Không có dữ liệu để chỉnh sửa!")
@@ -1118,6 +1130,9 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					bookings.createDate = value;
 					bookings.listSer = $scope.cart.items;
 					bookings.employee1=$scope.form3.employee1;
+					if ($scope.listTime.length!=0){
+						bookings.timeBooking=$scope.listTime[1];
+					}
 				} else {
 					bookings.totalPrice = 0;
 				}
@@ -1127,6 +1142,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 					alert("Vui lòng nhập thông tin đầy đủ")
 
 				}else{
+					if (confirm("Bạn có chắc muốn cập nhật dữ liệu không")){
 					//checkBooking UCF by phone
 					$http.get(`/rest/checkBooking/${bookings.phone}`).then(resp => {
 						$scope.bookingUCF = {}
@@ -1144,6 +1160,7 @@ app.controller("booking-ctrl",function($scope,$http,$timeout,$q){
 						// $scope.form.data = null;
 						console.log(error);
 					})
+					}
 				}
 			}else {
 				alert("Không có dữ liệu để chỉnh sửa!")

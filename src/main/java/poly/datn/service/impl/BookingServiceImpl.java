@@ -235,7 +235,12 @@ public class BookingServiceImpl implements BookingService {
 		Time time = null;
 		try {
 			Statusbooking statusBooking = statusBookingDAO.StatusBookigByIdCOM();
-			TimeBooking timeBooking=timeBookingDAO.findById(Integer.parseInt(bookingDTO.getTimeBooking())).get();
+			TimeBooking timeBooking=new TimeBooking();
+			if (!bookingDTO.getTimeBooking().contains("h")){
+				timeBooking=timeBookingDAO.findById(Integer.parseInt(bookingDTO.getTimeBooking())).get();
+			}else {
+				timeBooking.setName(bookingDTO.getTimeBooking());
+			}
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 				Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 				booking1.setCreateDate(bookingDTO.getCreateDate());
@@ -254,14 +259,16 @@ public class BookingServiceImpl implements BookingService {
 //					bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
 					bookingDetailDAO.save(bookingDetail);
 				}
-
-			for(int i=0; i<bookingDTO.getListTime().size();i++ ){
-				TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
-				timeBookingDetailDetail.setBookingId(booking1.getId());
-				timeBookingDetailDetail.setTimeBookingId(bookingDTO.getListTime().get(i));
-				timeBookingDetailDetail.setDate(bookingDTO.getCreateDate());
-				timeBookingDetailDetail.setStylistId(bookingDTO.getEmployee1().get(0).getId());
-				timeBookingDetailDAO.save(timeBookingDetailDetail);
+			if (bookingDTO.getListTime()!=null){
+				timeBookingDetailDAO.delete(bookingDTO.getId());
+				for(int i=0; i<bookingDTO.getListTime().size();i++ ){
+					TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
+					timeBookingDetailDetail.setBookingId(booking1.getId());
+					timeBookingDetailDetail.setTimeBookingId(bookingDTO.getListTime().get(i));
+					timeBookingDetailDetail.setDate(bookingDTO.getCreateDate());
+					timeBookingDetailDetail.setStylistId(bookingDTO.getEmployee1().get(0).getId());
+					timeBookingDetailDAO.save(timeBookingDetailDetail);
+				}
 			}
 
 	} catch (Exception e) {
@@ -275,7 +282,12 @@ public class BookingServiceImpl implements BookingService {
 		Time time = null;
 		try {
 			Statusbooking statusBooking = statusBookingDAO.StatusbookingbyIdWFC();
-			TimeBooking timeBooking=timeBookingDAO.findById(Integer.parseInt(bookingDTO.getTimeBooking())).get();
+			TimeBooking timeBooking=new TimeBooking();
+			if (!bookingDTO.getTimeBooking().contains("h")){
+				timeBooking=timeBookingDAO.findById(Integer.parseInt(bookingDTO.getTimeBooking())).get();
+			}else {
+				timeBooking.setName(bookingDTO.getTimeBooking());
+			}
 			Employee stylist = employeeDAO.employeeByIdStylist(bookingDTO.getEmployee1().get(0).getId());
 			Booking booking1= bookingDAO.findById(bookingDTO.getId()).get();
 			booking1.setCreateDate(bookingDTO.getCreateDate());
@@ -294,16 +306,17 @@ public class BookingServiceImpl implements BookingService {
 //					bookingDetail.setTime(bookingDTO.getListSer().get(i).getTime());
 				bookingDetailDAO.save(bookingDetail);
 			}
-
-			for(int i=0; i<bookingDTO.getListTime().size();i++ ){
-				TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
-				timeBookingDetailDetail.setBookingId(booking1.getId());
-				timeBookingDetailDetail.setTimeBookingId(bookingDTO.getListTime().get(i));
-				timeBookingDetailDetail.setDate(bookingDTO.getCreateDate());
-				timeBookingDetailDetail.setStylistId(bookingDTO.getEmployee1().get(0).getId());
-				timeBookingDetailDAO.save(timeBookingDetailDetail);
+			if (bookingDTO.getListTime()!=null){
+				timeBookingDetailDAO.delete(bookingDTO.getId());
+				for(int i=0; i<bookingDTO.getListTime().size();i++ ){
+					TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
+					timeBookingDetailDetail.setBookingId(booking1.getId());
+					timeBookingDetailDetail.setTimeBookingId(bookingDTO.getListTime().get(i));
+					timeBookingDetailDetail.setDate(bookingDTO.getCreateDate());
+					timeBookingDetailDetail.setStylistId(bookingDTO.getEmployee1().get(0).getId());
+					timeBookingDetailDAO.save(timeBookingDetailDetail);
+				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -332,13 +345,16 @@ public class BookingServiceImpl implements BookingService {
 				bookingDetailDAO.save(bookingDetail);
 			}
 
-			for(int i=0; i<bookingDTO.getListTime().size();i++ ){
-				TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
-				timeBookingDetailDetail.setBookingId(booking1.getId());
-				timeBookingDetailDetail.setTimeBookingId(bookingDTO.getListTime().get(i));
-				timeBookingDetailDetail.setDate(bookingDTO.getCreateDate());
-				timeBookingDetailDetail.setStylistId(bookingDTO.getEmployee1().get(0).getId());
-				timeBookingDetailDAO.save(timeBookingDetailDetail);
+			if (bookingDTO.getListTime()!=null){
+				timeBookingDetailDAO.delete(bookingDTO.getId());
+				for(int i=0; i<bookingDTO.getListTime().size();i++ ){
+					TimeBookingDetail timeBookingDetailDetail = new TimeBookingDetail();
+					timeBookingDetailDetail.setBookingId(booking1.getId());
+					timeBookingDetailDetail.setTimeBookingId(bookingDTO.getListTime().get(i));
+					timeBookingDetailDetail.setDate(bookingDTO.getCreateDate());
+					timeBookingDetailDetail.setStylistId(bookingDTO.getEmployee1().get(0).getId());
+					timeBookingDetailDAO.save(timeBookingDetailDetail);
+				}
 			}
 
 		} catch (Exception e) {
