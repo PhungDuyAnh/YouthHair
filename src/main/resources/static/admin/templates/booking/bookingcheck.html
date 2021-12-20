@@ -107,7 +107,7 @@
 						<td>{{item.statusbooking.statusName}}</td>
 						<td>
 							<a style="cursor: pointer;" ng-click="showDetailCOM(item);getDate3();showServiceChecked();getDisableTime1(item.employee1.id,item.createDate,item.id)"
-								class="btn btn-primary" data-toggle="modal" data-target="#infoModal"> Chi Tiết</i>
+								class="btn btn-primary" data-toggle="modal" data-target="#infoConfirmModal"> Chi Tiết</i>
 							</a>
 							<a style="cursor: pointer;" class="btn btn-danger" ng-click="updateCAN(item)"> Huỷ</i></a>
 						</td>
@@ -120,22 +120,22 @@
 				<select
 						name="sizePage"
 						class="custom-select"
-						ng-model="pager.size"
-						ng-change="pager.setPage()"
+						ng-model="pagerCOM.size"
+						ng-change="pagerCOM.setPage()"
 						ng-options="x for x in sizePage">
 				</select>
 			</div>
 			<div class="text-center">
 
-				<button ng-click="pager.first()" class="btn btn-primary btn-circle"> <i
+				<button ng-click="pagerCOM.first()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-double-left"></i>
-				</button> <button ng-click="pager.prev()" class="btn btn-primary btn-circle"> <i
+				</button> <button ng-click="pagerCOM.prev()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-left"></i>
 				</button> 
-				<button class="btn btn-primary" disabled="disabled">{{pager.page + 1}} of {{pager.count}}</button>
-				<button ng-click="pager.next()" class="btn btn-primary btn-circle"> <i
+				<button class="btn btn-primary" disabled="disabled">{{pagerCOM.page + 1}} of {{pagerCOM.count}}</button>
+				<button ng-click="pagerCOM.next()" class="btn btn-primary btn-circle"> <i
 					class="fas fa-angle-right"></i>
-				</button> <button ng-click="pager.last()" class="btn btn-primary btn-circle"> <i
+				</button> <button ng-click="pagerCOM.last()" class="btn btn-primary btn-circle"> <i
 					class="	fas fa-angle-double-right"></i>
 				</button>
 			</div>
@@ -163,20 +163,38 @@
 			</div>
 
 			<!-- Modal body -->
-			<form class="css-form" name="myForm"
-				  ng-submit="myForm.$valid" novalidate>
+			<form class="css-form" name="choXacNhan"
+				  ng-submit="choXacNhan.$valid" novalidate>
 			<div class="modal-body p-5">
 
 				<div class="row form-group">
 					<div class="col-md-6 mb-3 mb-md-0">
-						<label class="text-black" for="fname">Họ Tên</label><input
+						<label class="text-black" for="fname">Họ Tên <span
+								class="text-danger">(*)</span></label><input
 							type="text" id="fname" class="form-control" ng-model="formChoXacNhan.customer.fullName"
-							placeholder="Họ Tên..." readonly>
+							name="hoTen"
+							placeholder="Họ Tên..."
+							ng-required="true">
+						<span ng-show="choXacNhan.$submitted ">
+						<span ng-show="choXacNhan.hoTen.$error.required" class="error-msg text-danger" >Bạn chưa nhập tên.</span>
+							</span>
 					</div>
 					<div class="col-md-6 mb-3 mb-md-0">
-						<label class="text-black" for="email">Email</label> <input
+						<label class="text-black" for="email">Email <span
+								class="text-danger">(*)</span></label> <input
+								name="thuDienTu"
+								class="form-control" placeholder="Email"
+								ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})$/"
+								ng-required="true"
 							type="email" id="email" class="form-control" placeholder="Email" ng-model="formChoXacNhan.customer.email"
-							readonly>
+							>
+						<span ng-show="choXacNhan.$submitted ">
+      					<span ng-show="choXacNhan.thuDienTu.$error.required"
+							  class="error-msg text-danger">Bạn chưa nhập Email.</span>
+   													 </span>
+						<span class="error-msg text-danger" ng-show="choXacNhan.thuDienTu.$dirty && choXacNhan.thuDienTu.$error.pattern">
+						Email không đúng định dạng!
+						</span>
 					</div>
 				</div>
 
@@ -223,8 +241,9 @@
 				<div class="row form-group">
 					<div class="col-md-12">
 						<label class="text-black" >Chọn Giờ Đến <span
-								class="text-danger">(*)</span></label>
-						<ul class="status-form text-center" >
+								class="text-danger">(*)</span></label><br>
+						<span>Khung giờ hiện tại: {{formChoXacNhan.timeBooking}}</span>
+						<ul class="timeBooking-form text-center" >
 							<div ng-if="shiftsByStylist.id != null">
 								<li ng-repeat="item in allTimeBookingByShifts" >
 									<input type="radio" ng-disabled="disableTime1(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
@@ -260,7 +279,7 @@
 						<!--
                                <input type="submit" value="Lưu"
                                    class="btn btn-primary py-2 px-4 text-white"> -->
-						<button ng-click="booking.purchase()" type="button" class="btn btn-success" data-dismiss="modal">Xác Nhận</button>
+						<button ng-click="booking.purchase()" type="submit" class="btn btn-success">Xác Nhận</button>
 					</div>
 				</div>
 
@@ -270,8 +289,8 @@
 
 	</div>
 </div>
-<!-- InfoCheckModal-->
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+<!-- InfoConfirmModal-->
+<div class="modal fade" id="infoConfirmModal" tabindex="-1" role="dialog"
 	 aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -343,12 +362,13 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-md-12">
-							<label class="text-black" >Chọn Giờ Đến <span
-									class="text-danger">(*)</span></label>
-							<ul class="status-form text-center" >
+							<label class="text-black" >Chọn Giờ Đến<span
+									class="text-danger">(*)</span></label><br>
+							<span>Khung giờ hiện tại: {{formCOM.timeBooking}}</span>
+							<ul class="timeBooking-form text-center" >
 								<div ng-if="shiftsByStylist.id != null">
 									<li ng-repeat="item in allTimeBookingByShifts" >
-										<input type="radio" ng-disabled="disableTime2(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time2{{$index}}"   />
+										<input type="radio" ng-checked="checkedTime(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time2{{$index}}"   />
 										<label for="time2{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
 									</li> </div>
 								<div ng-if="shiftsByStylist.id == null">
@@ -381,7 +401,7 @@
 							<!--
                                    <input type="submit" value="Lưu"
                                        class="btn btn-primary py-2 px-4 text-white"> -->
-							<button ng-click="booking.purchase()" type="button" class="btn btn-success" data-dismiss="modal">Xác Nhận</button>
+							<button ng-click="booking.updateWFC()" type="button" class="btn btn-success">Thêm vào lịch chờ cắt</button>
 						</div>
 					</div>
 
