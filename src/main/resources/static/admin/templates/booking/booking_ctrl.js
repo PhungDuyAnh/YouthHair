@@ -19,6 +19,11 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 	$scope.itemConfirm=[];
 	$scope.listTimeBooking=[];
 	$scope.disableTime=[];
+	$scope.doanhThu = 0;
+	$scope.lienHe = 0;
+	$scope.tongNhanVien=0;
+	$scope.stylistCount=0;
+	$scope.monthYear=moment(new Date()).format('yyyy-MM');
 
 	var toprice;
 	$scope.getDate = moment(new Date()).format('yyyy-MM-DD');
@@ -88,6 +93,23 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 		$http.get("/rest/getAllTimeBookingDetail").then(resp=>{
 			$scope.allTimeBookingDetail=resp.data;
 		})
+
+		$http.get(`/rest/thongKeDT?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.doanhThu=resp.data;
+		})
+
+		$http.get(`/rest/lienHeTk?monthYear=${$scope.monthYear}`).then(resp=>{
+			$scope.lienHe=resp.data;
+		})
+
+		$http.get(`/rest/employee/countNv`).then(resp=>{
+			$scope.tongNhanVien=resp.data;
+		})
+
+		$http.get(`/rest/employee/countStyList`).then(resp=>{
+			$scope.stylistCount=resp.data;
+		})
+
 		console.log("ồ")
 	}
 
@@ -1178,6 +1200,12 @@ app.controller("booking-ctrl",function($scope,$http,$timeout, $interval,$q){
 				$scope.initialize();
 			})
 		}
+	}
+
+	$scope.getMonthYear= function (){
+		var item=angular.copy($scope.monthYear);
+		$scope.monthYear=moment(new Date(item)).format('yyyy-MM');
+		$scope.initialize();
 	}
 	
 	$interval($scope.initialize, 15000);
