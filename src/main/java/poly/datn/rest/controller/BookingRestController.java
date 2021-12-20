@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Sort;
@@ -21,6 +23,7 @@ import poly.datn.entity.ThongBaoUCF;
 import poly.datn.service.*;
 import poly.datn.service.dto.BookingCustomerDTO;
 import poly.datn.service.dto.BookingDTO;
+import poly.datn.service.dto.Role;
 
 @RestController
 @RequestMapping("/rest/booking")
@@ -40,6 +43,9 @@ public class BookingRestController {
 
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	HttpSession session;
 
 	@GetMapping("")
 	public List<Booking> getAll(){
@@ -153,5 +159,18 @@ public class BookingRestController {
 	@GetMapping("/alertBookingUCF")
 	public List<ThongBaoUCF> alertBookingUCF(){
 		return bookingService.alertBookingUCF();
+	}
+	
+	@GetMapping("/author")
+	public Role getRole(){
+		Role role= new Role();
+		var roleSs= session.getAttribute("role");
+		var roleStr = String.valueOf(roleSs);
+		if (roleStr.equals("admin")){
+			role.setRoleName("admin");
+		}else if(roleStr.equals("staff")) {
+			role.setRoleName("staff");
+		}
+		return role;
 	}
 }

@@ -1,12 +1,21 @@
 package poly.datn.controller;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SecurityController {
-	
+	@Autowired
+	HttpSession session;
 	
 	@RequestMapping("/security/login/form")
 	public String loginForm( Model model) {
@@ -16,12 +25,19 @@ public class SecurityController {
 	}
 	
 	@RequestMapping("/security/login/success")
-	public String loginSuccess(Model model) {
+	public String vaitro(HttpServletRequest req, Principal principal,Model model) {
+		System.out.println("success");
+		String username = principal.getName();
+		System.out.println("UserName: " + username);
 
-		System.out.println("loginSuccess");
-		model.addAttribute("message","Đăng nhập thành công!");
+		User loginUser = (User) ((Authentication) principal).getPrincipal();
+		session.setAttribute("role",username);
+		String a =(String) session.getAttribute("role") ;
+		System.out.println(loginUser);
+		
 		return "redirect:/admin/templates/index.html";
 	}
+	
 	@RequestMapping("/security/login/error")
 	public String loginError(Model model) {
 		System.out.println("loginError");

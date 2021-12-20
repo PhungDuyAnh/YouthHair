@@ -208,57 +208,29 @@
 
 		<div class="slide-one-item home-slider owl-carousel">
 
-			<div class="site-section bg-light">
-				<div class="container">
-					<div class="row">
+			<div class="site-section bg-light" th:each="serv,state:${serviceTop3}">
+				<div class="container" >
+					<div class="row" >
 						<div class="col-lg-6 mb-5">
-							<img src="assets/images/person_5.jpg" alt="Image"
-								class="img-md-fluid">
+							<img th:src="@{|../../../../images/${serv.image}|}" alt="Image" class="img-md-fluid" width="500px" height="500px">
 						</div>
 						<div class="col-lg-6 bg-white p-md-5 align-self-center">
 							<h2
-								class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Dịch
-								Vụ Mới!</h2>
+									class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Dịch Vụ Hot!</h2>
 							<p class="text-black lead">
-								<em>&ldquo;Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Similique dolorem quisquam laudantium,
-									incidunt id laborum, tempora aliquid labore minus. Nemo maxime,
-									veniam! Fugiat odio nam eveniet ipsam atque, corrupti
-									porro&rdquo;</em>
+							<h3>[[${serv.serviceName}]]</h3>
+							</p>
+							<p class="text-black lead">
+								<em>"[[${serv.note}]]"</em>
 							</p>
 							<p class="lead text-black">
-								&mdash; <em>Stellla Martin</em>
+								<b>Giá: </b><em>[[${serv.price}]] VND</em>
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="site-section bg-light">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 mb-5">
-							<img src="/assets/images/person_2.jpg" alt="Image"
-								class="img-md-fluid">
-						</div>
-						<div class="col-lg-6 bg-white p-md-5 align-self-center">
-							<h2
-								class="display-1 text-black line-height-1 site-section-heading mb-4 pb-3">Dịch
-								Vụ Mới!</h2>
-							<p class="text-black lead">
-								<em>&ldquo;Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Similique dolorem quisquam laudantium,
-									incidunt id laborum, tempora aliquid labore minus. Nemo maxime,
-									veniam! Fugiat odio nam eveniet ipsam atque, corrupti
-									porro&rdquo;</em>
-							</p>
-							<p class="lead text-black">
-								&mdash; <em>Stellla Martin</em>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
 
 		</div>
 
@@ -276,7 +248,7 @@
 						th:each="serv,state:${sers}">
 						<div class="h-100 p-4 p-lg-5 bg-light site-block-feature-7"
 							align="center">
-							<img alt="" th:src="@{|assets/images/haircut/${serv.image}|}"
+							<img alt="" th:src="@{|../../../../images/${serv.image}|}"
 								class="icon display-3 mb-4 d-block rounded-circle" width="60%"
 								height="40%">
 							<h3 class="text-black h4">[[${serv.serviceName}]]</h3>

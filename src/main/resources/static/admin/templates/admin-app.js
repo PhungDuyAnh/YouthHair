@@ -51,6 +51,7 @@ app.controller("main-ctrl",function($scope,$http, $interval){
 	$scope.lichhenAll=0;
 	$scope.lichhenCPM=0;
 	$scope.monthYear=moment(new Date()).format('yyyy-MM');
+	$scope.authority={};
 	
 	$scope.initialize=function (){
 		$http.get("/rest/booking/alertBookingUCF").then(resp=>{
@@ -78,6 +79,10 @@ app.controller("main-ctrl",function($scope,$http, $interval){
 			$scope.lienHe=resp.data;
 		})
 		
+		//phan quyen
+		$http.get('/rest/booking/author').then(resp=>{
+			$scope.authority=resp.data;
+		})
 	}
 	
 	$scope.getMonthYear= function (){

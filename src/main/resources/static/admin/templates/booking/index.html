@@ -145,7 +145,7 @@
 											ng-click="cart.add(services.id)"
 											ng-checked="showBookingWating(form3.id,services.id)>=0" /> <label
 											for="st{{services.id}}"> <img
-												ng-src="{{'/assets/images/haircut/' + services.image}}" />
+												ng-src="{{'../../../../images/' + services.image}}" />
 												<br> {{services.serviceName}}
 										</label></li>
 									</ul>
@@ -256,7 +256,7 @@
 									id="lc{{services.id}}" ng-click="cart.add(services.id)"
 									ng-checked="showBookingWating(form.id,services.id)>=0" /> <label
 									for="lc{{services.id}}"> <img
-										ng-src="{{'/assets/images/haircut/' + services.image}}" /> <br>
+										ng-src="{{'../../../../images/' + services.image}}" /> <br>
 										{{services.serviceName}}
 								</label></li>
 							</ul>
@@ -460,7 +460,7 @@
 								<li ng-repeat="item in listSer"><input type="checkbox"
 									id="{{item.serviceName}}" disabled checked /> <label
 									for="{{item.serviceName}}"> <img
-										src="/assets/images/haircut/{{item.image}}" /> <br>
+										src="../../../../images/{{item.image}}" /> <br>
 										{{item.serviceName}}
 								</label></li>
 
