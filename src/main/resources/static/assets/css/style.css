@@ -278,24 +278,24 @@ h1, h2, h3, h4, h5,
 }
 /* End FormServices */
 
-/* FormStatus */
-.status-form ul {
+/* timeBookingForm */
+.timeBooking-form ul {
   list-style-type: none;
   margin: 0;
 }
 
-.status-form li {
+.timeBooking-form li {
   display: inline-block;
   position: relative;
   padding: 20px 10px;
 }
 
-.status-form input[type=radio] {
+.timeBooking-form input[type=radio] {
   position: absolute;
   visibility: hidden;
 }
 
-.status-form label { 
+.timeBooking-form label { 
   border: 1px solid #fff;
   padding: 10px;
   display: block;
@@ -307,9 +307,9 @@ h1, h2, h3, h4, h5,
   height: 50px;
 }
 
-.status-form label:before {
-  background-color: white;
-  color: grey;
+.timeBooking-form label:before {
+  background-color: grey;
+  color: white;
   content: " ";
   display: block;
   border-radius: 50%;
@@ -325,16 +325,16 @@ h1, h2, h3, h4, h5,
   transform: scale(0);
 }
 
-.status-form :checked + label {
+.timeBooking-form :checked + label {
   border-color: #ddd;
-  background-color: highlight;
+  background: linear-gradient(#e66465, #9198e5);
 }
-.status-form :checked + label:before {
+.timeBooking-form :checked + label:before {
   content: "✓";
-  background-color: white;
+  background-color: gray;
   transform: scale(1);
 }
-/* End FormStatus */
+/* End timeBookingForm */
 
 /* Navbar */
 .site-navbar {

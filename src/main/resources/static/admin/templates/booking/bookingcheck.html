@@ -107,7 +107,7 @@
 						<td>{{item.statusbooking.statusName}}</td>
 						<td>
 							<a style="cursor: pointer;" ng-click="showDetailCOM(item);getDate3();showServiceChecked();getDisableTime1(item.employee1.id,item.createDate,item.id)"
-								class="btn btn-primary" data-toggle="modal" data-target="#infoModal"> Chi Tiết</i>
+								class="btn btn-primary" data-toggle="modal" data-target="#infoConfirmModal"> Chi Tiết</i>
 							</a>
 							<a style="cursor: pointer;" class="btn btn-danger" ng-click="updateCAN(item)"> Huỷ</i></a>
 						</td>
@@ -243,7 +243,7 @@
 						<label class="text-black" >Chọn Giờ Đến <span
 								class="text-danger">(*)</span></label><br>
 						<span>Khung giờ hiện tại: {{formChoXacNhan.timeBooking}}</span>
-						<ul class="status-form text-center" >
+						<ul class="timeBooking-form text-center" >
 							<div ng-if="shiftsByStylist.id != null">
 								<li ng-repeat="item in allTimeBookingByShifts" >
 									<input type="radio" ng-disabled="disableTime1(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time{{$index}}"   />
@@ -289,8 +289,8 @@
 
 	</div>
 </div>
-<!-- InfoCheckModal-->
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+<!-- InfoConfirmModal-->
+<div class="modal fade" id="infoConfirmModal" tabindex="-1" role="dialog"
 	 aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -365,7 +365,7 @@
 							<label class="text-black" >Chọn Giờ Đến<span
 									class="text-danger">(*)</span></label><br>
 							<span>Khung giờ hiện tại: {{formCOM.timeBooking}}</span>
-							<ul class="status-form text-center" >
+							<ul class="timeBooking-form text-center" >
 								<div ng-if="shiftsByStylist.id != null">
 									<li ng-repeat="item in allTimeBookingByShifts" >
 										<input type="radio" ng-checked="checkedTime(item.id)>=0" ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" name="timeBooking" id="time2{{$index}}"   />
