@@ -92,7 +92,7 @@ public class BookingRestController {
 		Map<String,Object> data=new HashMap<>();
 		data.put("bookings",bookingService.findAll());
 		data.put("bookingDetails",bookingDetailService.findAll());
-		data.put("services",iServiceService.findAll());
+		data.put("services",iServiceService.findServicesActive());
 		return data;
 	}
 
