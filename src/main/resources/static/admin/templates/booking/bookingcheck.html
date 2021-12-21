@@ -373,7 +373,8 @@
 							<ul class="timeBooking-form text-center" >
 								<div ng-if="shiftsByStylist.id != null">
 									<li ng-repeat="item in allTimeBookingByShifts" >
-										<input type="radio" ng-disable="disableTime2(item.id)" ng-checked="checkTimeBookingCOM(formCOM,item.name)>=0"
+										<input type="radio" ng-disabled="disableTime2(item.id)>=0"
+									    ng-checked="checkTimeBookingCOM(formCOM,item.name)>=0"
 										ng-click="timeByStylist(item.id);timeNameByStylist(item.name)" 
 										name="timeBooking" id="time2{{$index}}"   />
 										<label for="time2{{$index}}" class="btn-secondary btn-lg"> {{item.name}}</label>
@@ -383,7 +384,6 @@
 										Nhân Viên Bận!!!
 									</h3>
 								</div>
-
 							</ul>
 						</div>
 					</div>
