@@ -204,10 +204,10 @@ app.controller("contact-ctrl",function($scope,$http){
 	$scope.saveBooking = function() {
 		var bookings = angular.copy($scope.formBooking);
 		const value1 = moment($scope.formBooking.time).format('DD/MM/yyyy HH:mm:ss');
-		bookings.time=value1;
+		bookings.timeBooking=value1;
 		const value = moment($scope.formBooking.createDate).format('YYYY-MM-DD');
 		if (toprice > 0) {
-			bookings.totalTime = totime;
+			//bookings.timeBooking = totime;
 			bookings.totalPrice = toprice;
 			bookings.createDate = value;
 			bookings.listSer = $scope.cart.items;

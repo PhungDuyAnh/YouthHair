@@ -139,7 +139,7 @@
 							  id="tm{{services.id}}" ng-click="cart.add(services.id)"
 							  ng-checked="showBookingWating(formChoXacNhan.id,services.id)>=0"
 							/>
-								<label for="tm{{services.id}}"> <img ng-src="{{'/assets/images/haircut/' + services.image}}" />
+								<label for="tm{{services.id}}"> <img ng-src="{{'../../../../images/' + services.image}}" />
 									<br> {{services.serviceName}}
 								</label></li>
 						</ul>
@@ -148,9 +148,7 @@
 
 				<div class="row form-group">
 					<div class="col-md-12">
-						<h5 class="text-black">
-							Tổng Thời Gian: <span class="text-info">{{cart.totalTime}} phút</span>
-						</h5>
+						
 						<h4 class="text-black">
 							Tổng Tiền: <span class="text-warning">{{cart.amount | number:0}} VNĐ</span>
 						</h4>
